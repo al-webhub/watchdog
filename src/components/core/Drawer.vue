@@ -29,7 +29,7 @@
             />
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
-            Vuetify MD
+            Landingly
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
@@ -48,18 +48,7 @@
             v-text="link.text"
           />
         </v-list-tile>
-        <v-list-tile
-          active-class="success"
-          class="v-list-item v-list__tile--buy"
-          to="/upgrade"
-        >
-          <v-list-tile-action>
-            <v-icon>mdi-package-up</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title class="font-weight-light">
-            Upgrade To PRO
-          </v-list-tile-title>
-        </v-list-tile>
+
       </v-layout>
     </v-img>
   </v-navigation-drawer>
@@ -80,7 +69,7 @@ export default {
     }
   },
   data: () => ({
-    logo: 'favicon.ico',
+    logo: 'landingly.png',
     links: [
       {
         to: '/',

@@ -100,7 +100,7 @@
           color="green"
           icon="mdi-store"
           title="Revenue"
-          value="$34,245"
+          value="$34,242"
           sub-icon="mdi-calendar"
           sub-text="Last 24 Hours"
         />
