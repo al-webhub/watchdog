@@ -1,0 +1,13 @@
+{
+  "name": "api/app",
+  "description" : "description",
+  "authors": [
+    {
+      "name": "My name",
+      "email": "admin@example.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"Landingly\\": "src/"}
+  }
+}
