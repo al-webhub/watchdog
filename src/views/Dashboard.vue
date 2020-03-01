@@ -504,10 +504,14 @@ export default {
       }
     }
   },
+  mounted() {
+    this.$store.dispatch('GET_TODO');
+  },
   methods: {
     complete (index) {
       this.list[index] = !this.list[index]
     }
+
   }
 }
 </script>

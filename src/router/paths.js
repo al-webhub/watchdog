@@ -36,8 +36,8 @@ export default [
     view: 'Notifications'
   },
   {
-    path: '/upgrade',
-    name: 'Upgrade to PRO',
-    view: 'Upgrade'
+    path: '/login',
+    name: 'Login',
+    view: 'Login'
   }
 ]

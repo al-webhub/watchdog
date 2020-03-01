@@ -16,6 +16,7 @@ import getters from './getters'
 import modules from './modules'
 import mutations from './mutations'
 import state from './state'
+import Axios from 'axios'
 
 Vue.use(Vuex)
 

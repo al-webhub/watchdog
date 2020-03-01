@@ -2,4 +2,7 @@
 
 export default {
   //
+  TODOS: state => {
+    return state.todos;
+  },
 }

@@ -1,0 +1,4 @@
+Options +FollowSymLinks
+RewriteEngine On
+RewriteRule ^([a-z]+)/(.*)$ index.php?type=$1&method=$2 [L,NC,QSA]
+

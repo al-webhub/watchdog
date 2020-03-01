@@ -2,4 +2,11 @@
 
 export default {
   //
+  SET_TODO: (state, payload) => {
+    state.todos = payload;
+  },
+
+  ADD_TODO: (state, payload) => {
+    state.todos.push(payload);
+  },
 }
