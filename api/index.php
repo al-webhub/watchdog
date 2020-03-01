@@ -15,7 +15,7 @@ switch ($_REQUEST['type']) {
     case "get":
         switch ($_REQUEST['method']) {
             case "test":
-                $test = file_get_contents('https://jsonplaceholder.typicode.com/todos/1');
+                $test = file_get_contents('https://jsonplaceholder.typicode.com/users');
                 echo $test;
                 break;
         }

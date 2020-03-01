@@ -1,5 +1,6 @@
 module.exports = {
   devServer: {
-    disableHostCheck: true
+    disableHostCheck: true,
+    proxy: 'http://landingly:80'
   }
 }

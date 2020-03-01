@@ -160,11 +160,11 @@
         <material-card
           color="orange"
           title="Employee Stats"
-          text="New employees on 15th September, 2016"
+          text="New employees on 15th September, 20126"
         >
           <v-data-table
             :headers="headers"
-            :items="items"
+            :items="todoList"
             hide-actions
           >
             <template
@@ -177,14 +177,10 @@
               />
             </template>
             <template
-              slot="items"
-              slot-scope="{ index, item }"
+              slot="item"
+              slot-scope="item"
             >
-              <td>{{ index + 1 }}</td>
-              <td>{{ item.name }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-              <td class="text-xs-right">{{ item.country }}</td>
-              <td class="text-xs-right">{{ item.city }}</td>
+              <td class="text-xs-right">{{ item.email }}</td>
             </template>
           </v-data-table>
         </material-card>
@@ -360,6 +356,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   data () {
     return {
@@ -504,14 +501,18 @@ export default {
       }
     }
   },
-  mounted() {
-    this.$store.dispatch('GET_TODO');
-  },
   methods: {
     complete (index) {
       this.list[index] = !this.list[index]
     }
-
+  },
+  mounted () {
+    this.$store.dispatch('GET_TODO')
+  },
+  computed: {
+    todoList(){
+      return this.$store.getters.TODOS
+    }
   }
 }
 </script>
