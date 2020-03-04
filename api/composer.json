@@ -9,5 +9,9 @@
   ],
   "autoload": {
     "psr-4": {"Landingly\\": "src/"}
+  },
+  "require": {
+    "vlucas/phpdotenv": "^4.1"
   }
 }
+git
