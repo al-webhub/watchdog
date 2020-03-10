@@ -20,6 +20,11 @@ import App from "@/App";
 // router setup
 import routes from "@/routes/routes";
 import store from "@/store/store";
+
+// Move this subscribe to separate file
+store.subscribe(mutation => {
+  console.log(mutation);
+});
 // Plugins
 import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
@@ -44,7 +49,6 @@ Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
-
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

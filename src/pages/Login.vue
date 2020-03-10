@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="submit">
+    {{ form }}
     <div>
       <label for="email">Email</label>
       <input type="email" name="email" id="email" v-model="form.email" />
@@ -20,10 +21,21 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions } from "vuex";
+
 export default {
   name: "Login",
   components: {},
+
+  methods: {
+    ...mapActions({
+      signIn: "auth/signIn"
+    }),
+    submit() {
+      console.log(this.form);
+      this.signIn(this.form);
+    }
+  },
   data() {
     return {
       form: {
@@ -31,12 +43,6 @@ export default {
         password: ""
       }
     };
-  },
-  methods: {
-    async submit() {
-      let response = axios.post("/api/auth/signin", this.form);
-      console.log(response);
-    }
   }
 };
 </script>
