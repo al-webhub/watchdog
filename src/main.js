@@ -20,10 +20,19 @@ import App from "@/App";
 // router setup
 import routes from "@/routes/routes";
 import store from "@/store/store";
+import axios from "axios";
 
 // Move this subscribe to separate file
 store.subscribe(mutation => {
-  console.log(mutation);
+  switch (mutation.type) {
+    case "auth/SET_TOKEN":
+      if (mutation.payload) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${mutation.payload}`;
+      } else {
+        axios.defaults.headers.common["Authorization"] = null;
+      }
+      break;
+  }
 });
 // Plugins
 import GlobalComponents from "./globalComponents";
