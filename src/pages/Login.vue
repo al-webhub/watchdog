@@ -35,6 +35,7 @@
             </md-card-content>
           </md-card>
         </form>
+        <router-link to="/dashboard">Dashboard</router-link>
       </div>
     </div>
   </div>

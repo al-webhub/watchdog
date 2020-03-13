@@ -51,6 +51,22 @@ const router = new VueRouter({
   linkExactActiveClass: "nav-item active"
 });
 
+router.beforeEach((to, from, next) => {
+    if (to.meta.protected) {
+        if (store.getters['auth/authenticated']) {
+            next();
+        } else {
+            alert("AUTHENTICATION REQUIRED!!!");
+        }
+    } else {
+        if (to.name == 'login' && store.getters['auth/authenticated']) {
+
+        }
+        next();
+    }
+
+})
+
 Vue.prototype.$Chartist = Chartist;
 
 Vue.use(VueRouter);

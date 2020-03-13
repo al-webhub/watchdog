@@ -17,11 +17,15 @@ const routes = [
     path: "/",
     name: "home",
     component: Content,
+    redirect: "login/",
     children: [
       {
         path: "login/",
         name: "login",
-        component: Login
+        component: Login,
+        meta: {
+            protected: false
+        }
       }
     ]
   },
@@ -33,7 +37,10 @@ const routes = [
       {
         path: "/dashboard",
         name: "dashboard",
-        component: Dashboard
+        component: Dashboard,
+        meta: {
+          protected: true
+        }
       }
     ]
   }
