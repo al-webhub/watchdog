@@ -21,19 +21,29 @@ import App from "@/App";
 import routes from "@/routes/routes";
 import store from "@/store/store";
 import axios from "axios";
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 // Move this subscribe to separate file
 store.subscribe(mutation => {
   switch (mutation.type) {
     case "auth/SET_TOKEN":
       if (mutation.payload) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${mutation.payload}`;
+        console.log(mutation);
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${mutation.payload}`;
       } else {
         axios.defaults.headers.common["Authorization"] = null;
       }
       break;
   }
 });
+
+if (store.getters["auth/getToken"]) {
+  store.dispatch("auth/attempt", store.getters["auth/getToken"]);
+}
 // Plugins
 import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
@@ -45,27 +55,30 @@ import MaterialDashboard from "@/material-dashboard";
 import Chartist from "chartist";
 
 // configure router
-const router = new VueRouter({
+export const router = new VueRouter({
   mode: "history",
   routes, // short for routes: routes
   linkExactActiveClass: "nav-item active"
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.meta.protected) {
-        if (store.getters['auth/authenticated']) {
-            next();
-        } else {
-            alert("AUTHENTICATION REQUIRED!!!");
-        }
+  if (to.meta.protected) {
+    if (store.getters["auth/authenticated"]) {
+      next();
     } else {
-        if (to.name == 'login' && store.getters['auth/authenticated']) {
-
-        }
-        next();
+      next({
+        name: "login"
+      });
     }
-
-})
+  } else if (to.name == "login" && store.getters["auth/authenticated"]) {
+    // redirect to dashboard
+    next({
+      name: "dashboard"
+    });
+  } else {
+    next();
+  }
+});
 
 Vue.prototype.$Chartist = Chartist;
 
@@ -74,6 +87,7 @@ Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
+Vue.use(VueSweetalert2);
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

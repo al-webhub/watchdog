@@ -23,7 +23,8 @@
                     <label>Password</label>
                     <md-input
                       v-model="form.password"
-                      type="password"></md-input>
+                      type="password"
+                    ></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-size-100 text-right">
@@ -35,7 +36,6 @@
             </md-card-content>
           </md-card>
         </form>
-        <router-link to="/dashboard">Dashboard</router-link>
       </div>
     </div>
   </div>

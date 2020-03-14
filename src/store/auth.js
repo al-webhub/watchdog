@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import { router } from "../main.js";
 
 Vue.use(Vuex);
 
@@ -16,13 +17,16 @@ export default {
     },
     getUser(state) {
       return state.user;
+    },
+    getToken(state) {
+      return state.token;
     }
   },
   mutations: {
     SET_TOKEN(state, token) {
       state.token = token;
     },
-    SET_USER(state, data) {
+    async SET_USER(state, data) {
       state.user = data;
     }
   },
@@ -36,11 +40,35 @@ export default {
       commit("SET_TOKEN", token);
       try {
         let response = await axios.get("/api/auth/self");
-        commit("SET_USER", response.data);
+
+        await commit("SET_USER", response.data);
+        router.push("dashboard");
       } catch (e) {
         commit("SET_TOKEN", null);
         commit("SET_USER", null);
       }
+    },
+    logout({ commit }) {
+      return axios.post("/api/auth/signout").then(() => {
+        commit("SET_TOKEN", null);
+        commit("SET_USER", null);
+      });
     }
   }
 };
+
+axios.interceptors.response.use(
+  function(response) {
+    return response;
+  },
+  function(error) {
+    console.log(error.response);
+    if (
+      error.response.status === 401 &&
+      error.response.config.url == "/api/auth/signin"
+    ) {
+      Vue.swal("Error", "Wrong password", "error");
+    }
+    return Promise.reject(error);
+  }
+);
