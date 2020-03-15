@@ -40,12 +40,12 @@ export default {
       commit("SET_TOKEN", token);
       try {
         let response = await axios.get("/api/auth/self");
-
         await commit("SET_USER", response.data);
         router.push("dashboard");
       } catch (e) {
         commit("SET_TOKEN", null);
         commit("SET_USER", null);
+        router.push("login");
       }
     },
     logout({ commit }) {
@@ -62,7 +62,6 @@ axios.interceptors.response.use(
     return response;
   },
   function(error) {
-    console.log(error.response);
     if (
       error.response.status === 401 &&
       error.response.config.url == "/api/auth/signin"

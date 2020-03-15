@@ -30,7 +30,6 @@ store.subscribe(mutation => {
   switch (mutation.type) {
     case "auth/SET_TOKEN":
       if (mutation.payload) {
-        console.log(mutation);
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${mutation.payload}`;
@@ -62,6 +61,7 @@ export const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  console.log(to);
   if (to.meta.protected) {
     if (store.getters["auth/authenticated"]) {
       next();

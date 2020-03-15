@@ -1,9 +1,7 @@
 <template>
   <div class="content">
     <div class="md-layout md-alignment-bottom-center ">
-      <div
-        class="md-layout-item md-lay md-medium-size-100 md-size-33 login_form_padding "
-      >
+      <div class="md-layout-item md-lay md-medium-size-100 md-size-33 login_form_padding ">
         <form @submit.prevent="submit">
           <md-card>
             <md-card-header>
@@ -21,16 +19,11 @@
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
                     <label>Password</label>
-                    <md-input
-                      v-model="form.password"
-                      type="password"
-                    ></md-input>
+                    <md-input v-model="form.password" type="password"></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-size-100 text-right">
-                  <md-button type="submit" class="md-raised md-success"
-                    >Login</md-button
-                  >
+                  <md-button type="submit" class="md-raised md-success">Login</md-button>
                 </div>
               </div>
             </md-card-content>
