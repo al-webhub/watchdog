@@ -6,6 +6,7 @@
         <md-table-cell md-label="Country">{{ item.country }}</md-table-cell>
         <md-table-cell md-label="City">{{ item.city }}</md-table-cell>
         <md-table-cell md-label="Salary">{{ item.salary }}</md-table-cell>
+        <md-table-cell md-label="Salary2"><md-button class="md-raised md-success"><md-icon>content_paste</md-icon></md-button></md-table-cell>
       </md-table-row>
     </md-table>
   </div>

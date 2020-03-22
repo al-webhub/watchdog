@@ -11,7 +11,7 @@ export default {
   mutations: {},
   actions: {
     async updateProfile({ dispatch }, form) {
-      let response = await axios.post("api/settings/profile/updateprofile/", form);
+      let response = await axios.post("/api/settings/profile/updateprofile/", form);
       if (response.status === 200) {
         Vue.swal("Success", response.data.message, "success");
         this.dispatch("auth/attempt", this.getters["auth/getToken"]);

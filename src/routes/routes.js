@@ -8,6 +8,7 @@ import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
 import Login from "@/pages/Login";
 import Settings from '@/pages/Settings'
+import Pages from '@/pages/Pages'
 
 import Content from "@/pages/Layout/Content";
 
@@ -45,6 +46,14 @@ const routes = [
         path: "/settings",
         name: "settings",
         component: Settings,
+        meta: {
+          protected: true
+        }
+      },
+      {
+        path: "/pages",
+        name: "pages",
+        component: Pages,
         meta: {
           protected: true
         }

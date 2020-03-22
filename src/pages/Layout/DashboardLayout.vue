@@ -12,9 +12,9 @@
         <md-icon>build</md-icon>
         <p>Settings</p>
       </sidebar-link>
-      <sidebar-link to="/table">
+      <sidebar-link to="/pages">
         <md-icon>content_paste</md-icon>
-        <p>Table list</p>
+        <p>Pages</p>
       </sidebar-link>
       <sidebar-link to="/typography">
         <md-icon>library_books</md-icon>
