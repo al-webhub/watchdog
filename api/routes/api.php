@@ -13,3 +13,8 @@ Route::group(['prefix' => 'settings', 'namespace' => 'Settings'], function(){
         Route::post('/updateprofile', 'UpdateProfileController');
     });
 });
+
+Route::group(['prefix' => 'pages', 'namespace' => 'Pages'], function(){
+    Route::get('/scan', 'ScanPagesController');
+    Route::post('/parsepagetext', 'ParsePageTextController');
+});

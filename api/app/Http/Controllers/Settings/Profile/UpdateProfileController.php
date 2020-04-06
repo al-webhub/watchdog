@@ -41,6 +41,5 @@ class UpdateProfileController extends Controller
         }
         $user->save();
         return response()->json(['message' => $message], 200);
-
     }
 }
