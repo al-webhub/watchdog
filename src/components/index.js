@@ -7,6 +7,7 @@ import StatsCard from "./Cards/StatsCard.vue";
 import NavTabsTable from "./Tables/NavTabsTable.vue";
 import OrderedTable from "./Tables/OrderedTable.vue";
 import SimpleTable from "./Tables/SimpleTable.vue";
+import PageTextTable from './Tables/PageTextTable'
 
 // Forms
 import EditProfileForm from './Forms/Settings/EditProfileForm'
@@ -18,5 +19,6 @@ export {
   NavTabsTable,
   OrderedTable,
   SimpleTable,
-  EditProfileForm
+  EditProfileForm,
+  PageTextTable
 };

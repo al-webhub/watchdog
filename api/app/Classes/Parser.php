@@ -23,17 +23,49 @@ class Parser
     public static function getAllEditableTags($filename)
     {
         $html = self::getHtml($filename);
-        $text = self::getP($html);
-        return $text;
+        $id = 1;
+        $p  = self::getTag($html, 'p','Text',1);
+        $id = $id + count($p);
+        $h1 = self::getTag($html, 'h1', 'Headline', $id);
+        $id = $id + count($h1);
+        $h2 = self::getTag($html, 'h2', 'Headline', $id);
+        $id = $id + count($h2);
+        $h3 = self::getTag($html, 'h3', 'Headline', $id);
+        $id = $id + count($h3);
+        $h4 = self::getTag($html, 'h4', 'Headline', $id);
+        $id = $id + count($h4);
+        $h5 = self::getTag($html, 'h5', 'Headline', $id);
+        $id = $id + count($h5);
+        $h6 = self::getTag($html, 'h6', 'Headline', $id);
+        $id = $id + count($h6);
+        $a  = self::getTag($html, 'a', 'link', $id);
+        $id = $id + count($a);
+        $button = self::getTag($html, 'button', 'button', $id);
+        $id = $id + count($button);
+        $span = self::getTag($html, 'span', 'Text', $id);
+        $id = $id + count($span);
+        $label = self::getTag($html, 'label', 'Label', $id);
+
+        $result = array_merge($p, $h1, $h2, $h3, $h4, $h5, $h6, $a, $button, $span, $label);
+        return $result;
     }
 
-    public static function getP($html)
+    public static function getP($html, $id = 0)
     {
         $text = [];
         $text = self::parseHtml($html, 'p');
-        $result = self::makeObject($text,'Text', 0);
+        $result = self::makeObject($text,'Text', $id);
         return $result;
     }
+
+    public static function getTag($html, $tag, $type, $id = 0)
+    {
+        $text = [];
+        $text = self::parseHtml($html, $tag);
+        $result = self::makeObject($text, $type, $id);
+        return $result;
+    }
+
 
     private static function parseHtml($html, $needle)
     {
@@ -46,7 +78,11 @@ class Parser
 
     private static function makeObject($data, $type, $id = 0)
     {
+        $result = [];
         for ($i = 0; $i < count($data); $i++) {
+            if (is_array($data[$i])) {
+                dd($data[$i]);
+            }
             if (mb_strlen(trim($data[$i]), 'utf-8') > 1) {
                 $object = new stdClass();
                 $object->id = $id;

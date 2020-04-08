@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      texts: this.$store.getters['pages/getParsedPage']
+      texts: ""
     };
   }
 };

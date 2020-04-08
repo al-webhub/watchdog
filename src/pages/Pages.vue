@@ -19,9 +19,7 @@
             </h4>
           </md-card-header>
           <md-card-content>
-            {{ getParsedPage }}
-            <SimpleTable ></SimpleTable>
-
+            <PageTextTable :rows="getParsedPage"></PageTextTable>
           </md-card-content>
         </md-card>
       </div>
@@ -30,12 +28,12 @@
 </template>
 
 <script>
-import { SimpleTable } from "@/components";
+import { PageTextTable } from "@/components";
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
 export default {
   components: {
-    SimpleTable
+    PageTextTable
   },
   data() {
     return {
