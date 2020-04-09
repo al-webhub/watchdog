@@ -6,17 +6,18 @@
       >
         <md-card>
           <md-card-header data-background-color="green">
-            <h4 class="title">
+            <span class="title">
               Selected Page
-              <select v-model="selectedpage.filename" v-on:change="selectPage">
-                <option
-                  v-for="page in pages"
-                  v-bind:value="page"
-                  v-bind:key="page"
-                  >{{ page }}</option
-                >
-              </select>
-            </h4>
+            </span>
+            <select v-model="selectedpage.filename" v-on:change="selectPage">
+              <option
+                v-for="page in pages"
+                v-bind:value="page"
+                v-bind:key="page"
+                >{{ page }}
+              </option>
+            </select>
+            <input type="text" class="pull-right" v-model="search" v-on:keyup="searchOnPageTexts" placeholder="Search" />
           </md-card-header>
           <md-card-content>
             <PageTextTable :rows="getParsedPage"></PageTextTable>
@@ -40,7 +41,8 @@ export default {
       selectedpage: {
         filename: ""
       },
-      pages: this.$store.getters["pages/getPages"]
+      pages: this.$store.getters["pages/getPages"],
+      search: ""
     };
   },
   methods: {
@@ -50,6 +52,11 @@ export default {
     }),
     selectPage() {
       this.ParsePage(this.selectedpage);
+    },
+    searchOnPageTexts() {
+      if (this.search.length > 3) {
+         this.ParsePage(this.selectedpage, this.search)
+      }
     }
   },
   created: function() {

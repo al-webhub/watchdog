@@ -36,7 +36,7 @@ export default {
         Vue.swal("Error", "Unexpeted Error! Error code: 100", "error");
       }
     },
-    async ParsePage({ dispatch }, page) {
+    async ParsePage({ dispatch }, page, search) {
       try {
         let response = await axios.post("/api/pages/parsepagetext", page);
         dispatch("SaveParsedPage", response.data);
