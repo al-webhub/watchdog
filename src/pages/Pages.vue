@@ -17,7 +17,13 @@
                 >{{ page }}
               </option>
             </select>
-            <input type="text" class="pull-right" v-model="search" v-on:keyup="searchOnPageTexts" placeholder="Search" />
+            <input
+              type="text"
+              class="pull-right"
+              v-model="selectedpage.search"
+              v-on:keyup="searchOnPageTexts"
+              placeholder="Search"
+            />
           </md-card-header>
           <md-card-content>
             <PageTextTable :rows="getParsedPage"></PageTextTable>
@@ -32,6 +38,8 @@
 import { PageTextTable } from "@/components";
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
+import Vue from 'vue'
+import { router } from '../main'
 export default {
   components: {
     PageTextTable
@@ -39,10 +47,10 @@ export default {
   data() {
     return {
       selectedpage: {
-        filename: ""
+        filename: "",
+        search: ""
       },
-      pages: this.$store.getters["pages/getPages"],
-      search: ""
+      pages: this.$store.getters["pages/getPages"]
     };
   },
   methods: {
@@ -54,8 +62,13 @@ export default {
       this.ParsePage(this.selectedpage);
     },
     searchOnPageTexts() {
-      if (this.search.length > 3) {
-         this.ParsePage(this.selectedpage, this.search)
+      if (this.selectedpage.filename === "") {
+        Vue.swal("Warning!", "Please select page first!", "warning");
+      } else {
+        if (this.selectedpage.search.length > 3) {
+
+        }
+        this.ParsePage(this.selectedpage);
       }
     }
   },

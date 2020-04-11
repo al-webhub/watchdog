@@ -20,11 +20,12 @@ class ParsePageTextController extends Controller
         if (!$exists) {
             return response()->json(['message' => 'Requested filename not found!'], '404');
         }
-        $text = Parser::getAllEditableTags($request->filename);
+        $text = Parser::getAllEditableTags($request->filename, $request->search);
         return response()->json($text, 200);
     }
 
-    private function fileExists($filename) {
+    private function fileExists($filename)
+    {
         return $exists = Storage::disk('pages')->exists($filename);
     }
 }

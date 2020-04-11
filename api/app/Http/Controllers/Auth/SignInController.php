@@ -10,10 +10,6 @@ class SignInController extends Controller
     public function __invoke(Request $request)
     {
         $token = auth()->attempt($request->only('email','password'));
-        if ($token) {
-            return response()->json(['token' => $token]);
-        } else {
-            return response(null, 401);
-        }
+        return $token ? response()->json(['token' => $token]) : response(null, 401);
     }
 }

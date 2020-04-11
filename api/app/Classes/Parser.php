@@ -19,55 +19,44 @@ class Parser
         return HtmlDomParser::str_get_html($file);
     }
 
-
-    public static function getAllEditableTags($filename)
+    public static function getAllEditableTags($filename, $search = '')
     {
         $html = self::getHtml($filename);
         $id = 1;
-        $p  = self::getTag($html, 'p','Text',1);
+        $p  = self::getTag($html, 'p','Text',1, $search);
         $id = $id + count($p);
-        $h1 = self::getTag($html, 'h1', 'Headline', $id);
+        $h1 = self::getTag($html, 'h1', 'Headline', $id, $search);
         $id = $id + count($h1);
-        $h2 = self::getTag($html, 'h2', 'Headline', $id);
+        $h2 = self::getTag($html, 'h2', 'Headline', $id, $search);
         $id = $id + count($h2);
-        $h3 = self::getTag($html, 'h3', 'Headline', $id);
+        $h3 = self::getTag($html, 'h3', 'Headline', $id, $search);
         $id = $id + count($h3);
-        $h4 = self::getTag($html, 'h4', 'Headline', $id);
+        $h4 = self::getTag($html, 'h4', 'Headline', $id, $search);
         $id = $id + count($h4);
-        $h5 = self::getTag($html, 'h5', 'Headline', $id);
+        $h5 = self::getTag($html, 'h5', 'Headline', $id, $search);
         $id = $id + count($h5);
-        $h6 = self::getTag($html, 'h6', 'Headline', $id);
+        $h6 = self::getTag($html, 'h6', 'Headline', $id, $search);
         $id = $id + count($h6);
-        $a  = self::getTag($html, 'a', 'link', $id);
+        $a  = self::getTag($html, 'a', 'link', $id, $search);
         $id = $id + count($a);
-        $button = self::getTag($html, 'button', 'button', $id);
+        $button = self::getTag($html, 'button', 'button', $id, $search);
         $id = $id + count($button);
-        $span = self::getTag($html, 'span', 'Text', $id);
+        $span = self::getTag($html, 'span', 'Text', $id, $search);
         $id = $id + count($span);
-        $label = self::getTag($html, 'label', 'Label', $id);
+        $label = self::getTag($html, 'label', 'Label', $id, $search);
 
         $result = array_merge($p, $h1, $h2, $h3, $h4, $h5, $h6, $a, $button, $span, $label);
         return $result;
     }
 
-    public static function getP($html, $id = 0)
+    public static function getTag($html, $tag, $type, $id = 0, $search)
     {
-        $text = [];
-        $text = self::parseHtml($html, 'p');
-        $result = self::makeObject($text,'Text', $id);
-        return $result;
-    }
-
-    public static function getTag($html, $tag, $type, $id = 0)
-    {
-        $text = [];
         $text = self::parseHtml($html, $tag);
-        $result = self::makeObject($text, $type, $id);
-        return $result;
+        return self::makeObject($text, $type, $search, $id);
     }
 
 
-    private static function parseHtml($html, $needle)
+    private static function parseHtml($html, $needle): array
     {
         $text = [];
         foreach($html->find($needle) as $element) {
@@ -76,12 +65,14 @@ class Parser
         return $text;
     }
 
-    private static function makeObject($data, $type, $id = 0)
+    private static function makeObject($data, $type, $search, $id = 0)
     {
         $result = [];
-        for ($i = 0; $i < count($data); $i++) {
-            if (is_array($data[$i])) {
-                dd($data[$i]);
+        $total = count($data);
+        for ($i = 0; $i < $total; $i++) {
+            $data[$i] = self::filterSearch($data[$i], $search);
+            if ($data[$i] === false) {
+                continue;
             }
             if (mb_strlen(trim($data[$i]), 'utf-8') > 1) {
                 $object = new stdClass();
@@ -93,5 +84,15 @@ class Parser
             }
         }
         return $result;
+    }
+
+    public static function filterSearch(string $data, $search) {
+        if (strlen($search) >= 3) {
+            if (stripos($data, $search) !== false) {
+                return $data;
+            }
+            return false;
+        }
+        return $data;
     }
 }
