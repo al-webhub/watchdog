@@ -26,7 +26,7 @@
             />
           </md-card-header>
           <md-card-content>
-            <PageTextTable :rows="getParsedPage"></PageTextTable>
+            <PageTextTable :rows="getParsedPage" v-on:getEditTextModal="getEditTextModal"></PageTextTable>
           </md-card-content>
         </md-card>
       </div>
@@ -65,11 +65,21 @@ export default {
       if (this.selectedpage.filename === "") {
         Vue.swal("Warning!", "Please select page first!", "warning");
       } else {
-        if (this.selectedpage.search.length > 3) {
-
-        }
         this.ParsePage(this.selectedpage);
       }
+    },
+    getEditTextModal: function (item) {
+      Vue.swal({
+        input: 'textarea',
+        inputValue: item.value,
+        confirmButtonColor: '#4caf50',
+        inputAttributes: {
+          'aria-label': 'Type your message here'
+        },
+        showCancelButton: true
+      }).then((result) => {
+         alert('Process Edit!');
+      });
     }
   },
   created: function() {
