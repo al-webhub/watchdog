@@ -41,11 +41,11 @@ export default {
       try {
         let response = await axios.get("/api/auth/self");
         await commit("SET_USER", response.data);
-        router.push("dashboard");
+        router.push("dashboard").catch(err => {});
       } catch (e) {
         commit("SET_TOKEN", null);
         commit("SET_USER", null);
-        router.push("login");
+        router.push("login").catch(err => {});
       }
     },
     logout({ commit }) {

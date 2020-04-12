@@ -56,12 +56,12 @@ import Chartist from "chartist";
 // configure router
 export const router = new VueRouter({
   mode: "history",
+  base: "/landingly/",
   routes, // short for routes: routes
   linkExactActiveClass: "nav-item active"
 });
 
 router.beforeEach((to, from, next) => {
-  console.log(to);
   if (to.meta.protected) {
     if (store.getters["auth/authenticated"]) {
       next();
