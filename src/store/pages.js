@@ -50,6 +50,19 @@ export default {
     },
     async SaveParsedPage({ commit }, data) {
       commit("SET_PARSED_PAGE", data);
+    },
+    async updatePageText({ dispatch }, data) {
+      try {
+        let response = await axios.post("/api/pages/editpagetext", data);
+        dispatch("ParsePage", data);
+      } catch (e) {
+        Vue.swal("Error", e.response.data.message, "error").then(result => {
+          if (result.value) {
+            router.go();
+          }
+        });
+      }
+
     }
   }
 };

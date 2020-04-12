@@ -6,16 +6,13 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\Storage;
 use stdClass;
 use Sunra\PhpSimple\HtmlDomParser;
+use App\Classes\Files;
 
 class Parser
 {
     public static function getHtml($filename)
     {
-        try {
-            $file = Storage::disk('pages')->get($filename);
-        } catch (FileNotFoundException $e) {
-            return response()->json(['message' => "Requested file not found!"], 404);
-        }
+        $file = Files::getFile($filename);
         return HtmlDomParser::str_get_html($file);
     }
 
@@ -55,6 +52,13 @@ class Parser
         return self::makeObject($text, $type, $search, $id);
     }
 
+    public static function EditHtml($search, $replace, $html, $nth = 0) {
+        $found = preg_match_all('#'.$search.'#', $html, $matches, PREG_OFFSET_CAPTURE);
+        if (false !== $found && $found > $nth) {
+            return substr_replace($html, $replace, $matches[0][$nth][1], strlen($search));
+        }
+        return $html;
+    }
 
     private static function parseHtml($html, $needle): array
     {
@@ -86,7 +90,7 @@ class Parser
         return $result;
     }
 
-    public static function filterSearch(string $data, $search) {
+    private static function filterSearch(string $data, $search) {
         if (strlen($search) >= 3) {
             if (stripos($data, $search) !== false) {
                 return $data;

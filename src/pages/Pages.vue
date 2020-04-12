@@ -26,7 +26,10 @@
             />
           </md-card-header>
           <md-card-content>
-            <PageTextTable :rows="getParsedPage" v-on:getEditTextModal="getEditTextModal"></PageTextTable>
+            <PageTextTable
+              :rows="getParsedPage"
+              v-on:getEditTextModal="getEditTextModal"
+            ></PageTextTable>
           </md-card-content>
         </md-card>
       </div>
@@ -38,8 +41,8 @@
 import { PageTextTable } from "@/components";
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
-import Vue from 'vue'
-import { router } from '../main'
+import Vue from "vue";
+
 export default {
   components: {
     PageTextTable
@@ -47,7 +50,7 @@ export default {
   data() {
     return {
       selectedpage: {
-        filename: "",
+        filename: this.$store.getters["pages/getPages"][0],
         search: ""
       },
       pages: this.$store.getters["pages/getPages"]
@@ -56,7 +59,8 @@ export default {
   methods: {
     ...mapActions({
       ScanForPages: "pages/ScanForPages",
-      ParsePage: "pages/ParsePage"
+      ParsePage: "pages/ParsePage",
+      updatePageText: "pages/updatePageText"
     }),
     selectPage() {
       this.ParsePage(this.selectedpage);
@@ -68,22 +72,32 @@ export default {
         this.ParsePage(this.selectedpage);
       }
     },
-    getEditTextModal: function (item) {
+    getEditTextModal: function(item) {
       Vue.swal({
-        input: 'textarea',
+        input: "textarea",
         inputValue: item.value,
-        confirmButtonColor: '#4caf50',
+        confirmButtonColor: "#4caf50",
         inputAttributes: {
-          'aria-label': 'Type your message here'
+          "aria-label": "Type your message here"
         },
         showCancelButton: true
-      }).then((result) => {
-         alert('Process Edit!');
+      }).then(result => {
+        result.oldvalue = item.value;
+        result.id = item.id;
+        result.filename = this.selectedpage.filename;
+        result.search = this.selectedpage.search;
+        if (result.value !== result.oldvalue) {
+          this.updateText(result);
+        }
       });
+    },
+    updateText(item) {
+      this.updatePageText(item);
     }
   },
   created: function() {
     this.ScanForPages();
+    this.selectPage();
   },
   computed: {
     ...mapGetters({
