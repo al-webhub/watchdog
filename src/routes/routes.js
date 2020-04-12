@@ -7,8 +7,9 @@ import Icons from "@/pages/Icons.vue";
 import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
 import Login from "@/pages/Login";
-import Settings from '@/pages/Settings'
-import Pages from '@/pages/Pages'
+import Settings from "@/pages/Settings";
+import Pages from "@/pages/Pages";
+import Editor from "@/pages/Editor";
 
 import Content from "@/pages/Layout/Content";
 
@@ -54,6 +55,14 @@ const routes = [
         path: "/pages",
         name: "pages",
         component: Pages,
+        meta: {
+          protected: true
+        }
+      },
+      {
+        path: "/editor",
+        name: "editor",
+        component: Editor,
         meta: {
           protected: true
         }

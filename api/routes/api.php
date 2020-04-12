@@ -19,3 +19,7 @@ Route::group(['prefix' => 'pages', 'namespace' => 'Pages'], function(){
     Route::post('/parsepagetext', 'ParsePageTextController');
     Route::post('/editpagetext', 'EditPageTextController');
 });
+
+Route::group(['prefix' => 'editor', 'namespace' => 'Editor'], function(){
+    Route::post('/getfilecontents', 'GetFileContentsController');
+});

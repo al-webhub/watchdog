@@ -53,7 +53,7 @@ export default {
     },
     async updatePageText({ dispatch }, data) {
       try {
-        let response = await axios.post("/api/pages/editpagetext", data);
+        await axios.post("/api/pages/editpagetext", data);
         dispatch("ParsePage", data);
       } catch (e) {
         Vue.swal("Error", e.response.data.message, "error").then(result => {
@@ -62,7 +62,6 @@ export default {
           }
         });
       }
-
     }
   }
 };
