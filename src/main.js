@@ -55,7 +55,7 @@ import Chartist from "chartist";
 
 // configure router
 export const router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   base: "/landingly/",
   routes, // short for routes: routes
   linkExactActiveClass: "nav-item active"
