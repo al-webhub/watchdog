@@ -1,32 +1,15 @@
 <template>
   <div class="content">
-    <div class="md-layout">
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
-      >
-        {{}}
-        <md-card>
-          <md-card-header data-background-color="green">
-            <span class="title">Code Editor</span>
-            <select v-model="selectedpage.filename" v-on:change="selectPage">
-              <option
-                v-for="page in pages"
-                v-bind:value="page"
-                v-bind:key="page"
-                >{{ page }}
-              </option>
-            </select>
-          </md-card-header>
-          <md-card-content>
-            <codemirror
-              v-model="getPageContents"
-              ref="cmEditor"
-              :options="cmOption"
-            ></codemirror>
-          </md-card-content>
-        </md-card>
-      </div>
-    </div>
+    <select v-model="selectedpage.filename" v-on:change="selectPage">
+      <option v-for="page in pages" v-bind:value="page" v-bind:key="page"
+        >{{ page }}
+      </option>
+    </select>
+    <codemirror
+      v-model="getPageContents"
+      ref="cmEditor"
+      :options="cmOption"
+    ></codemirror>
   </div>
 </template>
 
@@ -39,6 +22,7 @@ import "codemirror/theme/monokai.css";
 import "codemirror/addon/selection/active-line.js";
 import "codemirror/addon/edit/closetag.js";
 import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "Editor",
   components: {
@@ -54,8 +38,7 @@ export default {
         autoCloseTags: true,
         line: true,
         mode: "text/html",
-        theme: "monokai",
-        viewportMargin: Infinity
+        theme: "monokai"
       },
       selectedpage: {
         filename: this.$store.getters["pages/getPages"][0]
@@ -79,14 +62,15 @@ export default {
   computed: {
     ...mapGetters({
       getPageContents: "editor/getPageContents"
-    })
+    }),
+    codemirror() {
+      return this.$refs.cmEditor.codemirror;
+    }
+  },
+  mounted() {
+    this.codemirror.setSize("", "100%");
   }
 };
 </script>
 
-<style scoped>
-.CodeMirror {
-  border: 1px solid #eee;
-  height: auto;
-}
-</style>
+<style scoped></style>
