@@ -15,7 +15,10 @@ class ScanPagesController extends Controller
 
     public function __invoke(Request $request)
     {
-        $pages = Storage::disk('pages')->allFiles();
-        return response()->json(['pages' => $pages], 200);
+        $pages = Storage::disk('pages')->files('/');
+        $onlyhtml = array_filter($pages, static function($str){
+            return strpos($str, '.html') !== 0;
+        });
+        return response()->json(['pages' => $onlyhtml], 200);
     }
 }
