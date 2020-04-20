@@ -63,8 +63,10 @@ class Parser
     private static function parseHtml($html, $needle): array
     {
         $text = [];
-        foreach($html->find($needle) as $element) {
-            $text[] = $element->innertext;
+        if ($html) {
+            foreach($html->find($needle) as $element) {
+                $text[] = $element->innertext;
+            }
         }
         return $text;
     }
