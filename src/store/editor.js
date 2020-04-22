@@ -8,16 +8,24 @@ Vue.use(Vuex);
 export default {
   namespaced: true,
   state: {
-    editor: null
+    editor: null,
+    lastModified: ''
   },
   getters: {
     getPageContents(state) {
       return state.editor;
+    },
+    getPageLastModified(state) {
+      return state.lastModified;
     }
   },
   mutations: {
     async SET_FILE_CONTENTS(state, data) {
       state.editor = data;
+    },
+    async SET_LAST_MODIFIED(state, data) {
+      console.log('in muatation');
+      state.lastModified = data;
     }
   },
   actions: {
@@ -35,6 +43,22 @@ export default {
     },
     async SavePageContents({ commit }, data) {
       await commit("SET_FILE_CONTENTS", data);
+    },
+    async updateFileContents({ dispatch }, data) {
+      try {
+        let response = await axios.post('/api/editor/updatefilecontents', data);
+        dispatch('updateLastModified', response.data.message);
+      } catch (e) {
+        Vue.swal("Error", e.response.data.message, "error").then(result => {
+          if (result.value) {
+            router.go();
+          }
+        });
+      }
+    },
+    async updateLastModified({ commit }, date) {
+      console.log(date);
+        await commit("SET_LAST_MODIFIED", date);
     }
   }
 };

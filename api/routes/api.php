@@ -22,4 +22,5 @@ Route::group(['prefix' => 'pages', 'namespace' => 'Pages'], function(){
 
 Route::group(['prefix' => 'editor', 'namespace' => 'Editor'], function(){
     Route::post('/getfilecontents', 'GetFileContentsController');
+    Route::post('/updatefilecontents', 'UpdateFileContentsController');
 });

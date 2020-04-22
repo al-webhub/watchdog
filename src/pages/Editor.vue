@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <span>Last modified: {{ getLastModified }}</span>
     <select v-model="selectedpage.filename" v-on:change="selectPage">
       <option v-for="page in pages" v-bind:value="page" v-bind:key="page"
         >{{ page }}
@@ -9,6 +10,7 @@
       v-model="getPageContents"
       ref="cmEditor"
       :options="cmOption"
+      @input="onCmCodeChange"
     ></codemirror>
   </div>
 </template>
@@ -49,10 +51,18 @@ export default {
   methods: {
     ...mapActions({
       ScanForPages: "pages/ScanForPages",
-      getFileContents: "editor/getFileContents"
+      getFileContents: "editor/getFileContents",
+      updatePageContents: "editor/updateFileContents"
     }),
     selectPage() {
       this.getFileContents(this.selectedpage);
+    },
+    onCmCodeChange(newCode) {
+      this.code = newCode;
+      this.updatePageContents({
+        contents: this.code,
+        filename: this.selectedpage.filename
+      });
     }
   },
   created: function() {
@@ -61,7 +71,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getPageContents: "editor/getPageContents"
+      getPageContents: "editor/getPageContents",
+      getLastModified: "editor/getPageLastModified"
     }),
     codemirror() {
       return this.$refs.cmEditor.codemirror;
