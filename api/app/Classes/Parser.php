@@ -46,13 +46,21 @@ class Parser
         return $result;
     }
 
-    public static function getTag($html, $tag, $type, $id = 0, $search)
+    public static function getImages($filename): array
     {
-        $text = self::parseHtml($html, $tag);
-        return self::makeObject($text, $type, $search, $id);
+        $html = Files::getFile($filename);
+        $imagesArray = self::parseImage($html);
+        return self::makeImageObject($imagesArray);
     }
 
-    public static function EditHtml($search, $replace, $html, $nth = 0) {
+    public static function getTag($html, $tag, $type, $id = 0, $search = ''): array
+    {
+        $data = self::parseHtml($html, $tag);;
+        return self::makeObject($data, $type, $search, $id);
+    }
+
+    public static function EditHtml($search, $replace, $html, $nth = 0)
+    {
         $found = preg_match_all('#'.$search.'#', $html, $matches, PREG_OFFSET_CAPTURE);
         if (false !== $found && $found > $nth) {
             return substr_replace($html, $replace, $matches[0][$nth][1], strlen($search));
@@ -60,18 +68,41 @@ class Parser
         return $html;
     }
 
-    private static function parseHtml($html, $needle): array
+    private static function parseImage($html)
     {
-        $text = [];
-        if ($html) {
-            foreach($html->find($needle) as $element) {
-                $text[] = $element->innertext;
-            }
-        }
-        return $text;
+        $horror = '/<img(?:\\s[^<>]*?)?\\bsrc\\s*=\\s*(?|"([^"]*)"|\'([^\']*)\'|([^<>\'"\\s]*))[^<>]*>/i';
+        preg_match_all($horror, $html, $images);
+        return $images;
     }
 
-    private static function makeObject($data, $type, $search, $id = 0)
+    private static function parseHtml($html, $needle): array
+    {
+        $parsedData = [];
+        if ($html) {
+            foreach($html->find($needle) as $element) {
+                $parsedData[] = $element->innertext;
+            }
+        }
+        return $parsedData;
+    }
+
+    private static function makeImageObject($data, $index = 1)
+    {
+        $result = [];
+        if (is_array($data[$index]) && count($data[$index]) > 0) {
+            foreach ($data[$index] as $key => $image) {
+                $name = explode('/', $image);
+                $object = new stdClass();
+                $object->id = $key;
+                $object->name = end($name);
+                $object->path = $image;
+                $result[] = $object;
+            }
+        }
+        return $result;
+    }
+
+    private static function makeObject($data, $type, $search, $id = 0): array
     {
         $result = [];
         $total = count($data);
@@ -92,7 +123,8 @@ class Parser
         return $result;
     }
 
-    private static function filterSearch(string $data, $search) {
+    private static function filterSearch(string $data, $search)
+    {
         if (strlen($search) >= 3) {
             if (stripos($data, $search) !== false) {
                 return $data;

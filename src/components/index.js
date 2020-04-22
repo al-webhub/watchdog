@@ -7,10 +7,10 @@ import StatsCard from "./Cards/StatsCard.vue";
 import NavTabsTable from "./Tables/NavTabsTable.vue";
 import OrderedTable from "./Tables/OrderedTable.vue";
 import SimpleTable from "./Tables/SimpleTable.vue";
-import PageTextTable from './Tables/PageTextTable'
-
+import PageTextTable from "./Tables/PageTextTable";
+import PageImageTable from "./Tables/PageImageTable";
 // Forms
-import EditProfileForm from './Forms/Settings/EditProfileForm'
+import EditProfileForm from "./Forms/Settings/EditProfileForm";
 
 export {
   ChartCard,
@@ -20,5 +20,6 @@ export {
   OrderedTable,
   SimpleTable,
   EditProfileForm,
-  PageTextTable
+  PageTextTable,
+  PageImageTable
 };

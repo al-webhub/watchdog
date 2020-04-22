@@ -16,6 +16,10 @@
         <md-icon>content_paste</md-icon>
         <p>Pages</p>
       </sidebar-link>
+      <sidebar-link to="/images">
+        <md-icon>image</md-icon>
+        <p>Images</p>
+      </sidebar-link>
       <sidebar-link to="/editor">
         <md-icon>post_add</md-icon>
         <p>Editor</p>

@@ -20,6 +20,10 @@ Route::group(['prefix' => 'pages', 'namespace' => 'Pages'], function(){
     Route::post('/editpagetext', 'EditPageTextController');
 });
 
+Route::group(['prefix' => 'images', 'namespace' => 'Images'], function(){
+    Route::post('/parsepageimages', 'ParsePageImagesController');
+});
+
 Route::group(['prefix' => 'editor', 'namespace' => 'Editor'], function(){
     Route::post('/getfilecontents', 'GetFileContentsController');
     Route::post('/updatefilecontents', 'UpdateFileContentsController');

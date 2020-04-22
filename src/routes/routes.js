@@ -10,6 +10,7 @@ import Login from "@/pages/Login";
 import Settings from "@/pages/Settings";
 import Pages from "@/pages/Pages";
 import Editor from "@/pages/Editor";
+import Images from "@/pages/Images";
 
 import Content from "@/pages/Layout/Content";
 
@@ -63,6 +64,14 @@ const routes = [
         path: "/editor",
         name: "editor",
         component: Editor,
+        meta: {
+          protected: true
+        }
+      },
+      {
+        path: "/images",
+        name: "images",
+        component: Images,
         meta: {
           protected: true
         }
