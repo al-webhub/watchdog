@@ -4,7 +4,7 @@
       <div class="md-layout-item md-lay md-medium-size-100 md-size-33 login_form_padding ">
         <form @submit.prevent="submit">
           <md-card>
-            <md-card-header >
+            <md-card-header data-background-color="red">
               <h4 class="title">Register</h4>
               <p class="category"></p>
             </md-card-header>
@@ -77,6 +77,11 @@ export default {
       authenticated: "auth/authenticated",
       user: "auth/getUser"
     })
+  },
+  created() {
+    if (this.authenticated) {
+      this.$router.push("dashboard");
+    }
   }
 };
 </script>

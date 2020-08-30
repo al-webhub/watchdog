@@ -1,15 +1,12 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
 import Dashboard from "@/pages/Dashboard.vue";
-import TableList from "@/pages/TableList.vue";
-import Typography from "@/pages/Typography.vue";
-import Icons from "@/pages/Icons.vue";
-import Maps from "@/pages/Maps.vue";
-import Notifications from "@/pages/Notifications.vue";
-import Login from "@/pages/Login";
+import Register from "@/pages/Auth/Register";
+import Login from "@/pages/Auth/Login";
+
 import Settings from "@/pages/Settings";
 import Content from "@/pages/Layout/Content";
-import Register from "@/pages/Register";
+import NotFound from "@/pages/Service/NotFound";
 
 const routes = [
   {
@@ -19,7 +16,7 @@ const routes = [
     redirect: "login/",
     children: [
       {
-        path: "login/",
+        path: "login",
         name: "login",
         component: Login,
         meta: {
@@ -27,7 +24,7 @@ const routes = [
         }
       },
       {
-        path: "register/",
+        path: "register",
         name: "Register",
         component: Register,
         meta: {
@@ -58,6 +55,10 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: "*",
+    component: NotFound
   }
 ];
 

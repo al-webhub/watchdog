@@ -57,9 +57,6 @@ export default {
     async register({ dispatch }, data) {
       let response = await axios.post("/api/auth/register", data);
       dispatch("attempt", response.data.token);
-      // return .then(() => {
-      //   dispatch("attempt", response.data.token);
-      // });
     }
   }
 };
