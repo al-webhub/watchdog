@@ -13,18 +13,3 @@ Route::group(['prefix' => 'settings', 'namespace' => 'Settings'], function(){
         Route::post('/updateprofile', 'UpdateProfileController');
     });
 });
-
-Route::group(['prefix' => 'pages', 'namespace' => 'Pages'], function(){
-    Route::get('/scan', 'ScanPagesController');
-    Route::post('/parsepagetext', 'ParsePageTextController');
-    Route::post('/editpagetext', 'EditPageTextController');
-});
-
-Route::group(['prefix' => 'images', 'namespace' => 'Images'], function(){
-    Route::post('/parsepageimages', 'ParsePageImagesController');
-});
-
-Route::group(['prefix' => 'editor', 'namespace' => 'Editor'], function(){
-    Route::post('/getfilecontents', 'GetFileContentsController');
-    Route::post('/updatefilecontents', 'UpdateFileContentsController');
-});

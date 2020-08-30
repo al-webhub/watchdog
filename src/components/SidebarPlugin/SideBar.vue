@@ -47,7 +47,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Landingly"
+      default: "Watchdog"
     },
     backgroundImage: {
       type: String,
@@ -55,11 +55,11 @@ export default {
     },
     imgLogo: {
       type: String,
-      default: require("@/assets/img/vue-logo.png")
+      default: require("@/assets/img/logo.png")
     },
     activeColor: {
       type: String,
-      default: "green",
+      default: "red",
       validator: value => {
         let acceptedValues = ["", "purple", "blue", "green", "orange", "red"];
         return acceptedValues.indexOf(value) !== -1;

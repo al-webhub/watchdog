@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
     <notifications></notifications>
-
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/dashboard">
@@ -12,18 +11,7 @@
         <md-icon>build</md-icon>
         <p>Settings</p>
       </sidebar-link>
-      <sidebar-link to="/pages">
-        <md-icon>content_paste</md-icon>
-        <p>Pages</p>
-      </sidebar-link>
-      <sidebar-link to="/images">
-        <md-icon>image</md-icon>
-        <p>Images</p>
-      </sidebar-link>
-      <sidebar-link to="/editor">
-        <md-icon>post_add</md-icon>
-        <p>Editor</p>
-      </sidebar-link>
+
     </side-bar>
 
     <div class="main-panel">

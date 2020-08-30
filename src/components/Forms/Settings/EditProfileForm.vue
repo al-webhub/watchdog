@@ -33,7 +33,7 @@
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
-            <md-button type="submit" class="md-raised md-success"
+            <md-button type="submit" class="md-raised md-danger"
               >Update Profile</md-button
             >
           </div>
@@ -72,8 +72,6 @@ export default {
     }
   }
 };
-
-
 </script>
 
-<style scoped></style>
+<style scoped/>

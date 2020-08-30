@@ -98,3 +98,4 @@ new Vue({
     Chartist: Chartist
   }
 });
+document.title = 'Watchdog';

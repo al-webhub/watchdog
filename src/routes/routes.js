@@ -8,10 +8,6 @@ import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
 import Login from "@/pages/Login";
 import Settings from "@/pages/Settings";
-import Pages from "@/pages/Pages";
-import Editor from "@/pages/Editor";
-import Images from "@/pages/Images";
-
 import Content from "@/pages/Layout/Content";
 
 const routes = [
@@ -48,30 +44,6 @@ const routes = [
         path: "/settings",
         name: "settings",
         component: Settings,
-        meta: {
-          protected: true
-        }
-      },
-      {
-        path: "/pages",
-        name: "pages",
-        component: Pages,
-        meta: {
-          protected: true
-        }
-      },
-      {
-        path: "/editor",
-        name: "editor",
-        component: Editor,
-        meta: {
-          protected: true
-        }
-      },
-      {
-        path: "/images",
-        name: "images",
-        component: Images,
         meta: {
           protected: true
         }
