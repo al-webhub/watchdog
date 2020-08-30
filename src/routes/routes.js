@@ -8,6 +8,8 @@ import Settings from "@/pages/Settings";
 import Content from "@/pages/Layout/Content";
 import NotFound from "@/pages/Service/NotFound";
 
+import Users from "@/pages/Users/Users.vue";
+
 const routes = [
   {
     path: "/",
@@ -50,6 +52,14 @@ const routes = [
         path: "/settings",
         name: "settings",
         component: Settings,
+        meta: {
+          protected: true
+        }
+      },
+      {
+        path: "/users",
+        name: "users",
+        component: Users,
         meta: {
           protected: true
         }

@@ -11,6 +11,10 @@
         <md-icon>build</md-icon>
         <p>Settings</p>
       </sidebar-link>
+      <sidebar-link to="/users">
+        <md-icon>account_box</md-icon>
+        <p>Users</p>
+      </sidebar-link>
 
     </side-bar>
 
