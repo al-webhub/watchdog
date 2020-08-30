@@ -9,6 +9,7 @@ import Notifications from "@/pages/Notifications.vue";
 import Login from "@/pages/Login";
 import Settings from "@/pages/Settings";
 import Content from "@/pages/Layout/Content";
+import Register from "@/pages/Register";
 
 const routes = [
   {
@@ -21,6 +22,14 @@ const routes = [
         path: "login/",
         name: "login",
         component: Login,
+        meta: {
+          protected: false
+        }
+      },
+      {
+        path: "register/",
+        name: "Register",
+        component: Register,
         meta: {
           protected: false
         }

@@ -5,11 +5,17 @@
         <form @submit.prevent="submit">
           <md-card>
             <md-card-header >
-              <h4 class="title">Login</h4>
+              <h4 class="title">Register</h4>
               <p class="category"></p>
             </md-card-header>
             <md-card-content>
               <div class="md-layout">
+                <div class="md-layout-item md-small-size-100 md-size-100">
+                  <md-field>
+                    <label>Name</label>
+                    <md-input v-model="form.name" type="name"></md-input>
+                  </md-field>
+                </div>
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
                     <label>Email</label>
@@ -22,13 +28,15 @@
                     <md-input v-model="form.password" type="password"></md-input>
                   </md-field>
                 </div>
+                <div class="md-layout-item md-small-size-100 md-size-100">
+                  <md-field>
+                    <label>Repeat password</label>
+                    <md-input v-model="form.password_confirmation" type="password"></md-input>
+                  </md-field>
+                </div>
                 <div class="md-layout-item md-size-100 text-right">
-                  <md-button
-                    @click="$router.push('register')"
-                    class="md-raised md-danger pull-left"
-                    >Register</md-button
-                  >
-                  <md-button type="submit" class="md-raised md-danger">Login</md-button>
+                  <md-button @click="$router.push('login')" class="md-raised md-danger pull-left">Login</md-button>
+                  <md-button type="submit" class="md-raised md-danger">Register</md-button>
                 </div>
               </div>
             </md-card-content>
@@ -48,17 +56,19 @@ export default {
   components: {},
   methods: {
     ...mapActions({
-      signIn: "auth/signIn"
+      register: "auth/register"
     }),
     submit() {
-      this.signIn(this.form);
+      this.register(this.form);
     }
   },
   data() {
     return {
       form: {
+        name: "",
         email: "",
-        password: ""
+        password: "",
+        password_confirmation: ""
       }
     };
   },
