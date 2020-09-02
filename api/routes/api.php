@@ -14,3 +14,7 @@ Route::group(['prefix' => 'settings', 'namespace' => 'Settings'], function(){
         Route::post('/updateprofile', 'UpdateProfileController');
     });
 });
+
+Route::group(['prefix' => 'users', 'namespace' => 'Users'], function(){
+    Route::get('/getusers', 'getUsersController');
+});

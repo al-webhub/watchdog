@@ -8,8 +8,8 @@
           <md-card-header data-background-color="red">
             <h4 class="title">Registered users</h4>
           </md-card-header>
-          <md-card-content>
-            <ordered-table></ordered-table>
+          <md-card-content >
+            <users-table :rows="getUsers" ></users-table>
           </md-card-content>
         </md-card>
 
@@ -19,11 +19,28 @@
 </template>
 
 <script>
-import { SimpleTable, OrderedTable } from "@/components";
+import { UsersTable } from "@/components";
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
+import Vue from "vue";
+
 
 export default {
   components: {
-    OrderedTable
+      UsersTable
+  },
+  methods: {
+      ...mapActions({
+          requestUsers: "users/requestUsers"
+      })
+  },
+  computed: {
+      ...mapGetters({
+          getUsers: "users/getUsers"
+      })
+  },
+  created: function () {
+      this.requestUsers();
   }
 };
 </script>
