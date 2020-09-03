@@ -20,9 +20,13 @@ export default {
         }
     },
     actions: {
-        async requestUsers({ commit }) {
+        async requestUsers({ commit }, search = '') {
             try {
-                let response = await axios.get('/api/users/getusers/');
+                let response = await axios.get('/api/users/getusers/', {
+                    params: {
+                        search: search
+                    }
+                });
                 await commit('SET_USERS', response.data);
             } catch (e) {
                 await commit('SET_USERS', null);

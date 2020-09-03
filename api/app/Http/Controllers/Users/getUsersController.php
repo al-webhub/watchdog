@@ -15,8 +15,15 @@ class getUsersController extends Controller
 
     public function __invoke(Request $request)
     {
-        // TODO Implement limits and search query;
-        $users = User::take(10)->get();
+        $search = $request->search;
+        if (!$search) {
+            $users = User::take(10)->get();
+        } else {
+            $users = User::query()
+                ->whereLike('name', $search)
+                ->whereLike('email', $search)
+                ->take(10)->get();
+        }
         return response()->json($users);
     }
 }
