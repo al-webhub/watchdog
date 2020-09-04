@@ -32,6 +32,10 @@ export default {
                 await commit('SET_USERS', null);
                 Vue.swal("Error", "Unexpected Error!");
             }
+        },
+        async deleteUser({ dispatch }, user) {
+            await axios.post('/api/users/delete/', user);
+            dispatch("requestUsers", user.search);
         }
     }
 };

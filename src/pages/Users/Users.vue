@@ -20,10 +20,10 @@
             </div>
           </md-card-header>
           <md-card-content >
-            <users-table :rows="getUsers" ></users-table>
+            <users-table :rows="getUsers" v-on:deleteUserModal="deleteUserModal">
+            </users-table>
           </md-card-content>
         </md-card>
-
       </div>
     </div>
   </div>
@@ -46,12 +46,27 @@ export default {
          }
      }
   },
+
+
   methods: {
       ...mapActions({
-          requestUsers: "users/requestUsers"
+          requestUsers: "users/requestUsers",
+          deleteUser: "users/deleteUser"
       }),
       search() {
           this.requestUsers(this.users.search);
+      },
+      deleteUserModal: function (user) {
+          Vue.swal({
+              title: 'Warning',
+              text: "Are you sure want to delete user: " + user.name,
+              showCancelButton: true,
+              confirmButtonColor: '#4caf50',
+              cancelButtonColor: '#f44336'
+          }).then(result => {
+              user.search = this.users.search;
+              this.deleteUser(user);
+          });
       }
   },
   computed: {
@@ -63,4 +78,5 @@ export default {
       this.requestUsers();
   }
 };
+
 </script>

@@ -17,4 +17,5 @@ Route::group(['prefix' => 'settings', 'namespace' => 'Settings'], function(){
 
 Route::group(['prefix' => 'users', 'namespace' => 'Users'], function(){
     Route::get('/getusers', 'getUsersController');
+    Route::post('/delete', 'deleteUserController');
 });
