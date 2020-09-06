@@ -18,7 +18,7 @@
                 <md-field>
                   <label>Search:</label>
                   <md-input
-                          v-model="users.search"
+                          v-model="websites.search"
                           v-on:keyup="search"
                   />
                 </md-field>
@@ -26,7 +26,7 @@
             </div>
           </md-card-header>
           <md-card-content>
-            <WebsitesTable></WebsitesTable>
+            <websites-table></websites-table>
           </md-card-content>
         </md-card>
       </div>
@@ -65,7 +65,7 @@ export default {
     })
   },
   created: function() {
-    this.requestWebsites();
+    this.requestWebsites(this.websites.search);
   }
 };
 </script>

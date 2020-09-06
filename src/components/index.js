@@ -10,6 +10,7 @@ import SimpleTable from "./Tables/SimpleTable.vue";
 import PageTextTable from "./Tables/PageTextTable";
 import PageImageTable from "./Tables/PageImageTable";
 import UsersTable from "./Tables/UsersTable";
+import WebsitesTable from "./Tables/WebsitesTable";
 // Forms
 import EditProfileForm from "./Forms/Settings/EditProfileForm";
 
@@ -23,5 +24,6 @@ export {
   SimpleTable,
   EditProfileForm,
   PageTextTable,
+  WebsitesTable,
   PageImageTable
 };

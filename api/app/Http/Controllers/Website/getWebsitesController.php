@@ -16,7 +16,7 @@ class getWebsitesController extends Controller
     public function __invoke(Request $request)
     {
         $user = auth()->user();
-        $websites = $user->websites();
-        Helper::sendResponse($websites, 200);
+        $websites = $user->websites()->get();
+        return Helper::sendResponse($websites, 200);
     }
 }
