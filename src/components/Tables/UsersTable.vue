@@ -5,9 +5,8 @@
         <md-table-cell md-label="ID" style="width:10px;">{{ item.id }}</md-table-cell>
         <md-table-cell md-label="Name">{{ item.name }}</md-table-cell>
         <md-table-cell md-label="Email">{{ item.email }}</md-table-cell>
-        <md-table-cell md-label="Priviligies">{{ item.priviligies }}</md-table-cell>
         <md-table-cell md-label="Controls"  style="width:100px;">
-          <md-button class="md-sm md-success pull-right">Edit</md-button>
+          <md-button v-on:click="$emit('editUserModal', item)" class="md-sm md-success pull-right">Edit</md-button>
           <md-button v-on:click="$emit('deleteUserModal', item)" class="md-sm md-danger pull-right">Delete</md-button>
         </md-table-cell>
       </md-table-row>

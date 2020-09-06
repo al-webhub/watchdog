@@ -36,6 +36,10 @@ export default {
         async deleteUser({ dispatch }, user) {
             await axios.post('/api/users/delete/', user);
             dispatch("requestUsers", user.search);
+        },
+        async updateUser({ dispatch }, user) {
+            await axios.post('/api/users/update', user);
+            dispatch('requestUsers', user.search);
         }
     }
 };
