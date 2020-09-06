@@ -20,3 +20,7 @@ Route::group(['prefix' => 'users', 'namespace' => 'Users'], function(){
     Route::post('/delete', 'deleteUserController');
     Route::post('/update', 'updateUserController');
 });
+
+Route::group(['prefix' => 'websites', 'namespace' => 'Website'], function(){
+    Route::get('/getwebsites', 'getWebsitesController');
+});

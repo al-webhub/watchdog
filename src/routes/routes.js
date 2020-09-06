@@ -7,6 +7,7 @@ import Login from "@/pages/Auth/Login";
 import Settings from "@/pages/Settings";
 import Content from "@/pages/Layout/Content";
 import NotFound from "@/pages/Service/NotFound";
+import Websites from "@/pages/Websites/Websites";
 
 import Users from "@/pages/Users/Users.vue";
 
@@ -60,6 +61,14 @@ const routes = [
         path: "/users",
         name: "users",
         component: Users,
+        meta: {
+          protected: true
+        }
+      },
+      {
+        path: "/websites",
+        name: "My websites",
+        component: Websites,
         meta: {
           protected: true
         }

@@ -3,8 +3,8 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Website;
 
 class UsersSeeder extends Seeder
 {
@@ -21,15 +21,17 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
         // admin user
         $user = User::create([
            'name' => 'admin',
            'email' => 'admin@admin.com',
-           'password' => Hash::make('123456'),
-            'remember_token' => Str::random(10)
+           'password' => '123456',
+           'remember_token' => Str::random(10)
         ]);
 
-        $users = factory(User::class, $this->count)->create();
+        factory(User::class, $this->count)->create()->each(function ($user){
+            $websites = factory(Website::class, 10)->make();
+            $user->websites()->saveMany($websites);
+        });
     }
 }

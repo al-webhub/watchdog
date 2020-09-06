@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import auth from "./auth";
 import settings from "./settings";
 import users from "./users";
+import websites from "./websites";
 
 import createPersistedState from "vuex-persistedstate";
 
@@ -12,7 +13,8 @@ export default new Vuex.Store({
   modules: {
     auth,
     settings,
-    users
+    users,
+    websites
   },
   plugins: [createPersistedState()]
 });

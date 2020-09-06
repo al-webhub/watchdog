@@ -7,14 +7,19 @@
         <md-icon>dashboard</md-icon>
         <p>Dashboard</p>
       </sidebar-link>
-      <sidebar-link to="/settings">
-        <md-icon>build</md-icon>
-        <p>Settings</p>
+      <sidebar-link to="/websites">
+        <md-icon>web</md-icon>
+        <p>My Websites</p>
       </sidebar-link>
       <sidebar-link to="/users">
         <md-icon>account_box</md-icon>
         <p>Users</p>
       </sidebar-link>
+      <sidebar-link to="/settings">
+        <md-icon>build</md-icon>
+        <p>Settings</p>
+      </sidebar-link>
+
 
     </side-bar>
 
