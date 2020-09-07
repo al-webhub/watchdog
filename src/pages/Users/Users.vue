@@ -75,6 +75,11 @@ export default {
       }).then(result => {
         user.search = this.users.search;
         this.deleteUser(user);
+        Vue.swal(
+              'Deleted!',
+              'User was deleted!',
+              'success'
+        )
       });
     },
     editUserModal: function (user) {
@@ -91,6 +96,11 @@ export default {
       }).then(result => {
           user.search = this.users.search;
           this.updateUser(user);
+          Vue.swal(
+              'Updated!',
+              'User was updated!',
+              'success'
+          )
       });
     }
   },

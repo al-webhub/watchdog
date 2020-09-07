@@ -32,6 +32,14 @@ export default {
                 await commit('SET_WEBSITES', null);
                 Vue.swal("Error", "Unexpected Error!");
             }
+        },
+        async deleteWebsite({ dispatch }, website) {
+            await axios.post('/api/websites/delete/', website);
+            dispatch("requestWebsites", website.search);
+        },
+        async updateWebsite({ dispatch }, website) {
+            await axios.post('/api/websites/update/', website);
+            dispatch('requestWebsites', website.search);
         }
     }
 };

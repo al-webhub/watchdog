@@ -17,16 +17,17 @@
               >
                 <md-field>
                   <label>Search:</label>
-                  <md-input
-                          v-model="websites.search"
-                          v-on:keyup="search"
-                  />
+                  <md-input v-model="websites.search" v-on:keyup="search" />
                 </md-field>
               </div>
             </div>
           </md-card-header>
           <md-card-content>
-            <websites-table></websites-table>
+            <websites-table  :rows="getWebsites"
+                             v-on:ShowDeleteModal="deleteModal"
+                             v-on:ShowEditModal="editModal"
+                             v-on:toggleActive="toggleActive"
+            ></websites-table>
           </md-card-content>
         </md-card>
       </div>
@@ -54,14 +55,58 @@ export default {
   methods: {
     ...mapActions({
        requestWebsites: "websites/requestWebsites",
+       deleteWebsite: "websites/deleteWebsite",
+       updateWebsite: "websites/updateWebsite"
     }),
     search() {
       this.requestWebsites(this.websites.search);
+    },
+    deleteModal: function(website) {
+      Vue.swal({
+          title: "Warning",
+          text: "Are you sure want to delete website: " + website.url,
+          showCancelButton: true,
+          confirmButtonColor: "#4caf50",
+          cancelButtonColor: "#f44336"
+      }).then(result => {
+          website.search = this.websites.search;
+          this.deleteWebsite(website);
+          Vue.swal(
+              'Deleted!',
+              'Website was deleted!',
+              'success'
+          )
+      });
+    },
+    editModal: function (website) {
+       Vue.swal({
+          title: 'Edit website: '+ website.url,
+              html:
+                  '<input id="name" value="'+ website.name +'" class="swal2-input">' +
+                  '<input id="url" value="'+ website.url +'" class="swal2-input">' +
+                  '<select class="form-control">' +
+                  '<option >TEST</option>' +
+                  '<option>TEST</option>' +
+                  '<option>TEST</option>' +
+                  '</select>',
+              focusConfirm: false,
+              preConfirm: () => {
+                  user.email = document.getElementById('email').value;
+                  user.name = document.getElementById('url').value;
+              }
+          }).then(result => {
+
+          });
+    },
+    toggleActive: function(website) {
+      website.search = this.websites.search;
+      website.toggle = 1;
+      this.updateWebsite(website);
     }
   },
   computed: {
     ...mapGetters({
-      getUsers: "users/getUsers"
+        getWebsites: "websites/getWebsites"
     })
   },
   created: function() {
