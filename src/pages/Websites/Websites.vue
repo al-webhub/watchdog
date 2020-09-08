@@ -84,7 +84,7 @@ export default {
     },
     editModal: function (website) {
        Vue.swal({
-          title: 'Edit website: '+ website.url,
+              title: 'Edit website: '+ website.url,
               html:
                   '<input id="name" value="'+ website.name +'" class="swal2-input">' +
                   '<input id="url" value="'+ website.url +'" class="swal2-input">',
@@ -92,7 +92,10 @@ export default {
               preConfirm: () => {
                   website.name = document.getElementById('name').value;
                   website.url = document.getElementById('url').value;
-              }
+              },
+              showCancelButton: true,
+              confirmButtonColor: "#4caf50",
+              cancelButtonColor: "#f44336"
           }).then(result => {
              if (result.isConfirmed) {
                  website.search = this.websites.search;
@@ -122,6 +125,8 @@ export default {
                 '<input id="url" value="" class="swal2-input" placeholder="URL">',
             focusConfirm: false,
             showCancelButton: true,
+            confirmButtonColor: "#4caf50",
+            cancelButtonColor: "#f44336",
             preConfirm: () => {
                 website.name = document.getElementById('name').value;
                 website.url = document.getElementById('url').value;
