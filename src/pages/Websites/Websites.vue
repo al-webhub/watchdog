@@ -10,7 +10,8 @@
               <div
                 class="md-layout-item md-medium-size-70 md-xsmall-size-100 md-size-70"
               >
-                <h4 class="title">Monitored websites</h4>
+                <h4 class="title">Monitored websites </h4>
+                  <md-button v-on:click="showNewModal" class="md-primary md-raised  md-sm"><md-icon >add_box</md-icon>Add new</md-button>
               </div>
               <div
                 class="md-layout-item md-medium-size-30 md-xsmall-size-100 md-size-30"
@@ -56,7 +57,8 @@ export default {
     ...mapActions({
        requestWebsites: "websites/requestWebsites",
        deleteWebsite: "websites/deleteWebsite",
-       updateWebsite: "websites/updateWebsite"
+       updateWebsite: "websites/updateWebsite",
+       addWebsite: "websites/addWebsite"
     }),
     search() {
       this.requestWebsites(this.websites.search);
@@ -83,25 +85,51 @@ export default {
           title: 'Edit website: '+ website.url,
               html:
                   '<input id="name" value="'+ website.name +'" class="swal2-input">' +
-                  '<input id="url" value="'+ website.url +'" class="swal2-input">' +
-                  '<select class="form-control">' +
-                  '<option >TEST</option>' +
-                  '<option>TEST</option>' +
-                  '<option>TEST</option>' +
-                  '</select>',
+                  '<input id="url" value="'+ website.url +'" class="swal2-input">',
               focusConfirm: false,
               preConfirm: () => {
-                  user.email = document.getElementById('email').value;
-                  user.name = document.getElementById('url').value;
+                  website.name = document.getElementById('name').value;
+                  website.url = document.getElementById('url').value;
               }
           }).then(result => {
-
+              website.search = this.websites.search;
+              this.updateWebsite(website);
+              Vue.swal(
+               'Updated!',
+               'Website was updated!',
+               'success'
+              )
           });
     },
     toggleActive: function(website) {
       website.search = this.websites.search;
       website.toggle = 1;
       this.updateWebsite(website);
+    },
+    showNewModal: function () {
+        let website = {
+            'name': null,
+            'url': null
+        };
+        Vue.swal({
+            title: 'Add website: ',
+            html:
+                '<input id="name" value="" class="swal2-input" placeholder="Name">' +
+                '<input id="url" value="" class="swal2-input" placeholder="URL">',
+            focusConfirm: false,
+            preConfirm: () => {
+                website.name = document.getElementById('name').value;
+                website.url = document.getElementById('url').value;
+            }
+        }).then(result => {
+            website.search = this.websites.search;
+            this.addWebsite(website);
+            Vue.swal(
+                'Created!',
+                'New website was added!',
+                'success'
+            )
+        });
     }
   },
   computed: {

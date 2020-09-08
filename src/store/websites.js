@@ -40,6 +40,10 @@ export default {
         async updateWebsite({ dispatch }, website) {
             await axios.post('/api/websites/update/', website);
             dispatch('requestWebsites', website.search);
+        },
+        async addWebsite({ dispatch }, website) {
+            await axios.post('/api/websites/add', website);
+            dispatch('requestWebsites', website.search);
         }
     }
 };
