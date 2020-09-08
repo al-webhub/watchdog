@@ -71,13 +71,15 @@ export default {
           confirmButtonColor: "#4caf50",
           cancelButtonColor: "#f44336"
       }).then(result => {
-          website.search = this.websites.search;
-          this.deleteWebsite(website);
-          Vue.swal(
-              'Deleted!',
-              'Website was deleted!',
-              'success'
-          )
+          if (result.isConfirmed) {
+              website.search = this.websites.search;
+              this.deleteWebsite(website);
+              Vue.swal(
+                  'Deleted!',
+                  'Website was deleted!',
+                  'success'
+              )
+          }
       });
     },
     editModal: function (website) {
@@ -92,13 +94,15 @@ export default {
                   website.url = document.getElementById('url').value;
               }
           }).then(result => {
-              website.search = this.websites.search;
-              this.updateWebsite(website);
-              Vue.swal(
-               'Updated!',
-               'Website was updated!',
-               'success'
-              )
+             if (result.isConfirmed) {
+                 website.search = this.websites.search;
+                 this.updateWebsite(website);
+                 Vue.swal(
+                     'Updated!',
+                     'Website was updated!',
+                     'success'
+                 )
+             }
           });
     },
     toggleActive: function(website) {
@@ -117,18 +121,21 @@ export default {
                 '<input id="name" value="" class="swal2-input" placeholder="Name">' +
                 '<input id="url" value="" class="swal2-input" placeholder="URL">',
             focusConfirm: false,
+            showCancelButton: true,
             preConfirm: () => {
                 website.name = document.getElementById('name').value;
                 website.url = document.getElementById('url').value;
             }
         }).then(result => {
-            website.search = this.websites.search;
-            this.addWebsite(website);
-            Vue.swal(
-                'Created!',
-                'New website was added!',
-                'success'
-            )
+            if (result.isConfirmed) {
+                website.search = this.websites.search;
+                this.addWebsite(website);
+                Vue.swal(
+                    'Created!',
+                    'New website was added!',
+                    'success'
+                )
+            }
         });
     }
   },

@@ -73,13 +73,15 @@ export default {
         confirmButtonColor: "#4caf50",
         cancelButtonColor: "#f44336"
       }).then(result => {
-        user.search = this.users.search;
-        this.deleteUser(user);
-        Vue.swal(
-              'Deleted!',
-              'User was deleted!',
-              'success'
-        )
+        if (result.isConfirmed) {
+          user.search = this.users.search;
+          this.deleteUser(user);
+          Vue.swal(
+            'Deleted!',
+            'User was deleted!',
+            'success'
+          )
+        }
       });
     },
     editUserModal: function (user) {
@@ -94,13 +96,15 @@ export default {
           user.name = document.getElementById('name').value;
         }
       }).then(result => {
-          user.search = this.users.search;
-          this.updateUser(user);
-          Vue.swal(
-              'Updated!',
-              'User was updated!',
-              'success'
-          )
+          if (result.isConfirmed) {
+              user.search = this.users.search;
+              this.updateUser(user);
+              Vue.swal(
+                  'Updated!',
+                  'User was updated!',
+                  'success'
+              )
+          }
       });
     }
   },
