@@ -10,4 +10,8 @@ class Website extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scans() {
+        return $this->hasMany(Scan::class);
+    }
 }

@@ -5,6 +5,7 @@ use Faker\Factory as Faker;
 use App\User;
 use Illuminate\Support\Str;
 use App\Website;
+use App\Scan;
 
 class UsersSeeder extends Seeder
 {
@@ -12,7 +13,7 @@ class UsersSeeder extends Seeder
      *  Number of users to seed
      * @var int
      */
-    private $count = 100;
+    private $count = 10;
 
     /**
      * Run the database seeds.
@@ -32,6 +33,10 @@ class UsersSeeder extends Seeder
         factory(User::class, $this->count)->create()->each(function ($user){
             $websites = factory(Website::class, 10)->make();
             $user->websites()->saveMany($websites);
+            $websites->each(function ($ws) {
+               $scans = factory(Scan::class, 10)->make();
+               $ws->scans()->saveMany($scans);
+            });
         });
     }
 }
