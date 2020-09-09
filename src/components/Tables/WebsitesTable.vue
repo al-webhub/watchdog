@@ -5,7 +5,7 @@
         <md-table-cell md-label="ID" style="width:10px;">{{ item.id }}</md-table-cell>
         <md-table-cell md-label="Name"  style="width: 150px;">{{ item.name }}</md-table-cell>
         <md-table-cell md-label="Url" > {{ item.url }}</md-table-cell>
-        <md-table-cell md-label="Created at" style="width:175px;">24.04.2020 12:23</md-table-cell>
+        <md-table-cell md-label="Created at" style="width:175px;">{{ item.created_at | formatDate }}</md-table-cell>
         <md-table-cell md-label="Last Updated" style="width:175px;">24.04.2020 12:23</md-table-cell>
         <md-table-cell md-label="Last Score" style="width:150px;">
           <md-icon class="md-success">tablet_mac</md-icon> 100
@@ -32,6 +32,8 @@
 
 
 <script>
+import moment from 'moment';
+
 export default {
   name: "websites-table",
   props: {
@@ -42,13 +44,7 @@ export default {
     rows: Array,
   },
   computed: {
-      isActive: function (value) {
-          if (value === 1) {
-              return 'success';
-          } else {
-              return 'danger'
-          }
-      }
+
   }
 };
 </script>

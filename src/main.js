@@ -47,6 +47,7 @@ if (store.getters["auth/getToken"]) {
 import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
 import Notifications from "./components/NotificationPlugin";
+import moment from 'moment';
 
 // MaterialDashboard plugin
 import MaterialDashboard from "@/material-dashboard";
@@ -97,5 +98,11 @@ new Vue({
   data: {
     Chartist: Chartist
   }
+});
+
+Vue.filter('FormatDate', function (value) {
+   if (value) {
+     return moment(String(value)).format('DD.MM.YYYY kk:mm');
+   }
 });
 document.title = 'Watchdog';
