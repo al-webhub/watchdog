@@ -21,10 +21,26 @@ class getWebsitesController extends Controller
         //
         $search = $request->search;
         if ($search) {
-            $websites =  $user->websites()->where('websites.url', 'LIKE', '%'.$search.'%')->orWhere('websites.name', 'LIKE', '%'.$search.'%')->get();
+            $websites =  $user->websites()->where('websites.url', 'LIKE', '%'.$search.'%')->orWhere('websites.name', 'LIKE', '%'.$search.'%');
         } else {
-            $websites = $user->websites()->get();
+            $websites = $user->websites();
         }
+//        $websites = $websites->addSelect(
+////            ['score_desktop' => function($query) {
+////                                    $query->select('score_desktop')
+////                                           ->from('scans')
+////                                           ->whereColumn('website_id', 'websites.id')
+////                                           ->orderBy('id', 'DESC')->limit(1);
+////                                }
+////            ],
+////            ['score_mobile' => function($query) {
+////                                    $query->select('score_mobile')
+////                                        ->from('scans')
+////                                        ->whereColumn('website_id', 'websites.id')
+////                                        ->orderBy('id', 'DESC')->limit(1);
+////                              }
+////            ])->get();
+        $websites = $websites->with('scans')->get();
         return Helper::sendResponse($websites, 200);
     }
 }

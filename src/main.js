@@ -102,7 +102,7 @@ new Vue({
 
 Vue.filter('FormatDate', function (value) {
    if (value) {
-     return moment(String(value)).format('DD.MM.YYYY kk:mm');
+     return moment(String(value)).format('DD.MM.YYYY');
    }
 });
 document.title = 'Watchdog';
