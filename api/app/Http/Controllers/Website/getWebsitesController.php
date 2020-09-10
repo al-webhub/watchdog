@@ -25,22 +25,10 @@ class getWebsitesController extends Controller
         } else {
             $websites = $user->websites();
         }
-//        $websites = $websites->addSelect(
-////            ['score_desktop' => function($query) {
-////                                    $query->select('score_desktop')
-////                                           ->from('scans')
-////                                           ->whereColumn('website_id', 'websites.id')
-////                                           ->orderBy('id', 'DESC')->limit(1);
-////                                }
-////            ],
-////            ['score_mobile' => function($query) {
-////                                    $query->select('score_mobile')
-////                                        ->from('scans')
-////                                        ->whereColumn('website_id', 'websites.id')
-////                                        ->orderBy('id', 'DESC')->limit(1);
-////                              }
-////            ])->get();
-        $websites = $websites->with('scans')->get();
+
+        $websites = $websites->with(['scans' => function($query) {
+            $query->limit(1)->orderBy('id', 'DESC');
+        }])->get();
         return Helper::sendResponse($websites, 200);
     }
 }

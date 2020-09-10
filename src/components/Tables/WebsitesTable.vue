@@ -6,10 +6,10 @@
         <md-table-cell md-label="Name"  style="width: 150px;">{{ item.name }}</md-table-cell>
         <md-table-cell md-label="Url" > {{ item.url }}</md-table-cell>
         <md-table-cell md-label="Created at" style="width:175px;">{{ item.created_at | formatDate }}</md-table-cell>
-        <md-table-cell md-label="Last scan" style="width:175px;">24.04.2020</md-table-cell>
+        <md-table-cell md-label="Last scan" style="width:175px;">{{ item.scans[0].created_at | formatDate }}</md-table-cell>
         <md-table-cell md-label="Last Score" style="min-width:150px;">
-          <md-icon class="md-success">tablet_mac</md-icon> 100
-          <md-icon class="md-success">desktop_windows</md-icon> 100
+          <md-icon class="md-success">tablet_mac</md-icon> {{ item.scans[0].score_mobile }}
+          <md-icon class="md-success">desktop_windows</md-icon> {{ item.scans[0].score_desktop }}
         </md-table-cell>
         <md-table-cell md-label="Average Score" style="width:120px;">
           <md-icon class="md-success">tablet_mac</md-icon> 100
