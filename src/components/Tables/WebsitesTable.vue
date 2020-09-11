@@ -8,7 +8,7 @@
         <md-table-cell md-label="Created at" style="width:175px;">{{ item.created_at | formatDate }}</md-table-cell>
         <md-table-cell md-label="Last scan" style="width:175px;">{{ item.scans[0].created_at | formatDate }}</md-table-cell>
         <md-table-cell md-label="Last Score" style="min-width:150px;">
-          <md-icon class="md-success">tablet_mac</md-icon> {{ item.scans[0].score_mobile }}
+          <md-icon style="">tablet_mac</md-icon> {{ item.scans[0].score_mobile }}
           <md-icon class="md-success">desktop_windows</md-icon> {{ item.scans[0].score_desktop }}
         </md-table-cell>
         <md-table-cell md-label="Average Score" style="width:120px;">
@@ -44,7 +44,31 @@ export default {
     rows: Array,
   },
   computed: {
-
+    scoreClasses() {
+        if (!this.rows) {
+            return [];
+        }
+        return this.rows.map(item => {
+           item.score_mobile_class = this.scoreColor(item.scans[0].score_mobile);
+           item.score_desktop_class = this.scoreColor(item.scans[0].score_desktop);
+           return item;
+        });
+    }
+  },
+  methods: {
+    scoreColor: function (value) {
+        let color = 'default';
+        if (value > 0 && value <= 49) {
+            color = 'red';
+        }
+        if (value >= 50 && value <= 89) {
+            color = 'orange';
+        }
+        if (value >= 90 && value <= 100) {
+            color = 'green';
+        }
+        return color;
+    }
   }
 };
 </script>
