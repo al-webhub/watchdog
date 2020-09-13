@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Rules\DomainValidation;
 use Illuminate\Http\Request;
 use App\Website;
+use App\Scan;
 
 class addWebsiteController extends Controller
 {
@@ -33,6 +34,9 @@ class addWebsiteController extends Controller
         $website->url  = $request->url;
         $website->user_id = $user->id;
         $website->save();
+        $scan = new Scan();
+        $scan->website_id = $website->id;
+        $scan->save();
         Helper::sendMessage('OK');
     }
 }
