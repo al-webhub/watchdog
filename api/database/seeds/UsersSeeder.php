@@ -13,7 +13,7 @@ class UsersSeeder extends Seeder
      *  Number of users to seed
      * @var int
      */
-    private $count = 2;
+    private $count = 1;
 
     /**
      * Run the database seeds.
@@ -31,10 +31,10 @@ class UsersSeeder extends Seeder
         ]);
 
         factory(User::class, $this->count)->create()->each(function ($user){
-            $websites = factory(Website::class, 1)->make();
+            $websites = factory(Website::class, 50)->make();
             $user->websites()->saveMany($websites);
             $websites->each(function ($ws) {
-               $scans = factory(Scan::class, 50)->make();
+               $scans = factory(Scan::class, 5000)->make();
                $ws->scans()->saveMany($scans);
             });
         });

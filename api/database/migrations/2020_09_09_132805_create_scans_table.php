@@ -20,6 +20,7 @@ class CreateScansTable extends Migration
             $table->foreign('website_id')->references('id')->on('websites')->onDelete('cascade');
             $table->unsignedInteger('score_desktop')->default(0);
             $table->unsignedInteger('score_mobile')->default(0);
+            $table->unsignedInteger('ttfb')->default(0);
         });
     }
 

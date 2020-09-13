@@ -5,19 +5,18 @@
         <md-table-cell md-label="ID" style="width:10px;">{{ item.id }}</md-table-cell>
         <md-table-cell md-label="Name"  style="width: 150px;">{{ item.name }}</md-table-cell>
         <md-table-cell md-label="Url" > {{ item.url }}</md-table-cell>
-        <md-table-cell md-label="Created at" style="width:175px;">{{ item.created_at | formatDate }}</md-table-cell>
-        <md-table-cell md-label="Last scan" style="width:175px;">{{ item.scans[0].created_at | formatDate }}</md-table-cell>
+        <md-table-cell md-label="Created at" style="width:175px;">{{ item.created_at | FormatDate}}</md-table-cell>
+        <md-table-cell md-label="Last scan" style="width:175px;">{{ item.last_scan_time }} min ago</md-table-cell>
         <md-table-cell md-label="Last Score" style="min-width:150px;">
-          <md-icon style="">tablet_mac</md-icon> {{ item.scans[0].score_mobile }}
-          <md-icon class="md-success">desktop_windows</md-icon> {{ item.scans[0].score_desktop }}
+          <md-icon :style="{ color: item.score_mobile_class }">tablet_mac</md-icon> {{ item.scans[0].score_mobile }}
+          <md-icon :style="{ color: item.score_desktop_class }">desktop_windows</md-icon> {{ item.scans[0].score_desktop }}
         </md-table-cell>
-        <md-table-cell md-label="Average Score" style="width:120px;">
-          <md-icon class="md-success">tablet_mac</md-icon> 100
-          <md-icon class="md-success">desktop_windows</md-icon> 100
+        <md-table-cell md-label="TTFB" style="width:120px;">
+          <md-icon class="md-success">access_time</md-icon> {{ item.scans[0].ttfb }}
         </md-table-cell>
-        <md-table-cell md-label="Scans" class="text-center" style="width:75px;">9999</md-table-cell>
+        <md-table-cell md-label="Scans" class="text-center" style="width:75px;">{{ item.scans_count }}</md-table-cell>
         <md-table-cell md-label="Status" style="width: 75px;">
-          <md-button v-if="item.active == 1" class="md-sm md-success" v-on:click="$emit('toggleActive', item)">Active</md-button>
+          <md-button v-if="item.active === 1" class="md-sm md-success" v-on:click="$emit('toggleActive', item)">Active</md-button>
           <md-button v-else class="md-sm md-danger" v-on:click="$emit('toggleActive', item)">Offline</md-button>
         </md-table-cell>
         <md-table-cell md-label="Controls"  style="width:253px;">
@@ -32,9 +31,9 @@
 
 
 <script>
-import moment from 'moment';
+  import moment from 'moment';
 
-export default {
+  export default {
   name: "websites-table",
   props: {
     tableHeaderColor: {
@@ -42,33 +41,6 @@ export default {
       default: "red"
     },
     rows: Array,
-  },
-  computed: {
-    scoreClasses() {
-        if (!this.rows) {
-            return [];
-        }
-        return this.rows.map(item => {
-           item.score_mobile_class = this.scoreColor(item.scans[0].score_mobile);
-           item.score_desktop_class = this.scoreColor(item.scans[0].score_desktop);
-           return item;
-        });
-    }
-  },
-  methods: {
-    scoreColor: function (value) {
-        let color = 'default';
-        if (value > 0 && value <= 49) {
-            color = 'red';
-        }
-        if (value >= 50 && value <= 89) {
-            color = 'orange';
-        }
-        if (value >= 90 && value <= 100) {
-            color = 'green';
-        }
-        return color;
-    }
   }
 };
 </script>

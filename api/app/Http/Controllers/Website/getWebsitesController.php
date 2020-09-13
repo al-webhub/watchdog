@@ -27,8 +27,8 @@ class getWebsitesController extends Controller
         }
 
         $websites = $websites->with(['scans' => function($query) {
-            $query->limit(1)->orderBy('id', 'DESC');
-        }])->get();
+            $query->latest()->limit(1);
+        }])->withCount('scans')->get();
         return Helper::sendResponse($websites, 200);
     }
 }

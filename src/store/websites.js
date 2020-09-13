@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 
 Vue.use(Vuex);
+import moment from 'moment';
 
 export default {
   namespaced: true,
@@ -27,8 +28,15 @@ export default {
                         search: search
                     }
                 });
+                response.data.map(item => {
+                             item.score_mobile_class = scoreColor(item.scans[0].score_mobile);
+                             item.score_desktop_class = scoreColor(item.scans[0].score_desktop);
+                             item.last_scan_time = calcLastScanTime(item.scans[0].created_at);
+                             return item;
+                          });
                 await commit('SET_WEBSITES', response.data);
             } catch (e) {
+                console.log(e);
                 await commit('SET_WEBSITES', null);
                 Vue.swal("Error", "Unexpected Error!");
             }
@@ -47,3 +55,22 @@ export default {
         }
     }
 };
+
+function scoreColor(value) {
+    let color = 'default';
+    if (value > 0 && value <= 49) {
+      color = 'red';
+    }
+    if (value >= 50 && value <= 89) {
+      color = 'orange';
+    }
+    if (value >= 90 && value <= 100) {
+      color = 'green';
+    }
+    return color;
+}
+
+function calcLastScanTime(value) {
+    let now = moment();
+    return moment.duration(now.diff(value)).asMinutes().toFixed(0);
+}
