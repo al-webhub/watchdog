@@ -127,14 +127,16 @@ export default {
             showCancelButton: true,
             confirmButtonColor: "#4caf50",
             cancelButtonColor: "#f44336",
-            preConfirm: () => {
-                website.name = document.getElementById('name').value;
-                website.url = document.getElementById('url').value;
+            preConfirm: async () => {
+              website.name = document.getElementById('name').value;
+              website.url = document.getElementById('url').value;
+              website.search = this.websites.search;
+              await this.addWebsite(website);
             }
         }).then(result => {
             if (result.isConfirmed) {
-                website.search = this.websites.search;
-                this.addWebsite(website);
+                // website.search = this.websites.search;
+               // this.addWebsite(website);
                 Vue.swal(
                     'Created!',
                     'New website was added!',
