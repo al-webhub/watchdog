@@ -48,3 +48,13 @@ export default {
   }
 };
 </script>
+
+<style>
+  body.swal2-shown > [aria-hidden="true"] {
+    filter: blur(10px);
+  }
+
+  body > * {
+    transition: 0.1s filter linear;
+  }
+</style>

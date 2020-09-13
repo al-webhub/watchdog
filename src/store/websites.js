@@ -28,7 +28,7 @@ export default {
                         search: search
                     }
                 });
-                response.data.map(item => {
+                response.data.map(async item => {
                              item.score_mobile_class = scoreColor(item.scans[0].score_mobile);
                              item.score_desktop_class = scoreColor(item.scans[0].score_desktop);
                              item.last_scan_time = calcLastScanTime(item.scans[0].created_at);

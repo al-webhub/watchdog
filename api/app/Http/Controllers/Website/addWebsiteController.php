@@ -21,12 +21,12 @@ class addWebsiteController extends Controller
             'name' => 'required',
             'url' => 'required|unique:websites,'.$user->id
         ]);
-      //  $website = new Website();
-        dd('test');
-//        $website->name = $request->name;
-//        $website->url  = $request->url;
-//        $website->user_id = $user->id;
-//        $website->save();
+        $website = new Website();
+        $website->name = $request->name;
+        $website->url  = $request->url;
+        $website->user_id = $user->id;
+        $website->save();
+            
         Helper::sendMessage('OK');
     }
 }
