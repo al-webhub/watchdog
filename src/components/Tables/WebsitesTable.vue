@@ -22,7 +22,7 @@
         >
         <md-table-cell md-label="Status" style="width: 75px;">
           <md-button
-            v-if="item.active === 1"
+            v-if="item.active == 1"
             class="md-sm md-success"
             v-on:click="$emit('toggleActive', item)"
             >Active</md-button
@@ -37,7 +37,7 @@
         <md-table-cell md-label="Controls" style="width:253px;">
           <md-button v-on:click="$emit('ShowEditModal', item)" class="md-sm md-success md-icon md-icon-font"><md-icon>settings</md-icon></md-button>
           <md-button v-on:click="$emit('ShowDeleteModal', item)" class="md-sm md-danger md-icon md-icon-font"><md-icon>delete</md-icon></md-button>
-          <md-button style="width: 75px;" class="md-sm md-primary"><md-icon>arrow_right_alt</md-icon> Details</md-button>
+          <md-button v-on:click="$router.push({ name: 'Analytics', params: { website_id: item.id } })" style="width: 75px;" class="md-sm md-primary"><md-icon>arrow_right_alt</md-icon> Details</md-button>
         </md-table-cell>
       </md-table-row>
     </md-table>
@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import moment from "moment";
 
 export default {
   name: "websites-table",

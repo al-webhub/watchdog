@@ -8,6 +8,7 @@ import Settings from "@/pages/Settings";
 import Content from "@/pages/Layout/Content";
 import NotFound from "@/pages/Service/NotFound";
 import Websites from "@/pages/Websites/Websites";
+import Website from "@/pages/Websites/Website";
 
 import Users from "@/pages/Users/Users.vue";
 
@@ -69,6 +70,14 @@ const routes = [
         path: "/websites",
         name: "My websites",
         component: Websites,
+        meta: {
+          protected: true
+        }
+      },
+      {
+        path: "/website/:website_id",
+        name: 'Analytics',
+        component: Website,
         meta: {
           protected: true
         }
