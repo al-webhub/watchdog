@@ -22,7 +22,7 @@
         >
         <md-table-cell md-label="Status" style="width: 75px;">
           <md-button
-            v-if="item.active === 1"
+            v-if="item.active == 1"
             class="md-sm md-success"
             v-on:click="$emit('toggleActive', item)"
             >Active</md-button
@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import moment from "moment";
 
 export default {
   name: "websites-table",
