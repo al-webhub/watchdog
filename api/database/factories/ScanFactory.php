@@ -7,8 +7,19 @@ use Faker\Generator as Faker;
 
 $factory->define(Scan::class, function (Faker $faker) {
     return [
-        'score_desktop' => $faker->numberBetween(1, 100),
-        'score_mobile'  => $faker->numberBetween(1, 100),
-        'ttfb'          => $faker->numberBetween(10, 10000)
+        'score_desktop'     => $faker->numberBetween(1, 100),
+        'score_mobile'      => $faker->numberBetween(1, 100),
+        'fcp_mobile'        => $faker->numberBetween(100, 10000),
+        'fcp_desktop'       => $faker->numberBetween(100, 10000),
+        'tti_mobile'        => $faker->numberBetween(100, 10000),
+        'tti_desktop'       => $faker->numberBetween(100, 10000),
+        'si_mobile'         => $faker->numberBetween(100, 10000),
+        'si_desktop'        => $faker->numberBetween(100, 10000),
+        'fmp_mobile'        => $faker->numberBetween(100, 10000),
+        'fmp_desktop'       => $faker->numberBetween(100, 10000),
+        'fcpu_idle_mobile'  => $faker->numberBetween(100, 10000),
+        'fcpu_idle_desktop' => $faker->numberBetween(100, 10000),
+        'ttfb_mobile'       => $faker->numberBetween(100, 10000),
+        'ttfb_desktop'      => $faker->numberBetween(100, 10000)
     ];
 });
