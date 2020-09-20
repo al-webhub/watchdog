@@ -7,10 +7,6 @@
       <div :id="chartId" class="ct-chart"></div>
     </md-card-header>
 
-    <md-card-content>
-      <slot name="content"></slot>
-    </md-card-content>
-
     <md-card-actions md-alignment="left">
       <slot name="footer"></slot>
     </md-card-actions>
@@ -18,7 +14,7 @@
 </template>
 <script>
 export default {
-  name: "chart-card",
+  name: "pulse",
   props: {
     footerText: {
       type: String,
@@ -60,7 +56,8 @@ export default {
   },
   data() {
     return {
-      chartId: "no-id"
+      chartId: "no-id",
+      chart: "null"
     };
   },
   methods: {
@@ -69,7 +66,7 @@ export default {
      */
     initChart() {
       var chartIdQuery = `#${this.chartId}`;
-      this.$Chartist[this.chartType](
+      this.chart = this.$Chartist[this.chartType](
         chartIdQuery,
         this.chartData,
         this.chartOptions
@@ -90,8 +87,27 @@ export default {
   mounted() {
     this.updateChartId();
     this.$nextTick(this.initChart);
+  },
+  watch: {
+    data: function() {
+      console.log('test');
+
+    }
   }
 };
 </script>
 
+<style>
+  svg.ct-chart-bar, svg.ct-chart-line{
+    overflow: visible;
+  }
+  .ct-label.ct-label.ct-horizontal.ct-end {
+    position: relative;
+    justify-content: flex-end;
+    text-align: right;
+    transform-origin: 100% 0;
+    transform: translate(-100%) rotate(-90deg);
+    white-space:nowrap;
+  }
 
+</style>

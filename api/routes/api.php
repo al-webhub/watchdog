@@ -27,3 +27,7 @@ Route::group(['prefix' => 'websites', 'namespace' => 'Website'], function(){
     Route::post('/update', 'updateWebsiteController');
     Route::post('/add', 'addWebsiteController');
 });
+
+Route::group(['prefix' => 'scans', 'namespace' => 'Scan'], function(){
+    Route::get('/getpulse', 'getPulseController');
+});

@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Scan::class, function (Faker $faker) {
     return [
-        'score_desktop'     => $faker->numberBetween(1, 100),
-        'score_mobile'      => $faker->numberBetween(1, 100),
+        'score_desktop'     => $faker->numberBetween(70, 95),
+        'score_mobile'      => $faker->numberBetween(65, 90),
         'fcp_mobile'        => $faker->numberBetween(100, 10000),
         'fcp_desktop'       => $faker->numberBetween(100, 10000),
         'tti_mobile'        => $faker->numberBetween(100, 10000),

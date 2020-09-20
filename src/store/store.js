@@ -4,6 +4,7 @@ import auth from "./auth";
 import settings from "./settings";
 import users from "./users";
 import websites from "./websites";
+import pulse from "./pulse";
 
 import createPersistedState from "vuex-persistedstate";
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
     auth,
     settings,
     users,
-    websites
+    websites,
+    pulse
   },
   plugins: [createPersistedState()]
 });
