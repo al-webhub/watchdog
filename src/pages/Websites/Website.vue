@@ -4,20 +4,14 @@
       <div
               class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
-        <pulse :chart-data="PulseChartData.data"
-               :chart-options="PulseChartData.options"
-               :chart-type="'Line'"
-               data-background-color="blue">
-        </pulse>
+        <pulse-chart v-if="loaded" :chartData="chartData" :chartLabels="chartLabels"></pulse-chart>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {
-  Pulse
-} from "@/components";
+ import { PulseChart } from "@/components";
 
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
@@ -25,34 +19,13 @@ import Vue from "vue";
 
 export default {
   components: {
-    Pulse
+    PulseChart
   },
   data() {
     return {
-      PulseChartData: {
-        data: {
-          labels: null,
-          series: null,
-        },
-        options: {
-          lineSmooth: this.$Chartist.Interpolation.cardinal({
-            tension: 1,
-            fillHoles: true
-          }),
-          height: "300px",
-          low: 0,
-          high: 105,
-          chartPadding: {
-            top: 25,
-            right: 0,
-            bottom: 10,
-            left: 0
-          },
-          axisY: {
-            onlyInteger: true
-          }
-        }
-      }
+      chartData: [],
+      chartLabels: [],
+      loaded: false
     };
   },
   methods: {
@@ -66,15 +39,16 @@ export default {
       getPulse: "pulse/getPulse"
     })
   },
-   mounted() {
-     let website_id = this.$route.params.website_id;
-    this.requestPulse(website_id);
-    this.PulseChartData.data.labels = this.getPulse.labels;
-    this.PulseChartData.data.series = [
-      this.getPulse.mobile,
-      this.getPulse.desktop
-    ];
-   }
+  async mounted() {
+      this.loaded = false;
+      let website_id = this.$route.params.website_id;
+      console.log('fire request');
+      await this.requestPulse(website_id);
+      console.log('await request');
+      this.chartData = this.getPulse.mobile;
+      this.chartLabels = this.getPulse.labels;
+      this.loaded = true;
+  }
 };
 </script>
 

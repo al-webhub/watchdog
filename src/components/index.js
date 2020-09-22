@@ -15,6 +15,7 @@ import WebsitesTable from "./Tables/WebsitesTable";
 import EditProfileForm from "./Forms/Settings/EditProfileForm";
 // Charts
 import Pulse from "./Charts/Pulse";
+import PulseChart from  "./Charts/PulseChart";
 
 export {
   UsersTable,
@@ -28,5 +29,6 @@ export {
   PageTextTable,
   WebsitesTable,
   PageImageTable,
-  Pulse
+  Pulse,
+  PulseChart
 };

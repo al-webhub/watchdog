@@ -57,7 +57,8 @@ export default {
   data() {
     return {
       chartId: "no-id",
-      chart: "null"
+      $Chartist: null,
+      chart: null
     };
   },
   methods: {
