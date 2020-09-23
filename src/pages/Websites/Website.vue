@@ -42,10 +42,9 @@ export default {
   async mounted() {
       this.loaded = false;
       let website_id = this.$route.params.website_id;
-      console.log('fire request');
       await this.requestPulse(website_id);
-      console.log('await request');
-      this.chartData = this.getPulse.mobile;
+      this.chartData.mobile = this.getPulse.mobile;
+      this.chartData.desktop = this.getPulse.desktop;
       this.chartLabels = this.getPulse.labels;
       this.loaded = true;
   }

@@ -22,6 +22,7 @@ class getPulseController extends Controller
        $website = $user->websites()->find($website_id);
        $scans = $website->scans()->latest()->orderBy('id', 'DESC')->take(48)->get();
 
+       $scans = $scans->reverse();
        foreach ($scans as &$scan) {
            $data['labels'][] = Carbon::parse($scan->created_at)->format('H:i');
            $data['desktop'][] = $scan->score_desktop;
