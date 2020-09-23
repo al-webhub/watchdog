@@ -20,7 +20,7 @@ class getPulseController extends Controller
        // TODO  Some validation
        $user = auth()->user();
        $website = $user->websites()->find($website_id);
-       $scans = $website->scans()->latest()->orderBy('id', 'DESC')->take(48)->get();
+       $scans = $website->scans()->latest()->orderBy('id', 'DESC')->take(50)->get();
 
        $scans = $scans->reverse();
        foreach ($scans as &$scan) {
