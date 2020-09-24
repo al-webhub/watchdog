@@ -16,6 +16,7 @@ import EditProfileForm from "./Forms/Settings/EditProfileForm";
 // Charts
 import Pulse from "./Charts/Pulse";
 import PulseChart from  "./Charts/PulseChart";
+import PulseParamsChart from "./Charts/PulseParamsChart";
 
 export {
   UsersTable,
@@ -30,5 +31,6 @@ export {
   WebsitesTable,
   PageImageTable,
   Pulse,
-  PulseChart
+  PulseChart,
+  PulseParamsChart
 };

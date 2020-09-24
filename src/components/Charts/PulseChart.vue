@@ -32,12 +32,12 @@ export default {
               }],
               xAxes: [ {
                   gridLines: {
-                      display: false
+                      display: true
                   }
               }]
           },
           legend: {
-              display: false
+              display: true
           },
           responsive: true,
           maintainAspectRatio: false
