@@ -135,8 +135,6 @@ export default {
             }
         }).then(result => {
             if (result.isConfirmed) {
-                // website.search = this.websites.search;
-               // this.addWebsite(website);
                 Vue.swal(
                     'Created!',
                     'New website was added!',

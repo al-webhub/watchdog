@@ -7,12 +7,12 @@
         <md-table-cell md-label="Url"> {{ item.url }}</md-table-cell>
         <md-table-cell md-label="Created at" style="width:175px;">{{ item.created_at | FormatDate}}</md-table-cell>
         <md-table-cell md-label="Last scan" style="width:175px;">{{ item.last_scan_time }} min ago</md-table-cell>
-        <md-table-cell md-label="Last Score" style="min-width:150px;">
+        <md-table-cell md-label="Last Score" style="min-width:100px;">
           <md-icon :style="{ color: item.score_mobile_class }">tablet_mac</md-icon> {{ item.scans[0].score_mobile }}
           <md-icon :style="{ color: item.score_desktop_class }">desktop_windows</md-icon> {{ item.scans[0].score_desktop }}
         </md-table-cell>
         <md-table-cell md-label="TTFB" style="width:120px;">
-          <md-icon class="md-success">access_time</md-icon> {{ item.scans[0].ttfb }}
+          <md-icon class="md-success">access_time</md-icon> {{ item.scans[0].ttfb_mobile }} / {{ item.scans[0].ttfb_desktop }}
         </md-table-cell>
         <md-table-cell
           md-label="Scans"
