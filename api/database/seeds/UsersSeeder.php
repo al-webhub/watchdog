@@ -28,6 +28,7 @@ class UsersSeeder extends Seeder
            'name' => 'admin',
            'email' => 'admin@admin.com',
            'password' => '123456',
+           'is_admin' => true,
            'remember_token' => Str::random(10)
         ]);
 
@@ -35,7 +36,7 @@ class UsersSeeder extends Seeder
             $websites = factory(Website::class, 1)->make();
             $user->websites()->saveMany($websites);
             $websites->each(function ($ws) {
-               $scans = factory(Scan::class, 5000)->make();
+               $scans = factory(Scan::class, 1000)->make();
                $ws->scans()->saveMany($scans);
             });
         });

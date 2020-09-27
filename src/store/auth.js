@@ -9,7 +9,8 @@ export default {
   namespaced: true,
   state: {
     token: null,
-    user: null
+    user: null,
+    role: 0
   },
   getters: {
     authenticated(state) {

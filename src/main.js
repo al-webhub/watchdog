@@ -65,6 +65,17 @@ router.beforeEach((to, from, next) => {
   if (to.meta.protected) {
     if (store.getters["auth/authenticated"]) {
       next();
+      if (to.meta.onlyadmin) {
+        if (store.getters['auth/getUser'].role === 1) {
+          next();
+        } else {
+          next({
+            name: "dashboard"
+          });
+        }
+      } else {
+        next();
+      }
     } else {
       next({
         name: "login"

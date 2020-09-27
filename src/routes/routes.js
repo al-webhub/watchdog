@@ -47,7 +47,8 @@ const routes = [
         name: "dashboard",
         component: Dashboard,
         meta: {
-          protected: true
+          protected: true,
+          onlyadmin: false
         }
       },
       {
@@ -55,7 +56,8 @@ const routes = [
         name: "settings",
         component: Settings,
         meta: {
-          protected: true
+          protected: true,
+          onlyadmin: false
         }
       },
       {
@@ -63,7 +65,8 @@ const routes = [
         name: "users",
         component: Users,
         meta: {
-          protected: true
+          protected: true,
+          onlyadmin: true
         }
       },
       {
@@ -71,7 +74,8 @@ const routes = [
         name: "My websites",
         component: Websites,
         meta: {
-          protected: true
+          protected: true,
+          onlyadmin: false
         }
       },
       {
@@ -79,7 +83,8 @@ const routes = [
         name: 'Analytics',
         component: Website,
         meta: {
-          protected: true
+          protected: true,
+          onlyadmin: false
         }
       }
     ]

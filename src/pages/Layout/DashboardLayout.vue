@@ -11,7 +11,7 @@
         <md-icon>web</md-icon>
         <p>My Websites</p>
       </sidebar-link>
-      <sidebar-link to="/users">
+      <sidebar-link v-if="user.role === 1" to="/users">
         <md-icon>account_box</md-icon>
         <p>Users</p>
       </sidebar-link>
@@ -38,6 +38,7 @@ import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "@/pages/Layout/MobileMenu.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -45,6 +46,11 @@ export default {
     DashboardContent,
     ContentFooter,
     MobileMenu
+  },
+  computed: {
+    ...mapGetters({
+      user: "auth/getUser"
+    })
   }
 };
 </script>

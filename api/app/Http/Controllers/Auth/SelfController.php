@@ -15,6 +15,6 @@ class SelfController extends Controller
     public function __invoke(Request $request)
     {
         $user = $request->user();
-        return response()->json(['email' => $user->email, 'name' => $user->name]);
+        return response()->json(['email' => $user->email, 'name' => $user->name, 'role' => $user->is_admin]);
     }
 }
