@@ -21,9 +21,8 @@ import App from "@/App";
 import routes from "@/routes/routes";
 import store from "@/store/store";
 import axios from "axios";
-import VueSweetalert2 from 'vue-sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
-
+import VueSweetalert2 from "vue-sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 // Move this subscribe to separate file
 store.subscribe(mutation => {
@@ -47,7 +46,7 @@ if (store.getters["auth/getToken"]) {
 import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
 import Notifications from "./components/NotificationPlugin";
-import moment from 'moment';
+import moment from "moment";
 
 // MaterialDashboard plugin
 import MaterialDashboard from "@/material-dashboard";
@@ -100,9 +99,9 @@ new Vue({
   }
 });
 
-Vue.filter('FormatDate', function (value) {
-   if (value) {
-     return moment(String(value)).format('DD.MM.YYYY');
-   }
+Vue.filter("FormatDate", function(value) {
+  if (value) {
+    return moment(String(value)).format("DD.MM.YYYY");
+  }
 });
-document.title = 'Watchdog';
+document.title = "Watchdog";

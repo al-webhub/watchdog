@@ -1,12 +1,25 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
-        <pulse-chart v-if="loaded" :chartData="chartData" :chartLabels="chartLabels"></pulse-chart>
+      <div
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+      >
+        <pulse-chart
+          v-if="loaded"
+          :chartData="chartData"
+          :chartLabels="chartLabels"
+        ></pulse-chart>
       </div>
 
-      <div style="margin-top: 25px" class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
-        <pulse-params-chart v-if="loaded" :chartData="chartData" :chartLabels="chartLabels"></pulse-params-chart>
+      <div
+        style="margin-top: 25px"
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+      >
+        <pulse-params-chart
+          v-if="loaded"
+          :chartData="chartData"
+          :chartLabels="chartLabels"
+        ></pulse-params-chart>
       </div>
     </div>
   </div>
@@ -42,29 +55,12 @@ export default {
     })
   },
   async mounted() {
-      this.loaded = false;
-      let website_id = this.$route.params.website_id;
-      await this.requestPulse(website_id);
-      this.chartData = this.getPulse;
-
-      // this.chartData.mobile = {
-      //     'score': this.getPulse.mobile,
-      //     'fcp': this.getPulse.fcp_mobile,
-      // };
-      //
-      // this.chartData.desktop = {
-      //     'score': this.getPulse.desktop,
-      //     'fcp': this.getPulse.desktop
-      // };
-      // this.chartData.mobile.fcp = this.getPulse.desktop;
-      // this.chartData.desktop = this.getPulse.desktop;
-      // this.chartData.desktop = this.getPulse.desktop;
-      // this.chartData.desktop = this.getPulse.desktop;
-      // this.chartData.desktop = this.getPulse.desktop;
-      // this.chartData.desktop = this.getPulse.desktop;
-      this.chartLabels = this.getPulse.labels;
-      this.loaded = true;
+    this.loaded = false;
+    let website_id = this.$route.params.website_id;
+    await this.requestPulse(website_id);
+    this.chartData = this.getPulse;
+    this.chartLabels = this.getPulse.labels;
+    this.loaded = true;
   }
 };
 </script>
-
