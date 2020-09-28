@@ -66,7 +66,8 @@ router.beforeEach((to, from, next) => {
     if (store.getters["auth/authenticated"]) {
       next();
       if (to.meta.onlyadmin) {
-        if (store.getters['auth/getUser'].role === 1) {
+        console.log(store.getters['auth/getUser'].role);
+        if (store.getters['auth/getUser'].role == 1) {
           next();
         } else {
           next({

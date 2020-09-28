@@ -16,7 +16,7 @@ class getUsersController extends Controller
 
     public function __invoke(Request $request)
     {
-        if (auth()->user()->is_admin !== 1) {
+        if ((int)auth()->user()->is_admin !== 1) {
            return Helper::sendMessage('Permission denied', 403);
         }
         $search = $request->search;

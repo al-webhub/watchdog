@@ -11,7 +11,7 @@
         <md-icon>web</md-icon>
         <p>My Websites</p>
       </sidebar-link>
-      <sidebar-link v-if="user.role === 1" to="/users">
+      <sidebar-link v-if="user.role == 1" to="/users">
         <md-icon>account_box</md-icon>
         <p>Users</p>
       </sidebar-link>
