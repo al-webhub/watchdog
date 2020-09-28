@@ -15,8 +15,6 @@ $factory->define(Scan::class, function (Faker $faker) {
         'tti_desktop'       => $faker->numberBetween(1000, 2000),
         'si_mobile'         => $faker->numberBetween(3000, 2000),
         'si_desktop'        => $faker->numberBetween(3000, 2000),
-        'fmp_mobile'        => $faker->numberBetween(4000, 5000),
-        'fmp_desktop'       => $faker->numberBetween(4000, 5000),
         'fcpu_idle_mobile'  => $faker->numberBetween(5000, 6000),
         'fcpu_idle_desktop' => $faker->numberBetween(5000, 6000),
         'ttfb_mobile'       => $faker->numberBetween(10, 1000),

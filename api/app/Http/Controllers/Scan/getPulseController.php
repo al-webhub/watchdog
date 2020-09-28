@@ -33,7 +33,6 @@ class getPulseController extends Controller
            $data['tti_desktop'][] = $scan->tti_desktop;
            $data['si_mobile'][] = $scan->si_mobile;
            $data['si_desktop'][] = $scan->si_desktop;
-           $data['fmp_mobile'][] = $scan->fmp_mobile;
            $data['fcpu_idle_mobile'][] = $scan->fcpu_idle_mobile;
            $data['fcpu_idle_desktop'][] = $scan->fcpu_idle_desktop;
            $data['ttfb_mobile'][] = $scan->ttfb_mobile;

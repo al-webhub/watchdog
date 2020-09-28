@@ -26,8 +26,6 @@ class CreateScansTable extends Migration
             $table->unsignedInteger('tti_desktop')->default(0);
             $table->unsignedInteger('si_mobile')->default(0);
             $table->unsignedInteger('si_desktop')->default(0);
-            $table->unsignedInteger('fmp_mobile')->default(0);
-            $table->unsignedInteger('fmp_desktop')->default(0);
             $table->unsignedInteger('fcpu_idle_mobile')->default(0);
             $table->unsignedInteger('fcpu_idle_desktop')->default(0);
             $table->unsignedInteger('ttfb_mobile')->default(0);

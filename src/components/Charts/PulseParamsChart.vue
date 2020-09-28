@@ -104,24 +104,6 @@ export default {
                  data: this.chartData.si_desktop
              },
              {
-                 label: 'First meaningful paint Mobile',
-                 borderColor: '#961269',
-                 pointBackgroundColor: 'white',
-                 borderWidth: 2,
-                 pointBorderColor: '#961269',
-                 backgroundColor: 'transparent',
-                 data: this.chartData.fmp_mobile
-             },
-             {
-                 label: 'First meaningful paint Desktop',
-                 borderColor: '#931496',
-                 pointBackgroundColor: 'white',
-                 borderWidth: 1,
-                 pointBorderColor: '#931496',
-                 backgroundColor: 'transparent',
-                 data: this.chartData.fmp_desktop
-             },
-             {
                  label: 'Time to first byte Mobile',
                  borderColor: '#afae00',
                  pointBackgroundColor: 'white',
