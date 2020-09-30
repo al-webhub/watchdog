@@ -14,7 +14,7 @@ class ScanByName extends Command
      *
      * @var string
      */
-    protected $signature = 'scan:url {url}';
+    protected $signature = 'scan:url {url} {--onlyscan}';
 
     /**
      * The console command description.
@@ -42,19 +42,28 @@ class ScanByName extends Command
     {
        $this->info('Working...'.$this->argument('url'));
        // check if given url exists anywhere
-       $website = Website::where('url', $this->argument('url'))->get()->first();
-       if (is_null($website)) {
-           $this->info('Website not found in database!');
-           return false;
+       if (!$this->option('onlyscan')) {
+           $website = Website::where('url', $this->argument('url'))->get()->first();
+           if (is_null($website)) {
+               $this->info('Website not found in database!');
+               return false;
+           }
+           $this->info('Found! Please wait. Scan in progress');
        }
-       $this->info('Found! Please wait. Scan in progress');
        $this->info('Scan process can take over 30 seconds!');
 
        $scan = new Scanner($this->argument('url'));
        $result = $scan->go();
-       dd($result['mobile']);
-       $this->info('Scan results'.$result['mobile']->getStatusCode(), '  -> '.$result['desktop']->getStatusCode());
-
-
+       // TODO proper error handling
+       if ($result['mobile']['state'] === 'fulfilled') {
+           $this->info('Mobile -> '.$result['mobile']['value']->getStatusCode(). ' -> '.$result['mobile']['value']->getReasonPhrase());
+       } else {
+           $this->info('FAILED Mobile');
+       }
+       if ($result['desktop']['state'] === 'fulfilled') {
+            $this->info('Desktop -> '.$result['desktop']['value']->getStatusCode(). ' -> '.$result['desktop']['value']->getReasonPhrase());
+       } else {
+           $this->info('FAILED Desktop');
+       }
     }
 }
