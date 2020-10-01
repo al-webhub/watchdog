@@ -6,14 +6,14 @@
  * Time: 15:44
  */
 
-namespace App\Helpers;
+namespace App\Logic;
 use GuzzleHttp;
 use GuzzleHttp\Promise;
 
 
 /**
  * Class Scanner
- * @package App\Helpers
+ * @package App\Logic
  */
 class Scanner
 {
@@ -49,9 +49,7 @@ class Scanner
             'desktop' => $client->getAsync('?url='.$url.'&locale=en&strategy=mobile')
         ];
 
-        $responses = Promise\settle($promises)->wait();
-
-        return $responses;
+        return Promise\settle($promises)->wait();
     }
 
     /**

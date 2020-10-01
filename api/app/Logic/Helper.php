@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Helpers;
+namespace App\Logic;
 
 class Helper
 {

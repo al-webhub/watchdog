@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Scan;
 use Illuminate\Console\Command;
 use App\Website;
-use App\Helpers\Scanner;
+use App\Logic\Scanner;
 
 class ScanByName extends Command
 {
