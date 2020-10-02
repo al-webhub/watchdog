@@ -6,6 +6,8 @@ use App\Scan;
 use Illuminate\Console\Command;
 use App\Website;
 use App\Logic\Scanner;
+use App\Logic\DataProcessor;
+
 
 class ScanByName extends Command
 {
@@ -65,5 +67,13 @@ class ScanByName extends Command
        } else {
            $this->info('FAILED Desktop');
        }
+
+       if ($result['mobile']['state'] === 'fulfilled' && $result['desktop']['state'] === 'fulfilled') {
+            $mobile = $result['mobile']['value']->getBody()->getContents();
+            $desktop = $result['desktop']['value']->getBody()->getContents();
+            $processor = new DataProcessor($mobile, $desktop);
+            $processor->go();
+       }
+
     }
 }
