@@ -9,6 +9,8 @@ $factory->define(Scan::class, function (Faker $faker) {
     return [
         'score_desktop'     => $faker->numberBetween(70, 95),
         'score_mobile'      => $faker->numberBetween(65, 90),
+        'cls_mobile'        => $faker->randomFloat('3', 0,'4'),
+        'cls_desktop'        => $faker->randomFloat('3', 0,'4'),
         'fcp_mobile'        => $faker->numberBetween(6000, 7000),
         'fcp_desktop'       => $faker->numberBetween(6000, 7000),
         'tti_mobile'        => $faker->numberBetween(1000, 2000),

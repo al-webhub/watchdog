@@ -72,7 +72,7 @@ class ScanByName extends Command
             $mobile = $result['mobile']['value']->getBody()->getContents();
             $desktop = $result['desktop']['value']->getBody()->getContents();
             $processor = new DataProcessor($mobile, $desktop);
-            $processor->go();
+            $processor->go($website->id);
        }
 
     }

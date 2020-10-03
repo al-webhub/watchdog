@@ -7,7 +7,7 @@
  */
 
 namespace App\Logic;
-
+use App\Scan;
 
 class DataProcessor
 {
@@ -20,31 +20,61 @@ class DataProcessor
         $this->desktop = json_decode($desktop, true);
     }
 
-    public function go()
+    public function go($website_id = null)
     {
         $mobile = $this->prepare('mobile');
-
         $desktop = $this->prepare('desktop');
+        if (!$website_id) {
+            return ['Desktop' => $desktop, 'Mobile' => $mobile];
+        }
+        $scan = new Scan();
+        $scan->website_id = $website_id;
+        $scan->score_desktop = $desktop['score'];
+        $scan->cls_desktop = $desktop['cls'];
+        $scan->fcp_desktop = $desktop['fcp'];
+        $scan->tti_desktop = $desktop['tti'];
+        $scan->si_desktop = $desktop['si'];
+        $scan->fcpu_idle_desktop = $desktop['fcpu'];
+        $scan->ttfb_desktop = $desktop['ttfb'];
 
+        $scan->score_mobile = $mobile['score'];
+        $scan->cls_mobile = $mobile['cls'];
+        $scan->fcp_mobile = $mobile['fcp'];
+        $scan->tti_mobile = $mobile['tti'];
+        $scan->si_mobile = $mobile['si'];
+        $scan->fcpu_idle_mobile = $mobile['fcpu'];
+        $scan->ttfb_mobile = $mobile['ttfb'];
+
+        $scan->save();
+        dd('Saved!');
+        return true;
     }
 
     private function prepare($type)
     {
         switch ($type) {
-            case "mobile":
+            case 'mobile':
                 $data = $this->mobile;
                 break;
-            case "desktop":
+            case 'desktop':
                 $data = $this->desktop;
                 break;
         }
+
         $values = [
-            'score_mobile' => '',
-            'fcp_mobile'   => $data['lighthouseResult']['audits']['metrics']['details']['items']['firstContentfulPaint'],
-            'tti_mobile'   => $data['lighthouseResult']['audits']['metrics']['details']['items']['interactive'],
-            'si_mobile'    => $data['lighthouseResult']['audits']['metrics']['details']['items']['speedIndex'],
-            'fcpu_idle_mobile' => $data['lighthouseResult']['audits']['metrics']['details']['items']['firstCPUIdle'],
-            'ttfb_mobile'  => $data['lighthouseResult']['audits']['server-response-time']['numericValue']
+            'score' => $data['lighthouseResult']['categories']['performance']['score'] * 100,
+            'fcp'   => $data['lighthouseResult']['audits']['metrics']['details']['items'][0]['firstContentfulPaint'],
+            'cls'   => $data['lighthouseResult']['audits']['metrics']['details']['items'][0]['cumulativeLayoutShift'],
+            'tti'   => $data['lighthouseResult']['audits']['metrics']['details']['items'][0]['interactive'],
+            'si'    => $data['lighthouseResult']['audits']['metrics']['details']['items'][0]['speedIndex'],
+            'fcpu' => $data['lighthouseResult']['audits']['metrics']['details']['items'][0]['firstCPUIdle'],
+            'ttfb'  => (int)$data['lighthouseResult']['audits']['server-response-time']['numericValue']
         ];
+        return $values;
+    }
+
+    public function save()
+    {
+
     }
 }
