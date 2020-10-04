@@ -30,4 +30,7 @@ Route::group(['prefix' => 'websites', 'namespace' => 'Website'], function(){
 
 Route::group(['prefix' => 'scans', 'namespace' => 'Scan'], function(){
     Route::get('/getpulse', 'getPulseController');
+    Route::get('/getweek', 'getWeeklyController');
+    Route::get('/getmonth', 'getMonthlyController');
+    Route::get('/getrange', 'getRangeController');
 });

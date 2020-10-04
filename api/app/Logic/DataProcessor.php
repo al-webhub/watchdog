@@ -46,7 +46,6 @@ class DataProcessor
         $scan->ttfb_mobile = $mobile['ttfb'];
 
         $scan->save();
-        dd('Saved!');
         return true;
     }
 
@@ -73,8 +72,4 @@ class DataProcessor
         return $values;
     }
 
-    public function save()
-    {
-
-    }
 }

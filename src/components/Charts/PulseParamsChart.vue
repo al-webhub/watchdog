@@ -1,12 +1,14 @@
 
 <script>
 import { Line, mixins } from 'vue-chartjs'
+const { reactiveProp } = mixins
 export default {
   extends: Line,
+  mixins: [reactiveProp],
   name: "pulse-params-chart",
   props: {
     chartData: {
-      type: Array,
+      type: Object,
       required: false
     },
     chartLabels: {
