@@ -36,12 +36,12 @@ class UsersSeeder extends Seeder
             $websites = factory(Website::class, 1)->make();
             $user->websites()->saveMany($websites);
             $websites->each(function ($ws) {
-               $scans = factory(Scan::class, 30000)->make();
+               $scans = factory(Scan::class, 5000)->make();
                $ws->scans()->saveMany($scans);
             });
         });
 
-        $start_date = Carbon::createFromDate(2020, 1, 1);
+        $start_date = Carbon::createFromDate(2020, 9, 1);
         $scans = Scan::where('website_id', 1)->get();
         foreach ($scans as $scan) {
             $scan->created_at = $start_date;

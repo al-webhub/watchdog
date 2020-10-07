@@ -18,12 +18,15 @@ class getRangeController extends Controller
     {
         $user = auth()->user();
         $website = $user->websites()->find($request->website_id);
-        $date = Carbon::today()->subDays(29);
-        $scans = $website->scans()->whereBetween('created_at', [$request->range[0], $request->range[1]])->get()->groupBy(function($row) {
-            return Carbon::parse($row->created_at)->format('W');
+        $format = 'd.m';
+        $diff = Carbon::parse($request->range[0])->diffInDays(Carbon::parse($request->range[1]));
+        if ($diff > 50) {
+            $format = 'W-Y';
+        }
+        $scans = $website->scans()->whereBetween('created_at', [$request->range[0], $request->range[1]])->get()->groupBy(function($row) use ($format) {
+            return Carbon::parse($row->created_at)->format($format);
         });
-
-        $data = Helper::formatGraphOutput($scans);
+        $data = Helper::formatGraphOutput($scans, $format);
         return Helper::sendResponse($data);
     }
 }
