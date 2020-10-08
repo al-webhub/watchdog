@@ -123,6 +123,60 @@ export default {
                  backgroundColor: 'transparent',
                  data: this.chartData.ttfb_desktop
              },
+             {
+                 label: 'Total blocking time Desktop',
+                 borderColor: '#0200af',
+                 pointBackgroundColor: 'white',
+                 borderWidth: 1,
+                 pointBorderColor: '#0200af',
+                 backgroundColor: 'transparent',
+                 data: this.chartData.tbt_desktop
+             },
+             {
+                 label: 'Total blocking time  Mobile',
+                 borderColor: '#0200af',
+                 pointBackgroundColor: 'white',
+                 borderWidth: 1,
+                 pointBorderColor: '#0200af',
+                 backgroundColor: 'transparent',
+                 data: this.chartData.tbt_mobile
+             },
+             {
+                 label: 'Content layout shift Desktop',
+                 borderColor: '#0200af',
+                 pointBackgroundColor: 'white',
+                 borderWidth: 1,
+                 pointBorderColor: '#0200af',
+                 backgroundColor: 'transparent',
+                 data: this.chartData.cls_desktop
+             },
+             {
+                 label: 'Content layout shift  Mobile',
+                 borderColor: '#0200af',
+                 pointBackgroundColor: 'white',
+                 borderWidth: 1,
+                 pointBorderColor: '#0200af',
+                 backgroundColor: 'transparent',
+                 data: this.chartData.cls_mobile
+             },
+             {
+                 label: 'Total byte weight Desktop',
+                 borderColor: '#0200af',
+                 pointBackgroundColor: 'white',
+                 borderWidth: 1,
+                 pointBorderColor: '#0200af',
+                 backgroundColor: 'transparent',
+                 data: this.chartData.tbw_desktop
+             },
+             {
+                 label: 'Total byte weight  Mobile',
+                 borderColor: '#0200af',
+                 pointBackgroundColor: 'white',
+                 borderWidth: 1,
+                 pointBorderColor: '#0200af',
+                 backgroundColor: 'transparent',
+                 data: this.chartData.tbw_desktop
+             },
          ]
       }, this.options);
   }

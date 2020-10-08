@@ -35,6 +35,8 @@ class Helper
             $data['tbt_desktop'][]  = (int)$scan->avg('tbt_mobile');
             $data['ttfb_mobile'][]  = (int)$scan->avg('ttfb_mobile');
             $data['ttfb_desktop'][] = (int)$scan->avg('ttfb_desktop');
+            $data['cls_mobile'][]  = round($scan->avg('cls_mobile'), 2);
+            $data['cls_desktop'][] = round($scan->avg('cls_desktop'), 2);
             $data['tbw_mobile'][] = (int)$scan->avg('tbw_mobile');
             $data['tbw_desktop'][] = (int)$scan->avg('tbw_desktop');
         }
