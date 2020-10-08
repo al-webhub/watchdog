@@ -34,16 +34,19 @@ class DataProcessor
         $scan->fcp_desktop = $desktop['fcp'];
         $scan->tti_desktop = $desktop['tti'];
         $scan->si_desktop = $desktop['si'];
-        $scan->fcpu_idle_desktop = $desktop['fcpu'];
         $scan->ttfb_desktop = $desktop['ttfb'];
+        $scan->tbt_desktop  = $desktop['tbt'];
+        $scan->tbw_desktop  = $desktop['tbw'];
+
 
         $scan->score_mobile = $mobile['score'];
         $scan->cls_mobile = $mobile['cls'];
         $scan->fcp_mobile = $mobile['fcp'];
         $scan->tti_mobile = $mobile['tti'];
         $scan->si_mobile = $mobile['si'];
-        $scan->fcpu_idle_mobile = $mobile['fcpu'];
         $scan->ttfb_mobile = $mobile['ttfb'];
+        $scan->tbt_mobile  = $mobile['tbt'];
+        $scan->tbw_mobile  = $mobile['tbw'];
 
         $scan->save();
         return true;
@@ -66,8 +69,9 @@ class DataProcessor
             'cls'   => $data['lighthouseResult']['audits']['metrics']['details']['items'][0]['cumulativeLayoutShift'],
             'tti'   => $data['lighthouseResult']['audits']['metrics']['details']['items'][0]['interactive'],
             'si'    => $data['lighthouseResult']['audits']['metrics']['details']['items'][0]['speedIndex'],
-            'fcpu' => $data['lighthouseResult']['audits']['metrics']['details']['items'][0]['firstCPUIdle'],
-            'ttfb'  => (int)$data['lighthouseResult']['audits']['server-response-time']['numericValue']
+            'tbt'   => $data['lighthouseResult']['audits']['metrics']['details']['items'][0]['totalBlockingTime'],
+            'ttfb'  => (int)$data['lighthouseResult']['audits']['server-response-time']['numericValue'],
+            'tbw'   => (int)$data['lighthouseResult']['audits']['total-byte-weight']['numericValue']
         ];
         return $values;
     }

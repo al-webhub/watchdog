@@ -21,7 +21,6 @@ class Helper
     public static function formatGraphOutput($rows, $date_format = '')
     {
         $data = [];
-
         foreach ($rows as $date => $scan) {
             $data['labels'][]  = (string)self::getFormattedDate($date, $date_format);
             $data['desktop'][] = (int)$scan->avg('score_desktop');
@@ -32,10 +31,12 @@ class Helper
             $data['tti_desktop'][] = (int)$scan->avg('tti_desktop');
             $data['si_mobile'][]   = (int)$scan->avg('si_mobile');
             $data['si_desktop'][]  = (int)$scan->avg('si_desktop');
-            $data['fcpu_idle_mobile'][]  = (int)$scan->avg('fcpu_idle_mobile');
-            $data['fcpu_idle_desktop'][] = (int)$scan->avg('fcpu_idle_desktop');
+            $data['tbt_mobile'][]   = (int)$scan->avg('tbt_mobile');
+            $data['tbt_desktop'][]  = (int)$scan->avg('tbt_mobile');
             $data['ttfb_mobile'][]  = (int)$scan->avg('ttfb_mobile');
             $data['ttfb_desktop'][] = (int)$scan->avg('ttfb_desktop');
+            $data['tbw_mobile'][] = (int)$scan->avg('tbw_mobile');
+            $data['tbw_desktop'][] = (int)$scan->avg('tbw_desktop');
         }
         return $data;
     }
@@ -43,6 +44,7 @@ class Helper
     public static function getFormattedDate($date, $format)
     {
         switch ($format) {
+            case "":
             case "d.m":
                 return $date;
             break;

@@ -28,10 +28,12 @@ class CreateScansTable extends Migration
             $table->unsignedInteger('tti_desktop')->default(0);
             $table->unsignedInteger('si_mobile')->default(0);
             $table->unsignedInteger('si_desktop')->default(0);
-            $table->unsignedInteger('fcpu_idle_mobile')->default(0);
-            $table->unsignedInteger('fcpu_idle_desktop')->default(0);
+            $table->unsignedInteger('tbt_mobile')->default(0);
+            $table->unsignedInteger('tbt_desktop')->default(0);
             $table->unsignedInteger('ttfb_mobile')->default(0);
             $table->unsignedInteger('ttfb_desktop')->default(0);
+            $table->unsignedInteger('tbw_mobile')->default(0);
+            $table->unsignedInteger('tbw_desktop')->default(0);
         });
     }
 

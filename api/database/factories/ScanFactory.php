@@ -17,9 +17,11 @@ $factory->define(Scan::class, function (Faker $faker) {
         'tti_desktop'       => $faker->numberBetween(1000, 2000),
         'si_mobile'         => $faker->numberBetween(3000, 2000),
         'si_desktop'        => $faker->numberBetween(3000, 2000),
-        'fcpu_idle_mobile'  => $faker->numberBetween(5000, 6000),
-        'fcpu_idle_desktop' => $faker->numberBetween(5000, 6000),
+        'tbt_mobile'        => $faker->numberBetween(5000, 6000),
+        'tbt_desktop'       => $faker->numberBetween(5000, 6000),
         'ttfb_mobile'       => $faker->numberBetween(10, 1000),
-        'ttfb_desktop'      => $faker->numberBetween(10, 1000)
+        'ttfb_desktop'      => $faker->numberBetween(10, 1000),
+        'tbw_mobile'        => $faker->numberBetween(3000, 5000),
+        'tbw_desktop'       => $faker->numberBetween(3000, 5000)
     ];
 });
