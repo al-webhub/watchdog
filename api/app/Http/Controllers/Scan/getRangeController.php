@@ -23,9 +23,18 @@ class getRangeController extends Controller
         if ($diff > 50) {
             $format = 'W-Y';
         }
-        $scans = $website->scans()->whereBetween('created_at', [$request->range[0], $request->range[1]])->get()->groupBy(function($row) use ($format) {
+        $start_date = Carbon::parse($request->range[0]);
+        $end_date = Carbon::parse($request->range[1]);
+        if ($request->range[0] == $request->range[1]) {
+            $format = 'H';
+            $start_date = Carbon::parse($request->range[0]);
+            $end_date = Carbon::parse($request->range[1])->addHours(23)->addMinutes(59)->addSeconds(59);
+        }
+
+        $scans = $website->scans()->whereBetween('created_at', [$start_date, $end_date])->get()->groupBy(function($row) use ($format) {
             return Carbon::parse($row->created_at)->format($format);
         });
+
         $data = Helper::formatGraphOutput($scans, $format);
         return Helper::sendResponse($data);
     }

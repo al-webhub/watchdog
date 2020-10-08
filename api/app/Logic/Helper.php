@@ -45,6 +45,7 @@ class Helper
     {
         switch ($format) {
             case "":
+            case "H":
             case "d.m":
                 return $date;
             break;
