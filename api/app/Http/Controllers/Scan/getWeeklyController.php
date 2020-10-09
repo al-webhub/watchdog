@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Scan;
 
 use App\Http\Controllers\Controller;
 use App\Logic\Helper;
+use App\Website;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Scan;
@@ -18,7 +19,11 @@ class getWeeklyController extends Controller
     public function __invoke(Request $request)
     {
         $user = auth()->user();
-        $website = $user->websites()->find($request->website_id);
+        if ($user->is_admin) {
+            $website = Website::find($request->website_id);
+        } else {
+            $website = $user->websites()->find($request->website_id);
+        }
         $date = Carbon::today()->subDays(6);
         $scans = $website->scans()->where('created_at', '>=', $date)->get()->groupBy(function($row) {
             return Carbon::parse($row->created_at)->format('d.m');

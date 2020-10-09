@@ -18,10 +18,34 @@ class getWebsitesController extends Controller
     public function __invoke(Request $request)
     {
         $user = auth()->user();
-        //
-        $search = $request->search;
-        if ($search) {
-            $websites =  $user->websites()->where('websites.url', 'LIKE', '%'.$search.'%')->orWhere('websites.name', 'LIKE', '%'.$search.'%');
+        if ($user->is_admin) {
+            $websites = $this->adminData($request);
+        } else {
+            $websites = $this->userData($request);
+        }
+
+        return Helper::sendResponse($websites, 200);
+    }
+
+    private function adminData(Request $request)
+    {
+        if ($request->search) {
+            $websites = Website::where('websites.url', 'LIKE', '%'.$request->search.'%')->orWhere('websites.name', 'LIKE', '%'.$request->search.'%');
+        }  else {
+            $websites = new Website();
+        }
+
+        $websites = $websites->with(['scans' => function($query) {
+            $query->latest()->limit(1);
+        }])->withCount('scans')->get();
+        return $websites;
+    }
+
+    private function userData(Request $request)
+    {
+        $user = auth()->user();
+        if ($request->search) {
+            $websites =  $user->websites()->where('websites.url', 'LIKE', '%'.$request->search.'%')->orWhere('websites.name', 'LIKE', '%'.$request->search.'%');
         } else {
             $websites = $user->websites();
         }
@@ -29,6 +53,7 @@ class getWebsitesController extends Controller
         $websites = $websites->with(['scans' => function($query) {
             $query->latest()->limit(1);
         }])->withCount('scans')->get();
-        return Helper::sendResponse($websites, 200);
+
+        return $websites;
     }
 }
