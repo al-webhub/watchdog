@@ -19,7 +19,7 @@
     "i": "^0.3.6",
     "moment": "^2.27.0",
     "uninstall": "0.0.0",
-    "vue": "2.6.10",
+    "vue": "2.6.11",
     "vue-chartjs": "^3.5.1",
     "vue-clickaway": "2.2.2",
     "vue-codemirror": "^4.0.6",
@@ -35,19 +35,19 @@
     "vuex-persistedstate": "^2.7.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.1.1",
-    "@vue/cli-plugin-eslint": "4.1.1",
-    "@vue/cli-plugin-router": "4.1.1",
-    "@vue/cli-service": "4.1.1",
+    "@vue/cli-plugin-babel": "4.2.3",
+    "@vue/cli-plugin-eslint": "4.2.3",
+    "@vue/cli-plugin-router": "4.2.3",
+    "@vue/cli-service": "4.2.3",
     "@vue/eslint-config-prettier": "6.0.0",
-    "babel-eslint": "10.0.3",
-    "eslint": "6.7.2",
-    "eslint-plugin-prettier": "3.1.1",
-    "eslint-plugin-vue": "6.0.1",
+    "babel-eslint": "10.1.0",
     "es6-promise": "4.2.8",
+    "eslint": "6.8.0",
+    "eslint-plugin-prettier": "3.1.2",
+    "eslint-plugin-vue": "6.2.2",
     "prettier": "1.19.1",
-    "sass": "1.23.7",
-    "sass-loader": "8.0.0",
-    "vue-template-compiler": "2.6.10"
+    "sass": "1.26.2",
+    "sass-loader": "8.0.2",
+    "vue-template-compiler": "2.6.11"
   }
 }
