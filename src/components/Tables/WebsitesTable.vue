@@ -86,7 +86,6 @@ export default {
     ping(url) {
       this.check(url)
         .then(function(time) {
-          console.log(time);
           return time;
         }).catch(function (error) {
           return null;

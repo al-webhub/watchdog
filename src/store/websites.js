@@ -36,7 +36,6 @@ export default {
                           });
                 await commit('SET_WEBSITES', response.data);
             } catch (e) {
-                console.log(e);
                 await commit('SET_WEBSITES', null);
                 Vue.swal("Error", "Unexpected Error!");
             }

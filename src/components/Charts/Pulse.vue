@@ -90,10 +90,7 @@ export default {
     this.$nextTick(this.initChart);
   },
   watch: {
-    data: function() {
-      console.log('test');
-
-    }
+    data: function() {}
   }
 };
 </script>
