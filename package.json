@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve --open",
     "dev": "npm run serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "node scripts/gh-pages-deploy.js"
   },
   "dependencies": {
     "@northwalker/vue-hotel-datepicker": "^2.0.7",
@@ -48,6 +49,7 @@
     "prettier": "1.19.1",
     "sass": "1.26.2",
     "sass-loader": "8.0.2",
-    "vue-template-compiler": "2.6.11"
+    "vue-template-compiler": "2.6.11",
+    "execa": "latest"
   }
 }
