@@ -23,7 +23,7 @@ export default {
     actions: {
         async requestWebsites({ commit }, search = '') {
             try {
-                let response = await axios.get('/api/websites/getwebsites/', {
+                let response = await axios.get('/api/websites/getwebsites', {
                     params: {
                         search: search
                     }
@@ -41,11 +41,11 @@ export default {
             }
         },
         async deleteWebsite({ dispatch }, website) {
-            await axios.post('/api/websites/delete/', website);
+            await axios.post('/api/websites/delete', website);
             dispatch("requestWebsites", website.search);
         },
         async updateWebsite({ dispatch }, website) {
-            await axios.post('/api/websites/update/', website);
+            await axios.post('/api/websites/update', website);
             dispatch('requestWebsites', website.search);
         },
         async addWebsite({ dispatch }, website) {
