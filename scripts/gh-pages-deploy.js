@@ -8,7 +8,7 @@ const fs = require("fs");
     await execa("npm", ["run", "build"]);
     // Understand if it's dist or build folder
     const folderName = fs.existsSync("dist") ? "dist" : "build";
-    const CNAME = fs.writeFile("dist/CNAME", "www.watchdog-app.ml", function() {
+    const CNAME = fs.writeFile("dist/CNAME", "www.watchdog-app.ml", function(err) {
       if (err) throw err;
       console.log("It's saved!");
     });
