@@ -22,7 +22,7 @@ export default {
     actions: {
         async requestUsers({ commit }, search = '') {
             try {
-                let response = await axios.get('/api/users/getusers/', {
+                let response = await axios.get('/api/users/getusers', {
                     params: {
                         search: search
                     }
@@ -34,7 +34,7 @@ export default {
             }
         },
         async deleteUser({ dispatch }, user) {
-            await axios.post('/api/users/delete/', user);
+            await axios.post('/api/users/delete', user);
             dispatch("requestUsers", user.search);
         },
         async updateUser({ dispatch }, user) {
