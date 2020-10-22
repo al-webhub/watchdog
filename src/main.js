@@ -22,6 +22,8 @@ import routes from "@/routes/routes";
 import store from "@/store/store";
 import axios from "axios";
 axios.defaults.baseURL = "http://watchdog.zzz.com.ua/public/";
+console.log(process.env.VUE_APP_BASE_URL);
+
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
