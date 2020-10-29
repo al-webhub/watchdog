@@ -4,14 +4,17 @@
       <div
               class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
+        <md-button to="/websites" class="md-sm md-danger">
+          <md-icon>keyboard_backspace</md-icon>Back
+        </md-button>
         <md-button v-on:click="getPulseChart" class="md-sm md-danger">
-          Pulse
+          <md-icon>av_timer</md-icon>Pulse
         </md-button>
         <md-button v-on:click="getWeek" class="md-sm md-danger">
-          This week
+          <md-icon>view_week</md-icon> This week
         </md-button>
         <md-button v-on:click="getMonth" class="md-sm md-danger">
-          Last 30 days
+          <md-icon>replay_30</md-icon> Last 30 days
         </md-button>
         <date-picker v-model="time"
                      valueType="format"
