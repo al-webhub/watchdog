@@ -42,7 +42,7 @@ export default {
       try {
         let response = await axios.get("/api/auth/self");
         await commit("SET_USER", response.data);
-        router.push("dashboard").catch(err => {});
+        router.push("/dashboard").catch(err => {});
       } catch (e) {
         commit("SET_TOKEN", null);
         commit("SET_USER", null);
