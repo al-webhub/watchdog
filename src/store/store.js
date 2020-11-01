@@ -6,6 +6,9 @@ import users from "./users";
 import websites from "./websites";
 import pulse from "./pulse";
 
+// Pages
+import dashboard from "./pages/dashboard";
+
 import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
@@ -16,7 +19,8 @@ export default new Vuex.Store({
     settings,
     users,
     websites,
-    pulse
+    pulse,
+    dashboard
   },
   plugins: [createPersistedState()]
 });

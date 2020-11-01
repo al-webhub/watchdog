@@ -2,92 +2,63 @@
   <div class="content">
     <div class="md-layout">
       <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
         <chart-card
-          :chart-data="dailySalesChart.data"
-          :chart-options="dailySalesChart.options"
-          :chart-type="'Line'"
-          data-background-color="blue"
+          v-if="loaded"
+          :chart-data="ScansChart.data"
+          :chart-options="ScansChart.options"
+          :chart-type="'Bar'"
+          data-background-color="green"
         >
           <template slot="content">
-            <h4 class="title">Daily Sales</h4>
-            <p class="category">
-              <span class="text-success"
-                ><i class="fas fa-long-arrow-alt-up"></i> 55%
-              </span>
-              increase in today sales.
-            </p>
+            <h4 class="title">Daily Scans</h4>
+            <p class="category"></p>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>access_time</md-icon>
-              updated 4 minutes ago
+              Today: scanned {{ ScansChart.storage.total_scans }} times.
             </div>
           </template>
         </chart-card>
       </div>
       <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
         <chart-card
-          :chart-data="emailsSubscriptionChart.data"
-          :chart-options="emailsSubscriptionChart.options"
-          :chart-responsive-options="emailsSubscriptionChart.responsiveOptions"
+          v-if="loaded"
+          :chart-data="ScansChart.data"
+          :chart-options="ScansChart.options"
+          :chart-responsive-options="ScansChart.responsiveOptions"
           :chart-type="'Bar'"
           data-background-color="red"
         >
           <template slot="content">
-            <h4 class="title">Email Subscription</h4>
-            <p class="category">
-              Last Campaign Performance
-            </p>
+            <h4 class="title">This chart is under development</h4>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>access_time</md-icon>
-              updated 10 days ago
+              Today: scanned {{ ScansChart.storage.total_scans }} times.
             </div>
           </template>
         </chart-card>
       </div>
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33"
-      >
-        <chart-card
-          :chart-data="dataCompletedTasksChart.data"
-          :chart-options="dataCompletedTasksChart.options"
-          :chart-type="'Line'"
-          data-background-color="green"
-        >
-          <template slot="content">
-            <h4 class="title">Completed Tasks</h4>
-            <p class="category">
-              Last Campaign Performance
-            </p>
-          </template>
 
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              campaign sent 26 minutes ago
-            </div>
-          </template>
-        </chart-card>
-      </div>
       <div
         class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
       >
         <stats-card data-background-color="green">
           <template slot="header">
-            <md-icon>store</md-icon>
+            <md-icon>receipt_long</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Revenue</p>
-            <h3 class="title">$34,245</h3>
+            <p class="category">Active websites</p>
+            <h3 class="title">{{ active_websites }}</h3>
           </template>
 
           <template slot="footer">
@@ -103,21 +74,23 @@
       >
         <stats-card data-background-color="orange">
           <template slot="header">
-            <md-icon>content_copy</md-icon>
+            <md-icon>rotate_right</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Used Space</p>
+            <p class="category">Total scans</p>
             <h3 class="title">
-              49/50
-              <small>GB</small>
+              {{ total_scans }}
             </h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
-              <md-icon class="text-danger">warning</md-icon>
-              <a href="#pablo">Get More Space...</a>
+              Today:
+              <span class="text-success"
+                ><md-icon class="text-success">call_made</md-icon>
+                {{ ScansChart.storage.total_scans }}</span
+              >
             </div>
           </template>
         </stats-card>
@@ -131,14 +104,14 @@
           </template>
 
           <template slot="content">
-            <p class="category">Fixed Issues</p>
-            <h3 class="title">75</h3>
+            <p class="category">Under development</p>
+            <h3 class="title">99999999</h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>local_offer</md-icon>
-              Tracked from Github
+              Under development
             </div>
           </template>
         </stats-card>
@@ -152,19 +125,20 @@
           </template>
 
           <template slot="content">
-            <p class="category">Folowers</p>
-            <h3 class="title">+245</h3>
+            <p class="category">Under development</p>
+            <h3 class="title">99999999</h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>update</md-icon>
-              Just Updated
+              Under development
             </div>
           </template>
         </stats-card>
       </div>
       <div
+        v-if="show"
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
         <md-card>
@@ -178,6 +152,7 @@
         </md-card>
       </div>
       <div
+        v-if="show"
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
         <nav-tabs-card>
@@ -211,6 +186,8 @@ import {
   NavTabsTable,
   OrderedTable
 } from "@/components";
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -222,6 +199,10 @@ export default {
   },
   data() {
     return {
+      show: false,
+      loaded: false,
+      active_websites: 0,
+      total_scans: 0,
       dailySalesChart: {
         data: {
           labels: ["M", "T", "W", "T", "F", "S", "S"],
@@ -246,7 +227,6 @@ export default {
           labels: ["12am", "3pm", "6pm", "9pm", "12pm", "3am", "6am", "9am"],
           series: [[230, 750, 450, 300, 280, 240, 200, 190]]
         },
-
         options: {
           lineSmooth: this.$Chartist.Interpolation.cardinal({
             tension: 0
@@ -261,32 +241,19 @@ export default {
           }
         }
       },
-      emailsSubscriptionChart: {
+      ScansChart: {
         data: {
-          labels: [
-            "Ja",
-            "Fe",
-            "Ma",
-            "Ap",
-            "Mai",
-            "Ju",
-            "Jul",
-            "Au",
-            "Se",
-            "Oc",
-            "No",
-            "De"
-          ],
-          series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]]
+          labels: [],
+          series: [[]]
         },
         options: {
           axisX: {
             showGrid: false
           },
           low: 0,
-          high: 1000,
+          high: 10,
           chartPadding: {
-            top: 0,
+            top: 20,
             right: 5,
             bottom: 0,
             left: 0
@@ -304,9 +271,35 @@ export default {
               }
             }
           ]
-        ]
+        ],
+        storage: {
+          total_scans: 0
+        }
       }
     };
+  },
+  methods: {
+    ...mapActions({
+      requestDashboard: "dashboard/requestDashboard"
+    })
+  },
+  computed: {
+    ...mapGetters({
+      getDashboard: "dashboard/getDashboard"
+    })
+  },
+  async mounted() {
+    this.loaded = false;
+    await this.requestDashboard();
+    let dashboard = await this.getDashboard;
+    this.ScansChart.data.labels = dashboard.graph_scans.labels;
+    this.ScansChart.data.series[0] = dashboard.graph_scans.values;
+    this.ScansChart.options.high =
+      dashboard.graph_scans.max + parseInt(dashboard.graph_scans.max * 0.5);
+    this.ScansChart.storage.total_scans = dashboard.graph_scans.total_scans;
+    this.active_websites = dashboard.active_websites;
+    this.total_scans = dashboard.total_scans;
+    this.loaded = true;
   }
 };
 </script>
