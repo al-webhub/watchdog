@@ -9,6 +9,7 @@ import Content from "@/pages/Layout/Content";
 import NotFound from "@/pages/Service/NotFound";
 import Websites from "@/pages/Websites/Websites";
 import Website from "@/pages/Websites/Website";
+import Fullsitescan from "@/pages/Websites/Fullsitescan";
 
 import Users from "@/pages/Users/Users.vue";
 
@@ -80,8 +81,17 @@ const routes = [
       },
       {
         path: "/website/:website_id",
-        name: 'Analytics',
+        name: "Analytics",
         component: Website,
+        meta: {
+          protected: true,
+          onlyadmin: false
+        }
+      },
+      {
+        path: "/fullscan/:website_id",
+        name: "Full site scan",
+        component: Fullsitescan,
         meta: {
           protected: true,
           onlyadmin: false

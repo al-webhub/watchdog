@@ -11,12 +11,16 @@ import PageTextTable from "./Tables/PageTextTable";
 import PageImageTable from "./Tables/PageImageTable";
 import UsersTable from "./Tables/UsersTable";
 import WebsitesTable from "./Tables/WebsitesTable";
+import FullscansTable from "./Tables/FullscansTable";
 // Forms
 import EditProfileForm from "./Forms/Settings/EditProfileForm";
+import StartFullscanForm from "./Forms/Websites/StartFullscanForm";
 // Charts
 import Pulse from "./Charts/Pulse";
 import PulseChart from "./Charts/PulseChart";
 import PulseParamsChart from "./Charts/PulseParamsChart";
+// Pagination
+import Pagination from "./Pagination";
 
 export {
   UsersTable,
@@ -32,5 +36,8 @@ export {
   PageImageTable,
   Pulse,
   PulseChart,
-  PulseParamsChart
+  PulseParamsChart,
+  FullscansTable,
+  StartFullscanForm,
+  Pagination
 };

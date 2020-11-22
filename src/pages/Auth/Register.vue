@@ -5,38 +5,38 @@
         <form @submit.prevent="submit">
           <md-card>
             <md-card-header data-background-color="red">
-              <h4 class="title">Register</h4>
+              <h4 class="title">{{$t(`auth.register_form_headline`)}}</h4>
               <p class="category"></p>
             </md-card-header>
             <md-card-content>
               <div class="md-layout">
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
-                    <label>Name</label>
+                    <label>{{$t(`auth.name`)}}</label>
                     <md-input v-model="form.name" type="name"></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
-                    <label>Email</label>
+                    <label>{{$t(`auth.email`)}}</label>
                     <md-input v-model="form.email" type="email"></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
-                    <label>Password</label>
+                    <label>{{$t(`auth.password`)}}</label>
                     <md-input v-model="form.password" type="password"></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
-                    <label>Repeat password</label>
+                    <label>{{$t(`auth.repeat_password`)}}</label>
                     <md-input v-model="form.password_confirmation" type="password"></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-size-100 text-right">
-                  <md-button @click="$router.push('login')" class="md-raised md-danger pull-left">Login</md-button>
-                  <md-button type="submit" class="md-raised md-danger">Register</md-button>
+                  <md-button @click="$router.push('login')" class="md-raised md-danger pull-left">{{$t(`auth.login_button_text`)}}</md-button>
+                  <md-button type="submit" class="md-raised md-danger">{{$t(`auth.register_button_text`)}}</md-button>
                 </div>
               </div>
             </md-card-content>

@@ -5,20 +5,20 @@
         <form @submit.prevent="submit">
           <md-card>
             <md-card-header data-background-color="red">
-              <h4 class="title">Login</h4>
+              <h4 class="title">{{$t(`auth.login_form_headline`)}}</h4>
               <p class="category"></p>
             </md-card-header>
             <md-card-content>
               <div class="md-layout">
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
-                    <label>Email</label>
+                    <label>{{$t(`auth.email`)}}</label>
                     <md-input v-model="form.email" type="email"></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
-                    <label>Password</label>
+                    <label>{{$t(`auth.password`)}}</label>
                     <md-input v-model="form.password" type="password"></md-input>
                   </md-field>
                 </div>
@@ -26,9 +26,9 @@
                   <md-button
                     @click="$router.push('register')"
                     class="md-raised md-danger pull-left"
-                    >Register</md-button
+                    >{{$t(`auth.register_button_text`)}}</md-button
                   >
-                  <md-button type="submit" class="md-raised md-danger">Login</md-button>
+                  <md-button type="submit" class="md-raised md-danger">{{$t(`auth.login_button_text`)}}</md-button>
                 </div>
               </div>
             </md-card-content>

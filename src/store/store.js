@@ -5,7 +5,7 @@ import settings from "./settings";
 import users from "./users";
 import websites from "./websites";
 import pulse from "./pulse";
-
+import fullscan from "./fullscan";
 // Pages
 import dashboard from "./pages/dashboard";
 
@@ -20,7 +20,8 @@ export default new Vuex.Store({
     users,
     websites,
     pulse,
-    dashboard
+    dashboard,
+    fullscan
   },
   plugins: [createPersistedState()]
 });

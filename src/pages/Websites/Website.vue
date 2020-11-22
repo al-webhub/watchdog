@@ -2,7 +2,7 @@
   <div class="content">
     <div class="md-layout">
       <div
-              class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <md-button to="/websites" class="md-sm md-danger">
           <md-icon>keyboard_backspace</md-icon>Back
@@ -16,15 +16,27 @@
         <md-button v-on:click="getMonth" class="md-sm md-danger">
           <md-icon>replay_30</md-icon> Last 30 days
         </md-button>
-        <date-picker v-model="time"
-                     valueType="format"
-                     type="date"
-                     range
-                     placeholder="or select range"
-                     class="daterangepicker_custom_position"
-                     v-on:change="getCustomRange"
+        <date-picker
+          v-model="time"
+          valueType="format"
+          type="date"
+          range
+          placeholder="or select range"
+          class="daterangepicker_custom_position"
+          v-on:change="getCustomRange"
         >
         </date-picker>
+        <md-button
+          v-on:click="
+            $router.push({
+              name: 'Full site scan',
+              params: { website_id: website_id }
+            })
+          "
+          class="md-sm md-danger pull-right"
+        >
+          <md-icon>insights</md-icon> Full site scan
+        </md-button>
       </div>
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
@@ -55,8 +67,8 @@ import { PulseChart, PulseParamsChart } from "@/components";
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
 import Vue from "vue";
-import DatePicker from 'vue2-datepicker';
-import 'vue2-datepicker/index.css';
+import DatePicker from "vue2-datepicker";
+import "vue2-datepicker/index.css";
 
 export default {
   components: {
@@ -105,8 +117,8 @@ export default {
     getCustomRange: async function() {
       this.loaded = false;
       let data = {
-        'website_id': this.website_id,
-        'time': this.time
+        website_id: this.website_id,
+        time: this.time
       };
       await this.requestRange(data);
       this.chartData = this.getPulse;
@@ -132,8 +144,8 @@ export default {
 </script>
 
 <style>
-  .daterangepicker_custom_position {
-     margin: 10px 1px 10px 1px;
-     height: 88px;
-  }
+.daterangepicker_custom_position {
+  margin: 10px 1px 10px 1px;
+  height: 88px;
+}
 </style>

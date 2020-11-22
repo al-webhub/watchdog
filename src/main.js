@@ -25,6 +25,9 @@ if (process.env.NODE_ENV === "production") {
   axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
 }
 
+import { ENGLISH_TRANSLATIONS } from "./translations/en";
+import { RUSSIAN_TRANSLATIONS } from "./translations/ru";
+
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
@@ -56,6 +59,7 @@ import moment from "moment";
 import MaterialDashboard from "@/material-dashboard";
 
 import Chartist from "chartist";
+import VueI18n from "vue-i18n";
 
 // configure router
 export const router = new VueRouter({
@@ -103,12 +107,24 @@ Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
 Vue.use(VueSweetalert2);
+Vue.use(VueI18n);
+
+const TRANSLATIONS = {
+  en: ENGLISH_TRANSLATIONS,
+  ru: RUSSIAN_TRANSLATIONS
+};
+const i18n = new VueI18n({
+  locale: "ru",
+  messages: TRANSLATIONS
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
   render: h => h(App),
   router,
   store,
+  i18n,
   data: {
     Chartist: Chartist
   }
