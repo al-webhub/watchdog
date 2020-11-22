@@ -282,7 +282,10 @@ export default {
         if (this.page - pad > 0) {
           start = this.page - pad;
         }
-        let end = this.fullscan.all.last_page;
+        let end = 1;
+        if (typeof this.fullscan.all !== 'undefined') {
+          let end = this.fullscan.all.last_page;
+        }
         if (pad + this.page < end) {
           end = this.page + pad;
         }
@@ -317,7 +320,6 @@ export default {
         this.showtable = true;
       }
     }
-
     this.loaded = true;
   }
 };
