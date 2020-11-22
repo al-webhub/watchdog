@@ -17,6 +17,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "@/App";
+import vueFilterPrettyBytes from 'vue-filter-pretty-bytes';
+
 // router setup
 import routes from "@/routes/routes";
 import store from "@/store/store";
@@ -108,6 +110,7 @@ Vue.use(GlobalDirectives);
 Vue.use(Notifications);
 Vue.use(VueSweetalert2);
 Vue.use(VueI18n);
+Vue.use(vueFilterPrettyBytes);
 
 const TRANSLATIONS = {
   en: ENGLISH_TRANSLATIONS,
@@ -134,6 +137,19 @@ Vue.filter("FormatDate", function(value) {
   if (value) {
     return moment(String(value)).format("DD.MM.YYYY");
   }
+});
+
+Vue.filter('round', function(value, decimals) {
+  if(!value) {
+    value = 0;
+  }
+
+  if(!decimals) {
+    decimals = 0;
+  }
+
+  value = Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals);
+  return value;
 });
 document.title = "Watchdog";
 

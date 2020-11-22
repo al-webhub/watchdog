@@ -27,13 +27,14 @@
           {{ item.tbt_desktop }}/{{ item.tbt_mobile }}
         </md-table-cell>
         <md-table-cell md-label="CLS">
-          {{ item.cls_desktop }}/{{ item.cls_mobile }}
+          {{ item.cls_desktop | round(3)}}/{{ item.cls_mobile | round(3)}}
         </md-table-cell>
         <md-table-cell md-label="TTFB">
           {{ item.ttfb_desktop }}/{{ item.ttfb_mobile }}
         </md-table-cell>
+
         <md-table-cell md-label="TBW">
-          {{ item.tbw_desktop }}/{{ item.tbw_mobile }}
+          {{ item.tbw_desktop | prettyBytes  }}
         </md-table-cell>
         <md-table-cell md-label="Controls" style="width:253px;">
           <md-button

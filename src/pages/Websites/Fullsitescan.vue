@@ -276,7 +276,7 @@ export default {
       this.refreshPagination();
     },
     refreshPagination() {
-      if (this.fullscan == null) {
+      if (this.fullscan !== null) {
         let pad = 5;
         let start = 1;
         if (this.page - pad > 0) {
@@ -309,6 +309,7 @@ export default {
     await this.requestFullscan(params);
     this.fullscan = this.getFullscans;
     this.empty = this.fullscan.empty;
+    this.refreshPagination();
     if (this.empty === false) {
       if (typeof this.fullscan.all.data === 'undefined' || this.fullscan.all.data.length === 0) {
         this.showtable = false;
@@ -316,7 +317,7 @@ export default {
         this.showtable = true;
       }
     }
-    this.refreshPagination();
+
     this.loaded = true;
   }
 };
