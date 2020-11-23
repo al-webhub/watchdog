@@ -99,24 +99,18 @@
 
             <template slot="content">
               <p class="category">Average page size</p>
-              <h3 class="title">{{ fullscan.avg_page_size }} Kb</h3>
+              <h3 class="title">{{ fullscan.avg_page_size | prettyBytes}}</h3>
             </template>
 
             <template slot="footer">
               <div class="stats">
                 <span title="Minimal page size" class="text-success"
                   ><md-icon class="text-success">trending_down</md-icon>
-                  {{ fullscan.min_page_size_mobile }}/{{
-                    fullscan.min_page_size_desktop
-                  }}
-                  Kb
+                  {{ fullscan.min_page_size_desktop | prettyBytes }}
                 </span>
                 <span title="Maximum page size" class="text-danger"
                   ><md-icon class="text-danger">trending_up</md-icon>
-                  {{ fullscan.max_page_size_mobile }}/{{
-                    fullscan.max_page_size_desktop
-                  }}
-                  Kb</span
+                  {{ fullscan.max_page_size_mobile | prettyBytes }}</span
                 >
               </div>
             </template>
