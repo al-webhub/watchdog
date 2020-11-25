@@ -2,22 +2,20 @@
   <div>
     <md-table v-model="rows" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="ID" style="width:10px;">{{
+        <md-table-cell :md-label="cols.id" style="width:10px;">{{
           item.id
         }}</md-table-cell>
-        <md-table-cell md-label="Name" style="width: 150px;">{{
-          item.name
-        }}</md-table-cell>
-        <md-table-cell md-label="Url">
+
+        <md-table-cell style="width: 350px;" :md-label="cols.url">
           {{ item.url }}
         </md-table-cell>
-        <md-table-cell md-label="Created at" style="width:125px;">{{
+        <md-table-cell :md-label="cols.created_at" style="width:125px;">{{
           item.created_at | FormatDate
         }}</md-table-cell>
-        <md-table-cell md-label="Last scan" style="width:125px;"
+        <md-table-cell :md-label="cols.last_scan" style="width:125px;"
           >{{ item.last_scan_time }} min ago</md-table-cell
         >
-        <md-table-cell md-label="Last Score" style="min-width:100px;">
+        <md-table-cell :md-label="cols.last_score" style="min-width:100px;">
           <md-icon :style="{ color: item.score_mobile_class }"
             >tablet_mac</md-icon
           >
@@ -27,14 +25,14 @@
           >
           {{ item.scans[0].score_desktop }}
         </md-table-cell>
-        <md-table-cell md-label="TTFB" style="width:120px;">
+        <md-table-cell :md-label="cols.ttfb" style="width:120px;">
           <md-icon class="md-success">access_time</md-icon>
           {{ item.scans[0].ttfb_mobile }}
         </md-table-cell>
-        <md-table-cell md-label="Scans" style="width:75px;">{{
+        <md-table-cell :md-label="cols.scans" style="width:75px;">{{
           item.scans_count
         }}</md-table-cell>
-        <md-table-cell md-label="Status" style="width: 75px;">
+        <md-table-cell :md-label="cols.status" style="width: 75px;">
           <md-button
             v-if="item.active == 1"
             class="md-sm md-success"
@@ -48,7 +46,7 @@
             >Offline</md-button
           >
         </md-table-cell>
-        <md-table-cell md-label="Controls" style="width:253px;">
+        <md-table-cell :md-label="cols.controls" style="width:253px;">
           <md-button
             v-on:click="$emit('ShowEditModal', item)"
             class="md-sm md-success md-icon md-icon-font"
@@ -62,9 +60,9 @@
           <md-button
             v-on:click="$router.push({name: 'Analytics',params: { website_id: item.id }})
             "
-            style="width: 75px;"
+            style="width: 105px;"
             class="md-sm md-primary"
-            ><md-icon>arrow_right_alt</md-icon> Details</md-button
+            ><md-icon>arrow_right_alt</md-icon> {{ cols.details_btn }}</md-button
           >
         </md-table-cell>
       </md-table-row>
@@ -80,7 +78,24 @@ export default {
       type: String,
       default: "red"
     },
-    rows: Array
+    rows: Array,
+  },
+  data() {
+    return {
+      cols: {
+        id: this.$i18n.t(`pages.websites.table.id`),
+        name: this.$i18n.t(`pages.websites.table.name`),
+        url: this.$i18n.t(`pages.websites.table.url`),
+        created_at: this.$i18n.t(`pages.websites.table.created_at`),
+        last_scan: this.$i18n.t(`pages.websites.table.last_scan`),
+        last_score: this.$i18n.t(`pages.websites.table.last_score`),
+        ttfb: this.$i18n.t(`pages.websites.table.ttfb`),
+        scans: this.$i18n.t(`pages.websites.table.scans`),
+        status: this.$i18n.t(`pages.websites.table.status`),
+        controls: this.$i18n.t(`pages.websites.table.controls`),
+        details_btn: this.$i18n.t(`pages.websites.table.details_btn`)
+      }
+    };
   },
   methods: {
     ping(url) {

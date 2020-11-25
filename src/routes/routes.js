@@ -72,7 +72,7 @@ const routes = [
       },
       {
         path: "/websites",
-        name: "My websites",
+        name: "mywebsites",
         component: Websites,
         meta: {
           protected: true,
@@ -90,7 +90,7 @@ const routes = [
       },
       {
         path: "/fullscan/:website_id",
-        name: "Full site scan",
+        name: "Fullsitescan",
         component: Fullsitescan,
         meta: {
           protected: true,

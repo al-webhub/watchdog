@@ -10,14 +10,14 @@
               <div
                 class="md-layout-item md-medium-size-70 md-xsmall-size-100 md-size-70"
               >
-                <h4 class="title">Monitored websites </h4>
-                  <md-button v-on:click="showNewModal" class="md-primary md-raised  md-sm"><md-icon >add_box</md-icon>Add new</md-button>
+                <h4 class="title">{{$t(`pages.websites.title`)}} </h4>
+                  <md-button v-on:click="showNewModal" class="md-primary md-raised  md-sm"><md-icon >add_box</md-icon>{{$t(`pages.websites.add_btn_text`)}}</md-button>
               </div>
               <div
                 class="md-layout-item md-medium-size-30 md-xsmall-size-100 md-size-30"
               >
                 <md-field>
-                  <label>Search:</label>
+                  <label>{{$t(`pages.websites.search_placeholder`)}}</label>
                   <md-input v-model="websites.search" v-on:keyup="search" />
                 </md-field>
               </div>

@@ -12,14 +12,14 @@
           data-background-color="green"
         >
           <template slot="content">
-            <h4 class="title">Daily Scans</h4>
+            <h4 class="title">{{$t(`pages.dashboard.charts.scans_chart.title`)}}</h4>
             <p class="category"></p>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>access_time</md-icon>
-              Today: scanned {{ ScansChart.storage.total_scans }} times.
+              {{$t(`pages.dashboard.charts.scans_chart.sub_1`)}} {{ ScansChart.storage.total_scans }} {{$t(`pages.dashboard.charts.scans_chart.sub_2`)}}.
             </div>
           </template>
         </chart-card>
@@ -36,13 +36,13 @@
           data-background-color="red"
         >
           <template slot="content">
-            <h4 class="title">This chart is under development</h4>
+            <h4 class="title">{{$t(`pages.dashboard.charts.indev_chart.title`)}}</h4>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>access_time</md-icon>
-              Today: scanned {{ ScansChart.storage.total_scans }} times.
+              {{$t(`pages.dashboard.charts.scans_chart.sub_1`)}} {{ ScansChart.storage.total_scans }} {{$t(`pages.dashboard.charts.scans_chart.sub_2`)}}.
             </div>
           </template>
         </chart-card>
@@ -57,14 +57,14 @@
           </template>
 
           <template slot="content">
-            <p class="category">Active websites</p>
+            <p class="category">{{$t(`pages.dashboard.panels.active_websites_panel.title`)}}</p>
             <h3 class="title">{{ active_websites }}</h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>date_range</md-icon>
-              Last 24 Hours
+              {{$t(`pages.dashboard.panels.active_websites_panel.sub`)}}
             </div>
           </template>
         </stats-card>
@@ -78,7 +78,7 @@
           </template>
 
           <template slot="content">
-            <p class="category">Total scans</p>
+            <p class="category">{{$t(`pages.dashboard.panels.total_scans_panel.title`)}}</p>
             <h3 class="title">
               {{ total_scans }}
             </h3>
@@ -86,7 +86,7 @@
 
           <template slot="footer">
             <div class="stats">
-              Today:
+              {{$t(`pages.dashboard.panels.total_scans_panel.sub`)}}
               <span class="text-success"
                 ><md-icon class="text-success">call_made</md-icon>
                 {{ ScansChart.storage.total_scans }}</span
@@ -104,14 +104,14 @@
           </template>
 
           <template slot="content">
-            <p class="category">Under development</p>
+            <p class="category">{{$t(`pages.dashboard.panels.under_development_panel.title`)}}</p>
             <h3 class="title">99999999</h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>local_offer</md-icon>
-              Under development
+              {{$t(`pages.dashboard.panels.under_development_panel.sub`)}}
             </div>
           </template>
         </stats-card>
@@ -121,18 +121,18 @@
       >
         <stats-card data-background-color="blue">
           <template slot="header">
-            <i class="fab fa-twitter"></i>
+            <i class="fab fa-twitter"/>
           </template>
 
           <template slot="content">
-            <p class="category">Under development</p>
+            <p class="category">{{$t(`pages.dashboard.panels.under_development_panel.title`)}}</p>
             <h3 class="title">99999999</h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>update</md-icon>
-              Under development
+              {{$t(`pages.dashboard.panels.under_development_panel.sub`)}}
             </div>
           </template>
         </stats-card>

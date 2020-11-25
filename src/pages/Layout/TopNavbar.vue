@@ -2,7 +2,7 @@
   <md-toolbar md-elevation="0" class="md-transparent">
     <div class="md-toolbar-row">
       <div class="md-toolbar-section-start">
-        <h3 class="md-title">{{ $route.name }}</h3>
+        <h3 class="md-title">{{ title }}</h3>
       </div>
       <div class="md-toolbar-section-end">
         <md-button
@@ -56,6 +56,12 @@ export default {
     },
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+    }
+  },
+  computed: {
+    title() {
+      let path = 'routes.'+this.$route.name;
+      return this.$i18n.t(path);
     }
   }
 };

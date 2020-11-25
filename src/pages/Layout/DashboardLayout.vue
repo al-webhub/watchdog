@@ -5,19 +5,19 @@
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/dashboard">
         <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
+        <p>{{$t(`routes.dashboard`)}}</p>
       </sidebar-link>
       <sidebar-link to="/websites">
         <md-icon>web</md-icon>
-        <p>My Websites</p>
+        <p>{{$t(`routes.mywebsites`)}}</p>
       </sidebar-link>
       <sidebar-link v-if="user.role == 1" to="/users">
         <md-icon>account_box</md-icon>
-        <p>Users</p>
+        <p>{{$t(`routes.users`)}}</p>
       </sidebar-link>
       <sidebar-link to="/settings">
         <md-icon>build</md-icon>
-        <p>Settings</p>
+        <p>{{$t(`routes.settings`)}}</p>
       </sidebar-link>
 
 

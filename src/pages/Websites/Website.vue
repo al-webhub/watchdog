@@ -29,7 +29,7 @@
         <md-button
           v-on:click="
             $router.push({
-              name: 'Full site scan',
+              name: 'Fullsitescan',
               params: { website_id: website_id }
             })
           "
