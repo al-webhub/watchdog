@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content" :style="bgImage">
     <div class="md-layout md-alignment-bottom-center ">
       <div class="md-layout-item md-lay md-medium-size-100 md-size-33 login_form_padding ">
         <form @submit.prevent="submit">
@@ -62,6 +62,12 @@ export default {
       this.register(this.form);
     }
   },
+  props: {
+    backgroundImage: {
+      type: String,
+      default: require("@/assets/img/bg-login.jpg")
+    }
+  },
   data() {
     return {
       form: {
@@ -76,7 +82,12 @@ export default {
     ...mapGetters({
       authenticated: "auth/authenticated",
       user: "auth/getUser"
-    })
+    }),
+    bgImage() {
+      return {
+        backgroundImage: `url(${this.backgroundImage})`
+      };
+    }
   },
   created() {
     if (this.authenticated) {
@@ -89,5 +100,8 @@ export default {
 <style>
 .login_form_padding {
   margin-top: 10%;
+}
+.content {
+  min-height: 100vh;
 }
 </style>

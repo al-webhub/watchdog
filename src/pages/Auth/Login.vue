@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content" :style="bgImage" >
     <div class="md-layout md-alignment-bottom-center ">
       <div class="md-layout-item md-lay md-medium-size-100 md-size-33 login_form_padding ">
         <form @submit.prevent="submit">
@@ -46,6 +46,12 @@ import { mapGetters } from "vuex";
 export default {
   name: "Login",
   components: {},
+  props: {
+    backgroundImage: {
+      type: String,
+      default: require("@/assets/img/bg-login.jpg")
+    }
+  },
   methods: {
     ...mapActions({
       signIn: "auth/signIn"
@@ -66,7 +72,12 @@ export default {
     ...mapGetters({
       authenticated: "auth/authenticated",
       user: "auth/getUser"
-    })
+    }),
+    bgImage() {
+      return {
+        backgroundImage: `url(${this.backgroundImage})`
+      };
+    }
   }
 };
 </script>
@@ -74,5 +85,8 @@ export default {
 <style>
 .login_form_padding {
   margin-top: 10%;
+}
+.content {
+  min-height: 100vh;
 }
 </style>
