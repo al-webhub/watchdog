@@ -276,12 +276,13 @@ export default {
         if (this.page - pad > 0) {
           start = this.page - pad;
         }
-        let end = 1;
+        let end = pad;
         if (typeof this.fullscan.all !== 'undefined') {
-          let end = this.fullscan.all.last_page;
-        }
-        if (pad + this.page < end) {
-          end = this.page + pad;
+          if (pad + this.page < this.fullscan.all.last_page) {
+            end = this.page + pad;
+          } else {
+            end = this.fullscan.all.last_page;
+          }
         }
         let range = (start, stop, step = 1) =>
           Array(stop - start)
