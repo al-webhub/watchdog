@@ -218,7 +218,7 @@
               </div>
             </md-card-header>
             <md-card-content>
-              <fullscans-table :rows="fullscan.all.data" />
+              <fullscans-table v-on:rescanUrl="goRescanUrl" :rows="fullscan.all.data" />
             </md-card-content>
             <md-card-header data-background-color="red" v-if="havepagination">
               <Pagination
@@ -227,9 +227,10 @@
                 v-on:changepage="toPage"
               />
             </md-card-header>
-            <h2 class="text-center" v-else>
+            <md-table-empty-state v-else>
               По вашему запросу ничего не найдено!
-            </h2>
+            </md-table-empty-state>
+
           </md-card>
         </div>
       </div>
@@ -268,17 +269,41 @@ export default {
       fullscan: null,
       showtable: false,
       havepagination: false,
-      pages: []
+      pages: [],
+      rescan: null,
     };
   },
   methods: {
     ...mapActions({
       requestFullscan: "fullscan/requestFullscan",
-      deleteScanByid: "fullscan/deleteScanByid"
+      deleteScanByid: "fullscan/deleteScanByid",
+      rescanUrl: "fullscan/rescanUrl"
     }),
     toPage: function(page) {
       this.page = page;
       this.refreshData();
+    },
+    goRescanUrl(item) {
+      this.rescan = item;
+      Vue.swal({
+        title: "Please confirm",
+        text: "Rescan can take up to 60 seconds",
+        confirmButtonColor: "#4caf50",
+        showLoaderOnConfirm: true,
+        allowOutsideClick: () => !Swal.isLoading(),
+        preConfirm: (item) => {
+          return this.rescanUrl(this.rescan).then(function (result) {
+            console.log(result);
+            return true;
+          });
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.refreshData();
+          Swal.close();
+        }
+      });
+
     },
     goSearch: async function() {
       this.page = 1;

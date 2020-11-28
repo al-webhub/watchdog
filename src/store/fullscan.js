@@ -47,6 +47,9 @@ export default {
         search: ""
       };
       dispatch("requestFullscan", params);
+    },
+    async rescanUrl({dispatch}, data) {
+       await axios.post('/api/fss/rescanurl', data);
     }
   }
 };

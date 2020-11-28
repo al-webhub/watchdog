@@ -27,7 +27,7 @@
           {{ item.tbt_desktop }}/{{ item.tbt_mobile }}
         </md-table-cell>
         <md-table-cell md-label="CLS">
-          {{ item.cls_desktop | round(3)}}/{{ item.cls_mobile | round(3)}}
+          {{ item.cls_desktop | round(3) }}/{{ item.cls_mobile | round(3) }}
         </md-table-cell>
         <md-table-cell md-label="TTFB">
           {{ item.ttfb_desktop }}/{{ item.ttfb_mobile }}
@@ -38,9 +38,11 @@
         </md-table-cell>
         <md-table-cell md-label="Controls" style="width:253px;">
           <md-button
+            :disabled="item.buttonDisabled"
+            v-on:click="$emit('rescanUrl', item)"
             style="width: 75px;"
             class="md-sm md-danger"
-            ><md-icon>arrow_right_alt</md-icon> Details</md-button>
+            ><md-icon>refresh</md-icon> Rescan</md-button>
         </md-table-cell>
       </md-table-row>
     </md-table>
@@ -56,7 +58,6 @@ export default {
       default: "red"
     },
     rows: Array
-  },
-  methods: {}
+  }
 };
 </script>
