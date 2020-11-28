@@ -99,7 +99,7 @@
 
             <template slot="content">
               <p class="category">Average page size</p>
-              <h3 class="title">{{ fullscan.avg_page_size | prettyBytes}}</h3>
+              <h3 class="title">{{ fullscan.avg_page_size | prettyBytes }}</h3>
             </template>
 
             <template slot="footer">
@@ -150,15 +150,62 @@
           </stats-card>
         </div>
         <div
-          class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100" v-if="showtable"
+          class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+          v-if="showtable"
         >
           <md-card class="md-card-plain">
             <md-card-header data-background-color="red">
               <div class="md-layout">
                 <div
-                  class="md-layout-item md-medium-size-70 md-xsmall-size-100 md-size-70"
+                  class="md-layout-item md-medium-size-70 md-xsmall-size-100 md-size-45"
                 >
                   <h4 class="title">Scan results</h4>
+                </div>
+                <div
+                  class="md-layout-item md-medium-size-30 md-xsmall-size-100 md-size-15"
+                >
+                  <md-field>
+                    <label>Filter:</label>
+                    <md-select
+                      v-model="filter"
+                      name="filter"
+                      v-on:input="goSearch"
+                    >
+                      <md-option value="score_mobile">Score mobile</md-option>
+                      <md-option value="score_desktop">Score desktop</md-option>
+                      <md-option value="response_code">Code</md-option>
+                      <md-option value="fcp_mobile">FCP mobile</md-option>
+                      <md-option value="fcp_desktop">FCP desktop</md-option>
+                      <md-option value="si_mobile">SI mobile</md-option>
+                      <md-option value="si_desktop">SI desktop</md-option>
+                      <md-option value="tti_mobile">TTI mobile</md-option>
+                      <md-option value="tti_desktop">TTI desktop</md-option>
+                      <md-option value="tbt_mobile">TBT mobile</md-option>
+                      <md-option value="tbt_mobile">TBT desktop</md-option>
+                      <md-option value="cls_mobile">CLS mobile</md-option>
+                      <md-option value="cls_desktop">CLS desktop</md-option>
+                      <md-option value="ttfb_mobile">TTFB mobile</md-option>
+                      <md-option value="ttfb_desktop">TTFB mobile</md-option>
+                      <md-option value="tbw_mobile">TBW mobile</md-option>
+                      <md-option value="tbw_desktop">TBW desktop</md-option>
+                    </md-select>
+                  </md-field>
+                </div>
+                <div
+                  class="md-layout-item md-medium-size-30 md-xsmall-size-100 md-size-10"
+                >
+                  <md-field>
+                    <label>Sign:</label>
+                    <md-select
+                      v-model="param"
+                      name="param"
+                      v-on:input="goSearch"
+                    >
+                      <md-option value="="> &equals; </md-option>
+                      <md-option value=">"> &gt; </md-option>
+                      <md-option value="<"> &lt; </md-option>
+                    </md-select>
+                  </md-field>
                 </div>
                 <div
                   class="md-layout-item md-medium-size-30 md-xsmall-size-100 md-size-30"
@@ -173,13 +220,16 @@
             <md-card-content>
               <fullscans-table :rows="fullscan.all.data" />
             </md-card-content>
-            <md-card-header data-background-color="red">
+            <md-card-header data-background-color="red" v-if="havepagination">
               <Pagination
                 :data="pages"
                 :current="page"
                 v-on:changepage="toPage"
               />
             </md-card-header>
+            <h2 class="text-center" v-else>
+              По вашему запросу ничего не найдено!
+            </h2>
           </md-card>
         </div>
       </div>
@@ -213,8 +263,11 @@ export default {
       website_id: 0,
       page: 1,
       search: "",
+      filter: "",
+      param: "",
       fullscan: null,
       showtable: false,
+      havepagination: false,
       pages: []
     };
   },
@@ -232,7 +285,9 @@ export default {
       let params = {
         website_id: this.website_id,
         page: this.page,
-        search: this.search
+        search: this.search,
+        filter: this.filter,
+        params: this.param
       };
       await this.requestFullscan(params);
       this.fullscan = this.getFullscans;
@@ -270,6 +325,7 @@ export default {
       this.refreshPagination();
     },
     refreshPagination() {
+      this.havepagination = false;
       if (this.fullscan !== null) {
         let pad = 5;
         let start = 1;
@@ -277,7 +333,10 @@ export default {
           start = this.page - pad;
         }
         let end = pad;
-        if (typeof this.fullscan.all !== 'undefined') {
+        if (typeof this.fullscan.all !== "undefined") {
+          if (this.fullscan.all.last_page > 1) {
+            this.havepagination = true;
+          }
           if (pad + this.page < this.fullscan.all.last_page) {
             end = this.page + pad;
           } else {
@@ -309,11 +368,10 @@ export default {
     this.empty = this.fullscan.empty;
     this.refreshPagination();
     if (this.empty === false) {
-      if (typeof this.fullscan.all.data === 'undefined' || this.fullscan.all.data.length === 0) {
-        this.showtable = false;
-      } else {
-        this.showtable = true;
-      }
+      this.showtable = !(
+        typeof this.fullscan.all.data === "undefined" ||
+        this.fullscan.all.data.length === 0
+      );
     }
     this.loaded = true;
   }

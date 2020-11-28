@@ -30,7 +30,9 @@ export default {
         params: {
           page: params.page,
           website_id: params.website_id,
-          search: params.search
+          search: params.search,
+          filter: params.filter,
+          params: params.params
         }
       });
       await commit("SET_FULLSCANS", response.data);
