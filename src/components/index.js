@@ -19,8 +19,10 @@ import StartFullscanForm from "./Forms/Websites/StartFullscanForm";
 import Pulse from "./Charts/Pulse";
 import PulseChart from "./Charts/PulseChart";
 import PulseParamsChart from "./Charts/PulseParamsChart";
+import FcpChart from "./Charts/FcpChart";
 // Pagination
 import Pagination from "./Pagination";
+import LangSwitchForm from "./Forms/Settings/LangSwitchForm";
 
 export {
   UsersTable,
@@ -31,6 +33,7 @@ export {
   OrderedTable,
   SimpleTable,
   EditProfileForm,
+  LangSwitchForm,
   PageTextTable,
   WebsitesTable,
   PageImageTable,
@@ -39,5 +42,6 @@ export {
   PulseParamsChart,
   FullscansTable,
   StartFullscanForm,
-  Pagination
+  Pagination,
+  FcpChart
 };

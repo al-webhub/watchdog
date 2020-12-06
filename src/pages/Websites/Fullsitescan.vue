@@ -13,11 +13,21 @@
           "
           class="md-sm md-danger pull-left"
         >
-          <md-icon>keyboard_backspace</md-icon> Back
+          <md-icon>keyboard_backspace</md-icon> {{$t(`common.buttons.back`)}}
         </md-button>
-        <md-button v-on:click="deleteScan" class="md-sm md-danger pull-right">
-          <md-icon>delete_forever</md-icon> Delete
-        </md-button>
+        <div class="pull-right">
+          <md-button v-on:click="deleteScan" class="md-sm md-danger btn-fix-margin">
+            <md-icon>delete_forever</md-icon> {{$t(`common.buttons.delete`)}}
+          </md-button>
+          <md-button v-on:click="
+            $router.push({
+              name: 'FullscanAnalytics',
+              params: { website_id: website_id }
+            })
+          " class="md-sm md-danger ">
+            {{$t(`common.buttons.analytics`)}} <md-icon>trending_flat</md-icon>
+          </md-button>
+        </div>
       </div>
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
@@ -35,7 +45,7 @@
             </template>
 
             <template slot="content">
-              <p class="category">Progress</p>
+              <p class="category">{{$t(`fullscan.progress`)}}</p>
               <h3 class="title">
                 {{ fullscan.processed }}/{{ fullscan.left }}
               </h3>
@@ -43,7 +53,7 @@
 
             <template slot="footer">
               <div class="stats">
-                Failed:
+                {{$t(`fullscan.failed_label`)}}:
                 <span class="text-danger">
                   <md-icon class="text-danger">call_made</md-icon>
                   {{ fullscan.failed }}</span
@@ -61,7 +71,7 @@
             </template>
 
             <template slot="content">
-              <p class="category">Average score</p>
+              <p class="category">{{$t(`fullscan.avg_score`)}}:</p>
               <h3 class="title">
                 <md-icon>phone_iphone</md-icon
                 >{{ fullscan.avg_score_mobile }}&nbsp;<md-icon
@@ -72,13 +82,13 @@
 
             <template slot="footer">
               <div class="stats">
-                Max:
+                {{$t(`fullscan.max_label`)}}
                 <span class="text-success">
                   <md-icon class="text-success">trending_up</md-icon
                   >{{ fullscan.max_score_mobile }}/{{
                     fullscan.max_score_desktop
                   }} </span
-                >&nbsp; Min:
+                >&nbsp;{{$t(`fullscan.min_label`)}}
                 <span class="text-danger">
                   <md-icon class="text-danger">trending_down</md-icon
                   >{{ fullscan.min_score_mobile }}/{{
@@ -98,7 +108,7 @@
             </template>
 
             <template slot="content">
-              <p class="category">Average page size</p>
+              <p class="category">{{$t(`fullscan.avg_page_size`)}}</p>
               <h3 class="title">{{ fullscan.avg_page_size | prettyBytes }}</h3>
             </template>
 
@@ -125,7 +135,7 @@
             </template>
 
             <template slot="content">
-              <p class="category">Page with problems</p>
+              <p class="category">{{$t(`fullscan.problem_pages`)}}</p>
               <h3 class="title">
                 {{ fullscan.problem_pages }}
               </h3>
@@ -159,13 +169,13 @@
                 <div
                   class="md-layout-item md-medium-size-70 md-xsmall-size-100 md-size-45"
                 >
-                  <h4 class="title">Scan results</h4>
+                  <h4 class="title">{{$t(`fullscan.table_title`)}}</h4>
                 </div>
                 <div
                   class="md-layout-item md-medium-size-30 md-xsmall-size-100 md-size-15"
                 >
                   <md-field>
-                    <label>Filter:</label>
+                    <label>{{$t(`common.selects.filter`)}}:</label>
                     <md-select
                       v-model="filter"
                       name="filter"
@@ -195,7 +205,7 @@
                   class="md-layout-item md-medium-size-30 md-xsmall-size-100 md-size-10"
                 >
                   <md-field>
-                    <label>Sign:</label>
+                    <label>{{$t(`common.selects.sign`)}}:</label>
                     <md-select
                       v-model="param"
                       name="param"
@@ -211,7 +221,7 @@
                   class="md-layout-item md-medium-size-30 md-xsmall-size-100 md-size-30"
                 >
                   <md-field>
-                    <label>Search:</label>
+                    <label>{{$t(`common.inputs.search`)}}:</label>
                     <md-input v-model="search" v-on:keyup="goSearch" />
                   </md-field>
                 </div>
@@ -228,7 +238,7 @@
               />
             </md-card-header>
             <md-table-empty-state v-else>
-              По вашему запросу ничего не найдено!
+              {{$t(`fullscan.empty_search`)}}
             </md-table-empty-state>
 
           </md-card>
@@ -293,7 +303,6 @@ export default {
         allowOutsideClick: () => !Swal.isLoading(),
         preConfirm: (item) => {
           return this.rescanUrl(this.rescan).then(function (result) {
-            console.log(result);
             return true;
           });
         }
@@ -384,8 +393,20 @@ export default {
   async mounted() {
     this.loaded = false;
     this.website_id = this.$route.params.website_id;
+    if (typeof this.$route.params.filter != "undefined") {
+      this.filter = this.$route.params.filter;
+    }
+    if (typeof this.$route.params.search != "undefined") {
+      this.search = this.$route.params.search;
+    }
+    if (typeof this.$route.params.params != "undefined") {
+      this.params = this.$route.params.params;
+    }
     let params = {
       website_id: this.website_id,
+      filter: this.filter,
+      params: this.params,
+      search: this.search,
       page: this.page
     };
     await this.requestFullscan(params);
@@ -402,3 +423,9 @@ export default {
   }
 };
 </script>
+
+<style>
+  .btn-fix-margin {
+    margin-right: 10px;
+  }
+</style>

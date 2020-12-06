@@ -1,4 +1,23 @@
 export const ENGLISH_TRANSLATIONS = {
+    common: {
+      buttons: {
+          back: 'Back',
+          delete: 'Delete',
+          analytics: 'Analytics',
+          rescan: 'Rescan'
+      },
+      inputs: {
+          search: "Search"
+      },
+      selects: {
+          filter: 'Filter',
+          sign: 'Sign'
+      },
+      labels: {
+          mobile: 'Mobile',
+          desktop: 'Desktop'
+      }
+    },
     auth: {
         login_form_headline: 'Login',
         email: 'Email',
@@ -15,7 +34,8 @@ export const ENGLISH_TRANSLATIONS = {
         users: 'Users',
         settings: 'Settings',
         Analytics: 'Analytics',
-        Fullsitescan: 'Full site scan'
+        Fullsitescan: 'Full site scan',
+        FullscanAnalytics: 'Analytics'
     },
     pages: {
         dashboard: {
@@ -61,6 +81,49 @@ export const ENGLISH_TRANSLATIONS = {
                 controls: 'Controls',
                 details_btn: 'Details'
             }
+        }
+    },
+    fullscan: {
+        progress: 'Progress',
+        avg_score: 'Average Score',
+        avg_page_size: 'Average page size',
+        problem_pages: 'Page with problems',
+        failed_label: 'Failed',
+        min_label: 'Min:',
+        max_label: 'Max:',
+        table_title: 'Scan results',
+        empty_search: ' No results',
+        modal: {
+            delete: {
+                title: 'Warning',
+                message: 'Are you sure want to delete fullscans?'
+            },
+            rescan: {
+                title: 'Please confirm',
+                message: 'Rescan can take up to 60 seconds'
+            }
+        }
+    },
+    fullscananalytics: {
+        titles: {
+            scores: 'Scores',
+            fcp: 'First contentful paint',
+            tbt: 'Total blocking time',
+            tti: 'Time to interactive',
+            si: 'Speed Index',
+            cls: 'Cumulative Layout Shift',
+        },
+        zone_titles: {
+            green: 'Green zone pages',
+            orange: 'Orange zone pages',
+            red: 'Red zone pages',
+            na: 'No data pages'
+        },
+        graph: {
+            Green: 'Green',
+            Orange: 'Orange',
+            Red: 'Red',
+            NA: 'NA'
         }
     }
 };

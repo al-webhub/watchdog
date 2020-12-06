@@ -10,6 +10,7 @@ import NotFound from "@/pages/Service/NotFound";
 import Websites from "@/pages/Websites/Websites";
 import Website from "@/pages/Websites/Website";
 import Fullsitescan from "@/pages/Websites/Fullsitescan";
+import FullscanAnalytics from "@/pages/Websites/FullscanAnalytics";
 
 import Users from "@/pages/Users/Users.vue";
 
@@ -92,6 +93,15 @@ const routes = [
         path: "/fullscan/:website_id",
         name: "Fullsitescan",
         component: Fullsitescan,
+        meta: {
+          protected: true,
+          onlyadmin: false
+        }
+      },
+      {
+        path: "/analytics/:website_id",
+        name: "FullscanAnalytics",
+        component: FullscanAnalytics,
         meta: {
           protected: true,
           onlyadmin: false

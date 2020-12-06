@@ -1,4 +1,23 @@
 export const RUSSIAN_TRANSLATIONS = {
+    common: {
+        buttons: {
+            back: 'Назад',
+            delete: 'Удалить',
+            analytics: 'Обзор',
+            rescan: 'Повтор'
+        },
+        inputs: {
+            search: "Поиск"
+        },
+        selects: {
+            filter: 'Фильтр',
+            sign: 'Знак'
+        },
+        labels: {
+            mobile: 'Мобильная версия',
+            desktop: 'ПК версия'
+        }
+    },
     auth: {
         login_form_headline: 'Вход',
         email: 'Email',
@@ -15,7 +34,8 @@ export const RUSSIAN_TRANSLATIONS = {
         users: 'Пользователи',
         settings: 'Настройки',
         Analytics: 'Аналитика',
-        Fullsitescan: 'Полное сканирование сайта'
+        Fullsitescan: 'Полное сканирование сайта',
+        FullscanAnalytics: 'Обзор результатов'
     },
     pages: {
         dashboard: {
@@ -66,6 +86,49 @@ export const RUSSIAN_TRANSLATIONS = {
     forms: {
         startfullscanform: {
             'headline': 'Сканирование всего сайта'
+        }
+    },
+    fullscan: {
+        progress: 'Прогресс',
+        avg_score: 'Средний результат',
+        avg_page_size: 'Ср. размер страницы',
+        problem_pages: 'Ошибки',
+        failed_label: 'Неудачно',
+        min_label: 'Мин:',
+        max_label: 'Макс:',
+        table_title: 'Результаты сканирования',
+        empty_search: 'По вашему запросу ничего не найдено!',
+        modal: {
+            delete: {
+                title: 'Внимание',
+                message: 'Вы точно хотите удалить все сканирования?'
+            },
+            rescan: {
+                title: 'Требуется подтверждение',
+                message: 'Повторное сканирование может занять до 60 секунд'
+            }
+        }
+    },
+    fullscananalytics: {
+        titles: {
+            scores: 'Результат скорости',
+            fcp: 'Первая отрисовка контента',
+            tbt: 'Общее время блокировки',
+            tti: 'Время загрузки для взаимодействия',
+            si: 'Индекс скорости загрузки',
+            cls: 'Совокупное смещение макета',
+        },
+        zone_titles: {
+            green: 'Страниц в зеленой зоне',
+            orange: 'Страниц в желтой зоне',
+            red: 'Страниц в красной зоне',
+            na: 'Страниц без данных'
+        },
+        graph: {
+            Green: 'Зеленая зона',
+            Orange: 'Желтая зона',
+            Red: 'Красная зона',
+            NA: 'Нет данных'
         }
     }
 

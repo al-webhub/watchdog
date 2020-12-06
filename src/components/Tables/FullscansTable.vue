@@ -11,38 +11,76 @@
         <md-table-cell md-label="CODE">
           {{ item.response_code }}
         </md-table-cell>
-        <md-table-cell md-label="SCORE">
-          {{ item.score_desktop }}/{{ item.score_mobile }}
+        <md-table-cell md-label="SCORE" style="min-width: 70px">
+          <md-icon :style="{ color: item.score_desktop_class }"
+            >desktop_windows</md-icon
+          >
+          {{ item.score_desktop }}<br />
+          <md-icon :style="{ color: item.score_mobile_class }"
+            >phone_iphone</md-icon
+          >
+          {{ item.score_mobile }}
         </md-table-cell>
         <md-table-cell md-label="FCP">
-          {{ item.fcp_desktop }}/{{ item.fcp_mobile }}
+          <span :style="{ color: item.fcp_desktop_class }">{{
+            item.fcp_desktop
+          }}</span>
+          <br />
+          <span :style="{ color: item.fcp_mobile_class }">{{
+            item.fcp_mobile
+          }}</span>
         </md-table-cell>
         <md-table-cell md-label="SI">
-          {{ item.si_desktop }}/{{ item.si_mobile }}
+          <span :style="{ color: item.si_desktop_class }">{{
+            item.si_desktop
+          }}</span>
+          <br />
+          <span :style="{ color: item.si_mobile_class }">{{
+            item.si_mobile
+          }}</span>
         </md-table-cell>
         <md-table-cell md-label="TTI">
-          {{ item.tti_desktop }}/{{ item.tti_mobile }}
+          <span :style="{ color: item.tti_desktop_class }">{{
+            item.tti_desktop
+          }}</span>
+          <br />
+          <span :style="{ color: item.tti_mobile_class }">{{
+            item.tti_mobile
+          }}</span>
         </md-table-cell>
         <md-table-cell md-label="TBT">
-          {{ item.tbt_desktop }}/{{ item.tbt_mobile }}
+          <span :style="{ color: item.tbt_desktop_class }">{{
+            item.tbt_desktop
+          }}</span>
+          <br />
+          <span :style="{ color: item.tbt_mobile_class }">{{
+            item.tbt_mobile
+          }}</span>
         </md-table-cell>
         <md-table-cell md-label="CLS">
-          {{ item.cls_desktop | round(3) }}/{{ item.cls_mobile | round(3) }}
+          <span :style="{ color: item.cls_mobile_class }">{{
+            item.cls_desktop | round(3)
+          }}</span>
+          <br />
+          <span :style="{ color: item.cls_mobile_class }">{{
+            item.cls_mobile | round(3)
+          }}</span>
         </md-table-cell>
         <md-table-cell md-label="TTFB">
-          {{ item.ttfb_desktop }}/{{ item.ttfb_mobile }}
+          {{ item.ttfb_desktop }}<br />{{ item.ttfb_mobile }}
         </md-table-cell>
-
         <md-table-cell md-label="TBW">
-          {{ item.tbw_desktop | prettyBytes  }}
+          {{ item.tbw_desktop | prettyBytes }} <br />
+          {{ item.tbw_mobile | prettyBytes }}
         </md-table-cell>
-        <md-table-cell md-label="Controls" style="width:253px;">
+        <md-table-cell md-label="Controls" style="width:110px;">
           <md-button
             :disabled="item.buttonDisabled"
             v-on:click="$emit('rescanUrl', item)"
             style="width: 75px;"
             class="md-sm md-danger"
-            ><md-icon>refresh</md-icon> Rescan</md-button>
+            ><md-icon>refresh</md-icon>  {{$t(`common.buttons.rescan`)}}</md-button
+          >
         </md-table-cell>
       </md-table-row>
     </md-table>
