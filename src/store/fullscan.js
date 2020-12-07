@@ -42,7 +42,7 @@ export default {
           params: params.params
         }
       });
-      if (!typeof response.data.all.data == undefined) {
+      if (response.data.empty !== true) {
         response.data.all.data.map(async item => {
           item.score_mobile_class = scoreColor(item.score_mobile);
           item.score_desktop_class = scoreColor(item.score_desktop);
@@ -59,6 +59,7 @@ export default {
           return item;
         });
       }
+
 
       await commit("SET_FULLSCANS", response.data);
     },
