@@ -42,21 +42,24 @@ export default {
           params: params.params
         }
       });
-      response.data.all.data.map(async item => {
-        item.score_mobile_class = scoreColor(item.score_mobile);
-        item.score_desktop_class = scoreColor(item.score_desktop);
-        item.fcp_mobile_class = ColorizeFCP(item.fcp_mobile);
-        item.fcp_desktop_class = ColorizeFCP(item.fcp_desktop);
-        item.si_mobile_class = ColorizeSI(item.si_mobile);
-        item.si_desktop_class = ColorizeSI(item.si_desktop);
-        item.tbt_mobile_class = ColorizeTBT(item.tbt_mobile);
-        item.tbt_desktop_class = ColorizeTBT(item.tbt_desktop);
-        item.tti_mobile_class = ColorizeTTI(item.tti_mobile);
-        item.tti_desktop_class = ColorizeTTI(item.tti_desktop);
-        item.cls_mobile_class = ColorizeCLS(item.cls_mobile);
-        item.cls_desktop_class = ColorizeCLS(item.cls_desktop);
-        return item;
-      });
+      if (!typeof response.data.all.data == undefined) {
+        response.data.all.data.map(async item => {
+          item.score_mobile_class = scoreColor(item.score_mobile);
+          item.score_desktop_class = scoreColor(item.score_desktop);
+          item.fcp_mobile_class = ColorizeFCP(item.fcp_mobile);
+          item.fcp_desktop_class = ColorizeFCP(item.fcp_desktop);
+          item.si_mobile_class = ColorizeSI(item.si_mobile);
+          item.si_desktop_class = ColorizeSI(item.si_desktop);
+          item.tbt_mobile_class = ColorizeTBT(item.tbt_mobile);
+          item.tbt_desktop_class = ColorizeTBT(item.tbt_desktop);
+          item.tti_mobile_class = ColorizeTTI(item.tti_mobile);
+          item.tti_desktop_class = ColorizeTTI(item.tti_desktop);
+          item.cls_mobile_class = ColorizeCLS(item.cls_mobile);
+          item.cls_desktop_class = ColorizeCLS(item.cls_desktop);
+          return item;
+        });
+      }
+
       await commit("SET_FULLSCANS", response.data);
     },
     async deleteScanByid({ dispatch }, website_id) {
