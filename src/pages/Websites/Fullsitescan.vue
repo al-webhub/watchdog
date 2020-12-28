@@ -161,7 +161,7 @@
         </div>
         <div
                 class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
-
+              v-if="loaded"
         >
           <nav-tabs-card >
             <template slot="content">
