@@ -20,6 +20,7 @@ import Pulse from "./Charts/Pulse";
 import PulseChart from "./Charts/PulseChart";
 import PulseParamsChart from "./Charts/PulseParamsChart";
 import FcpChart from "./Charts/FcpChart";
+import DistributionChart from "./Charts/DistributionChart";
 // Pagination
 import Pagination from "./Pagination";
 import LangSwitchForm from "./Forms/Settings/LangSwitchForm";
@@ -40,6 +41,7 @@ export {
   Pulse,
   PulseChart,
   PulseParamsChart,
+  DistributionChart,
   FullscansTable,
   StartFullscanForm,
   Pagination,

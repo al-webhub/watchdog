@@ -160,6 +160,48 @@
           </stats-card>
         </div>
         <div
+                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+
+        >
+          <nav-tabs-card >
+            <template slot="content">
+
+              <span class="md-nav-tabs-title">Chart:</span>
+              <md-tabs class="md-danger" md-alignment="left">
+                <md-tab id="tab-home" md-label="Score" md-icon="bar_chart">
+                  <distribution-chart
+                          :chartData="fullscan.distribution.score.values"
+                          :chartLabels="fullscan.distribution.score.labels"
+                  ></distribution-chart>
+                </md-tab>
+
+                <md-tab id="tab-pages" md-label="FCP" >
+                  Chart here 2
+                </md-tab>
+                <md-tab id="tab-pages2" md-label="SI">
+                  Chart here 2
+                </md-tab>
+                <md-tab id="tab-pages3" md-label="TTI" >
+                  Chart here 3
+                </md-tab>
+                <md-tab id="tab-pages4" md-label="TBT" >
+                  Chart here 4
+                </md-tab>
+                <md-tab id="tab-pages5" md-label="CLS" >
+                  Chart here 5
+                </md-tab>
+                <md-tab id="tab-pages6" md-label="TTFB" >
+                  Chart here 6
+                </md-tab>
+                <md-tab id="tab-pages7" md-label="TBW" >
+                  Chart here 7
+                </md-tab>
+
+              </md-tabs>
+            </template>
+          </nav-tabs-card>
+        </div>
+        <div
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
           v-if="showtable"
         >
@@ -255,7 +297,9 @@ import {
   FullscansTable,
   StartFullscanForm,
   StatsCard,
-  Pagination
+  Pagination,
+  NavTabsCard,
+  DistributionChart
 } from "@/components";
 import Vue from "vue";
 
@@ -264,7 +308,9 @@ export default {
     StartFullscanForm,
     StatsCard,
     FullscansTable,
-    Pagination
+    Pagination,
+    NavTabsCard,
+    DistributionChart
   },
   data() {
     return {

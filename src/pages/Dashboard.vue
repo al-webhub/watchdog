@@ -152,7 +152,7 @@
         </md-card>
       </div>
       <div
-        v-if="show"
+
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
         <nav-tabs-card>
