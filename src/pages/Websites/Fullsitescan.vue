@@ -47,7 +47,7 @@
             <template slot="content">
               <p class="category">{{$t(`fullscan.progress`)}}</p>
               <h3 class="title">
-                {{ fullscan.processed }}/{{ fullscan.left }}
+                {{ fullscan.processed }}/{{ fullscan.total }}
               </h3>
             </template>
 
