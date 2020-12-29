@@ -1,7 +1,7 @@
 
 <script>
 import { Bar, mixins } from 'vue-chartjs'
-const { reactiveProp } = mixins
+const { reactiveProp } = mixins;
 
 export default {
   extends: Bar,
@@ -9,14 +9,12 @@ export default {
   name: "distribution-chart",
   props: {
     chartData: {
+      type: Object,
       required: false
     },
     chartLabels: {
+      type: Array,
       required: false
-    },
-    dataBackgroundColor: {
-      type: String,
-      default: ""
     }
   },
   data() {

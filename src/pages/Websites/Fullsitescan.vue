@@ -160,46 +160,19 @@
           </stats-card>
         </div>
         <div
-                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
-              v-if="loaded"
+              class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+
         >
-          <nav-tabs-card >
-            <template slot="content">
-
-              <span class="md-nav-tabs-title">Chart:</span>
-              <md-tabs class="md-danger" md-alignment="left">
-                <md-tab id="tab-home" md-label="Score" md-icon="bar_chart">
-                  <distribution-chart
-                          :chartData="fullscan.distribution.score.values"
-                          :chartLabels="fullscan.distribution.score.labels"
-                  ></distribution-chart>
-                </md-tab>
-
-                <md-tab id="tab-pages" md-label="FCP" >
-                  Chart here 2
-                </md-tab>
-                <md-tab id="tab-pages2" md-label="SI">
-                  Chart here 2
-                </md-tab>
-                <md-tab id="tab-pages3" md-label="TTI" >
-                  Chart here 3
-                </md-tab>
-                <md-tab id="tab-pages4" md-label="TBT" >
-                  Chart here 4
-                </md-tab>
-                <md-tab id="tab-pages5" md-label="CLS" >
-                  Chart here 5
-                </md-tab>
-                <md-tab id="tab-pages6" md-label="TTFB" >
-                  Chart here 6
-                </md-tab>
-                <md-tab id="tab-pages7" md-label="TBW" >
-                  Chart here 7
-                </md-tab>
-
-              </md-tabs>
-            </template>
-          </nav-tabs-card>
+          <md-toolbar :md-elevation="1" class="md-danger">
+            <span class="md-title">Choose</span>
+            <md-button class="md-raised md-accent">Score</md-button>
+            <md-button class="md-raised md-accent" style="margin-left: 10px;">FCP</md-button>
+          </md-toolbar>
+          <distribution-chart
+                  v-if="loaded"
+                  :chartData="fullscan.distribution.score.values"
+                  :chartLabels="fullscan.distribution.score.labels"
+          />
         </div>
         <div
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
@@ -298,7 +271,6 @@ import {
   StartFullscanForm,
   StatsCard,
   Pagination,
-  NavTabsCard,
   DistributionChart
 } from "@/components";
 import Vue from "vue";
@@ -309,7 +281,6 @@ export default {
     StatsCard,
     FullscansTable,
     Pagination,
-    NavTabsCard,
     DistributionChart
   },
   data() {
@@ -326,7 +297,7 @@ export default {
       showtable: false,
       havepagination: false,
       pages: [],
-      rescan: null,
+      rescan: null
     };
   },
   methods: {
