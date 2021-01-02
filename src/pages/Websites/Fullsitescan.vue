@@ -170,7 +170,6 @@
             <md-button v-on:click="setDistribution('si')" class="md-raised md-accent" style="margin-left: 10px;">SI</md-button>
             <md-button v-on:click="setDistribution('tti')" class="md-raised md-accent" style="margin-left: 10px;">TTI</md-button>
             <md-button v-on:click="setDistribution('tbt')" class="md-raised md-accent" style="margin-left: 10px;">TBT</md-button>
-            <md-button v-on:click="setDistribution('cls')" class="md-raised md-accent" style="margin-left: 10px;">CLS</md-button>
             <md-button v-on:click="setDistribution('ttfb')" class="md-raised md-accent" style="margin-left: 10px;">TTFB</md-button>
             <md-button v-on:click="setDistribution('tbw')" class="md-raised md-accent" style="margin-left: 10px;">TBW</md-button>
 
