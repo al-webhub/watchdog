@@ -165,13 +165,20 @@
         >
           <md-toolbar :md-elevation="1" class="md-danger">
             <span class="md-title">Choose</span>
-            <md-button class="md-raised md-accent">Score</md-button>
-            <md-button class="md-raised md-accent" style="margin-left: 10px;">FCP</md-button>
+            <md-button v-on:click="setDistribution('score')" class="md-raised md-accent">Score</md-button>
+            <md-button v-on:click="setDistribution('fcp')" class="md-raised md-accent" style="margin-left: 10px;">FCP</md-button>
+            <md-button v-on:click="setDistribution('si')" class="md-raised md-accent" style="margin-left: 10px;">SI</md-button>
+            <md-button v-on:click="setDistribution('tti')" class="md-raised md-accent" style="margin-left: 10px;">TTI</md-button>
+            <md-button v-on:click="setDistribution('tbt')" class="md-raised md-accent" style="margin-left: 10px;">TBT</md-button>
+            <md-button v-on:click="setDistribution('cls')" class="md-raised md-accent" style="margin-left: 10px;">CLS</md-button>
+            <md-button v-on:click="setDistribution('ttfb')" class="md-raised md-accent" style="margin-left: 10px;">TTFB</md-button>
+            <md-button v-on:click="setDistribution('tbw')" class="md-raised md-accent" style="margin-left: 10px;">TBW</md-button>
+
           </md-toolbar>
           <distribution-chart
                   v-if="loaded"
-                  :chartData="fullscan.distribution.score.values"
-                  :chartLabels="fullscan.distribution.score.labels"
+                  :chartData="fullscan.distribution.values"
+                  :chartLabels="fullscan.distribution.labels"
           />
         </div>
         <div
@@ -297,7 +304,8 @@ export default {
       showtable: false,
       havepagination: false,
       pages: [],
-      rescan: null
+      rescan: null,
+      distribution_chart: "score"
     };
   },
   methods: {
@@ -306,9 +314,15 @@ export default {
       deleteScanByid: "fullscan/deleteScanByid",
       rescanUrl: "fullscan/rescanUrl"
     }),
+    setDistribution: async function(item) {
+      this.distribution_chart = item;
+      await this.refreshData();
+    },
     toPage: function(page) {
+      this.loaded = false;
       this.page = page;
       this.refreshData();
+      this.loaded = true;
     },
     goRescanUrl(item) {
       this.rescan = item;
@@ -368,7 +382,8 @@ export default {
       this.website_id = this.$route.params.website_id;
       let params = {
         website_id: this.website_id,
-        page: this.page
+        page: this.page,
+        distribution: this.distribution_chart
       };
       await this.requestFullscan(params);
       this.fullscan = this.getFullscans;
@@ -424,7 +439,8 @@ export default {
       filter: this.filter,
       params: this.params,
       search: this.search,
-      page: this.page
+      page: this.page,
+      distribution: this.distribution_chart
     };
     await this.requestFullscan(params);
     this.fullscan = this.getFullscans;

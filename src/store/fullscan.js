@@ -39,7 +39,8 @@ export default {
           website_id: params.website_id,
           search: params.search,
           filter: params.filter,
-          params: params.params
+          params: params.params,
+          distribution: params.distribution
         }
       });
       if (response.data.empty !== true) {
@@ -59,8 +60,6 @@ export default {
           return item;
         });
       }
-
-
       await commit("SET_FULLSCANS", response.data);
     },
     async deleteScanByid({ dispatch }, website_id) {
