@@ -8,20 +8,20 @@
           <md-icon>keyboard_backspace</md-icon>Back
         </md-button>
         <md-button v-on:click="getPulseChart" class="md-sm md-danger">
-          <md-icon>av_timer</md-icon>Pulse
+          <md-icon>av_timer</md-icon>{{$t(`pages.website.pulse`)}}
         </md-button>
         <md-button v-on:click="getWeek" class="md-sm md-danger">
-          <md-icon>view_week</md-icon> This week
+          <md-icon>view_week</md-icon> {{$t(`pages.website.week`)}}
         </md-button>
         <md-button v-on:click="getMonth" class="md-sm md-danger">
-          <md-icon>replay_30</md-icon> Last 30 days
+          <md-icon>replay_30</md-icon> {{$t(`pages.website.month`)}}
         </md-button>
         <date-picker
           v-model="time"
           valueType="format"
           type="date"
           range
-          placeholder="or select range"
+          v-bind:placeholder="$t(`pages.website.range`)"
           class="daterangepicker_custom_position"
           v-on:change="getCustomRange"
         >
@@ -35,7 +35,7 @@
           "
           class="md-sm md-danger pull-right"
         >
-          <md-icon>insights</md-icon> Full site scan
+          <md-icon>insights</md-icon> {{$t(`pages.website.fullscan_btn`)}}
         </md-button>
       </div>
       <div

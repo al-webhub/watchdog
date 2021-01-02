@@ -81,6 +81,13 @@ export const RUSSIAN_TRANSLATIONS = {
                 controls: 'Управление',
                 details_btn: 'Подробнее'
             }
+        },
+        website: {
+            pulse: 'Пульс',
+            week: 'Последняя неделя',
+            month: 'Последние 30 дней',
+            range: 'или выберите диапазон',
+            fullscan_btn: 'Полное сканирование'
         }
     },
     forms: {

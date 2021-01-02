@@ -81,6 +81,13 @@ export const ENGLISH_TRANSLATIONS = {
                 controls: 'Controls',
                 details_btn: 'Details'
             }
+        },
+        website: {
+            pulse: 'Pulse',
+            week: 'This week',
+            month: 'Last 30 days',
+            range: 'or select range',
+            fullscan_btn: 'Full site scan'
         }
     },
     fullscan: {
