@@ -17,7 +17,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "@/App";
-import vueFilterPrettyBytes from 'vue-filter-pretty-bytes';
+import vueFilterPrettyBytes from "vue-filter-pretty-bytes";
 
 // router setup
 import routes from "@/routes/routes";
@@ -76,7 +76,7 @@ router.beforeEach((to, from, next) => {
     if (store.getters["auth/authenticated"]) {
       next();
       if (to.meta.onlyadmin) {
-        if (store.getters['auth/getUser'].role == 1) {
+        if (store.getters["auth/getUser"].role == 1) {
           next();
         } else {
           next({
@@ -139,12 +139,12 @@ Vue.filter("FormatDate", function(value) {
   }
 });
 
-Vue.filter('round', function(value, decimals) {
-  if(!value) {
+Vue.filter("round", function(value, decimals) {
+  if (!value) {
     value = 0;
   }
 
-  if(!decimals) {
+  if (!decimals) {
     decimals = 0;
   }
 
@@ -154,16 +154,16 @@ Vue.filter('round', function(value, decimals) {
 document.title = "Watchdog";
 
 axios.interceptors.response.use(
-    function(response) {
-      return response;
-    },
-    function(error) {
-      if (
-          error.response.status === 401 &&
-          error.response.config.url == "/api/auth/signin"
-      ) {
-        Vue.swal("Error", "Wrong password", "error");
-      }
-      return Promise.reject(error);
+  function(response) {
+    return response;
+  },
+  function(error) {
+    if (
+      error.response.status === 401 &&
+      error.response.config.url == "/api/auth/signin"
+    ) {
+      Vue.swal("Error", "Wrong password", "error");
     }
+    return Promise.reject(error);
+  }
 );
