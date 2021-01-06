@@ -1,54 +1,51 @@
 <template>
-
-  <div class="content base_content" :style="bgImage" >
+  <div class="content base_content" :style="bgImage">
     <vue-particles
-            color="#dedede"
-            :particleOpacity="0.7"
-            :particlesNumber="180"
-            shapeType="circle"
-            :particleSize="4"
-            linesColor="#dedede"
-            :linesWidth="1"
-            :lineLinked="true"
-            :lineOpacity="0.4"
-            :linesDistance="150"
-            :moveSpeed="3"
-            :hoverEffect="true"
-            hoverMode="grab"
-            :clickEffect="true"
-            clickMode="push"
+      color="#dedede"
+      :particleOpacity="0.1"
+      :particlesNumber="200"
+      shapeType="circle"
+      :particleSize="1"
+      linesColor="#d9534f"
+      :linesWidth="1"
+      :lineLinked="true"
+      :lineOpacity="0.4"
+      :linesDistance="250"
+      :moveSpeed="3"
+      :hoverEffect="true"
+      hoverMode="grab"
+      :clickEffect="true"
+      clickMode="push"
     >
-
     </vue-particles>
-    <div class="md-layout md-alignment-bottom-center form_position">
-      <div class="md-layout-item md-lay md-medium-size-100 md-size-33 login_form_padding ">
-        <form @submit.prevent="submit">
+    <div class="md-layout md-alignment-bottom-center form_position ">
+      <div class="md-layout-item md-lay md-medium-size-100 md-size-33  ">
+        <form @submit.prevent="submit" class="transparent">
           <md-card>
-            <md-card-header data-background-color="red">
-              <h4 class="title">{{$t(`auth.login_form_headline`)}}</h4>
-              <p class="category"></p>
-            </md-card-header>
-            <md-card-content>
+            <md-card-content class="not_transparent">
               <div class="md-layout">
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
-                    <label>{{$t(`auth.email`)}}</label>
+                    <label>{{ $t(`auth.email`) }}</label>
                     <md-input v-model="form.email" type="email"></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
-                    <label>{{$t(`auth.password`)}}</label>
-                    <md-input v-model="form.password" type="password"></md-input>
+                    <label>{{ $t(`auth.password`) }}</label>
+                    <md-input
+                      v-model="form.password"
+                      type="password"
+                    ></md-input>
                   </md-field>
                 </div>
-                <div class="md-layout-item md-size-100 text-right">
+                <div class="md-layout-item md-size-100 ">
                   <md-button
-                    @click="$router.push('register')"
-                    class="md-raised md-danger pull-left"
-                    >{{$t(`auth.register_button_text`)}}</md-button
+                    type="submit"
+                    style="background-color: transparent !important;border: 1px solid white;"
+                    class="md-raised btn-transparent"
+                    >{{ $t(`auth.login_button_text`) }}</md-button
                   >
-                  <md-button type="submit" class="md-raised md-danger">{{$t(`auth.login_button_text`)}}</md-button>
                 </div>
               </div>
             </md-card-content>
@@ -103,22 +100,34 @@ export default {
 </script>
 
 <style>
-.login_form_padding {
-  margin-top: 10%;
-}
 .content {
   min-height: 100vh;
 }
 .form_position {
   position: absolute;
-  top: 0.1rem;
+  top: 10rem;
   left: auto;
   width: 100%;
 }
-.base_content::-webkit-scrollbar {
-  display: none;
+.base_content {
+  width: auto;
+}
+.transparent {
+  visibility: hidden;
+}
+.not_transparent {
+  visibility: visible !important;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
 .base_content {
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 </style>
