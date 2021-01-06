@@ -18,6 +18,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "@/App";
 import vueFilterPrettyBytes from "vue-filter-pretty-bytes";
+import VueParticles from 'vue-particles';
 
 // router setup
 import routes from "@/routes/routes";
@@ -32,6 +33,8 @@ import { RUSSIAN_TRANSLATIONS } from "./translations/ru";
 
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+
+
 
 // Move this subscribe to separate file
 store.subscribe(mutation => {
@@ -111,6 +114,7 @@ Vue.use(Notifications);
 Vue.use(VueSweetalert2);
 Vue.use(VueI18n);
 Vue.use(vueFilterPrettyBytes);
+Vue.use(VueParticles);
 
 const TRANSLATIONS = {
   en: ENGLISH_TRANSLATIONS,

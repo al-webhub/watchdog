@@ -48,10 +48,11 @@
     "eslint": "6.8.0",
     "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-vue": "6.2.2",
+    "execa": "latest",
     "prettier": "1.19.1",
     "sass": "1.26.2",
     "sass-loader": "8.0.2",
-    "vue-template-compiler": "2.6.11",
-    "execa": "latest"
+    "vue-particles": "^1.0.9",
+    "vue-template-compiler": "2.6.11"
   }
 }

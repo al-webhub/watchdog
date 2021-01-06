@@ -1,6 +1,26 @@
 <template>
-  <div class="content" :style="bgImage" >
-    <div class="md-layout md-alignment-bottom-center ">
+
+  <div class="content base_content" :style="bgImage" >
+    <vue-particles
+            color="#dedede"
+            :particleOpacity="0.7"
+            :particlesNumber="180"
+            shapeType="circle"
+            :particleSize="4"
+            linesColor="#dedede"
+            :linesWidth="1"
+            :lineLinked="true"
+            :lineOpacity="0.4"
+            :linesDistance="150"
+            :moveSpeed="3"
+            :hoverEffect="true"
+            hoverMode="grab"
+            :clickEffect="true"
+            clickMode="push"
+    >
+
+    </vue-particles>
+    <div class="md-layout md-alignment-bottom-center form_position">
       <div class="md-layout-item md-lay md-medium-size-100 md-size-33 login_form_padding ">
         <form @submit.prevent="submit">
           <md-card>
@@ -88,5 +108,17 @@ export default {
 }
 .content {
   min-height: 100vh;
+}
+.form_position {
+  position: absolute;
+  top: 0.1rem;
+  left: auto;
+  width: 100%;
+}
+.base_content::-webkit-scrollbar {
+  display: none;
+}
+.base_content {
+  overflow: hidden;
 }
 </style>
