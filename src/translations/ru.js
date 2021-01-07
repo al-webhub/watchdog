@@ -27,6 +27,10 @@ export const RUSSIAN_TRANSLATIONS = {
         register_form_headline: 'Регистрация',
         name: 'Имя',
         repeat_password: 'Повторите пароль',
+        errors: {
+            empty: 'Вы не можете войти, не заполнив все поля',
+            wrong_password: 'Вы ввели неверный пароль, или такого пользователя не существует'
+        }
     },
     routes: {
         dashboard: 'Обзор',

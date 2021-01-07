@@ -34,8 +34,6 @@ import { RUSSIAN_TRANSLATIONS } from "./translations/ru";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
-
-
 // Move this subscribe to separate file
 store.subscribe(mutation => {
   switch (mutation.type) {
@@ -124,7 +122,6 @@ const i18n = new VueI18n({
   locale: "ru",
   messages: TRANSLATIONS
 });
-
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
@@ -166,7 +163,12 @@ axios.interceptors.response.use(
       error.response.status === 401 &&
       error.response.config.url == "/api/auth/signin"
     ) {
-      Vue.swal("Error", "Wrong password", "error");
+      let message = '<span style="color:white">'+i18n.t(`auth.errors.wrong_password`);+'</span>';
+      Vue.swal({
+        title: message,
+        background: 'transparent',
+        confirmButtonColor: 'transparent',
+      });
     }
     return Promise.reject(error);
   }

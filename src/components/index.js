@@ -25,6 +25,9 @@ import DistributionChart from "./Charts/DistributionChart";
 import Pagination from "./Pagination";
 import LangSwitchForm from "./Forms/Settings/LangSwitchForm";
 
+// other
+import DecodingTextAnimation from "./Misc/DecodingAnimation";
+
 export {
   UsersTable,
   ChartCard,
@@ -45,5 +48,6 @@ export {
   FullscansTable,
   StartFullscanForm,
   Pagination,
-  FcpChart
+  FcpChart,
+  DecodingTextAnimation
 };

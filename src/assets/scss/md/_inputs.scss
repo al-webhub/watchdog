@@ -391,7 +391,7 @@ select.form-control {
     height: 36px;
     padding: 7px 0;
     font-size: 14px !important;
-    -webkit-text-fill-color: $black-color !important;
+    -webkit-text-fill-color: $black-color ;
   }
 
   &.md-has-textarea:not(.md-autogrow) label{

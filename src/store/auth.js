@@ -61,18 +61,3 @@ export default {
     }
   }
 };
-
-axios.interceptors.response.use(
-  function(response) {
-    return response;
-  },
-  function(error) {
-    if (
-      error.response.status === 401 &&
-      error.response.config.url == "/api/auth/signin"
-    ) {
-      Vue.swal("Error", "Wrong password", "error");
-    }
-    return Promise.reject(error);
-  }
-);

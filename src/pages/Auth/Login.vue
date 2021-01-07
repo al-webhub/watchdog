@@ -22,18 +22,26 @@
       <div class="md-layout-item md-lay md-medium-size-100 md-size-33  ">
         <form @submit.prevent="submit" class="transparent">
           <md-card>
+            <h2 class="not_transparent text-center " style="color: white">
+              <DecodingTextAnimation text="Watchdog" mode="type" typeCharacter="|" :probability="1 " speed="slow"></DecodingTextAnimation>
+            </h2>
             <md-card-content class="not_transparent">
               <div class="md-layout">
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
                     <label>{{ $t(`auth.email`) }}</label>
-                    <md-input v-model="form.email" type="email"></md-input>
+                    <md-input
+                      v-model="form.email"
+                      type="email"
+                      class="caret_color_red"
+                    ></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-100">
                   <md-field>
                     <label>{{ $t(`auth.password`) }}</label>
                     <md-input
+                      class="caret_color_red"
                       v-model="form.password"
                       type="password"
                     ></md-input>
@@ -59,10 +67,12 @@
 <script>
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
+import { DecodingTextAnimation } from "@/components";
+import Vue from "vue";
 
 export default {
   name: "Login",
-  components: {},
+  components: {DecodingTextAnimation},
   props: {
     backgroundImage: {
       type: String,
@@ -74,7 +84,16 @@ export default {
       signIn: "auth/signIn"
     }),
     submit() {
-      this.signIn(this.form);
+      if (this.form.email.length === 0 || this.form.password.length === 0) {
+        let message = '<span style="color:white">'+this.$t(`auth.errors.empty`)+'</span>';
+        Vue.swal({
+          title: message,
+          background: 'transparent',
+          confirmButtonColor: 'transparent',
+        });
+      } else {
+        this.signIn(this.form);
+      }
     }
   },
   data() {
@@ -129,5 +148,9 @@ body {
   height: 100%;
   width: 100%;
   overflow: hidden;
+}
+.caret_color_red {
+  caret-color: #f44336;
+  -webkit-text-fill-color: white !important;
 }
 </style>

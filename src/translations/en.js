@@ -27,6 +27,10 @@ export const ENGLISH_TRANSLATIONS = {
         register_form_headline: 'Register',
         name: 'Name',
         repeat_password: 'Repeat password',
+        errors: {
+            empty: 'Sorry, you can\'t pass empty fields',
+            wrong_password: 'It seems your password is wrong or this user does not exist!'
+        }
     },
     routes: {
         dashboard: 'Dashboard',
