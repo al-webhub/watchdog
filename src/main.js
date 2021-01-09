@@ -20,6 +20,7 @@ import App from "@/App";
 import vueFilterPrettyBytes from "vue-filter-pretty-bytes";
 import VueParticles from 'vue-particles';
 import VueScrollProgressBar from '@guillaumebriday/vue-scroll-progress-bar';
+import VuePageTransition from 'vue-page-transition'
 
 // router setup
 import routes from "@/routes/routes";
@@ -115,6 +116,7 @@ Vue.use(VueI18n);
 Vue.use(vueFilterPrettyBytes);
 Vue.use(VueParticles);
 Vue.use(VueScrollProgressBar);
+Vue.use(VuePageTransition);
 
 const TRANSLATIONS = {
   en: ENGLISH_TRANSLATIONS,

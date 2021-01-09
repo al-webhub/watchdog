@@ -17,14 +17,7 @@
     <div class="md-layout section-normal test_bg">
       <div class="md-layout-item">
         <h1 class="main-headline">
-          <DecodingTextAnimation
-            text="Watchdog"
-            mode="type"
-            typeCharacter="|"
-            :probability="1"
-            speed="slow"
-            @decodeFinish="show_subtitles"
-          ></DecodingTextAnimation>
+          Watchdog
         </h1>
         <h4 v-if="subheaders_visible" class="main-subheadline">Monitor and audit web performance.</h4>
         <h4 v-if="subheaders_visible" class="main-subheadline">
@@ -71,14 +64,13 @@
 </template>
 
 <script>
-import { DecodingTextAnimation } from "@/components";
 export default {
   data() {
     return {
       subheaders_visible: false
     };
   },
-  components: { DecodingTextAnimation },
+  components: {  },
   methods: {
     show_subtitles: function () {
       this.subheaders_visible = true;

@@ -23,7 +23,7 @@
         <form @submit.prevent="submit" class="transparent">
           <md-card>
             <h2 class="not_transparent text-center " style="color: white">
-              <DecodingTextAnimation text="Watchdog" mode="type" typeCharacter="|" :probability="1 " speed="slow"></DecodingTextAnimation>
+              Watchdog
             </h2>
             <md-card-content class="not_transparent">
               <div class="md-layout">
@@ -67,12 +67,12 @@
 <script>
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
-import { DecodingTextAnimation } from "@/components";
+
 import Vue from "vue";
 
 export default {
   name: "Login",
-  components: {DecodingTextAnimation},
+  components: {},
   props: {
     backgroundImage: {
       type: String,

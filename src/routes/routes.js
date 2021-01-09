@@ -20,14 +20,19 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: Landing
+    component: Landing,
+    meta: {
+      protected: false,
+      transition: 'zoom'
+    }
   },
   {
     path: "/login",
     name: "login",
     component: Login,
     meta: {
-      protected: false
+      protected: false,
+      transition: 'zoom'
     }
   },
   {
