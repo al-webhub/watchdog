@@ -12,32 +12,31 @@ import Website from "@/pages/Websites/Website";
 import Fullsitescan from "@/pages/Websites/Fullsitescan";
 import FullscanAnalytics from "@/pages/Websites/FullscanAnalytics";
 
+import Landing from "@/pages/Landing/Landing";
+
 import Users from "@/pages/Users/Users.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: Content,
-    redirect: "login/",
-    children: [
-      {
-        path: "login",
-        name: "login",
-        component: Login,
-        meta: {
-          protected: false
-        }
-      },
-      {
-        path: "register",
-        name: "Register",
-        component: Register,
-        meta: {
-          protected: false
-        }
-      }
-    ]
+    component: Landing
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
+    meta: {
+      protected: false
+    }
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
+    meta: {
+      protected: false
+    }
   },
   {
     path: "/dashboard",

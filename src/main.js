@@ -19,6 +19,7 @@ import VueRouter from "vue-router";
 import App from "@/App";
 import vueFilterPrettyBytes from "vue-filter-pretty-bytes";
 import VueParticles from 'vue-particles';
+import VueScrollProgressBar from '@guillaumebriday/vue-scroll-progress-bar';
 
 // router setup
 import routes from "@/routes/routes";
@@ -66,8 +67,8 @@ import VueI18n from "vue-i18n";
 
 // configure router
 export const router = new VueRouter({
-  mode: "hash",
-  base: "/landingly/",
+  mode: "history",
+  base: "/",
   routes, // short for routes: routes
   linkExactActiveClass: "nav-item active"
 });
@@ -113,6 +114,7 @@ Vue.use(VueSweetalert2);
 Vue.use(VueI18n);
 Vue.use(vueFilterPrettyBytes);
 Vue.use(VueParticles);
+Vue.use(VueScrollProgressBar);
 
 const TRANSLATIONS = {
   en: ENGLISH_TRANSLATIONS,
