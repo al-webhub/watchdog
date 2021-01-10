@@ -4,17 +4,17 @@
     <div class="md-layout header-nav">
       <md-menu>
         <md-bottom-bar md-type="fixed" class="menu-components-wrapper">
-          <md-bottom-bar-item class="menu-components-item" id="bottom-bar-item-home"  >Home</md-bottom-bar-item>
-          <md-bottom-bar-item class="menu-components-item" id="bottom-bar-item-pages">About</md-bottom-bar-item>
-          <md-bottom-bar-item class="menu-components-item" id="bottom-bar-item-posts">Examples</md-bottom-bar-item>
-          <md-bottom-bar-item class="menu-components-item" id="bottom-bar-item-posts">Features</md-bottom-bar-item>
-          <md-bottom-bar-item class="menu-components-item" id="bottom-bar-item-posts">Insights</md-bottom-bar-item>
-          <md-bottom-bar-item class="menu-components-item" id="bottom-bar-item-posts">Contacts</md-bottom-bar-item>
+          <md-bottom-bar-item class="menu-components-item" to="#top"  >Home</md-bottom-bar-item>
+          <md-bottom-bar-item class="menu-components-item" to="/about">About</md-bottom-bar-item>
+          <md-bottom-bar-item class="menu-components-item" to="#examples">Examples</md-bottom-bar-item>
+          <md-bottom-bar-item class="menu-components-item" to="#features">Features</md-bottom-bar-item>
+          <md-bottom-bar-item class="menu-components-item" to="#insights">Insights</md-bottom-bar-item>
+          <md-bottom-bar-item class="menu-components-item" to="#contacts">Contacts</md-bottom-bar-item>
           <md-bottom-bar-item class="menu-components-item menu-last-item" id="login-link" to="/login">Login</md-bottom-bar-item>
         </md-bottom-bar>
       </md-menu>
     </div>
-    <div class="md-layout section-normal test_bg">
+    <div class="md-layout section-normal test_bg section" id="top">
       <div class="md-layout-item">
         <h1 class="main-headline">
           Watchdog
@@ -25,7 +25,7 @@
         </h4>
       </div>
     </div>
-    <div class="md-layout first-section test_bg">
+    <div class="md-layout first-section test_bg section" id="about">
       <div class="md-layout-item ">
         <vue-particles
           color="#dedede"
@@ -47,17 +47,33 @@
         </vue-particles>
       </div>
     </div>
-    <div class="md-layout">
+    <div class="md-layout section" id="examples">
       <div class="md-layout-item section-normal">
-        6666
+        Examples
       </div>
     </div>
-    <div class="md-layout">
+    <div class="md-layout section" id="features">
       <div
         class="md-layout-item section-normal"
         style="background-color: orangered"
       >
-        6666
+        Features
+      </div>
+    </div>
+    <div class="md-layout section" id="insights">
+      <div
+              class="md-layout-item section-normal"
+              style="background-color: yellow"
+      >
+        Insights
+      </div>
+    </div>
+    <div class="md-layout section" id="contacts">
+      <div
+              class="md-layout-item section-normal"
+              style="background-color: deepskyblue"
+      >
+        Contacts
       </div>
     </div>
   </div>
@@ -74,7 +90,44 @@ export default {
   methods: {
     show_subtitles: function () {
       this.subheaders_visible = true;
+    },
+    isInViewPort: function (element) {
+      if (elem.length > 0) {
+        let distance = elem.getBoundingClientRect();
+        return (
+                distance.top >= 0 &&
+                distance.left >= 0 &&
+                distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+      }
+      return false;
     }
+  },
+  mounted() {
+    window.addEventListener('scroll', function (event) {
+        let sections = document.querySelectorAll('.section');
+        let in_viewport = false;
+        let viewport_id = false;
+        for (const section of sections) {
+          let id = section.id;
+
+          let element = document.querySelector('#'+id);
+          console.log(document.visibilityState(element));
+          // let distance = element.getBoundingClientRect();
+          // console.log('TOP: '+distance.top +' --->LEFT: '+distance.left);
+          // var rect = el.getBoundingClientRect();
+          // var elemTop = rect.top;
+          // var elemBottom = rect.bottom;
+          //
+          // // Only completely visible elements return true:
+          // var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+          // // Partially visible elements return true:
+          // //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+          // return isVisible;
+        }
+
+    }, false);
   }
 };
 </script>

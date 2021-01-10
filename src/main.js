@@ -20,7 +20,8 @@ import App from "@/App";
 import vueFilterPrettyBytes from "vue-filter-pretty-bytes";
 import VueParticles from 'vue-particles';
 import VueScrollProgressBar from '@guillaumebriday/vue-scroll-progress-bar';
-import VuePageTransition from 'vue-page-transition'
+import VuePageTransition from 'vue-page-transition';
+import VueTypedJs from 'vue-typed-js';
 
 // router setup
 import routes from "@/routes/routes";
@@ -69,6 +70,13 @@ import VueI18n from "vue-i18n";
 // configure router
 export const router = new VueRouter({
   mode: "history",
+  scrollBehavior: function(to, from, savedPosition) {
+    if (to.hash) {
+      return {selector: to.hash};
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
   base: "/",
   routes, // short for routes: routes
   linkExactActiveClass: "nav-item active"
@@ -117,6 +125,7 @@ Vue.use(vueFilterPrettyBytes);
 Vue.use(VueParticles);
 Vue.use(VueScrollProgressBar);
 Vue.use(VuePageTransition);
+Vue.use(VueTypedJs);
 
 const TRANSLATIONS = {
   en: ENGLISH_TRANSLATIONS,

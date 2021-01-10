@@ -23,7 +23,7 @@ const routes = [
     component: Landing,
     meta: {
       protected: false,
-      transition: 'zoom'
+      transition: 'fade'
     }
   },
   {
@@ -32,7 +32,7 @@ const routes = [
     component: Login,
     meta: {
       protected: false,
-      transition: 'zoom'
+      transition: 'fade'
     }
   },
   {
@@ -115,7 +115,11 @@ const routes = [
   },
   {
     path: "*",
-    component: NotFound
+    component: NotFound,
+    meta: {
+      protected: false,
+      transition: "flip-y"
+    }
   }
 ];
 
