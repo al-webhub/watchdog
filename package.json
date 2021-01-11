@@ -12,6 +12,7 @@
   "dependencies": {
     "@guillaumebriday/vue-scroll-progress-bar": "^1.0.0",
     "@northwalker/vue-hotel-datepicker": "^2.0.7",
+    "animate.css": "^4.1.1",
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
     "chartist": "0.11.4",
@@ -35,6 +36,7 @@
     "vue-social-sharing": "2.4.7",
     "vue-sweetalert2": "^3.0.3",
     "vue-typed-js": "^0.1.2",
+    "vue2-animate": "^2.1.4",
     "vue2-datepicker": "^3.6.2",
     "vue2-daterange-picker": "^0.6.0",
     "vuejs-loading-plugin": "^1.0.51",
