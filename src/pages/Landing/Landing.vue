@@ -5,7 +5,7 @@
       <md-menu>
         <md-bottom-bar md-type="fixed" class="menu-components-wrapper">
           <md-bottom-bar-item class="menu-components-item" to="#top"  >Home</md-bottom-bar-item>
-          <md-bottom-bar-item class="menu-components-item" to="/about">About</md-bottom-bar-item>
+          <md-bottom-bar-item class="menu-components-item" to="#about">About</md-bottom-bar-item>
           <md-bottom-bar-item class="menu-components-item" to="#examples">Examples</md-bottom-bar-item>
           <md-bottom-bar-item class="menu-components-item" to="#features">Features</md-bottom-bar-item>
           <md-bottom-bar-item class="menu-components-item" to="#insights">Insights</md-bottom-bar-item>
@@ -16,13 +16,38 @@
     </div>
     <div class="md-layout section-normal test_bg section" id="top">
       <div class="md-layout-item">
-        <h1 class="main-headline">
-          Watchdog
-        </h1>
-        <h4 v-if="subheaders_visible" class="main-subheadline">Monitor and audit web performance.</h4>
-        <h4 v-if="subheaders_visible" class="main-subheadline">
-          Make meaningful improvements where it matters.
-        </h4>
+        <vue-particles
+                color="#dedede"
+                :particleOpacity="0.1"
+                :particlesNumber="200"
+                shapeType="circle"
+                :particleSize="1"
+                linesColor="#d9534f"
+                :linesWidth="1"
+                :lineLinked="true"
+                :lineOpacity="0.4"
+                :linesDistance="250"
+                :moveSpeed="3"
+                :hoverEffect="true"
+                hoverMode="grab"
+                :clickEffect="true"
+                clickMode="push"
+        >
+        </vue-particles>
+        <div class="top-container " >
+          <div class="side">
+            <h1 class="main-headline">
+              Watchdog
+            </h1>
+            <h4  class="main-subheadline">Monitor and audit web performance.</h4>
+            <h4  class="main-subheadline">
+              Make meaningful improvements where it matters.
+            </h4>
+            <md-button class="btn-outline-white" to="#about">
+              Discover
+            </md-button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="md-layout first-section test_bg section" id="about">
@@ -133,6 +158,7 @@ export default {
 </script>
 
 <style scoped>
+/* Navigation */
 .header-nav {
   position: fixed;
   left: 0;
@@ -169,19 +195,8 @@ export default {
   max-width: 100% !important;
 }
 
-.main-headline {
-  color: white;
-  margin: 15rem 0 0 15rem;
-}
-
-.main-subheadline {
-  color: white;
-  margin: 0.1rem 0 0 15rem;
-}
-
 .first-section {
   height: 100vh;
-  /*background-image: url('~@/assets/img/bg-login.jpg');*/
 }
 
 .section-normal {
@@ -189,38 +204,28 @@ export default {
   background-color: #00e676;
 }
 
-.test_bg2 {
-  background: linear-gradient(-45deg, #da460a, #3c5059, #3c464e, #671f05);
-  background-size: 400% 400%;
-  -webkit-animation: gradient 15s ease infinite;
-  animation: gradient 15s ease infinite;
-}
-
 .test_bg {
   background-color: #20272d;
 }
 
-@-webkit-keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+/* Top container styles */
+.top-container {
+  position: absolute;
+  top: 15%;
+  left: 15%;
 }
 
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.main-headline {
+  color: white;
 }
+
+.main-subheadline {
+  color: white;
+}
+
+/* Common styles */
+.btn-outline-white {
+  border: 1px solid white !important;
+}
+
 </style>

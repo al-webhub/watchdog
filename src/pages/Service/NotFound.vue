@@ -41,7 +41,7 @@
             <transition name="block" mode="slideLeft">
               <md-button
                       v-if="home_visible"
-                      v-on:click="$router.back()"
+                      to="/"
                       style="background-color: transparent !important; font-size: 0.4em; float: right"
                       class="md-raised btn-transparent"
               >
