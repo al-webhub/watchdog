@@ -48,28 +48,42 @@
             </md-button>
           </div>
         </div>
+        <img class="main-banner"  src="@/assets/img/laptop.png" alt="">
       </div>
     </div>
-    <div class="md-layout first-section test_bg section" id="about">
-      <div class="md-layout-item ">
-        <vue-particles
-          color="#dedede"
-          :particleOpacity="0.1"
-          :particlesNumber="200"
-          shapeType="circle"
-          :particleSize="1"
-          linesColor="#d9534f"
-          :linesWidth="1"
-          :lineLinked="true"
-          :lineOpacity="0.4"
-          :linesDistance="250"
-          :moveSpeed="3"
-          :hoverEffect="true"
-          hoverMode="grab"
-          :clickEffect="true"
-          clickMode="push"
-        >
-        </vue-particles>
+    <div class="md-layout first-section test_bg section " id="about">
+
+      <div class="md-layout  about-container">
+        <div class="md-layout-item">
+          <md-card class="btn-outline-white">
+            <md-card-media class="text-center">
+              <md-icon class="md-size-5x white-text-custom">link</md-icon>
+            </md-card-media>
+            <md-card-content class="white-text-custom text-center">
+              <span class="md-headline">Add URL's in dashboard</span>
+            </md-card-content>
+          </md-card>
+        </div>
+        <div class="md-layout-item">
+          <md-card class="btn-outline-white">
+            <md-card-media class="text-center">
+              <md-icon class="md-size-5x white-text-custom" >speed</md-icon>
+            </md-card-media>
+            <md-card-content class="white-text-custom text-center">
+              <span class="md-headline">Trigger Scans</span>
+            </md-card-content>
+          </md-card>
+        </div>
+        <div class="md-layout-item ">
+          <md-card class="btn-outline-white">
+            <md-card-media class="text-center">
+              <md-icon class="md-size-5x white-text-custom">analytics</md-icon>
+            </md-card-media>
+            <md-card-content class="white-text-custom text-center">
+              <span class="md-headline">Analyse Results</span>
+            </md-card-content>
+          </md-card>
+        </div>
       </div>
     </div>
     <div class="md-layout section" id="examples">
@@ -223,9 +237,28 @@ export default {
   color: white;
 }
 
+.main-banner {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 50%;
+  height: 70%;
+}
+
+.about-container {
+  margin-top: 12vh;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* Common styles */
 .btn-outline-white {
   border: 1px solid white !important;
 }
 
+.white-text-custom {
+  color: white !important;
+}
 </style>
