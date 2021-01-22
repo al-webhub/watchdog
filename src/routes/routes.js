@@ -1,47 +1,92 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
-
 import Dashboard from "@/pages/Dashboard.vue";
-import Register from "@/pages/Auth/Register";
-import Login from "@/pages/Auth/Login";
-
 import Settings from "@/pages/Settings";
-import Content from "@/pages/Layout/Content";
 import NotFound from "@/pages/Service/NotFound";
 import Websites from "@/pages/Websites/Websites";
 import Website from "@/pages/Websites/Website";
 import Fullsitescan from "@/pages/Websites/Fullsitescan";
 import FullscanAnalytics from "@/pages/Websites/FullscanAnalytics";
-
-import Landing from "@/pages/Landing/Landing";
-
 import Users from "@/pages/Users/Users.vue";
+
+
+// Frontend components
+import Register from "@/pages/Frontend/Auth/Register";
+import Login from "@/pages/Frontend/Auth/Login";
+
+import FrontendLayout from "@/pages/Layout/FrontendLayout";
+import Home from "@/pages/Frontend/Home";
+import About from "@/pages/Frontend/About";
+import Examples from "@/pages/Frontend/Examples";
+import Features from "@/pages/Frontend/Features";
+import Contacts from "@/pages/Frontend/Contacts";
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: Landing,
-    meta: {
-      protected: false,
-      transition: 'fade'
-    }
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: Login,
-    meta: {
-      protected: false,
-      transition: 'fade'
-    }
-  },
-  {
-    path: "/register",
-    name: "Register",
-    component: Register,
-    meta: {
-      protected: false
-    }
+    name: "Frontend",
+    component: FrontendLayout,
+    children: [
+      {
+        path: "/",
+        name: "Home",
+        component: Home,
+        meta: {
+          protected: false,
+          onlyadmin: false,
+          transition: "zoom"
+        }
+      },
+      {
+        path: "/about",
+        name: "About",
+        component: About,
+        meta: {
+          protected: false,
+          onlyadmin: false,
+          transition: "overlay-right-full"
+        }
+      },
+      {
+        path: "/examples",
+        name: "Examples",
+        component: Examples,
+        meta: {
+          protected: false,
+          onlyadmin: false,
+          transition: "overlay-down-full"
+        }
+      },
+      {
+        path: "/features",
+        name: "Features",
+        component: Features,
+        meta: {
+          protected: false,
+          onlyadmin: false,
+          transition: "overlay-up-full"
+        }
+      },
+      {
+        path: "/contacts",
+        name: "Contacts",
+        component: Contacts,
+        meta: {
+          protected: false,
+          onlyadmin: false,
+          transition: "overlay-right"
+        }
+      },
+      {
+        path: "/login",
+        name: "Login",
+        component: Login,
+        meta: {
+          protected: false,
+          onlyadmin: false,
+          transition: "overlay-left-full"
+        }
+      }
+    ]
   },
   {
     path: "/dashboard",
@@ -118,7 +163,7 @@ const routes = [
     component: NotFound,
     meta: {
       protected: false,
-      transition: "flip-y"
+      transition: "overlay-down"
     }
   }
 ];

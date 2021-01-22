@@ -21,6 +21,7 @@
     "google-maps": "3.3.0",
     "i": "^0.3.6",
     "moment": "^2.27.0",
+    "particles.vue": "^2.1.11",
     "uninstall": "0.0.0",
     "vue": "2.6.11",
     "vue-animejs": "^2.1.1",

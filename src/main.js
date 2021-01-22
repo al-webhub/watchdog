@@ -19,9 +19,9 @@ import VueRouter from "vue-router";
 import App from "@/App";
 import vueFilterPrettyBytes from "vue-filter-pretty-bytes";
 import VueParticles from 'vue-particles';
-import VueScrollProgressBar from '@guillaumebriday/vue-scroll-progress-bar';
 import VuePageTransition from 'vue-page-transition';
 import VueTypedJs from 'vue-typed-js';
+import Particles from "particles.vue";
 
 // router setup
 import routes from "@/routes/routes";
@@ -123,9 +123,9 @@ Vue.use(VueSweetalert2);
 Vue.use(VueI18n);
 Vue.use(vueFilterPrettyBytes);
 Vue.use(VueParticles);
-Vue.use(VueScrollProgressBar);
 Vue.use(VuePageTransition);
 Vue.use(VueTypedJs);
+Vue.use(Particles);
 
 const TRANSLATIONS = {
   en: ENGLISH_TRANSLATIONS,

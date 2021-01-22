@@ -195,6 +195,85 @@
 
 // Mixins for buttons
 
+@mixin btn-styles-frontend($btn-color) {
+
+  // remove this line if you want black shadows
+  @include shadow-2dp-color($btn-color);
+
+  &.md-raised{
+    @include shadow-2dp-color($btn-color);
+  }
+
+  &,
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  &:active:focus,
+  &:active:hover,
+  &.active:focus,
+  &.active:hover,
+  .open > &.dropdown-toggle,
+  .open > &.dropdown-toggle:focus,
+  .open > &.dropdown-toggle:hover {
+    background-color: $btn-color !important;
+    color: $white-color !important;
+
+    i{
+      color: $white-color !important;
+    }
+    box-shadow: 0 0 5px $btn-color,
+    0 0 25px $btn-color,
+    0 0 50px $btn-color,
+    0 0 200px $btn-color;
+  }
+
+  &:focus,
+  &:active,
+  &:hover{
+    box-shadow: 0 0 5px $btn-color,
+    0 0 25px $btn-color,
+    0 0 50px $btn-color,
+    0 0 200px $btn-color;
+  }
+
+  &.disabled,
+  &:disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      opacity: .65;
+      pointer-events: none;
+    }
+  }
+
+  &.md-simple{
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active,
+    &:active:focus,
+    &:active:hover,
+    &.active:focus,
+    &.active:hover{
+      background-color: transparent !important;
+      color: $btn-color !important;
+      box-shadow: none;
+
+      i{
+        color: $btn-color !important;
+      }
+    }
+  }
+
+}
+
 @mixin btn-styles($btn-color) {
 
     // remove this line if you want black shadows
