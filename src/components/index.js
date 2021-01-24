@@ -12,6 +12,7 @@ import PageImageTable from "./Tables/PageImageTable";
 import UsersTable from "./Tables/UsersTable";
 import WebsitesTable from "./Tables/WebsitesTable";
 import FullscansTable from "./Tables/FullscansTable";
+import ExampleSettingsTable from "./Tables/ExampleSettingsTable";
 // Forms
 import EditProfileForm from "./Forms/Settings/EditProfileForm";
 import StartFullscanForm from "./Forms/Websites/StartFullscanForm";
@@ -49,5 +50,6 @@ export {
   StartFullscanForm,
   Pagination,
   FcpChart,
-  DecodingTextAnimation
+  DecodingTextAnimation,
+  ExampleSettingsTable
 };

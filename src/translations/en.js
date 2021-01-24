@@ -39,7 +39,8 @@ export const ENGLISH_TRANSLATIONS = {
         settings: 'Settings',
         Analytics: 'Analytics',
         Fullsitescan: 'Full site scan',
-        FullscanAnalytics: 'Analytics'
+        FullscanAnalytics: 'Analytics',
+        examples: 'Example settings'
     },
     pages: {
         dashboard: {

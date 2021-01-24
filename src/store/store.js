@@ -9,6 +9,8 @@ import fullscan from "./fullscan";
 // Pages
 import dashboard from "./pages/dashboard";
 
+import examples from "./Service/examples";
+
 import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
@@ -21,7 +23,8 @@ export default new Vuex.Store({
     websites,
     pulse,
     dashboard,
-    fullscan
+    fullscan,
+    examples
   },
   plugins: [createPersistedState()]
 });

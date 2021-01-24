@@ -132,7 +132,7 @@ const TRANSLATIONS = {
   ru: RUSSIAN_TRANSLATIONS
 };
 const i18n = new VueI18n({
-  locale: "ru",
+  locale: "en",
   messages: TRANSLATIONS
 });
 /* eslint-disable no-new */

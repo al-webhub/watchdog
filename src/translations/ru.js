@@ -39,7 +39,8 @@ export const RUSSIAN_TRANSLATIONS = {
         settings: 'Настройки',
         Analytics: 'Аналитика',
         Fullsitescan: 'Полное сканирование сайта',
-        FullscanAnalytics: 'Обзор результатов'
+        FullscanAnalytics: 'Обзор результатов',
+        examples: 'Настройки примеров'
     },
     pages: {
         dashboard: {

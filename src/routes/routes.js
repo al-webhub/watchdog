@@ -7,7 +7,7 @@ import Website from "@/pages/Websites/Website";
 import Fullsitescan from "@/pages/Websites/Fullsitescan";
 import FullscanAnalytics from "@/pages/Websites/FullscanAnalytics";
 import Users from "@/pages/Users/Users.vue";
-
+import ExampleSettings from "@/pages/Service/ExampleSettings";
 
 // Frontend components
 import Register from "@/pages/Frontend/Auth/Register";
@@ -115,6 +115,15 @@ const routes = [
         path: "/users",
         name: "users",
         component: Users,
+        meta: {
+          protected: true,
+          onlyadmin: true
+        }
+      },
+      {
+        path: "/example-settings",
+        name: "examples",
+        component: ExampleSettings,
         meta: {
           protected: true,
           onlyadmin: true

@@ -15,6 +15,10 @@
         <md-icon>account_box</md-icon>
         <p>{{$t(`routes.users`)}}</p>
       </sidebar-link>
+      <sidebar-link v-if="user.role == 1" to="/example-settings">
+        <md-icon>account_box</md-icon>
+        <p>{{$t(`routes.examples`)}}</p>
+      </sidebar-link>
       <sidebar-link to="/settings">
         <md-icon>build</md-icon>
         <p>{{$t(`routes.settings`)}}</p>
