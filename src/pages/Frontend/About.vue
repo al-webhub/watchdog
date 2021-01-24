@@ -1,43 +1,61 @@
 <template>
-  <div class="md-layout section-normal  section">
+  <div class="md-layout section-normal section">
     <div class="md-layout-item ">
-      <div class="md-layout-item centered-headline-margin " >
-        <span class="md-display-2  white-text-custom">HOW IT WORKS</span>
-        <br>
-        <span class="md-subheading white-text-custom">Quick setup with nothing to download or install</span>
+      <div class="md-layout-item centered-headline-margin ">
+        <span class="md-display-2  white-text-custom"> HOW IT WORKS</span>
+        <br />
+        <span class="md-subheading white-text-custom"> Quick setup with nothing to download or install</span>
       </div>
-      <div class="md-layout about-container">
-        <div id="first" class="md-layout-item">
-          <md-card class="btn-outline-white">
-            <md-card-media class="text-center">
-              <md-icon class="md-size-5x white-text-custom">link</md-icon>
-            </md-card-media>
-            <md-card-content class="white-text-custom text-center">
-              <span class="md-headline">Add URL's in dashboard</span>
-            </md-card-content>
-          </md-card>
+      <div class="md-layout card-container">
+        <div class="md-layout-item md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
+          <div class="card" >
+            <div class="imgBox">
+              <md-icon class="md-size-4x white-text-custom ">link</md-icon>
+              <span class="md-title white-text-custom">Add URL's</span>
+            </div>
+            <div class="content-card">
+              <ul class="feature-list white-text-custom">
+                <li>Up to 100 Urls Monitored</li>
+                <li>Bulk url upload (dev)</li>
+                <li>Easy to understand UI</li>
+                <li>Full site scans based on Sitemap.xml</li>
+                <li>Mobile and desktop checked</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div id="second" class="md-layout-item">
-          <md-card class="btn-outline-white">
-            <md-card-media class="text-center">
-              <md-icon class="md-size-5x white-text-custom">speed</md-icon>
-            </md-card-media>
-            <md-card-content class="white-text-custom text-center">
-              <span class="md-headline">Trigger Scans</span>
-            </md-card-content>
-          </md-card>
+        <div class="md-layout-item md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
+          <div class="card">
+            <div class="imgBox">
+              <md-icon class="md-size-4x white-text-custom">speed</md-icon>
+              <span class="md-title white-text-custom">Trigger Scans</span>
+            </div>
+            <div class="content-card ">
+              <ul class="feature-list white-text-custom">
+                <li>Checkrate up to 5 min</li>
+                <li>Automated and on demand scans</li>
+                <li>Domain monitoring (dev)</li>
+                <li>SSL monitoring (dev)</li>
+                <li>Uptime monitoring (dev)</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div id="third" class="md-layout-item ">
-          <md-card class="btn-outline-white">
-            <md-card-media class="text-center">
-              <md-icon class="md-size-5x white-text-custom"
-              >analytics</md-icon
-              >
-            </md-card-media>
-            <md-card-content class="white-text-custom text-center">
-              <span class="md-headline">Analyse Results</span>
-            </md-card-content>
-          </md-card>
+        <div class="md-layout-item md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
+          <div class="card">
+            <div class="imgBox">
+              <md-icon class="md-size-4x white-text-custom img-icon">analytics</md-icon>
+              <span class="md-title white-text-custom">Analyze results</span>
+            </div>
+            <div class="content-card">
+              <ul class="feature-list white-text-custom">
+                <li>View scores of all important pages</li>
+                <li>Up to 3 years of historical data (dev)</li>
+                <li>Google sheets report export (dev)</li>
+                <li>Analyze new code releases or content updates</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -50,137 +68,89 @@ export default {
 </script>
 
 <style scoped>
-/* Navigation */
-.header-nav {
-  position: fixed;
-  left: 0;
-  top: auto;
-  bottom: 3px;
-  z-index: 100;
-  height: 3rem;
-  padding: 0;
-  border: 1px solid white;
+.card-container {
+  margin-top: 3rem;
 }
 
-.menu-components-wrapper {
-  height: 3rem;
-  width: 100vw;
-}
-
-.md-bottom-bar .md-bottom-bar-item {
-  height: 3rem !important;
-}
-
-.menu-components-item {
-  border: 1px solid white;
-}
-
-.md-theme-default {
-  background-color: transparent !important;
-}
-
-.md-theme-default:hover {
-  background-color: transparent !important;
-}
-
-.md-bottom-bar.md-type-fixed .md-bottom-bar-item {
-  max-width: 100% !important;
-}
-
-.first-section {
-  height: 100vh;
-}
-
-.section-normal {
-  height: 100vh;
-}
-
-.section {
-  background-color: #20272d;
-}
-
-
-
-/* Top container styles */
-.top-container {
-  position: absolute;
-  top: 15%;
-  left: 15%;
-}
-
-.main-headline {
-  color: white;
-}
-
-.main-subheadline {
-  color: white;
-}
-
-.main-banner {
-  position: absolute;
-  top: 10%;
-  right: 10%;
-  width: 50%;
-  height: 70%;
-}
-
-.about-container2 {
-  margin-top: 12vh;
+.card-container .card {
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 350px;
+  background: transparent;
+  transition: 0.5s;
 }
 
-/* Examples section */
-.table-centered {
-  margin: 0 auto;
+.card-container .card:before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: transparent;
+  transform-origin: bottom;
+  transform: skewX(45deg);
+  transition: 0.5s;
+  border: 1px solid white;
 }
 
-.flat-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-
-  display: inline-block;
-  *display: inline;
-  zoom: 1
+.card-container  .card:after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 5px;
+  height: 50%;
+  background: transparent;
+  transform-origin: left;
+  transform: skewY(45deg);
+  transition: 0.5s;
+  border-bottom: 350px solid white;
 }
 
-table, th, td {
-  border: 1px solid white !important;
+.card-container .card:hover {
+  transform: TranslateY(-40px);
+  box-shadow: 0 0 5px #F44336,
+  0 0 25px #F44336,
+  0 0 50px #F44336,
+  0 0 200px #F44336;
 }
 
-.table-footer-text {
-  width: 55vw;
-  margin: 1rem auto 0 auto;
+.card-container .card .imgBox {
+  position: relative;
+  width: 300px;
+  height: 150px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-/* Common styles */
-.btn-outline-white {
-  border: 1px solid white !important;
+.card-container .card .imgBox {
+  margin-left: 0;
 }
 
-.white-text-custom {
-  color: white !important;
-}
 
-.centered-headline-margin {
+
+.card-container .card .content-card {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  padding: 20px;
+  color: #777;
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 
-.red {
-  color: red !important;
-}
 
-.orange {
-  color: orange !important;
-}
-
-.green {
-  color: lawngreen !important;
+.feature-list {
+  text-align: left;
+  padding-left: 1.4rem;
 }
 
 </style>
