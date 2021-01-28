@@ -7,16 +7,23 @@ Vue.use(Vuex);
 export default {
   namespaced: true,
   state: {
-    examples: null
+    examples: null,
+    public_examples: null
   },
   getters: {
     getExamples(state) {
       return state.examples;
+    },
+    getPublicExamples(state) {
+      return state.public_examples;
     }
   },
   mutations: {
     SET_EXAMPLES(state, data) {
       state.examples = data;
+    },
+    SET_PUBLIC_EXAMPLES(state, data) {
+      state.public_examples = data;
     }
   },
   actions: {
@@ -37,8 +44,12 @@ export default {
       await dispatch("requestExamples");
     },
     async updateExample({ dispatch }, data) {
-      await axios.put('/api/examples/update', data);
+      await axios.put("/api/examples/update", data);
       await dispatch("requestExamples");
+    },
+    async requestPublicExamples({ commit }) {
+      let response = await axios.get("/api/examples/getpublic");
+      await dispatch("SET_PUBLIC_EXAMPLES", response.data);
     }
   }
 };
