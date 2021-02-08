@@ -49,7 +49,6 @@ export default {
     },
     async requestPublicExamples({ commit }) {
       let response = await axios.get("/api/examples/getpublic");
-
       await commit("SET_PUBLIC_EXAMPLES", response.data);
     }
   }

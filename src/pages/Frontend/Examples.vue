@@ -2,7 +2,7 @@
   <div class="md-layout section">
     <div class="md-layout-item section-normal">
       <div class="md-layout-item centered-headline-margin ">
-        <span class="md-display-2  white-text-custom">Examples</span>
+        <span class="md-display-2  white-text-custom" v-on:click="test">Examples</span>
         <br />
         <span class="md-subheading white-text-custom"
           >Below are some popular websites measured our Google PageSpeed
@@ -11,8 +11,7 @@
       </div>
       <div class="md-layout">
         <div class="md-layout-item">
-          <table
-            v-if="loaded"
+          <table v-if="loaded"
             class="table table-bordered table-centered white-text-custom"
           >
             <thead class="table-head">
@@ -48,27 +47,27 @@
               <tr v-for="example in examples" :key="example.id">
                 <td>{{ example.url }}</td>
                 <td class="text-center">
-                  <strong  >{{ example.data.score_mobile }}</strong>
-                  <span >{{ example.data.score_delta_mobile }}</span>
+                  <strong :style="{ color: getColor(example.score_mobile, 'score') }" >{{ example.score_mobile }}</strong>
+                  <span :style="{ color: getColor(example.score_delta_mobile, 'score_delta') }" >&nbsp;<span v-if=" example.score_delta_mobile > 0">+</span>{{ example.score_delta_mobile }}</span>
                 </td>
-                <td :style="{ color: getColor(example.data.fcp_mobile, 'fcp') }" class="text-center">{{ example.data.fcp_mobile | normalize(1000) }}</td>
-                <td :style="{ color: getColor(example.data.si_mobile, 'si') }" class="text-center ">{{ example.data.si_mobile | normalize(1000) }}</td>
-                <td :style="{ color: getColor(example.data.tti_mobile, 'tti') }" class="text-center">{{ example.data.tti_mobile | normalize(1000) }}</td>
-                <td :style="{ color: getColor(example.data.tbt_mobile, 'tbt') }"  class="text-center">{{ example.data.tbt_mobile | normalize(1000) }}</td>
-                <td :style="{ color: getColor(example.data.cls_mobile, 'cls') }"  class="text-center">{{ example.data.cls_mobile | normalize(1000)}}</td>
-                <td :style="{ color: getColor(example.data.ttfb_mobile, 'ttfb') }" class="text-center">{{ example.data.ttfb_mobile | normalize(1000) }}</td>
-                <td class="text-center">{{ example.data.tbw_mobile | prettyBytes }}</td>
+                <td :style="{ color: getColor(example.fcp_mobile, 'fcp') }" class="text-center">{{ example.fcp_mobile | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.si_mobile, 'si') }" class="text-center ">{{ example.si_mobile | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.tti_mobile, 'tti') }" class="text-center">{{ example.tti_mobile | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.tbt_mobile, 'tbt') }"  class="text-center">{{ example.tbt_mobile | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.cls_mobile, 'cls') }"  class="text-center">{{ example.cls_mobile | normalize(1000)}}</td>
+                <td :style="{ color: getColor(example.ttfb_mobile, 'ttfb') }" class="text-center">{{ example.ttfb_mobile | normalize(1000) }}</td>
+                <td class="text-center">{{ example.tbw_mobile | prettyBytes }}</td>
                 <td class="text-center">
-                  <strong  >{{ example.data.score_desktop }}</strong>
-                  <span >{{ example.data.score_delta_desktop }}</span>
+                  <strong :style="{ color: getColor(example.score_desktop, 'score') }" >{{ example.score_desktop }}</strong>
+                  <span :style="{ color: getColor(example.score_delta_desktop, 'score_delta') }" >&nbsp;<span v-if=" example.score_delta_desktop > 0">+</span>{{ example.score_delta_desktop }}</span>
                 </td>
-                <td :style="{ color: getColor(example.data.fcp_desktop, 'fcp') }" class="text-center">{{ example.data.fcp_desktop | normalize(1000) }}</td>
-                <td :style="{ color: getColor(example.data.si_desktop, 'si') }" class="text-center">{{ example.data.si_desktop  | normalize(1000) }}</td>
-                <td :style="{ color: getColor(example.data.tti_desktop, 'tti') }" class="text-center">{{ example.data.tti_desktop | normalize(1000) }}</td>
-                <td :style="{ color: getColor(example.data.tbt_desktop, 'tbt') }" class="text-center">{{ example.data.tbt_desktop | normalize(1000) }}</td>
-                <td :style="{ color: getColor(example.data.cls_desktop, 'cls') }" class="text-center">{{ example.data.cls_desktop | normalize(1000)}}</td>
-                <td :style="{ color: getColor(example.data.ttfb_desktop, 'ttfb') }" class="text-center">{{ example.data.ttfb_desktop| normalize(1000) }}</td>
-                <td class="text-center">{{ example.data.tbw_desktop | prettyBytes }}</td>
+                <td :style="{ color: getColor(example.fcp_desktop, 'fcp') }" class="text-center">{{ example.fcp_desktop | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.si_desktop, 'si') }" class="text-center">{{ example.si_desktop  | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.tti_desktop, 'tti') }" class="text-center">{{ example.tti_desktop | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.tbt_desktop, 'tbt') }" class="text-center">{{ example.tbt_desktop | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.cls_desktop, 'cls') }" class="text-center">{{ example.cls_desktop | normalize(1000)}}</td>
+                <td :style="{ color: getColor(example.ttfb_desktop, 'ttfb') }" class="text-center">{{ example.ttfb_desktop| normalize(1000) }}</td>
+                <td class="text-center">{{ example.tbw_desktop | prettyBytes }}</td>
               </tr>
             </tbody>
           </table>
@@ -99,13 +98,20 @@ export default {
   data() {
     return {
       loaded: false,
-      examples: false
+      examples: {
+        data: {
+          score_desktop: null
+        }
+      }
     };
   },
   methods: {
     ...mapActions({
       requestPublicExamples: "examples/requestPublicExamples"
     }),
+    test: function() {
+      console.log( typeof this.examples[0])
+    },
     getColor: function(value, type) {
       switch (type) {
         case "score":
@@ -175,6 +181,16 @@ export default {
             case value >= 251 && value <= 500:
               return "orange";
             case value >= 501:
+              return "red";
+          }
+          break;
+        case "score_delta":
+          switch (true) {
+            case value === 0:
+              return "";
+            case value > 0:
+              return "green";
+            case value < 0:
               return "red";
           }
           break;
