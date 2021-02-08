@@ -49,7 +49,8 @@ export default {
     },
     async requestPublicExamples({ commit }) {
       let response = await axios.get("/api/examples/getpublic");
-      await dispatch("SET_PUBLIC_EXAMPLES", response.data);
+
+      await commit("SET_PUBLIC_EXAMPLES", response.data);
     }
   }
 };
@@ -78,3 +79,25 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+
+function scoreColor(value) {
+  let color = 'default';
+  if (value > 0 && value <= 49) {
+    color = 'red';
+  }
+  if (value >= 50 && value <= 89) {
+    color = 'orange';
+  }
+  if (value >= 90 && value <= 100) {
+    color = 'green';
+  }
+  return color;
+}
+
+function deltaClass(value) {
+  if (value > 0) {
+    return 'green';
+  }
+  return 'red';
+}

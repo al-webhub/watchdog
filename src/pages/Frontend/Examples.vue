@@ -45,275 +45,30 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>https://twitter.com</td>
+              <tr v-for="example in examples" :key="example.id">
+                <td>{{ example.url }}</td>
                 <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">north</md-icon
-                  ><span class="green">99</span>
+                  <strong  >{{ example.data.score_mobile }}</strong>
+                  <span >{{ example.data.score_delta_mobile }}</span>
                 </td>
-                <td class="text-center red">99.9</td>
-                <td class="text-center orange">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
+                <td :style="{ color: getColor(example.data.fcp_mobile, 'fcp') }" class="text-center">{{ example.data.fcp_mobile | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.data.si_mobile, 'si') }" class="text-center ">{{ example.data.si_mobile | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.data.tti_mobile, 'tti') }" class="text-center">{{ example.data.tti_mobile | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.data.tbt_mobile, 'tbt') }"  class="text-center">{{ example.data.tbt_mobile | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.data.cls_mobile, 'cls') }"  class="text-center">{{ example.data.cls_mobile | normalize(1000)}}</td>
+                <td :style="{ color: getColor(example.data.ttfb_mobile, 'ttfb') }" class="text-center">{{ example.data.ttfb_mobile | normalize(1000) }}</td>
+                <td class="text-center">{{ example.data.tbw_mobile | prettyBytes }}</td>
                 <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">south</md-icon
-                  ><span class="green">99</span>
+                  <strong  >{{ example.data.score_desktop }}</strong>
+                  <span >{{ example.data.score_delta_desktop }}</span>
                 </td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-              </tr>
-              <tr>
-                <td>https://twitter.com</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">north</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center ">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">south</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-              </tr>
-              <tr>
-                <td>https://twitter.com</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">north</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center ">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">south</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-              </tr>
-              <tr>
-                <td>https://twitter.com</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">north</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center ">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">south</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-              </tr>
-              <tr>
-                <td>https://twitter.com</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">north</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center ">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">south</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-              </tr>
-              <tr>
-                <td>https://twitter.com</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">north</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center ">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">south</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-              </tr>
-              <tr>
-                <td>https://twitter.com</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">north</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center ">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">south</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-              </tr>
-              <tr>
-                <td>https://twitter.com</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">north</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center ">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">south</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-              </tr>
-              <tr>
-                <td>https://twitter.com</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">north</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center ">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">south</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-              </tr>
-              <tr>
-                <td>https://twitter.com</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">north</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center ">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
-                <td class="text-center">
-                  <strong class="green">100</strong
-                  ><md-icon class="green">south</md-icon
-                  ><span class="green">99</span>
-                </td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">99.9</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99</td>
-                <td class="text-center">9.99 Mb</td>
+                <td :style="{ color: getColor(example.data.fcp_desktop, 'fcp') }" class="text-center">{{ example.data.fcp_desktop | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.data.si_desktop, 'si') }" class="text-center">{{ example.data.si_desktop  | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.data.tti_desktop, 'tti') }" class="text-center">{{ example.data.tti_desktop | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.data.tbt_desktop, 'tbt') }" class="text-center">{{ example.data.tbt_desktop | normalize(1000) }}</td>
+                <td :style="{ color: getColor(example.data.cls_desktop, 'cls') }" class="text-center">{{ example.data.cls_desktop | normalize(1000)}}</td>
+                <td :style="{ color: getColor(example.data.ttfb_desktop, 'ttfb') }" class="text-center">{{ example.data.ttfb_desktop| normalize(1000) }}</td>
+                <td class="text-center">{{ example.data.tbw_desktop | prettyBytes }}</td>
               </tr>
             </tbody>
           </table>
@@ -343,21 +98,114 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      loaded: false
+      loaded: false,
+      examples: false
     };
   },
   methods: {
     ...mapActions({
       requestPublicExamples: "examples/requestPublicExamples"
-    })
+    }),
+    getColor: function(value, type) {
+      switch (type) {
+        case "score":
+          switch (true) {
+            case value >= 90 && value <= 100:
+              return "green";
+            case value >= 50 && value <= 89:
+              return "orange";
+            case value >= 0 && value <= 49:
+              return "red";
+          }
+          break;
+        case "fcp":
+          switch (true) {
+            case value > 3999:
+              return "red";
+            case value >= 2000 && value <= 3999:
+              return "orange";
+            case value >= 0 && value <= 1999:
+              return "green";
+          }
+          break;
+        case "si":
+          switch (true) {
+            case value > 5800:
+              return "red";
+            case value >= 4400 && value <= 5799:
+              return "orange";
+            case value >= 0 && value <= 4399:
+              return "green";
+          }
+          break;
+        case "tti":
+          switch (true) {
+            case value > 7300:
+              return "red";
+            case value >= 3900 && value <= 7299:
+              return "orange";
+            case value >= 0 && value <= 3899:
+              return "green";
+          }
+          break;
+        case "tbt":
+          switch (true) {
+            case value > 600:
+              return "red";
+            case value >= 300 && value <= 599:
+              return "orange";
+            case value >= 0 && value <= 299:
+              return "green";
+          }
+          break;
+        case "cls":
+          switch (true) {
+            case value > 0.25:
+              return "red";
+            case value >= 0.1 && value <= 0.2499:
+              return "orange";
+            case value >= 0 && value <= 0.099:
+              return "green";
+          }
+          break;
+        case "ttfb":
+          switch (true) {
+            case value >= 0 && value <= 250:
+              return "green";
+            case value >= 251 && value <= 500:
+              return "orange";
+            case value >= 501:
+              return "red";
+          }
+          break;
+      }
+    }
   },
   computed: {
     ...mapGetters({
       getPublicExamples: "examples/getPublicExamples"
     })
   },
+  filters: {
+    normalize: function(value, modifier) {
+      if (!value) {
+        return 0;
+      }
+
+      if (!modifier) {
+        return 0;
+      }
+
+      if (value > 1) {
+        value = value / modifier;
+      }
+
+      return value.toFixed(2);
+    }
+  },
   async mounted() {
     await this.requestPublicExamples();
+    this.examples = this.getPublicExamples;
     this.loaded = true;
   }
 };

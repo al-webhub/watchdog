@@ -165,6 +165,7 @@ Vue.filter("round", function(value, decimals) {
   value = Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals);
   return value;
 });
+
 document.title = "Watchdog";
 
 axios.interceptors.response.use(
