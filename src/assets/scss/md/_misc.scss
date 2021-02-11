@@ -21,6 +21,13 @@ body {
   }
 }
 
+body .landing {
+  background-color: $body-landing;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  color: #ededed;
+}
+
 .wrapper{
 
     &.wrapper-full-page{

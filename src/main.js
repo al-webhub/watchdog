@@ -1,16 +1,4 @@
-// =========================================================
-// * Vue Material Dashboard - v1.3.2
-// =========================================================
-//
-// * Product Page: https://www.creative-tim.com/product/vue-material-dashboard
-// * Copyright 2019 Creative Tim (https://www.creative-tim.com)
-// * Licensed under MIT (https://github.com/creativetimofficial/vue-material-dashboard/blob/master/LICENSE.md)
-//
-// * Coded by Creative Tim
-//
-// =========================================================
-//
-// * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
 
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -22,6 +10,7 @@ import VueParticles from 'vue-particles';
 import VuePageTransition from 'vue-page-transition';
 import VueTypedJs from 'vue-typed-js';
 import Particles from "particles.vue";
+import anime from "animejs";
 
 // router setup
 import routes from "@/routes/routes";
@@ -113,6 +102,9 @@ router.beforeEach((to, from, next) => {
 });
 
 Vue.prototype.$Chartist = Chartist;
+Vue.prototype.$anime = anime;
+
+
 
 Vue.use(VueRouter);
 Vue.use(MaterialDashboard);
@@ -126,6 +118,7 @@ Vue.use(VueParticles);
 Vue.use(VuePageTransition);
 Vue.use(VueTypedJs);
 Vue.use(Particles);
+
 
 const TRANSLATIONS = {
   en: ENGLISH_TRANSLATIONS,

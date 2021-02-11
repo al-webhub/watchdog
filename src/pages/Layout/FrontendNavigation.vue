@@ -11,10 +11,10 @@
                 <md-bottom-bar-item class="menu-components-item" to="/examples" active-class="active_nav"
                 >Examples</md-bottom-bar-item
                 >
-                <md-bottom-bar-item class="menu-components-item" to="/features" active-class="active_nav"
+                <md-bottom-bar-item v-if="visible" class="menu-components-item" to="/features" active-class="active_nav"
                 >Features</md-bottom-bar-item
                 >
-                <md-bottom-bar-item class="menu-components-item " to="/contacts" active-class="active_nav"
+                <md-bottom-bar-item v-if="visible" class="menu-components-item " to="/contacts" active-class="active_nav"
                 >Contacts</md-bottom-bar-item
                 >
                 <md-bottom-bar-item
@@ -30,13 +30,16 @@
 
 <script>
     export default {
-        name: "FrontendNavigation"
+        name: "FrontendNavigation",
+        data() {
+            return {
+                visible: false
+            }
+        }
     }
 </script>
 
 <style scoped>
-
-
     .header-nav {
         position: fixed;
         left: 0;
@@ -61,9 +64,6 @@
         border: 1px solid white;
     }
 
-
-
-
     .md-theme-default {
         background-color: transparent !important;
     }
@@ -75,6 +75,4 @@
     .md-bottom-bar.md-type-fixed .md-bottom-bar-item {
         max-width: 100% !important;
     }
-
-
 </style>

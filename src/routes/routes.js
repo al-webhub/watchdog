@@ -19,12 +19,13 @@ import About from "@/pages/Frontend/About";
 import Examples from "@/pages/Frontend/Examples";
 import Features from "@/pages/Frontend/Features";
 import Contacts from "@/pages/Frontend/Contacts";
+import FrontendContent from "@/pages/Layout/FrontendContent";
 
 const routes = [
   {
     path: "/",
     name: "Frontend",
-    component: FrontendLayout,
+    component: FrontendContent,
     children: [
       {
         path: "/",
