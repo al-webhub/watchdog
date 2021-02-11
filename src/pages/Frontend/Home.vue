@@ -3,17 +3,20 @@
     <main>
       <div class="content_landing content--fixed">
         <header class="codrops-header">
-          <h1 class="codrops-header__title">Watchdog</h1>
+          <md-icon v-if="visibleBackBtn" v-on:click="closed" style="pointer-events: all;"
+            >subdirectory_arrow_right</md-icon
+          >
+          <h2 class="codrops-header__title " v-on:click="closed">Watchdog</h2>
         </header>
       </div>
       <div class="content_landing">
         <nav class="menu">
-          <a  class="menu__item">Home</a>
-          <a  class="menu__item">About</a>
-          <a  class="menu__item">Examples</a>
-          <a  class="menu__item">Features</a>
-          <a  class="menu__item">Prices</a>
-          <a  class="menu__item">Login</a>
+          <a class="menu__item">Home</a>
+          <a class="menu__item">About</a>
+          <a class="menu__item">Examples</a>
+          <a class="menu__item">Features</a>
+          <a class="menu__item">Prices</a>
+          <a class="menu__item">Login</a>
         </nav>
         <svg
           class="scene"
@@ -269,8 +272,8 @@
             The hungry purple names into the low tower.
           </h3>
         </div>
-        <button class="content__close">
-          <svg class="icon icon--arrowback">
+        <button class="content__close" v-on:click="closed">
+          <svg class="icon icon--arrowback" >
             <use
               xmlns:xlink="http://www.w3.org/1999/xlink"
               xlink:href="#icon-arrowback"
@@ -288,28 +291,89 @@ import charming from "charming";
 export default {
   data() {
     return {
-      visible: false
+      visible: false,
+      visibleBackBtn: false,
+      blobs: [],
+      DOM: {},
+      isOpen: false,
+      current: false,
     };
   },
   methods: {
-    debounce: function(func, wait, immediate) {
-      var timeout;
-      return function() {
-        let context = this,
-          args = arguments;
-        const later = () => {
-          timeout = null;
-          if (!immediate) {
-            func.apply(context, args);
-          }
-        };
-        const callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) {
-          func.apply(context, args);
+    open: function(pos) {
+      this.isOpen = true;
+      this.visibleBackBtn = true;
+      anime({
+        targets: this.DOM.links.map(link => link.querySelectorAll("span")),
+        delay: (t, i) => anime.random(0, 300),
+        duration: 200,
+        easing: "easeInOutQuad",
+        opacity: 0,
+        begin: () =>
+          this.DOM.links.forEach(link => {
+            link.style.pointerEvents = "none";
+            link.classList.remove("menu__item--showDeco");
+          })
+      });
+
+      this.current = pos;
+      const currentBlob = this.blobs[this.current];
+      currentBlob.expand().then(() => {
+        this.DOM.content.style.pointerEvents = "auto";
+        const contentInner = this.DOM.contentInner[pos];
+        contentInner.style.opacity = 1;
+        anime({
+          targets: [
+            contentInner.querySelectorAll(".content__title > span"),
+            contentInner.querySelectorAll(".content__subtitle > span")
+          ],
+          duration: 200,
+          delay: (t, i) => anime.random(0, 600),
+          easing: "easeInOutQuad",
+          opacity: [0, 1]
+        });
+      });
+      this.blobs.filter(el => el != currentBlob).forEach(blob => blob.hide());
+      this.DOM.content.style.pointerEvents = "all";
+    },
+    closed: function() {
+      console.log('worked!');
+      if (!this.isOpen) return;
+      this.isOpen = false;
+      this.visibleBackBtn = false;
+      const contentInner = this.DOM.contentInner[this.current];
+      anime({
+        targets: [
+          contentInner.querySelectorAll(".content__title > span"),
+          contentInner.querySelectorAll(".content__subtitle > span"),
+        ],
+        delay: (t, i) => anime.random(0, 300),
+        duration: 200,
+        easing: "easeInOutQuad",
+        opacity: 0,
+        complete: () => {
+          contentInner.style.opacity = 0;
+          this.DOM.content.style.pointerEvents = "none";
         }
-      };
+      });
+
+      this.blobs[this.current].collapse().then(() => {
+        this.current = -1;
+
+        anime({
+          targets: this.DOM.links.map(link => link.querySelectorAll("span")),
+          duration: 200,
+          delay: (t, i) => anime.random(0, 600),
+          easing: "easeInOutQuad",
+          opacity: 1,
+          complete: () =>
+            this.DOM.links.forEach(link => {
+              link.style.pointerEvents = "auto";
+              link.classList.add("menu__item--showDeco");
+            })
+        });
+      });
+      this.blobs.filter(el => el != this.blobs[this.current]).forEach(blob => blob.show());
     }
   },
   mounted() {
@@ -318,7 +382,7 @@ export default {
       () => document.documentElement.classList.remove("md-theme-default"),
       60
     );
-    // moved
+
     function debounce(func, wait, immediate) {
       var timeout;
       return function() {
@@ -334,7 +398,6 @@ export default {
         if (callNow) func.apply(context, args);
       };
     }
-
     class Blob {
       constructor(el, options) {
         this.DOM = {};
@@ -348,23 +411,23 @@ export default {
         this.descriptions = [];
         this.layers = Array.from(this.DOM.el.querySelectorAll("path"), t => {
           t.style.transformOrigin = `${this.rect.left +
-            this.rect.width / 2}px ${this.rect.top + this.rect.height / 2}px`;
+          this.rect.width / 2}px ${this.rect.top + this.rect.height / 2}px`;
           t.style.opacity = 0;
           this.descriptions.push(t.getAttribute("d"));
           return t;
         });
 
         window.addEventListener(
-          "resize",
-          debounce(() => {
-            this.rect = this.DOM.el.getBoundingClientRect();
-            this.layers.forEach(
-              layer =>
-                (layer.style.transformOrigin = `${this.rect.left +
-                  this.rect.width / 2}px ${this.rect.top +
-                  this.rect.height / 2}px`)
-            );
-          }, 20)
+                "resize",
+                debounce(() => {
+                  this.rect = this.DOM.el.getBoundingClientRect();
+                  this.layers.forEach(
+                          layer =>
+                                  (layer.style.transformOrigin = `${this.rect.left +
+                                  this.rect.width / 2}px ${this.rect.top +
+                                  this.rect.height / 2}px`)
+                  );
+                }, 20)
         );
       }
       intro() {
@@ -408,7 +471,7 @@ export default {
             targets: this.layers,
             duration: 800,
             delay: (t, i, total) => (total - i - 1) * 50 + 400,
-            easing: 'spring(1, 80, 10, 0)',
+            easing: "spring(1, 80, 10, 0)",
             d: (t, i) => this.descriptions[i],
             update: function(anim) {
               if (anim.progress > 75 && !halfway) {
@@ -441,31 +504,28 @@ export default {
     }
 
     window.Blob = Blob;
-
     const DOM = {};
-    let blobs = [];
-    DOM.svg = document.querySelector("svg.scene");
-    console.log(DOM.svg);
-    Array.from(DOM.svg.querySelectorAll("g")).forEach(el => {
+    this.DOM.svg = document.querySelector("svg.scene");
+
+    Array.from(this.DOM.svg.querySelectorAll("g")).forEach(el => {
       const blob = new Blob(el);
-      blobs.push(blob);
+      this.blobs.push(blob);
       blob.intro();
     });
-    DOM.content = document.querySelector(".content--reveal");
-    DOM.contentInner = Array.from(
-      DOM.content.querySelectorAll(".content__inner"),
+
+    this.DOM.content = document.querySelector(".content--reveal");
+    this.DOM.contentInner = Array.from(
+      this.DOM.content.querySelectorAll(".content__inner"),
       el => {
         charming(el);
         return el;
       }
     );
-    DOM.ctrlBack = DOM.content.querySelector(".content__close");
-    DOM.links = Array.from(document.querySelectorAll(".menu > .menu__item"));
 
-    DOM.links.forEach((link, pos) => {
+    this.DOM.links = Array.from(document.querySelectorAll(".menu > .menu__item"));
+    this.DOM.links.forEach((link, pos) => {
       link.style.pointerEvents = "none";
       charming(link);
-
       anime({
         targets: link.querySelectorAll("span"),
         duration: 800,
@@ -477,63 +537,75 @@ export default {
           link.classList.add("menu__item--showDeco");
         }
       });
-
       link.addEventListener("click", ev => {
         ev.preventDefault();
-        open(pos);
+        this.open(pos);
       });
     });
 
-    DOM.ctrlBack.addEventListener('click', () => close());
+    DOM.ctrlBack = document.querySelectorAll(".btn_close");
+    DOM.ctrlBack.forEach(item => {
+      item.addEventListener("click", () => {
+        close();
+      });
+    });
 
     let current;
-    const open = (pos) => {
+    const open = pos => {
       this.isOpen = true;
+      this.visibleBackBtn = true;
       anime({
-        targets: DOM.links.map((link) => link.querySelectorAll('span')),
+        targets: this.DOM.links.map(link => link.querySelectorAll("span")),
         delay: (t, i) => anime.random(0, 300),
         duration: 200,
-        easing: 'easeInOutQuad',
+        easing: "easeInOutQuad",
         opacity: 0,
-        begin: () => DOM.links.forEach(link => {
-          link.style.pointerEvents = 'none';
-          link.classList.remove('menu__item--showDeco');
-        })
+        begin: () =>
+          this.DOM.links.forEach(link => {
+            link.style.pointerEvents = "none";
+            link.classList.remove("menu__item--showDeco");
+          })
       });
 
       current = pos;
-      const currentBlob = blobs[current];
+      const currentBlob = this.blobs[current];
       currentBlob.expand().then(() => {
-        DOM.content.style.pointerEvents = 'auto';
-
-        const contentInner = DOM.contentInner[pos];
+        this.DOM.content.style.pointerEvents = "auto";
+        const contentInner = this.DOM.contentInner[pos];
         contentInner.style.opacity = 1;
         anime({
-          targets: [contentInner.querySelectorAll('.content__title > span'), contentInner.querySelectorAll('.content__subtitle > span'), DOM.ctrlBack],
+          targets: [
+            contentInner.querySelectorAll(".content__title > span"),
+            contentInner.querySelectorAll(".content__subtitle > span")
+          ],
           duration: 200,
           delay: (t, i) => anime.random(0, 600),
-          easing: 'easeInOutQuad',
+          easing: "easeInOutQuad",
           opacity: [0, 1]
         });
       });
-
-      blobs.filter(el => el != currentBlob).forEach(blob => blob.hide());
+      this.blobs.filter(el => el != currentBlob).forEach(blob => blob.hide());
     };
 
     const close = () => {
       if (!this.isOpen) return;
       this.isOpen = false;
-
+      this.visibleBackBtn = false;
       const contentInner = DOM.contentInner[current];
       anime({
-        targets: [contentInner.querySelectorAll('.content__title > span'), contentInner.querySelectorAll('.content__subtitle > span'), DOM.ctrlBack],
+        targets: [
+          contentInner.querySelectorAll(".content__title > span"),
+          contentInner.querySelectorAll(".content__subtitle > span"),
+          DOM.ctrlBack
+        ],
         delay: (t, i) => anime.random(0, 300),
         duration: 200,
-        easing: 'easeInOutQuad',
+        easing: "easeInOutQuad",
         opacity: 0,
         complete: () => {
+          this.visibleBackBtn = false;
           contentInner.style.opacity = 0;
-          DOM.content.style.pointerEvents = 'none';
+          DOM.content.style.pointerEvents = "none";
         }
       });
 
@@ -541,18 +613,19 @@ export default {
         current = -1;
 
         anime({
-          targets: DOM.links.map((link) => link.querySelectorAll('span')),
+          targets: DOM.links.map(link => link.querySelectorAll("span")),
           duration: 200,
           delay: (t, i) => anime.random(0, 600),
-          easing: 'easeInOutQuad',
+          easing: "easeInOutQuad",
           opacity: 1,
-          complete: () => DOM.links.forEach(link => {
-            link.style.pointerEvents = 'auto';
-            link.classList.add('menu__item--showDeco');
-          })
+          complete: () =>
+            DOM.links.forEach(link => {
+              link.style.pointerEvents = "auto";
+              link.classList.add("menu__item--showDeco");
+            })
         });
       });
-      blobs.filter(el => el != blobs[current]).forEach(blob => blob.show());
+      this.blobs.filter(el => el != this.blobs[current]).forEach(blob => blob.show());
     };
   }
 };
@@ -663,7 +736,7 @@ main {
 
 .content--reveal {
   position: absolute;
-  z-index: -1;
+  z-index: 1001;
   top: 0;
   left: 0;
   width: 100%;
@@ -701,17 +774,18 @@ main {
   left: 0;
   top: 0;
   width: 100%;
-  height: 50%;
+  height: 100%;
   display: grid;
   align-items: center;
   justify-content: center;
   justify-items: center;
   align-content: end;
+  opacity: 0;
 }
 
 .js .content__inner {
-  opacity: 0;
-  transition: opacity 0.3s;
+  opacity: 0 !important;
+  transition: opacity 0.3s !important;
 }
 
 .content__title {
@@ -914,7 +988,6 @@ main {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  align-items: center;
   align-self: start;
   grid-area: header;
   justify-self: start;
