@@ -266,20 +266,47 @@
             The gabby priority handles into the deadly dot.
           </h3>
         </div>
-        <div class="content__inner">
-          <h2 class="content__title">Projects</h2>
-          <h3 class="content__subtitle">
-            The hungry purple names into the low tower.
-          </h3>
+        <div class="content__inner login-screen">
+          <form @submit.prevent="submit" class="transparent">
+            <md-card>
+              <h2 class="not_transparent text-center " style="color: white">
+                Watchdog
+              </h2>
+              <md-card-content class="not_transparent">
+                <div class="md-layout">
+                  <div class="md-layout-item md-small-size-100 md-size-100">
+                    <md-field>
+                      <label>{{ $t(`auth.email`) }}</label>
+                      <md-input
+                              v-model="form.email"
+                              type="email"
+                              class="caret_color"
+                      ></md-input>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-small-size-100 md-size-100">
+                    <md-field>
+                      <label>{{ $t(`auth.password`) }}</label>
+                      <md-input
+                              class="caret_color front-login"
+                              v-model="form.password"
+                              type="password"
+                      ></md-input>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-size-100 ">
+                    <md-button
+                            type="submit"
+                            style="background-color: transparent !important;border: 1px solid white;"
+                            class="md-raised   active"
+                    >{{ $t(`auth.login_button_text`) }}</md-button
+                    >
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+          </form>
         </div>
-        <button class="content__close" v-on:click="closed">
-          <svg class="icon icon--arrowback" >
-            <use
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              xlink:href="#icon-arrowback"
-            ></use>
-          </svg>
-        </button>
       </div>
     </main>
   </div>
@@ -288,6 +315,10 @@
 <script>
 import anime from "animejs";
 import charming from "charming";
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
+import Vue from "vue";
+
 export default {
   data() {
     return {
@@ -297,9 +328,16 @@ export default {
       DOM: {},
       isOpen: false,
       current: false,
+      form: {
+        email: "",
+        password: ""
+      }
     };
   },
   methods: {
+    ...mapActions({
+      signIn: "auth/signIn"
+    }),
     open: function(pos) {
       this.isOpen = true;
       this.visibleBackBtn = true;
@@ -374,14 +412,23 @@ export default {
         });
       });
       this.blobs.filter(el => el != this.blobs[this.current]).forEach(blob => blob.show());
+    },
+    submit() {
+      if (this.form.email.length === 0 || this.form.password.length === 0) {
+        const message = '<span style="color:white">'+this.$t(`auth.errors.empty`)+'</span>';
+        Vue.swal({
+          title: message,
+          background: "transparent",
+          confirmButtonColor: "transparent"
+        });
+      } else {
+        this.signIn(this.form);
+      }
     }
   },
   mounted() {
+    setTimeout(() => document.documentElement.classList.remove("md-theme-default"), 60);
     setTimeout(() => document.body.classList.add("render"), 60);
-    setTimeout(
-      () => document.documentElement.classList.remove("md-theme-default"),
-      60
-    );
 
     function debounce(func, wait, immediate) {
       var timeout;
@@ -398,6 +445,7 @@ export default {
         if (callNow) func.apply(context, args);
       };
     }
+
     class Blob {
       constructor(el, options) {
         this.DOM = {};
@@ -504,7 +552,6 @@ export default {
     }
 
     window.Blob = Blob;
-    const DOM = {};
     this.DOM.svg = document.querySelector("svg.scene");
 
     Array.from(this.DOM.svg.querySelectorAll("g")).forEach(el => {
@@ -542,96 +589,20 @@ export default {
         this.open(pos);
       });
     });
-
-    DOM.ctrlBack = document.querySelectorAll(".btn_close");
-    DOM.ctrlBack.forEach(item => {
-      item.addEventListener("click", () => {
-        close();
-      });
-    });
-
-    let current;
-    const open = pos => {
-      this.isOpen = true;
-      this.visibleBackBtn = true;
-      anime({
-        targets: this.DOM.links.map(link => link.querySelectorAll("span")),
-        delay: (t, i) => anime.random(0, 300),
-        duration: 200,
-        easing: "easeInOutQuad",
-        opacity: 0,
-        begin: () =>
-          this.DOM.links.forEach(link => {
-            link.style.pointerEvents = "none";
-            link.classList.remove("menu__item--showDeco");
-          })
-      });
-
-      current = pos;
-      const currentBlob = this.blobs[current];
-      currentBlob.expand().then(() => {
-        this.DOM.content.style.pointerEvents = "auto";
-        const contentInner = this.DOM.contentInner[pos];
-        contentInner.style.opacity = 1;
-        anime({
-          targets: [
-            contentInner.querySelectorAll(".content__title > span"),
-            contentInner.querySelectorAll(".content__subtitle > span")
-          ],
-          duration: 200,
-          delay: (t, i) => anime.random(0, 600),
-          easing: "easeInOutQuad",
-          opacity: [0, 1]
-        });
-      });
-      this.blobs.filter(el => el != currentBlob).forEach(blob => blob.hide());
-    };
-
-    const close = () => {
-      if (!this.isOpen) return;
-      this.isOpen = false;
-      this.visibleBackBtn = false;
-      const contentInner = DOM.contentInner[current];
-      anime({
-        targets: [
-          contentInner.querySelectorAll(".content__title > span"),
-          contentInner.querySelectorAll(".content__subtitle > span"),
-          DOM.ctrlBack
-        ],
-        delay: (t, i) => anime.random(0, 300),
-        duration: 200,
-        easing: "easeInOutQuad",
-        opacity: 0,
-        complete: () => {
-          this.visibleBackBtn = false;
-          contentInner.style.opacity = 0;
-          DOM.content.style.pointerEvents = "none";
-        }
-      });
-
-      blobs[current].collapse().then(() => {
-        current = -1;
-
-        anime({
-          targets: DOM.links.map(link => link.querySelectorAll("span")),
-          duration: 200,
-          delay: (t, i) => anime.random(0, 600),
-          easing: "easeInOutQuad",
-          opacity: 1,
-          complete: () =>
-            DOM.links.forEach(link => {
-              link.style.pointerEvents = "auto";
-              link.classList.add("menu__item--showDeco");
-            })
-        });
-      });
-      this.blobs.filter(el => el != this.blobs[current]).forEach(blob => blob.show());
-    };
   }
 };
 </script>
 
 <style scoped>
+.md-toggle-password {
+  color: white !important;
+}
+
+.caret_color {
+  caret-color: #ffffff;
+  -webkit-text-fill-color: white !important;
+}
+
 /* Color schemes */
 .render {
   --color-text: #ededed;
@@ -773,13 +744,14 @@ main {
   position: absolute;
   left: 0;
   top: 0;
+
   width: 100%;
   height: 100%;
   display: grid;
   align-items: center;
   justify-content: center;
   justify-items: center;
-  align-content: end;
+
   opacity: 0;
 }
 

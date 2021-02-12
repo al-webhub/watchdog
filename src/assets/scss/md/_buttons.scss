@@ -69,11 +69,6 @@
         &:focus,
         &:hover{
             background-color: $white-color;
-            color: $active_color;
-            box-shadow: 0 0 5px $active_color,
-                        0 0 25px $active_color,
-                        0 0 50px $active_color,
-                        0 0 200px $active_color !important;
         }
         &.btn-simple{
             color: #FFFFFF;

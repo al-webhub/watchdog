@@ -51,7 +51,7 @@ export default {
     }),
     logoutAction() {
       this.logout().then(() => {
-        this.$router.push("login").catch(err => {});
+        this.$router.push("/").catch(err => {});
       });
     },
     toggleSidebar() {

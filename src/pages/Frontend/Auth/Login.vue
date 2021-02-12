@@ -1,23 +1,5 @@
 <template>
   <div class="content base_content md-layout" :style="bgImage">
-<!--    <vue-particles-->
-<!--      color="#dedede"-->
-<!--      :particleOpacity="0.1"-->
-<!--      :particlesNumber="200"-->
-<!--      shapeType="circle"-->
-<!--      :particleSize="1"-->
-<!--      linesColor="#d9534f"-->
-<!--      :linesWidth="1"-->
-<!--      :lineLinked="true"-->
-<!--      :lineOpacity="0.4"-->
-<!--      :linesDistance="250"-->
-<!--      :moveSpeed="3"-->
-<!--      :hoverEffect="true"-->
-<!--      hoverMode="grab"-->
-<!--      :clickEffect="true"-->
-<!--      clickMode="push"-->
-<!--    >-->
-<!--    </vue-particles>-->
     <div class="md-layout md-alignment-bottom-center form_position ">
       <div class="md-layout-item md-lay md-medium-size-100 md-size-33  ">
         <form @submit.prevent="submit" class="transparent">

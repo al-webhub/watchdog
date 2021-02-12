@@ -429,7 +429,7 @@ select.form-control {
   }
 
   &:before{
-    background-color: $brand-primary !important;
+    background-color: $white-color !important;
   }
 
   &.md-focused label,
@@ -472,7 +472,9 @@ select.form-control {
     height: 18px;
 
     svg{
-      fill: $gray-light !important;
+      fill: $white-color !important;
     }
+
   }
 }
+
