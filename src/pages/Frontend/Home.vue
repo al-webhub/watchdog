@@ -3,9 +3,9 @@
     <main>
       <div class="content_landing content--fixed">
         <header class="codrops-header">
-          <md-icon v-if="visibleBackBtn" v-on:click="closed" style="pointer-events: all;"
-            >subdirectory_arrow_right</md-icon
-          >
+          <div class="codrops-links">
+            <a v-if="visibleBackBtn" v-on:click="closed" ><md-icon class="text-white">keyboard_backspace</md-icon></a>
+          </div>
           <h2 class="codrops-header__title " v-on:click="closed">Watchdog</h2>
         </header>
       </div>
