@@ -248,11 +248,71 @@
             The sympathetic picture adds into the freezing gift.
           </h3>
         </div>
-        <div class="content__inner">
-          <h2 class="content__title">Philosophy</h2>
+        <div class="content__inner examples screen">
+          <h2 class="content__title">Examples</h2>
           <h3 class="content__subtitle">
-            The dimwitted purchase can't fasten the poem.
+            Below are some popular websites measured our Google PageSpeed Insights Monitoring service
           </h3>
+          <table v-if="loaded"
+                 class="table table-bordered table-centered white-text-custom"
+          >
+            <thead class="table-head">
+            <tr>
+              <th colspan="9" class=" text-center">
+                Mobile <i class="fa fa-mobile" aria-hidden="true"></i>
+              </th>
+              <th colspan="8" class=" text-center">
+                Desktop <i class="fa fa-desktop " aria-hidden="true"></i>
+              </th>
+            </tr>
+            <tr>
+              <th class="">URL</th>
+              <th class="text-center">Score</th>
+              <th class=""><span class="small">FCP</span></th>
+              <th class=""><span class="small">SI</span></th>
+              <th class=""><span class="small">TTI</span></th>
+              <th class=""><span class="small">TBT</span></th>
+              <th class=""><span class="small">CLS</span></th>
+              <th class=""><span class="small">TTFB</span></th>
+              <th class=""><span class="small">TBW</span></th>
+              <th class="text-center">Score</th>
+              <th class=""><span class="small">FCP</span></th>
+              <th class=""><span class="small">SI</span></th>
+              <th class=""><span class="small">TTI</span></th>
+              <th class=""><span class="small">TBT</span></th>
+              <th class=""><span class="small">CLS</span></th>
+              <th class=""><span class="small">TTFB</span></th>
+              <th class=""><span class="small">TBW</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="example in examples" :key="example.id">
+              <td>{{ example.url }}</td>
+              <td class="text-center">
+                <strong :style="{ color: getColor(example.score_mobile, 'score') }" >{{ example.score_mobile }}</strong>
+                <span :style="{ color: getColor(example.score_delta_mobile, 'score_delta') }" >&nbsp;<span v-if=" example.score_delta_mobile > 0">+</span>{{ example.score_delta_mobile }}</span>
+              </td>
+              <td :style="{ color: getColor(example.fcp_mobile, 'fcp') }" class="text-center">{{ example.fcp_mobile | normalize(1000) }}</td>
+              <td :style="{ color: getColor(example.si_mobile, 'si') }" class="text-center ">{{ example.si_mobile | normalize(1000) }}</td>
+              <td :style="{ color: getColor(example.tti_mobile, 'tti') }" class="text-center">{{ example.tti_mobile | normalize(1000) }}</td>
+              <td :style="{ color: getColor(example.tbt_mobile, 'tbt') }"  class="text-center">{{ example.tbt_mobile | normalize(1000) }}</td>
+              <td :style="{ color: getColor(example.cls_mobile, 'cls') }"  class="text-center">{{ example.cls_mobile | normalize(1000)}}</td>
+              <td :style="{ color: getColor(example.ttfb_mobile, 'ttfb') }" class="text-center">{{ example.ttfb_mobile | normalize(1000) }}</td>
+              <td class="text-center">{{ example.tbw_mobile | prettyBytes }}</td>
+              <td class="text-center">
+                <strong :style="{ color: getColor(example.score_desktop, 'score') }" >{{ example.score_desktop }}</strong>
+                <span :style="{ color: getColor(example.score_delta_desktop, 'score_delta') }" >&nbsp;<span v-if=" example.score_delta_desktop > 0">+</span>{{ example.score_delta_desktop }}</span>
+              </td>
+              <td :style="{ color: getColor(example.fcp_desktop, 'fcp') }" class="text-center">{{ example.fcp_desktop | normalize(1000) }}</td>
+              <td :style="{ color: getColor(example.si_desktop, 'si') }" class="text-center">{{ example.si_desktop  | normalize(1000) }}</td>
+              <td :style="{ color: getColor(example.tti_desktop, 'tti') }" class="text-center">{{ example.tti_desktop | normalize(1000) }}</td>
+              <td :style="{ color: getColor(example.tbt_desktop, 'tbt') }" class="text-center">{{ example.tbt_desktop | normalize(1000) }}</td>
+              <td :style="{ color: getColor(example.cls_desktop, 'cls') }" class="text-center">{{ example.cls_desktop | normalize(1000)}}</td>
+              <td :style="{ color: getColor(example.ttfb_desktop, 'ttfb') }" class="text-center">{{ example.ttfb_desktop| normalize(1000) }}</td>
+              <td class="text-center">{{ example.tbw_desktop | prettyBytes }}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
         <div class="content__inner">
           <h2 class="content__title">Comparisons</h2>
@@ -322,6 +382,7 @@ import Vue from "vue";
 export default {
   data() {
     return {
+      activeSection: -1,
       visible: false,
       visibleBackBtn: false,
       blobs: [],
@@ -331,16 +392,36 @@ export default {
       form: {
         email: "",
         password: ""
-      }
+      },
+      examples: {
+        data: {
+          score_desktop: null
+        }
+      },
+      loaded: false,
     };
+  },
+  watch: {
+    activeSection: function (value) {
+      this.DOM.contentInner.forEach((element, pos) => {
+        if (pos === value) {
+          element.style.pointerEvents = "auto";
+        } else {
+          element.style.pointerEvents = "none";
+        }
+      });
+    }
   },
   methods: {
     ...mapActions({
-      signIn: "auth/signIn"
+      signIn: "auth/signIn",
+      requestPublicExamples: "examples/requestPublicExamples"
     }),
     open: function(pos) {
       this.isOpen = true;
       this.visibleBackBtn = true;
+      this.activeSection = pos;
+
       anime({
         targets: this.DOM.links.map(link => link.querySelectorAll("span")),
         delay: (t, i) => anime.random(0, 300),
@@ -372,13 +453,13 @@ export default {
         });
       });
       this.blobs.filter(el => el != currentBlob).forEach(blob => blob.hide());
-      this.DOM.content.style.pointerEvents = "all";
+      //this.DOM.content.style.pointerEvents = "all";
     },
     closed: function() {
-      console.log('worked!');
       if (!this.isOpen) return;
       this.isOpen = false;
       this.visibleBackBtn = false;
+      this.activeSection = -1;
       const contentInner = this.DOM.contentInner[this.current];
       anime({
         targets: [
@@ -424,9 +505,118 @@ export default {
       } else {
         this.signIn(this.form);
       }
+    },
+    getColor: function(value, type) {
+      switch (type) {
+        case "score":
+          switch (true) {
+            case value >= 90 && value <= 100:
+              return "green";
+            case value >= 50 && value <= 89:
+              return "orange";
+            case value >= 0 && value <= 49:
+              return "red";
+          }
+          break;
+        case "fcp":
+          switch (true) {
+            case value > 3999:
+              return "red";
+            case value >= 2000 && value <= 3999:
+              return "orange";
+            case value >= 0 && value <= 1999:
+              return "green";
+          }
+          break;
+        case "si":
+          switch (true) {
+            case value > 5800:
+              return "red";
+            case value >= 4400 && value <= 5799:
+              return "orange";
+            case value >= 0 && value <= 4399:
+              return "green";
+          }
+          break;
+        case "tti":
+          switch (true) {
+            case value > 7300:
+              return "red";
+            case value >= 3900 && value <= 7299:
+              return "orange";
+            case value >= 0 && value <= 3899:
+              return "green";
+          }
+          break;
+        case "tbt":
+          switch (true) {
+            case value > 600:
+              return "red";
+            case value >= 300 && value <= 599:
+              return "orange";
+            case value >= 0 && value <= 299:
+              return "green";
+          }
+          break;
+        case "cls":
+          switch (true) {
+            case value > 0.25:
+              return "red";
+            case value >= 0.1 && value <= 0.2499:
+              return "orange";
+            case value >= 0 && value <= 0.099:
+              return "green";
+          }
+          break;
+        case "ttfb":
+          switch (true) {
+            case value >= 0 && value <= 250:
+              return "green";
+            case value >= 251 && value <= 500:
+              return "orange";
+            case value >= 501:
+              return "red";
+          }
+          break;
+        case "score_delta":
+          switch (true) {
+            case value === 0:
+              return "";
+            case value > 0:
+              return "green";
+            case value < 0:
+              return "red";
+          }
+          break;
+      }
     }
   },
-  mounted() {
+  computed: {
+    ...mapGetters({
+      getPublicExamples: "examples/getPublicExamples"
+    })
+  },
+  filters: {
+    normalize: function(value, modifier) {
+      if (!value) {
+        return 0;
+      }
+
+      if (!modifier) {
+        return 0;
+      }
+
+      if (value > 1) {
+        value = value / modifier;
+      }
+
+      return value.toFixed(2);
+    }
+  },
+  async mounted() {
+    await this.requestPublicExamples();
+    this.examples = this.getPublicExamples;
+    this.loaded = true;
     setTimeout(() => document.documentElement.classList.remove("md-theme-default"), 60);
     setTimeout(() => document.body.classList.add("render"), 60);
 
@@ -459,7 +649,7 @@ export default {
         this.descriptions = [];
         this.layers = Array.from(this.DOM.el.querySelectorAll("path"), t => {
           t.style.transformOrigin = `${this.rect.left +
-          this.rect.width / 2}px ${this.rect.top + this.rect.height / 2}px`;
+            this.rect.width / 2}px ${this.rect.top + this.rect.height / 2}px`;
           t.style.opacity = 0;
           this.descriptions.push(t.getAttribute("d"));
           return t;
@@ -761,7 +951,7 @@ main {
 }
 
 .content__title {
-  font-size: 8vw;
+  font-size: 6vw;
   margin: 0;
   color: var(--color-title);
   text-transform: lowercase;
@@ -772,7 +962,7 @@ main {
 }
 
 .content__subtitle {
-  max-width: 300px;
+  max-width: 900px;
   text-align: center;
   font-size: 1.25em;
   font-weight: 400;
