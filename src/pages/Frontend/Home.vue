@@ -263,7 +263,7 @@
               <template v-for="example in examples">
                 <div
                   :key="example.id"
-                  v-on:click="openExample"
+                  v-on:click="openExample(example)"
                   class="s_item"
                   style="background-image: url(https://webdev.imgix.net/images/lockup.svg)"
                 ></div>
@@ -374,6 +374,7 @@
       requestPublicExamples: "examples/requestPublicExamples"
     }),
     openExample: function(item) {
+      console.log(item);
       Vue.swal({
         html: this.toHtml(item),
         position: "top-start",
@@ -404,7 +405,7 @@
                     <div class="custom--card">
                         <h3>Score</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.score_desktop, 'score')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -414,12 +415,12 @@
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="number">${item.score_desktop}</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.score_mobile, 'score')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -428,8 +429,8 @@
                                 </div>
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
-                                      <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="label">Mobile</div>
+                                      <div class="number">${item.score_mobile}</div>
                                     </div>
                                  </div>
                         </div>
@@ -439,7 +440,7 @@
                     <div class="custom--card">
                         <h3>First contentful paint</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.fcp_desktop, 'fcp')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -449,12 +450,12 @@
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="number">${this.normalize(item.fcp_desktop, 1000) }s</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.fcp_desktop, 'fcp')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -463,8 +464,8 @@
                                 </div>
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
-                                      <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="label">Mobile</div>
+                                      <div class="number">${this.normalize(item.fcp_mobile, 1000) }s</div>
                                     </div>
                                  </div>
                         </div>
@@ -474,9 +475,9 @@
              <div class="md-layout">
                 <div class="md-layout-item">
                     <div class="custom--card">
-                        <h3>Score</h3>
+                        <h3>Speed index</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.si_desktop, 'si')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -486,12 +487,12 @@
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="number">${this.normalize(item.si_desktop, 1000)}s</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.si_mobile, 'si')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -500,18 +501,18 @@
                                 </div>
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
-                                      <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="label">Mobile</div>
+                                      <div class="number">${this.normalize(item.si_mobile, 1000)}s</div>
                                     </div>
-                                 </div>
+                                </div>
                         </div>
                     </div>
                 </div>
                 <div class="md-layout-item">
                     <div class="custom--card">
-                        <h3>First contentful paint</h3>
+                        <h3>Time to interactive</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.tti_desktop, 'tti')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -521,12 +522,12 @@
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="number">${this.normalize(item.tti_desktop, 1000)}s</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.tti_mobile, 'tti')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -535,8 +536,8 @@
                                 </div>
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
-                                      <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="label">Mobile</div>
+                                      <div class="number">${this.normalize(item.tti_mobile, 1000)}s</div>
                                     </div>
                                  </div>
                         </div>
@@ -546,9 +547,9 @@
              <div class="md-layout">
                 <div class="md-layout-item">
                     <div class="custom--card">
-                        <h3>Score</h3>
+                        <h3>Total blocking time</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.tbt_desktop,'tbt')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -558,12 +559,12 @@
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="number">${this.normalize(item.tbt_desktop, 1000)}s</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.tbt_mobile,'tbt')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -572,8 +573,8 @@
                                 </div>
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
-                                      <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="label">Mobile</div>
+                                      <div class="number">${this.normalize(item.tbt_mobile, 1000)}s</div>
                                     </div>
                                  </div>
                         </div>
@@ -581,9 +582,9 @@
                 </div>
                 <div class="md-layout-item">
                     <div class="custom--card">
-                        <h3>First contentful paint</h3>
+                        <h3>Content layout shift</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.cls_desktop,'cls')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -593,12 +594,12 @@
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="number">${this.normalize(item.cls_desktop, 1000)}</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.cls_mobile,'cls')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -607,8 +608,8 @@
                                 </div>
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
-                                      <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="label">Mobile</div>
+                                      <div class="number">${this.normalize(item.cls_mobile, 1000)}</div>
                                     </div>
                                  </div>
                         </div>
@@ -618,9 +619,9 @@
              <div class="md-layout">
                 <div class="md-layout-item">
                     <div class="custom--card">
-                        <h3>Score</h3>
+                        <h3>Time to first byte</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.ttfb_desktop,'ttfb')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -630,12 +631,12 @@
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="number">${this.normalize(item.ttfb_desktop, 1000)}s</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.ttfb_mobile,'ttfb')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -644,51 +645,16 @@
                                 </div>
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
-                                      <div class="label">Desktop</div>
-                                      <div class="number">80</div>
-                                    </div>
-                                 </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="md-layout-item">
-                    <div class="custom--card">
-                        <h3>First contentful paint</h3>
-                        <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
-                                <div class="slice-colors min-scaled">
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                </div>
-                                <div class="needle min-scaled"></div>
-                                    <div class="gauge-center">
-                                      <div class="label">Desktop</div>
-                                      <div class="number">80</div>
-                                    </div>
-                                 </div>
-                        </div>
-                        <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio3 min-scaled">
-                                <div class="slice-colors min-scaled">
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                </div>
-                                <div class="needle min-scaled"></div>
-                                    <div class="gauge-center">
-                                      <div class="label">Desktop</div>
-                                      <div class="number">80</div>
+                                      <div class="label">Mobile</div>
+                                      <div class="number">${this.normalize(item.ttfb_mobile, 1000)}s</div>
                                     </div>
                                  </div>
                         </div>
                     </div>
                 </div>
+
             </div>
           </div>
-
       `;
     },
     open: function(pos) {
@@ -790,71 +756,85 @@
         case "score":
           switch (true) {
             case value >= 90 && value <= 100:
-              return "green";
-            case value >= 50 && value <= 89:
-              return "orange";
+              return "4";
+            case value >= 70 && value <= 89:
+              return "3";
+            case value >= 50 && value <= 69:
+              return "2";
             case value >= 0 && value <= 49:
-              return "red";
+              return "1";
           }
           break;
         case "fcp":
           switch (true) {
             case value > 3999:
-              return "red";
-            case value >= 2000 && value <= 3999:
-              return "orange";
+              return "1";
+            case value >= 3000 && value <= 3999:
+              return "2";
+            case value >= 2000 && value <= 2999:
+              return "3";
             case value >= 0 && value <= 1999:
-              return "green";
+              return "4";
           }
           break;
         case "si":
           switch (true) {
             case value > 5800:
-              return "red";
-            case value >= 4400 && value <= 5799:
-              return "orange";
+              return "1";
+            case value >= 5200 && value <= 5799:
+              return "2";
+            case value >= 4400 && value <= 5199:
+              return "3";
             case value >= 0 && value <= 4399:
-              return "green";
+              return "4";
           }
           break;
         case "tti":
           switch (true) {
             case value > 7300:
-              return "red";
-            case value >= 3900 && value <= 7299:
-              return "orange";
+              return "1";
+            case value >= 5000 && value <= 7299:
+              return "2";
+            case value >= 3900 && value <= 4999:
+              return "3";
             case value >= 0 && value <= 3899:
-              return "green";
+              return "4";
           }
           break;
         case "tbt":
           switch (true) {
             case value > 600:
-              return "red";
-            case value >= 300 && value <= 599:
-              return "orange";
+              return "1";
+            case value >= 400 && value <= 599:
+              return "2";
+            case value >= 300 && value <= 399:
+              return "3";
             case value >= 0 && value <= 299:
-              return "green";
+              return "4";
           }
           break;
         case "cls":
           switch (true) {
             case value > 0.25:
-              return "red";
-            case value >= 0.1 && value <= 0.2499:
-              return "orange";
+              return "1";
+            case value >= 0.199 && value <= 0.2499:
+              return "2";
+            case value >= 0.1 && value <= 0.199:
+              return "3";
             case value >= 0 && value <= 0.099:
-              return "green";
+              return "4";
           }
           break;
         case "ttfb":
           switch (true) {
             case value >= 0 && value <= 250:
-              return "green";
-            case value >= 251 && value <= 500:
-              return "orange";
+              return "4";
+            case value >= 251 && value <= 399:
+              return "3";
+            case value >= 400 && value <= 500:
+              return "2";
             case value >= 501:
-              return "red";
+              return "1";
           }
           break;
         case "score_delta":
@@ -868,6 +848,21 @@
           }
           break;
       }
+    },
+    normalize: function (value, modifier) {
+      if (!value) {
+        return 0;
+      }
+
+      if (!modifier) {
+        return 0;
+      }
+
+      if (value > 1) {
+        value = value / modifier;
+      }
+
+      return value.toFixed(2);
     }
   },
   computed: {
