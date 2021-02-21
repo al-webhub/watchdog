@@ -1140,18 +1140,17 @@
     border: 50px solid transparent;
   }
 
-
   .four .slice-colors .st.slice-item:nth-child(2) {
-    border-top: 50px #f1c40f solid;
-    border-right: 50px #f1c40f solid;
-    background-color:#1eaa59;
+    border-top: 50px #e67e22 solid;
+    border-right: 50px #e67e22 solid;
+    background-color:#E84C3D;
   }
 
   .four .slice-colors .st.slice-item:nth-child(4) {
     left:50%;
-    border-bottom: 50px #E84C3D solid;
-    border-right: 50px #E84C3D solid;
-    background-color:#e67e22;
+    border-bottom: 50px #1eaa59 solid;
+    border-right: 50px #1eaa59 solid;
+    background-color:#f1c40f;
   }
 
 
