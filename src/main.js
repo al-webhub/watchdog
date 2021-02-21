@@ -12,6 +12,8 @@ import VueTypedJs from 'vue-typed-js';
 import Particles from "particles.vue";
 import anime from "animejs";
 
+
+
 // router setup
 import routes from "@/routes/routes";
 import store from "@/store/store";
@@ -104,8 +106,6 @@ router.beforeEach((to, from, next) => {
 Vue.prototype.$Chartist = Chartist;
 Vue.prototype.$anime = anime;
 
-
-
 Vue.use(VueRouter);
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
@@ -118,7 +118,6 @@ Vue.use(VueParticles);
 Vue.use(VuePageTransition);
 Vue.use(VueTypedJs);
 Vue.use(Particles);
-
 
 const TRANSLATIONS = {
   en: ENGLISH_TRANSLATIONS,

@@ -4,7 +4,9 @@
       <div class="content_landing content--fixed">
         <header class="codrops-header">
           <div class="codrops-links">
-            <a v-if="visibleBackBtn" v-on:click="closed" ><md-icon class="text-white">keyboard_backspace</md-icon></a>
+            <a v-if="visibleBackBtn" v-on:click="closed"
+              ><md-icon class="text-white">keyboard_backspace</md-icon></a
+            >
           </div>
           <h2 class="codrops-header__title " v-on:click="closed">Watchdog</h2>
         </header>
@@ -236,94 +238,49 @@
       </div>
       <div class="content_landing content--reveal">
         <div class="content__inner">
-          <h2 class="content__title">Analysis</h2>
+          <h2 class="content__title">Home</h2>
           <img src="" alt="" />
           <h3 class="content__subtitle">
-            The rapid handle injects into the bashful lift.
+          </h3>
+
+        </div>
+        <div class="content__inner">
+          <h2 class="content__title">About</h2>
+          <h3 class="content__subtitle">
+            This page is under development!
+          </h3>
+        </div>
+        <div class="content__inner examples_screen">
+          <div class="headlines example_headlines">
+            <h2 class="content__title example_headline">Examples</h2>
+            <h3 class="content__subtitle example_subheadline">
+              Below are some popular websites measured our Google PageSpeed
+              Insights Monitoring service
+            </h3>
+          </div>
+          <div class="examples_content">
+            <div class="sub_examples_wrapper">
+              <template v-for="example in examples">
+                <div
+                  :key="example.id"
+                  v-on:click="openExample"
+                  class="s_item"
+                  style="background-image: url(https://webdev.imgix.net/images/lockup.svg)"
+                ></div>
+              </template>
+            </div>
+          </div>
+        </div>
+        <div class="content__inner">
+          <h2 class="content__title">Features</h2>
+          <h3 class="content__subtitle">
+            This section is under development!
           </h3>
         </div>
         <div class="content__inner">
-          <h2 class="content__title">Models</h2>
+          <h2 class="content__title">Prices</h2>
           <h3 class="content__subtitle">
-            The sympathetic picture adds into the freezing gift.
-          </h3>
-        </div>
-        <div class="content__inner examples screen">
-          <h2 class="content__title">Examples</h2>
-          <h3 class="content__subtitle">
-            Below are some popular websites measured our Google PageSpeed Insights Monitoring service
-          </h3>
-          <table v-if="loaded"
-                 class="table table-bordered table-centered white-text-custom"
-          >
-            <thead class="table-head">
-            <tr>
-              <th colspan="9" class=" text-center">
-                Mobile <i class="fa fa-mobile" aria-hidden="true"></i>
-              </th>
-              <th colspan="8" class=" text-center">
-                Desktop <i class="fa fa-desktop " aria-hidden="true"></i>
-              </th>
-            </tr>
-            <tr>
-              <th class="">URL</th>
-              <th class="text-center">Score</th>
-              <th class=""><span class="small">FCP</span></th>
-              <th class=""><span class="small">SI</span></th>
-              <th class=""><span class="small">TTI</span></th>
-              <th class=""><span class="small">TBT</span></th>
-              <th class=""><span class="small">CLS</span></th>
-              <th class=""><span class="small">TTFB</span></th>
-              <th class=""><span class="small">TBW</span></th>
-              <th class="text-center">Score</th>
-              <th class=""><span class="small">FCP</span></th>
-              <th class=""><span class="small">SI</span></th>
-              <th class=""><span class="small">TTI</span></th>
-              <th class=""><span class="small">TBT</span></th>
-              <th class=""><span class="small">CLS</span></th>
-              <th class=""><span class="small">TTFB</span></th>
-              <th class=""><span class="small">TBW</span></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="example in examples" :key="example.id">
-              <td>{{ example.url }}</td>
-              <td class="text-center">
-                <strong :style="{ color: getColor(example.score_mobile, 'score') }" >{{ example.score_mobile }}</strong>
-                <span :style="{ color: getColor(example.score_delta_mobile, 'score_delta') }" >&nbsp;<span v-if=" example.score_delta_mobile > 0">+</span>{{ example.score_delta_mobile }}</span>
-              </td>
-              <td :style="{ color: getColor(example.fcp_mobile, 'fcp') }" class="text-center">{{ example.fcp_mobile | normalize(1000) }}</td>
-              <td :style="{ color: getColor(example.si_mobile, 'si') }" class="text-center ">{{ example.si_mobile | normalize(1000) }}</td>
-              <td :style="{ color: getColor(example.tti_mobile, 'tti') }" class="text-center">{{ example.tti_mobile | normalize(1000) }}</td>
-              <td :style="{ color: getColor(example.tbt_mobile, 'tbt') }"  class="text-center">{{ example.tbt_mobile | normalize(1000) }}</td>
-              <td :style="{ color: getColor(example.cls_mobile, 'cls') }"  class="text-center">{{ example.cls_mobile | normalize(1000)}}</td>
-              <td :style="{ color: getColor(example.ttfb_mobile, 'ttfb') }" class="text-center">{{ example.ttfb_mobile | normalize(1000) }}</td>
-              <td class="text-center">{{ example.tbw_mobile | prettyBytes }}</td>
-              <td class="text-center">
-                <strong :style="{ color: getColor(example.score_desktop, 'score') }" >{{ example.score_desktop }}</strong>
-                <span :style="{ color: getColor(example.score_delta_desktop, 'score_delta') }" >&nbsp;<span v-if=" example.score_delta_desktop > 0">+</span>{{ example.score_delta_desktop }}</span>
-              </td>
-              <td :style="{ color: getColor(example.fcp_desktop, 'fcp') }" class="text-center">{{ example.fcp_desktop | normalize(1000) }}</td>
-              <td :style="{ color: getColor(example.si_desktop, 'si') }" class="text-center">{{ example.si_desktop  | normalize(1000) }}</td>
-              <td :style="{ color: getColor(example.tti_desktop, 'tti') }" class="text-center">{{ example.tti_desktop | normalize(1000) }}</td>
-              <td :style="{ color: getColor(example.tbt_desktop, 'tbt') }" class="text-center">{{ example.tbt_desktop | normalize(1000) }}</td>
-              <td :style="{ color: getColor(example.cls_desktop, 'cls') }" class="text-center">{{ example.cls_desktop | normalize(1000)}}</td>
-              <td :style="{ color: getColor(example.ttfb_desktop, 'ttfb') }" class="text-center">{{ example.ttfb_desktop| normalize(1000) }}</td>
-              <td class="text-center">{{ example.tbw_desktop | prettyBytes }}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="content__inner">
-          <h2 class="content__title">Comparisons</h2>
-          <h3 class="content__subtitle">
-            The melancholy building really paused the relation.
-          </h3>
-        </div>
-        <div class="content__inner">
-          <h2 class="content__title">Specimens</h2>
-          <h3 class="content__subtitle">
-            The gabby priority handles into the deadly dot.
+             This section is under development!
           </h3>
         </div>
         <div class="content__inner login-screen">
@@ -338,9 +295,9 @@
                     <md-field>
                       <label>{{ $t(`auth.email`) }}</label>
                       <md-input
-                              v-model="form.email"
-                              type="email"
-                              class="caret_color"
+                        v-model="form.email"
+                        type="email"
+                        class="caret_color"
                       ></md-input>
                     </md-field>
                   </div>
@@ -348,18 +305,18 @@
                     <md-field>
                       <label>{{ $t(`auth.password`) }}</label>
                       <md-input
-                              class="caret_color front-login"
-                              v-model="form.password"
-                              type="password"
+                        class="caret_color front-login"
+                        v-model="form.password"
+                        type="password"
                       ></md-input>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-size-100 ">
                     <md-button
-                            type="submit"
-                            style="background-color: transparent !important;border: 1px solid white;"
-                            class="md-raised   active"
-                    >{{ $t(`auth.login_button_text`) }}</md-button
+                      type="submit"
+                      style="background-color: transparent !important;border: 1px solid white;"
+                      class="md-raised   active"
+                      >{{ $t(`auth.login_button_text`) }}</md-button
                     >
                   </div>
                 </div>
@@ -373,15 +330,14 @@
 </template>
 
 <script>
-import anime from "animejs";
-import charming from "charming";
-import { mapActions } from "vuex";
-import { mapGetters } from "vuex";
-import Vue from "vue";
-
-export default {
+  import anime from "animejs";
+  import charming from "charming";
+  import {mapActions, mapGetters} from "vuex";
+  import Vue from "vue";
+  export default {
   data() {
     return {
+      value: 30,
       activeSection: -1,
       visible: false,
       visibleBackBtn: false,
@@ -398,11 +354,11 @@ export default {
           score_desktop: null
         }
       },
-      loaded: false,
+      loaded: false
     };
   },
   watch: {
-    activeSection: function (value) {
+    activeSection: function(value) {
       this.DOM.contentInner.forEach((element, pos) => {
         if (pos === value) {
           element.style.pointerEvents = "auto";
@@ -417,6 +373,324 @@ export default {
       signIn: "auth/signIn",
       requestPublicExamples: "examples/requestPublicExamples"
     }),
+    openExample: function(item) {
+      Vue.swal({
+        html: this.toHtml(item),
+        position: "top-start",
+        showClass: {
+          popup: `
+              animate__animated
+              animate__fadeInLeft
+              animate__faster`
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutLeft
+            animate__faster
+          `
+        },
+        grow: "column",
+        width: "35%",
+        showConfirmButton: false,
+        showCloseButton: true
+      });
+    },
+    toHtml: function(item) {
+      return `
+          <div class="modal_wrapper">
+            <div class="md-layout">
+                <div class="md-layout-item">
+                    <div class="custom--card">
+                        <h3>Score</h3>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-layout-item">
+                    <div class="custom--card">
+                        <h3>First contentful paint</h3>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="md-layout">
+                <div class="md-layout-item">
+                    <div class="custom--card">
+                        <h3>Score</h3>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-layout-item">
+                    <div class="custom--card">
+                        <h3>First contentful paint</h3>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="md-layout">
+                <div class="md-layout-item">
+                    <div class="custom--card">
+                        <h3>Score</h3>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-layout-item">
+                    <div class="custom--card">
+                        <h3>First contentful paint</h3>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="md-layout">
+                <div class="md-layout-item">
+                    <div class="custom--card">
+                        <h3>Score</h3>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-layout-item">
+                    <div class="custom--card">
+                        <h3>First contentful paint</h3>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                        <div class="gauge-wrapper min-scaled">
+                            <div class="gauge four rischio3 min-scaled">
+                                <div class="slice-colors min-scaled">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                </div>
+                                <div class="needle min-scaled"></div>
+                                    <div class="gauge-center">
+                                      <div class="label">Desktop</div>
+                                      <div class="number">80</div>
+                                    </div>
+                                 </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+      `;
+    },
     open: function(pos) {
       this.isOpen = true;
       this.visibleBackBtn = true;
@@ -464,7 +738,7 @@ export default {
       anime({
         targets: [
           contentInner.querySelectorAll(".content__title > span"),
-          contentInner.querySelectorAll(".content__subtitle > span"),
+          contentInner.querySelectorAll(".content__subtitle > span")
         ],
         delay: (t, i) => anime.random(0, 300),
         duration: 200,
@@ -492,11 +766,16 @@ export default {
             })
         });
       });
-      this.blobs.filter(el => el != this.blobs[this.current]).forEach(blob => blob.show());
+      this.blobs
+        .filter(el => el != this.blobs[this.current])
+        .forEach(blob => blob.show());
     },
     submit() {
       if (this.form.email.length === 0 || this.form.password.length === 0) {
-        const message = '<span style="color:white">'+this.$t(`auth.errors.empty`)+'</span>';
+        const message =
+          '<span style="color:white">' +
+          this.$t(`auth.errors.empty`) +
+          "</span>";
         Vue.swal({
           title: message,
           background: "transparent",
@@ -617,7 +896,10 @@ export default {
     await this.requestPublicExamples();
     this.examples = this.getPublicExamples;
     this.loaded = true;
-    setTimeout(() => document.documentElement.classList.remove("md-theme-default"), 60);
+    setTimeout(
+      () => document.documentElement.classList.remove("md-theme-default"),
+      60
+    );
     setTimeout(() => document.body.classList.add("render"), 60);
 
     function debounce(func, wait, immediate) {
@@ -656,16 +938,16 @@ export default {
         });
 
         window.addEventListener(
-                "resize",
-                debounce(() => {
-                  this.rect = this.DOM.el.getBoundingClientRect();
-                  this.layers.forEach(
-                          layer =>
-                                  (layer.style.transformOrigin = `${this.rect.left +
-                                  this.rect.width / 2}px ${this.rect.top +
-                                  this.rect.height / 2}px`)
-                  );
-                }, 20)
+          "resize",
+          debounce(() => {
+            this.rect = this.DOM.el.getBoundingClientRect();
+            this.layers.forEach(
+              layer =>
+                (layer.style.transformOrigin = `${this.rect.left +
+                  this.rect.width / 2}px ${this.rect.top +
+                  this.rect.height / 2}px`)
+            );
+          }, 20)
         );
       }
       intro() {
@@ -759,7 +1041,9 @@ export default {
       }
     );
 
-    this.DOM.links = Array.from(document.querySelectorAll(".menu > .menu__item"));
+    this.DOM.links = Array.from(
+      document.querySelectorAll(".menu > .menu__item")
+    );
     this.DOM.links.forEach((link, pos) => {
       link.style.pointerEvents = "none";
       charming(link);
@@ -783,7 +1067,168 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+
+  .gauge-wrapper {
+    display: inline-block !important;
+    max-width: 150px;
+    /*width: auto;*/
+    /*margin: 0 auto;*/
+  }
+
+  .gauge {
+    background: #e7e7e7;
+    box-shadow: 0 -3px 6px 2px rgba(0, 0, 0, 0.50);
+    width: 200px;
+    height: 100px;
+    border-radius: 100px 100px 0 0!important;
+    position: relative;
+    overflow: hidden;
+  }
+  .gauge.min-scaled {
+    transform: scale(0.5);
+  }
+
+  .gauge-center {
+    content: '';
+    color: #fff;
+    width: 60%;
+    height: 60%;
+    background: #15222E;
+    border-radius: 100px 100px 0 0!important;
+    position: absolute;
+    box-shadow: 0 -13px 15px -10px rgba(0, 0, 0, 0.28);
+    right: 21%;
+    bottom: 0;
+    z-index:10;
+  }
+
+  .gauge-center .label, .gauge-center .number {display:block; width: 100%; text-align: center; border:0!important;}
+  .gauge-center .label {font-size:0.75em; opacity:0.6; margin:1.1em 0 0.3em 0;}
+  .gauge-center .number {font-size:1.2em;}
+
+  .needle {
+    width: 80px;
+    height: 7px;
+    background: #15222E;
+    border-bottom-left-radius: 100%!important;
+    border-bottom-right-radius: 5px!important;
+    border-top-left-radius: 100%!important;
+    border-top-right-radius: 5px!important;
+    position: absolute;
+    bottom: -2px;
+    left: 20px;
+    transform-origin: 100% 4px;
+    transform: rotate(0deg);
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.38);
+    display:none;
+    z-index:9;
+  }
+
+  .four.rischio1 .needle {animation: fourspeed1 2s 1 both; animation-delay: 1s; display:block;}
+  .four.rischio2 .needle {animation: fourspeed2 2s 1 both; animation-delay: 1s; display:block;}
+  .four.rischio3 .needle {animation: fourspeed3 2s 1 both; animation-delay: 1s; display:block;}
+  .four.rischio4 .needle {animation: fourspeed4 2s 1 both; animation-delay: 1s; display:block;}
+
+  .slice-colors {height:100%;}
+
+  .slice-colors .st {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+  }
+
+
+  .four .slice-colors .st.slice-item:nth-child(2) {
+    border-top: 50px #f1c40f solid;
+    border-right: 50px #f1c40f solid;
+    background-color:#1eaa59;
+  }
+
+  .four .slice-colors .st.slice-item:nth-child(4) {
+    left:50%;
+    border-bottom: 50px #E84C3D solid;
+    border-right: 50px #E84C3D solid;
+    background-color:#e67e22;
+  }
+
+
+  @-webkit-keyframes fourspeed1 {
+    0% {transform: rotate(0);}
+    100% {transform: rotate(16deg);}
+  }
+
+  @-webkit-keyframes fourspeed2 {
+    0% {transform: rotate(0);}
+    100% {transform: rotate(65deg);}
+  }
+
+  @-webkit-keyframes fourspeed3 {
+    0% {transform: rotate(0);}
+    100% {transform: rotate(115deg);}
+  }
+
+  @-webkit-keyframes fourspeed4 {
+    0% {transform: rotate(0);}
+    100% {transform: rotate(164deg);}
+  }
+
+
+.custom--card {
+
+  white-space: nowrap;
+  margin-top: 20px;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  padding: 14px 14px 14px 14px;
+  cursor: pointer;
+}
+
+.custom--card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.custom--card h3 {
+  font-weight: 600;
+}
+
+.custom--card img {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  max-height: 120px;
+}
+
+.table-centered {
+  margin: 0 auto;
+}
+
+.flat-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+}
+
+table,
+th,
+td {
+  border: 1px solid white !important;
+}
+
+.table-footer-text {
+  width: 55vw;
+  margin: 1rem auto 0 auto;
+}
+
 .md-toggle-password {
   color: white !important;
 }
@@ -934,15 +1379,42 @@ main {
   position: absolute;
   left: 0;
   top: 0;
-
   width: 100%;
   height: 100%;
   display: grid;
   align-items: center;
   justify-content: center;
   justify-items: center;
-
   opacity: 0;
+}
+
+.examples_screen {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1.5fr;
+  /*height: 100vh !important;*/
+}
+
+.sub_examples_wrapper {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  column-gap: 0.75rem;
+  row-gap: 0.75rem;
+}
+
+.s_item {
+  /*border: 1px solid white;*/
+  width: 150px;
+  height: 150px;
+  background-size: contain;
+  background: no-repeat center;
+}
+
+.examples_table {
+  background-color: white;
 }
 
 .js .content__inner {
@@ -1197,6 +1669,41 @@ main {
   .message {
     display: block;
   }
+
+  .examples_screen {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.25fr 0.75fr;
+  }
+
+  .sub_examples_wrapper {
+    margin-top: 5rem;
+    display: inline-grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .s_item {
+    gap: 10px;
+    width: 200px;
+    height: 200px;
+    background-size: contain;
+    background: no-repeat center;
+  }
+
+  .example_subheadline {
+    margin-top: 2rem;
+    word-wrap: break-word;
+    white-space: -moz-pre-wrap;
+    white-space: pre-wrap;
+  }
+
+  .example_headline {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 4rem;
+  }
+
   .content_landing {
     flex-direction: column;
     height: auto;
@@ -1234,7 +1741,7 @@ main {
     align-items: center;
   }
   .content__inner {
-    margin-top: 12em;
+    margin-top: 3em;
   }
   .content__close {
     top: 15em;
