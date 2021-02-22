@@ -258,15 +258,15 @@
               Insights Monitoring service
             </h3>
           </div>
-          <div class="examples_content">
-            <div class="sub_examples_wrapper">
+          <div  class="examples_content">
+            <div v-if="loaded" class="sub_examples_wrapper">
               <template v-for="example in examples">
-                <div
-                  :key="example.id"
-                  v-on:click="openExample(example)"
-                  class="s_item"
-                  style="background-image: url(https://webdev.imgix.net/images/lockup.svg)"
-                ></div>
+                <div v-bind:key="example.id"
+                     v-on:click="openExample(example)"
+                     class="s_item"
+                >
+                  <img :src="require(`@/assets/img/example_logos/` + example.image)" alt=""  />
+                </div>
               </template>
             </div>
           </div>
@@ -374,7 +374,6 @@
       requestPublicExamples: "examples/requestPublicExamples"
     }),
     openExample: function(item) {
-      console.log(item);
       Vue.swal({
         html: this.toHtml(item),
         position: "top-start",
@@ -870,31 +869,11 @@
       getPublicExamples: "examples/getPublicExamples"
     })
   },
-  filters: {
-    normalize: function(value, modifier) {
-      if (!value) {
-        return 0;
-      }
-
-      if (!modifier) {
-        return 0;
-      }
-
-      if (value > 1) {
-        value = value / modifier;
-      }
-
-      return value.toFixed(2);
-    }
-  },
   async mounted() {
     await this.requestPublicExamples();
     this.examples = this.getPublicExamples;
     this.loaded = true;
-    setTimeout(
-      () => document.documentElement.classList.remove("md-theme-default"),
-      60
-    );
+    setTimeout(() => document.documentElement.classList.remove("md-theme-default"), 60);
     setTimeout(() => document.body.classList.add("render"), 60);
 
     function debounce(func, wait, immediate) {
@@ -1063,12 +1042,10 @@
 </script>
 
 <style>
-
+  /* Examples section gauges start */
   .gauge-wrapper {
     display: inline-block !important;
     max-width: 150px;
-    /*width: auto;*/
-    /*margin: 0 auto;*/
   }
 
   .gauge {
@@ -1080,6 +1057,7 @@
     position: relative;
     overflow: hidden;
   }
+
   .gauge.min-scaled {
     transform: scale(0.5);
   }
@@ -1148,7 +1126,6 @@
     background-color:#f1c40f;
   }
 
-
   @-webkit-keyframes fourspeed1 {
     0% {transform: rotate(0);}
     100% {transform: rotate(16deg);}
@@ -1169,9 +1146,10 @@
     100% {transform: rotate(164deg);}
   }
 
+  /* Examples section gauges end */
 
+  /* Examples section cards start */
 .custom--card {
-
   white-space: nowrap;
   margin-top: 20px;
   border-radius: 4px;
@@ -1189,38 +1167,6 @@
 
 .custom--card h3 {
   font-weight: 600;
-}
-
-.custom--card img {
-  position: absolute;
-  top: 20px;
-  right: 15px;
-  max-height: 120px;
-}
-
-.table-centered {
-  margin: 0 auto;
-}
-
-.flat-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-
-  display: inline-block;
-  *display: inline;
-  zoom: 1;
-}
-
-table,
-th,
-td {
-  border: 1px solid white !important;
-}
-
-.table-footer-text {
-  width: 55vw;
-  margin: 1rem auto 0 auto;
 }
 
 .md-toggle-password {
@@ -1400,15 +1346,16 @@ main {
 }
 
 .s_item {
-  /*border: 1px solid white;*/
-  width: 150px;
-  height: 150px;
+  border: 1px solid white;
+  width: 50px;
+  height: 50px;
   background-size: contain;
   background: no-repeat center;
 }
 
-.examples_table {
-  background-color: white;
+.s_item img {
+  width: 50px !important;
+  height: 50px !important;
 }
 
 .js .content__inner {
