@@ -263,9 +263,9 @@
               <template v-for="example in examples">
                 <div v-bind:key="example.id"
                      v-on:click="openExample(example)"
-                     class="s_item"
+                     class="s_item custom--card-small"
                 >
-                  <img :src="require(`@/assets/img/example_logos/` + example.image)" alt=""  />
+                  <img class="example-image" :src="require(`@/assets/img/example_logos/` + example.image)" alt=""  />
                 </div>
               </template>
             </div>
@@ -1153,11 +1153,17 @@
   white-space: nowrap;
   margin-top: 20px;
   border-radius: 4px;
-  background: #fff;
+  background: #fff !important;
   box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
   transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
   padding: 14px 14px 14px 14px;
   cursor: pointer;
+}
+
+.example-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
 }
 
 .custom--card:hover {
@@ -1168,6 +1174,21 @@
 .custom--card h3 {
   font-weight: 600;
 }
+
+  .custom--card-small {
+    white-space: nowrap;
+    border-radius: 4px;
+    background: #fff !important;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    padding: 7px 7px 7px 7px;
+    cursor: pointer;
+  }
+
+  .custom--card-small:hover {
+    transform: scale(1.3);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  }
 
 .md-toggle-password {
   color: white !important;
@@ -1332,30 +1353,25 @@ main {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 0.5fr 1.5fr;
-  /*height: 100vh !important;*/
 }
 
 .sub_examples_wrapper {
   margin-top: 1rem;
   margin-bottom: 1rem;
   display: inline-grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: repeat(14, 1fr);
+  grid-template-rows: repeat(9, 1fr);
   column-gap: 0.75rem;
   row-gap: 0.75rem;
 }
 
 .s_item {
-  border: 1px solid white;
+  /*border: 1px solid white;*/
+
   width: 50px;
   height: 50px;
   background-size: contain;
   background: no-repeat center;
-}
-
-.s_item img {
-  width: 50px !important;
-  height: 50px !important;
 }
 
 .js .content__inner {
@@ -1620,8 +1636,8 @@ main {
   .sub_examples_wrapper {
     margin-top: 5rem;
     display: inline-grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(14, 1fr);
+    grid-template-rows: repeat(9, 1fr);
   }
 
   .s_item {
