@@ -264,6 +264,7 @@
                 <div v-bind:key="example.id"
                      v-on:click="openExample(example)"
                      class="s_item custom--card-small"
+                     :title="example.url"
                 >
                   <img class="example-image" :src="require(`@/assets/img/example_logos/` + example.image)" alt=""  />
                 </div>
