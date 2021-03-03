@@ -12,6 +12,12 @@ const fs = require("fs");
       if (err) throw err;
       console.log("It's saved!");
     });
+    fs.copyFile('index.html', '404.html', (err) => {
+      if (err)
+        throw err;
+      console.log('404 page created!. ');
+    });
+
     await execa("git", ["--work-tree", folderName, "add", "--all"]);
     await execa("git", ["--work-tree", folderName, "commit", "-m", "gh-pages"]);
     console.log("Pushing to gh-pages...");
