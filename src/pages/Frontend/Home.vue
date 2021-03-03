@@ -378,6 +378,7 @@
       Vue.swal({
         html: this.toHtml(item),
         position: "top-start",
+        background: "transparent",
         showClass: {
           popup: `
               animate__animated
@@ -392,7 +393,7 @@
           `
         },
         grow: "column",
-        width: "35%",
+        width: "100%",
         showConfirmButton: false,
         showCloseButton: true
       });
@@ -400,7 +401,7 @@
     toHtml: function(item) {
       return `
           <div class="modal_wrapper">
-            <div class="md-layout">
+             <div class="md-layout">
                 <div class="md-layout-item">
                     <div class="custom--card">
                         <h3>Score</h3>
@@ -471,8 +472,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-             <div class="md-layout">
                 <div class="md-layout-item">
                     <div class="custom--card">
                         <h3>Speed index</h3>
@@ -508,42 +507,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="md-layout-item">
-                    <div class="custom--card">
-                        <h3>Time to interactive</h3>
-                        <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.tti_desktop, 'tti')} min-scaled">
-                                <div class="slice-colors min-scaled">
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                </div>
-                                <div class="needle min-scaled"></div>
-                                    <div class="gauge-center">
-                                      <div class="label">Desktop</div>
-                                      <div class="number">${this.normalize(item.tti_desktop, 1000)}s</div>
-                                    </div>
-                                 </div>
-                        </div>
-                        <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.tti_mobile, 'tti')} min-scaled">
-                                <div class="slice-colors min-scaled">
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                    <div class="st slice-item"></div>
-                                </div>
-                                <div class="needle min-scaled"></div>
-                                    <div class="gauge-center">
-                                      <div class="label">Mobile</div>
-                                      <div class="number">${this.normalize(item.tti_mobile, 1000)}s</div>
-                                    </div>
-                                 </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+             </div>
              <div class="md-layout">
                 <div class="md-layout-item">
                     <div class="custom--card">
@@ -615,13 +579,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-             <div class="md-layout">
                 <div class="md-layout-item">
                     <div class="custom--card">
-                        <h3>Time to first byte</h3>
+                        <h3>Time to interactive</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.ttfb_desktop,'ttfb')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.tti_desktop, 'tti')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -631,12 +593,12 @@
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">${this.normalize(item.ttfb_desktop, 1000)}s</div>
+                                      <div class="number">${this.normalize(item.tti_desktop, 1000)}s</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.ttfb_mobile,'ttfb')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(item.tti_mobile, 'tti')} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -646,17 +608,17 @@
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Mobile</div>
-                                      <div class="number">${this.normalize(item.ttfb_mobile, 1000)}s</div>
+                                      <div class="number">${this.normalize(item.tti_mobile, 1000)}s</div>
                                     </div>
                                  </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
+             </div>
           </div>
       `;
     },
+
     open: function(pos) {
       this.isOpen = true;
       this.visibleBackBtn = true;
@@ -1361,7 +1323,7 @@ main {
   margin-bottom: 1rem;
   display: inline-grid;
   grid-template-columns: repeat(14, 1fr);
-  grid-template-rows: repeat(9, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   column-gap: 0.75rem;
   row-gap: 0.75rem;
 }
