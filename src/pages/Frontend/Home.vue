@@ -272,11 +272,54 @@
             </div>
           </div>
         </div>
-        <div class="content__inner">
-          <h2 class="content__title">Features</h2>
-          <h3 class="content__subtitle">
-            This section is under development!
-          </h3>
+        <div class="content__inner features_screen">
+          <div class="slideshow">
+            <div class="slides slides--images">
+              <div class="slide slide--current">
+                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image1 + ')' }"></div>
+              </div>
+              <div class="slide">
+                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image2 + ')' }"></div>
+              </div>
+              <div class="slide">
+                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image3 + ')' }"></div>
+              </div>
+              <div class="slide">
+                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image4 + ')' }"></div>
+              </div>
+              <div class="slide">
+                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image5 + ')' }"></div>
+              </div>
+              <div class="slide">
+                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image6 + ')' }"></div>
+              </div>
+            </div>
+            <div class="slides slides--titles">
+              <div class="slide slide--current">
+                <h2 class="slide__title">Page speed monitoring</h2>
+              </div>
+              <div class="slide">
+                <h2 class="slide__title">2</h2>
+              </div>
+              <div class="slide">
+                <h2 class="slide__title">3</h2>
+              </div>
+              <div class="slide">
+                <h2 class="slide__title">4</h2>
+              </div>
+              <div class="slide">
+                <h2 class="slide__title">5</h2>
+              </div>
+              <div class="slide">
+                <h2 class="slide__title">6</h2>
+              </div>
+            </div>
+            <nav class="slidenav">
+              <button class="slidenav__item slidenav__item--prev">Previous</button>
+              <span>/</span>
+              <button class="slidenav__item slidenav__item--next">Next</button>
+            </nav>
+          </div>
         </div>
         <div class="content__inner">
           <h2 class="content__title">Prices</h2>
@@ -331,11 +374,11 @@
 </template>
 
 <script>
-  import anime from "animejs";
-  import charming from "charming";
-  import {mapActions, mapGetters} from "vuex";
-  import Vue from "vue";
-  export default {
+import anime from "animejs";
+import charming from "charming";
+import {mapActions,mapGetters} from "vuex";
+import Vue from "vue";
+export default {
   data() {
     return {
       value: 30,
@@ -355,7 +398,15 @@
           score_desktop: null
         }
       },
-      loaded: false
+      loaded: false,
+      features: {
+        image1: require("@/assets/img/features-2.jpg"),
+        image2: require("@/assets/img/features-3.jpg"),
+        image3: require("@/assets/img/features-4.jpg"),
+        image4: require("@/assets/img/features-1.jpg"),
+        image5: require("@/assets/img/features-1.jpg"),
+        image6: require("@/assets/img/features-1.jpg")
+      }
     };
   },
   watch: {
@@ -618,7 +669,6 @@
           </div>
       `;
     },
-
     open: function(pos) {
       this.isOpen = true;
       this.visibleBackBtn = true;
@@ -811,7 +861,7 @@
           break;
       }
     },
-    normalize: function (value, modifier) {
+    normalize: function(value, modifier) {
       if (!value) {
         return 0;
       }
@@ -838,12 +888,11 @@
     this.loaded = true;
     setTimeout(() => document.documentElement.classList.remove("md-theme-default"), 60);
     setTimeout(() => document.body.classList.add("render"), 60);
-
     function debounce(func, wait, immediate) {
       var timeout;
       return function() {
         var context = this,
-          args = arguments;
+                args = arguments;
         var later = function() {
           timeout = null;
           if (!immediate) func.apply(context, args);
@@ -1000,118 +1049,430 @@
         this.open(pos);
       });
     });
+
+    class Slideshow {
+      constructor(el) {
+        this.DOM = {};
+        this.DOM.el = el;
+        this.settings = {
+          animation: {
+            slides: {
+              duration: 500,
+              easing: 'easeOutQuint'
+            },
+            shape: {
+              duration: 300,
+              easing: {in: 'easeOutQuint', out: 'easeOutQuad'}
+            }
+          },
+          frameFill: 'url(#gradient1)'
+        }
+        this.init();
+      }
+      init() {
+        this.DOM.slides = Array.from(this.DOM.el.querySelectorAll('.slides--images > .slide'));
+        this.slidesTotal = this.DOM.slides.length;
+        this.DOM.nav = this.DOM.el.querySelector('.slidenav');
+        this.DOM.titles = this.DOM.el.querySelector('.slides--titles');
+        this.DOM.titlesSlides = Array.from(this.DOM.titles.querySelectorAll('.slide'));
+        this.DOM.nextCtrl = this.DOM.nav.querySelector('.slidenav__item--next');
+        this.DOM.prevCtrl = this.DOM.nav.querySelector('.slidenav__item--prev');
+        this.current = 0;
+        this.createFrame();
+        this.initEvents();
+      }
+      createFrame() {
+        this.rect = this.DOM.el.getBoundingClientRect();
+        this.frameSize = this.rect.width/12;
+        this.paths = {
+          initial: this.calculatePath('initial'),
+          final: this.calculatePath('final')
+        };
+        this.DOM.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        this.DOM.svg.setAttribute('class', 'shape');
+        this.DOM.svg.setAttribute('width','100%');
+        this.DOM.svg.setAttribute('height','100%');
+        this.DOM.svg.setAttribute('viewbox',`0 0 ${this.rect.width} ${this.rect.height}`);
+        this.DOM.svg.innerHTML = `
+            <defs>
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#09012d"/>
+                <stop offset="100%" stop-color="#0f2b73"/>
+            </linearGradient>
+            </defs>
+            <path fill="${this.settings.frameFill}" d="${this.paths.initial}"/>`;
+        this.DOM.el.insertBefore(this.DOM.svg, this.DOM.titles);
+        this.DOM.shape = this.DOM.svg.querySelector('path');
+      }
+      updateFrame() {
+        this.paths.initial = this.calculatePath('initial');
+        this.paths.final = this.calculatePath('final');
+        this.DOM.svg.setAttribute('viewbox',`0 0 ${this.rect.width} ${this.rect.height}`);
+        this.DOM.shape.setAttribute('d', this.isAnimating ? this.paths.final : this.paths.initial);
+      }
+      calculatePath(path = 'initial') {
+
+        if ( path === 'initial' ) {
+          return `M 0,0 0,${this.rect.height} ${this.rect.width},${this.rect.height} ${this.rect.width},0 0,0 Z M 0,0 ${this.rect.width},0 ${this.rect.width},${this.rect.height} 0,${this.rect.height} Z`;
+        }
+        else {
+          const point1 = {x: this.rect.width/4-50, y: this.rect.height/4+50};
+          const point2 = {x: this.rect.width/4+50, y: this.rect.height/4-50};
+          const point3 = {x: this.rect.width-point2.x, y: this.rect.height-point2.y};
+          const point4 = {x: this.rect.width-point1.x, y: this.rect.height-point1.y};
+
+          return `M 0,0 0,${this.rect.height} ${this.rect.width},${this.rect.height} ${this.rect.width},0 0,0 Z M ${point1.x},${point1.y} ${point2.x},${point2.y} ${point4.x},${point4.y} ${point3.x},${point3.y} Z`;
+        }
+      }
+      initEvents() {
+        this.DOM.nextCtrl.addEventListener('click', () => this.navigate('next'));
+        this.DOM.prevCtrl.addEventListener('click', () => this.navigate('prev'));
+
+        window.addEventListener('resize', debounce(() => {
+          this.rect = this.DOM.el.getBoundingClientRect();
+          this.updateFrame();
+        }, 20));
+
+        document.addEventListener('keydown', (ev) => {
+          const keyCode = ev.keyCode || ev.which;
+          if ( keyCode === 37 ) {
+            this.navigate('prev');
+          }
+          else if ( keyCode === 39 ) {
+            this.navigate('next');
+          }
+        });
+      }
+      navigate(dir = 'next') {
+        if ( this.isAnimating ) return false;
+        this.isAnimating = true;
+
+        const animateShapeIn = anime({
+          targets: this.DOM.shape,
+          duration: this.settings.animation.shape.duration,
+          easing: this.settings.animation.shape.easing.in,
+          d: this.paths.final
+        });
+
+        const animateSlides = () => {
+          return new Promise((resolve, reject) => {
+            const currentSlide = this.DOM.slides[this.current];
+            anime({
+              targets: currentSlide,
+              duration: this.settings.animation.slides.duration,
+              easing: this.settings.animation.slides.easing,
+              translateY: dir === 'next' ? this.rect.height : -1*this.rect.height,
+              complete: () => {
+                currentSlide.classList.remove('slide--current');
+                resolve();
+              }
+            });
+
+            const currentTitleSlide = this.DOM.titlesSlides[this.current];
+            anime({
+              targets: currentTitleSlide.children,
+              duration: this.settings.animation.slides.duration,
+              easing: this.settings.animation.slides.easing,
+              delay: (t,i,total) => dir === 'next' ? i*100 : (total-i-1)*100,
+              translateY: [0, dir === 'next' ? 100 : -100],
+              opacity: [1,0],
+              complete: () => {
+                currentTitleSlide.classList.remove('slide--current');
+                resolve();
+              }
+            });
+
+            this.current = dir === 'next' ?
+                    this.current < this.slidesTotal-1 ? this.current + 1 : 0 :
+                    this.current > 0 ? this.current - 1 : this.slidesTotal-1;
+
+            const newSlide = this.DOM.slides[this.current];
+            newSlide.classList.add('slide--current');
+            anime({
+              targets: newSlide,
+              duration: this.settings.animation.slides.duration,
+              easing: this.settings.animation.slides.easing,
+              translateY: [dir === 'next' ? -1*this.rect.height : this.rect.height,0]
+            });
+
+            const newSlideImg = newSlide.querySelector('.slide__img');
+
+            anime.remove(newSlideImg);
+            anime({
+              targets: newSlideImg,
+              duration: this.settings.animation.slides.duration*3,
+              easing: this.settings.animation.slides.easing,
+              translateY: [dir === 'next' ? -100 : 100, 0],
+              scale: [0.2,1]
+            });
+
+            const newTitleSlide = this.DOM.titlesSlides[this.current];
+            newTitleSlide.classList.add('slide--current');
+            anime({
+              targets: newTitleSlide.children,
+              duration: this.settings.animation.slides.duration*1.5,
+              easing: this.settings.animation.slides.easing,
+              delay: (t,i,total) => dir === 'next' ? i*100+100 : (total-i-1)*100+100,
+              translateY: [dir === 'next' ? -100 : 100 ,0],
+              opacity: [0,1]
+            });
+          });
+        };
+
+        const animateShapeOut = () => {
+          anime({
+            targets: this.DOM.shape,
+            duration: this.settings.animation.shape.duration,
+            easing: this.settings.animation.shape.easing.out,
+            d: this.paths.initial,
+            complete: () => this.isAnimating = false
+          });
+        }
+
+        animateShapeIn.finished.then(animateSlides).then(animateShapeOut);
+      }
+    };
+    new Slideshow(document.querySelector(".slideshow"));
   }
 };
 </script>
 
 <style>
-  /* Examples section gauges start */
-  .gauge-wrapper {
-    display: inline-block !important;
-    max-width: 150px;
-  }
+/* Slider start */
+.features_screen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
 
-  .gauge {
-    background: #e7e7e7;
-    box-shadow: 0 -3px 6px 2px rgba(0, 0, 0, 0.50);
-    width: 200px;
-    height: 100px;
-    border-radius: 100px 100px 0 0!important;
-    position: relative;
-    overflow: hidden;
-  }
+.slideshow {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  --color-text: #fff;
+  --color-bg: #020202;
+  --color-link: #fff;
+  --color-link-hover: #415bf8;
+  --color-stitle: #f1f1f1;
+  --fontsize-stitle: 12vw;
+  --color-nav: #fff;
+  --color-nav-hover: #415bf8;
+}
 
-  .gauge.min-scaled {
-    transform: scale(0.5);
-  }
+.slides {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 
-  .gauge-center {
-    content: '';
-    color: #fff;
-    width: 60%;
-    height: 60%;
-    background: #15222E;
-    border-radius: 100px 100px 0 0!important;
-    position: absolute;
-    box-shadow: 0 -13px 15px -10px rgba(0, 0, 0, 0.28);
-    right: 21%;
-    bottom: 0;
-    z-index:10;
-  }
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
 
-  .gauge-center .label, .gauge-center .number {display:block; width: 100%; text-align: center; border:0!important;}
-  .gauge-center .label {font-size:0.75em; opacity:0.6; margin:1.1em 0 0.3em 0;}
-  .gauge-center .number {font-size:1.2em;}
+.slide--current {
+  opacity: 1;
+  /*pointer-events: auto;*/
+}
 
-  .needle {
-    width: 80px;
-    height: 7px;
-    background: #15222E;
-    border-bottom-left-radius: 100%!important;
-    border-bottom-right-radius: 5px!important;
-    border-top-left-radius: 100%!important;
-    border-top-right-radius: 5px!important;
-    position: absolute;
-    bottom: -2px;
-    left: 20px;
-    transform-origin: 100% 4px;
-    transform: rotate(0deg);
-    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.38);
-    display:none;
-    z-index:9;
-  }
+.slide__img {
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: calc(100% + 400px);
+  height: calc(100% + 400px);
+  background-size: cover;
+  background-position: 50% 50%;
+}
 
-  .four.rischio1 .needle {animation: fourspeed1 2s 1 both; animation-delay: 1s; display:block;}
-  .four.rischio2 .needle {animation: fourspeed2 2s 1 both; animation-delay: 1s; display:block;}
-  .four.rischio3 .needle {animation: fourspeed3 2s 1 both; animation-delay: 1s; display:block;}
-  .four.rischio4 .needle {animation: fourspeed4 2s 1 both; animation-delay: 1s; display:block;}
+.slidenav {
+  position: absolute;
+  width: 300px;
+  margin-left: -150px;
+  left: 50%;
+  bottom: 0;
+  text-align: center;
+  padding: 2em;
+}
 
-  .slice-colors {height:100%;}
+.slidenav__item {
+  border: 0;
+  background: none;
+  font-weight: bold;
+  color: var(--color-nav);
+}
 
-  .slice-colors .st {
-    position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 0;
-    border: 50px solid transparent;
-  }
+.slidenav__item:focus {
+  outline: none;
+}
 
-  .four .slice-colors .st.slice-item:nth-child(2) {
-    border-top: 50px #e67e22 solid;
-    border-right: 50px #e67e22 solid;
-    background-color:#E84C3D;
-  }
+.slidenav__item:hover {
+  color: var(--color-nav-hover);
+}
 
-  .four .slice-colors .st.slice-item:nth-child(4) {
-    left:50%;
-    border-bottom: 50px #1eaa59 solid;
-    border-right: 50px #1eaa59 solid;
-    background-color:#f1c40f;
-  }
+.shape {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  fill: var(--color-shape-fill);
+  top: 0;
+  pointer-events: none;
+}
 
-  @-webkit-keyframes fourspeed1 {
-    0% {transform: rotate(0);}
-    100% {transform: rotate(16deg);}
-  }
+.slide__title {
+  position: relative;
+  font-size: var(--fontsize-stitle);
+  margin: 0;
+  cursor: default;
+  line-height: 1;
+  color: var(--color-stitle);
+}
 
-  @-webkit-keyframes fourspeed2 {
-    0% {transform: rotate(0);}
-    100% {transform: rotate(65deg);}
-  }
+.slide__desc {
+  position: relative;
+  font-size: 1.5em;
+  margin: 0 0 2em 0;
+  cursor: default;
+  color: var(--color-sdesc);
+  padding: 0 1em;
+  text-align: center;
+}
 
-  @-webkit-keyframes fourspeed3 {
-    0% {transform: rotate(0);}
-    100% {transform: rotate(115deg);}
-  }
+.slide__link {
+  position: relative;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 1em 2em;
+  display: block;
+  color: var(--color-slink);
+  background: var(--color-slink-bg);
+  transition: color 0.3s, background 0.3s;
+}
 
-  @-webkit-keyframes fourspeed4 {
-    0% {transform: rotate(0);}
-    100% {transform: rotate(164deg);}
-  }
+.slide__link:hover {
+  color: var(--color-slink-hover);
+  background: var(--color-slink-hover-bg);
+}
+/* Slider end */
 
-  /* Examples section gauges end */
+/* Examples section gauges start */
+.gauge-wrapper {
+  display: inline-block !important;
+  max-width: 150px;
+}
 
-  /* Examples section cards start */
+.gauge {
+  background: #e7e7e7;
+  box-shadow: 0 -3px 6px 2px rgba(0, 0, 0, 0.50);
+  width: 200px;
+  height: 100px;
+  border-radius: 100px 100px 0 0!important;
+  position: relative;
+  overflow: hidden;
+}
+
+.gauge.min-scaled {
+  transform: scale(0.5);
+}
+
+.gauge-center {
+  content: '';
+  color: #fff;
+  width: 60%;
+  height: 60%;
+  background: #15222E;
+  border-radius: 100px 100px 0 0!important;
+  position: absolute;
+  box-shadow: 0 -13px 15px -10px rgba(0, 0, 0, 0.28);
+  right: 21%;
+  bottom: 0;
+  z-index: 10;
+}
+
+.gauge-center .label, .gauge-center .number {display:block; width: 100%; text-align: center; border:0!important;}
+.gauge-center .label {font-size:0.75em; opacity:0.6; margin:1.1em 0 0.3em 0;}
+.gauge-center .number {font-size:1.2em;}
+
+.needle {
+  width: 80px;
+  height: 7px;
+  background: #15222E;
+  border-bottom-left-radius: 100%!important;
+  border-bottom-right-radius: 5px!important;
+  border-top-left-radius: 100%!important;
+  border-top-right-radius: 5px!important;
+  position: absolute;
+  bottom: -2px;
+  left: 20px;
+  transform-origin: 100% 4px;
+  transform: rotate(0deg);
+  box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.38);
+  display: none;
+  z-index: 9;
+}
+
+.four.rischio1 .needle {animation: fourspeed1 2s 1 both; animation-delay: 1s; display:block;}
+.four.rischio2 .needle {animation: fourspeed2 2s 1 both; animation-delay: 1s; display:block;}
+.four.rischio3 .needle {animation: fourspeed3 2s 1 both; animation-delay: 1s; display:block;}
+.four.rischio4 .needle {animation: fourspeed4 2s 1 both; animation-delay: 1s; display:block;}
+
+.slice-colors {height:100%;}
+
+.slice-colors .st {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+}
+
+.four .slice-colors .st.slice-item:nth-child(2) {
+  border-top: 50px #e67e22 solid;
+  border-right: 50px #e67e22 solid;
+  background-color:#E84C3D;
+}
+
+.four .slice-colors .st.slice-item:nth-child(4) {
+  left:50%;
+  border-bottom: 50px #1eaa59 solid;
+  border-right: 50px #1eaa59 solid;
+  background-color:#f1c40f;
+}
+
+@-webkit-keyframes fourspeed1 {
+  0% {transform: rotate(0);}
+  100% {transform: rotate(16deg);}
+}
+
+@-webkit-keyframes fourspeed2 {
+  0% {transform: rotate(0);}
+  100% {transform: rotate(65deg);}
+}
+
+@-webkit-keyframes fourspeed3 {
+  0% {transform: rotate(0);}
+  100% {transform: rotate(115deg);}
+}
+
+@-webkit-keyframes fourspeed4 {
+  0% {transform: rotate(0);}
+  100% {transform: rotate(164deg);}
+}
+
+/* Examples section gauges end */
+
+/* Examples section cards start */
 .custom--card {
   white-space: nowrap;
   margin-top: 20px;
@@ -1138,20 +1499,20 @@
   font-weight: 600;
 }
 
-  .custom--card-small {
-    white-space: nowrap;
-    border-radius: 4px;
-    background: #fff !important;
-    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-    padding: 7px 7px 7px 7px;
-    cursor: pointer;
-  }
+.custom--card-small {
+  white-space: nowrap;
+  border-radius: 4px;
+  background: #fff !important;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  padding: 7px 7px 7px 7px;
+  cursor: pointer;
+}
 
-  .custom--card-small:hover {
-    transform: scale(1.3);
-    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-  }
+.custom--card-small:hover {
+  transform: scale(1.3);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
 
 .md-toggle-password {
   color: white !important;
