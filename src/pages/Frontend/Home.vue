@@ -1,7 +1,7 @@
 <template>
   <div class="landing">
     <main>
-      <div class="content_landing content--fixed">
+      <div class="content_landing content--fixed ">
         <header class="codrops-header">
           <div class="codrops-links">
             <a v-if="visibleBackBtn" v-on:click="closed"
@@ -276,42 +276,152 @@
           <div class="slideshow">
             <div class="slides slides--images">
               <div class="slide slide--current">
-                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image1 + ')' }"></div>
               </div>
               <div class="slide">
-                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image2 + ')' }"></div>
+                <div class="slide__img" :style="{ 'background-color':   features.color2 }"></div>
               </div>
               <div class="slide">
-                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image3 + ')' }"></div>
+                <div class="slide__img" :style="{ 'background-color':   features.color3 }"></div>
               </div>
               <div class="slide">
-                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image4 + ')' }"></div>
+                <div class="slide__img" :style="{ 'background-color':   features.color4 }"></div>
               </div>
               <div class="slide">
-                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image5 + ')' }"></div>
-              </div>
-              <div class="slide">
-                <div class="slide__img" :style="{ 'background-image': 'url(' + features.image6 + ')' }"></div>
+                <div class="slide__img" :style="{ 'background-color':   features.color5 }"></div>
               </div>
             </div>
             <div class="slides slides--titles">
               <div class="slide slide--current">
-                <h2 class="slide__title">Page speed monitoring</h2>
+                <h2 class="slide__title ">See pagespeed history</h2>
+                <div class="slide__desc">
+                  <div class="md-layout">
+                    <div class="md-layout-item">
+                      Analyze the pagespeed score and core vitals for every URL provided over time
+                      so you can see exactly when it dropped and revert changes back to the code release or content update
+                    </div>
+                  </div>
+                </div>
+                <div class="md-layout ">
+                  <div class="md-layout-item">
+                    <div class="slide-card transparent_card">
+                      Up to 2 years of historical data
+                    </div>
+                  </div>
+                  <div class="md-layout-item ">
+                    <div class="slide-card transparent_card">
+                      Scan intervals from 5min
+                    </div>
+                  </div>
+                  <div class="md-layout-item">
+                    <div class="slide-card transparent_card">
+                     No more guessing. Precise data.
+                    </div>
+                  </div>
+                  <div class="md-layout-item">
+                    <div class="slide-card transparent_card">
+                      Both mobile and desktop
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slide ">
+                <h2 class="slide__title outline__black">Full site scans</h2>
+                <div class="slide__desc">
+                  <div class="md-layout">
+                    <div class="md-layout-item outline__black">
+                      Scan every single page of your website so you can get whole picture of your website performance.
+                    </div>
+                  </div>
+                </div>
+                <div class="md-layout ">
+                  <div class="md-layout-item">
+                    <div class="slide-card transparent_card outline__black">
+                      Google sheets export (dev)
+                    </div>
+                  </div>
+                  <div class="md-layout-item ">
+                    <div class="slide-card transparent_card outline__black">
+                      Automated and manual scans
+                    </div>
+                  </div>
+                  <div class="md-layout-item">
+                    <div class="slide-card transparent_card outline__black">
+                      Awesome analytics and visualization
+                    </div>
+                  </div>
+                  <div class="md-layout-item">
+                    <div class="slide-card transparent_card outline__black">
+                      Find slow and error pages
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="slide">
-                <h2 class="slide__title">2</h2>
+                <h2 class="slide__title">Notifications</h2>
+                <div class="slide__desc">
+                  <div class="md-layout">
+                    <div class="md-layout-item" style="font-size: 24px;">
+                      Email, Telegram, Slack, Webhooks, Coming soon
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="slide">
-                <h2 class="slide__title">3</h2>
+                <h2 class="slide__title outline__white">CRON Jobs monitor</h2>
+                <div class="slide__desc">
+                  <div class="md-layout">
+                    <div class="md-layout-item" style="font-size: 24px;">
+                      CRON jobs or scheduled tasks are the heart of your data processing. What happens if they stop working?
+                    </div>
+                  </div>
+                  <div class="md-layout ">
+                    <div class="md-layout-item">
+                      <div class="slide-card transparent_card ">
+                        Easy integration
+                      </div>
+                    </div>
+                    <div class="md-layout-item ">
+                      <div class="slide-card transparent_card ">
+                       Constant notifications
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="slide">
-                <h2 class="slide__title">4</h2>
-              </div>
-              <div class="slide">
-                <h2 class="slide__title">5</h2>
-              </div>
-              <div class="slide">
-                <h2 class="slide__title">6</h2>
+                <h2 class="slide__title">Near future</h2>
+                <div class="md-layout ">
+                  <div class="md-layout-item">
+                    <div class="slide-card transparent_card ">
+                      SSL monitoring
+                    </div>
+                  </div>
+                  <div class="md-layout-item ">
+                    <div class="slide-card transparent_card ">
+                      Domain monitoring
+                    </div>
+                  </div>
+                  <div class="md-layout-item ">
+                    <div class="slide-card transparent_card ">
+                      Uptime monitoring
+                    </div>
+                  </div>
+                  <div class="md-layout-item ">
+                    <div class="slide-card transparent_card ">
+                      Mixed content detection
+                    </div>
+                  </div>
+                  <div class="md-layout-item ">
+                    <div class="slide-card transparent_card ">
+                      Multiple languages
+                    </div>
+                  </div>
+                  <div class="md-layout-item ">
+                    <div class="slide-card transparent_card ">
+                      Many QOL improvements
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <nav class="slidenav">
@@ -399,13 +509,20 @@ export default {
         }
       },
       loaded: false,
-      features: {
-        image1: require("@/assets/img/features-2.jpg"),
-        image2: require("@/assets/img/features-3.jpg"),
-        image3: require("@/assets/img/features-4.jpg"),
-        image4: require("@/assets/img/features-1.jpg"),
-        image5: require("@/assets/img/features-1.jpg"),
+      features_img: {
+        image2: require("@/assets/img/features-1.jpg"),
+        image3: require("@/assets/img/features-notifications.jpg"),
+        image4: require("@/assets/img/features-5.jpg"),
+        image5: require("@/assets/img/linux-ubuntu.png"),
         image6: require("@/assets/img/features-1.jpg")
+      },
+      features: {
+        color1: "#2e46ff",
+        color2: "#ffffff",
+        color3: "#c00006",
+        color4: "#000000",
+        color5: "#2e46ff",
+        color6: "#2e46ff"
       }
     };
   },
@@ -1022,7 +1139,7 @@ export default {
     this.DOM.contentInner = Array.from(
       this.DOM.content.querySelectorAll(".content__inner"),
       el => {
-        charming(el);
+        // charming(el);
         return el;
       }
     );
@@ -1227,11 +1344,11 @@ export default {
             d: this.paths.initial,
             complete: () => this.isAnimating = false
           });
-        }
+        };
 
         animateShapeIn.finished.then(animateSlides).then(animateShapeOut);
       }
-    };
+    }
     new Slideshow(document.querySelector(".slideshow"));
   }
 };
@@ -1256,9 +1373,11 @@ export default {
   --color-link: #fff;
   --color-link-hover: #415bf8;
   --color-stitle: #f1f1f1;
-  --fontsize-stitle: 12vw;
+  --fontsize-stitle: 7vw;
   --color-nav: #fff;
   --color-nav-hover: #415bf8;
+  --color-slide-desc: #fff;
+  --fontsize-slide-desc: 1vw;
 }
 
 .slides {
@@ -1339,31 +1458,45 @@ export default {
   color: var(--color-stitle);
 }
 
+.outline__black {
+  -webkit-text-stroke: 1px black;
+}
+
+.outline__white {
+  -webkit-text-stroke: 1px white;
+}
+
 .slide__desc {
   position: relative;
-  font-size: 1.5em;
-  margin: 0 0 2em 0;
+  font-size: var(--fontsize-slide-desc);
+  margin: 1em 0 2em 0;
   cursor: default;
-  color: var(--color-sdesc);
+  color: var(--color-slide-desc);
   padding: 0 1em;
   text-align: center;
 }
 
-.slide__link {
-  position: relative;
-  font-size: 1em;
-  font-weight: bold;
-  padding: 1em 2em;
-  display: block;
-  color: var(--color-slink);
-  background: var(--color-slink-bg);
-  transition: color 0.3s, background 0.3s;
+.slide-card {
+  white-space: nowrap;
+  margin-top: 20px;
+  border-radius: 4px;
+  border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 10px rgba(0,0,0,.5), 0 0 6px rgba(0,0,0,.8);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  padding: 25px 25px 25px 25px;
+  font-size: 1rem;
 }
 
-.slide__link:hover {
-  color: var(--color-slink-hover);
-  background: var(--color-slink-hover-bg);
+.transparent_card {
+  background: transparent !important;
 }
+
+.slide_list {
+  position: absolute;
+  top: 10px;
+}
+
 /* Slider end */
 
 /* Examples section gauges start */
