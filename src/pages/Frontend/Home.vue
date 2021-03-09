@@ -509,13 +509,6 @@ export default {
         }
       },
       loaded: false,
-      features_img: {
-        image2: require("@/assets/img/features-1.jpg"),
-        image3: require("@/assets/img/features-notifications.jpg"),
-        image4: require("@/assets/img/features-5.jpg"),
-        image5: require("@/assets/img/linux-ubuntu.png"),
-        image6: require("@/assets/img/features-1.jpg")
-      },
       features: {
         color1: "#2e46ff",
         color2: "#ffffff",
