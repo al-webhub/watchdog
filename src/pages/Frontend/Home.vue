@@ -13,11 +13,11 @@
       </div>
       <div class="content_landing">
         <nav class="menu">
-          <a class="menu__item">Home</a>
-          <a class="menu__item">About</a>
+<!--          <a class="menu__item">Blog</a>-->
+<!--          <a class="menu__item">Contact</a>-->
           <a class="menu__item">Examples</a>
           <a class="menu__item">Features</a>
-          <a class="menu__item">Prices</a>
+          <a class="menu__item">Register</a>
           <a class="menu__item">Login</a>
         </nav>
         <svg
@@ -237,19 +237,16 @@
         </svg>
       </div>
       <div class="content_landing content--reveal">
-        <div class="content__inner">
-          <h2 class="content__title">Home</h2>
-          <img src="" alt="" />
-          <h3 class="content__subtitle">
-          </h3>
+<!--        <div class="content__inner">-->
+<!--          <h2 class="content__title">Home</h2>-->
+<!--          <img src="" alt="" />-->
+<!--          <h3 class="content__subtitle">-->
+<!--          </h3>-->
 
-        </div>
-        <div class="content__inner">
-          <h2 class="content__title">About</h2>
-          <h3 class="content__subtitle">
-            This page is under development!
-          </h3>
-        </div>
+<!--        </div>-->
+<!--        <div class="content__inner">-->
+<!--          <h2 class="content__title">Contact</h2>-->
+<!--        </div>-->
         <div class="content__inner examples_screen">
           <div class="headlines example_headlines">
             <h2 class="content__title example_headline">Examples</h2>
@@ -432,9 +429,9 @@
           </div>
         </div>
         <div class="content__inner">
-          <h2 class="content__title">Prices</h2>
+          <h2 class="content__title">Register</h2>
           <h3 class="content__subtitle">
-             This section is under development!
+             For now beta testing available only by invites. Contact us for free testing.
           </h3>
         </div>
         <div class="content__inner login-screen">
