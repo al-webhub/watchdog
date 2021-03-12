@@ -990,11 +990,9 @@ export default {
     })
   },
   async mounted() {
-    await this.requestPublicExamples();
-    this.examples = this.getPublicExamples;
-    this.loaded = true;
-    setTimeout(() => document.documentElement.classList.remove("md-theme-default"), 60);
-    setTimeout(() => document.body.classList.add("render"), 60);
+    document.body.classList.add("render");
+    document.documentElement.classList.remove("md-theme-default");
+
     function debounce(func, wait, immediate) {
       var timeout;
       return function() {
@@ -1010,7 +1008,6 @@ export default {
         if (callNow) func.apply(context, args);
       };
     }
-
     class Blob {
       constructor(el, options) {
         this.DOM = {};
@@ -1115,7 +1112,6 @@ export default {
         setTimeout(() => this.intro(), 400);
       }
     }
-
     window.Blob = Blob;
     this.DOM.svg = document.querySelector("svg.scene");
 
@@ -1340,6 +1336,10 @@ export default {
       }
     }
     new Slideshow(document.querySelector(".slideshow"));
+
+    await this.requestPublicExamples();
+    this.examples = this.getPublicExamples;
+    this.loaded = true;
   }
 };
 </script>
