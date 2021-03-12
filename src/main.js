@@ -90,7 +90,7 @@ router.beforeEach((to, from, next) => {
       }
     } else {
       next({
-        name: "login"
+        name: "Home"
       });
     }
   } else if (to.name == "login" && store.getters["auth/authenticated"]) {
