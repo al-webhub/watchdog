@@ -18,6 +18,14 @@ export const ENGLISH_TRANSLATIONS = {
           desktop: 'Desktop'
       }
     },
+    forms: {
+        startfullscanform: {
+            headline: 'Start full site scan',
+            description: 'Relative path to sitemap.xml required. For example: /sitemap.xml',
+            label: 'relative path to sitemap.xml',
+            submit: 'Start scan'
+        }
+    },
     auth: {
         login_form_headline: 'Login',
         email: 'Email',

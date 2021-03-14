@@ -4,7 +4,7 @@
       <md-card-header :data-background-color="dataBackgroundColor">
         <h4 class="title">{{ $t(`forms.startfullscanform.headline`) }}</h4>
         <p class="category">
-          Relative path to sitemap.xml required. For example: /sitemap.xml
+          {{ $t(`forms.startfullscanform.description`) }}
         </p>
       </md-card-header>
 
@@ -12,15 +12,13 @@
         <div class="md-layout">
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Путь к карте сайта </label>
+              <label>{{ $t(`forms.startfullscanform.label`) }}</label>
               <md-input v-model="form.sitemap" type="text"></md-input>
             </md-field>
           </div>
 
           <div class="md-layout-item md-size-100 text-right">
-            <md-button type="submit" class="md-raised md-danger"
-              >Start scan</md-button
-            >
+            <md-button type="submit" class="md-raised md-danger">{{ $t(`forms.startfullscanform.submit`) }}</md-button>
           </div>
         </div>
       </md-card-content>
