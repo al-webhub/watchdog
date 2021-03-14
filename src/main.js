@@ -11,7 +11,11 @@ import VuePageTransition from 'vue-page-transition';
 import VueTypedJs from 'vue-typed-js';
 import Particles from "particles.vue";
 import anime from "animejs";
+import { ENGLISH_TRANSLATIONS } from "./translations/en";
+import { RUSSIAN_TRANSLATIONS } from "./translations/ru";
 
+import VueSweetalert2 from "vue-sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 
 // router setup
@@ -21,12 +25,6 @@ import axios from "axios";
 if (process.env.NODE_ENV === "production") {
   axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
 }
-
-import { ENGLISH_TRANSLATIONS } from "./translations/en";
-import { RUSSIAN_TRANSLATIONS } from "./translations/ru";
-
-import VueSweetalert2 from "vue-sweetalert2";
-import "sweetalert2/dist/sweetalert2.min.css";
 
 // Move this subscribe to separate file
 store.subscribe(mutation => {
@@ -93,11 +91,6 @@ router.beforeEach((to, from, next) => {
         name: "Home"
       });
     }
-  } else if (to.name == "login" && store.getters["auth/authenticated"]) {
-    // redirect to dashboard
-    next({
-      name: "dashboard"
-    });
   } else {
     next();
   }

@@ -18,7 +18,8 @@
           <a class="menu__item">Examples</a>
           <a class="menu__item">Features</a>
           <a class="menu__item">Register</a>
-          <a class="menu__item">Login</a>
+          <a v-if="authenticated" :data-exclude="true" :to="dashboard" class="menu__item">Dashboard</a>
+          <a v-else class="menu__item">Login</a>
         </nav>
         <svg
           class="scene"
@@ -986,13 +987,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getPublicExamples: "examples/getPublicExamples"
+      getPublicExamples: "examples/getPublicExamples",
+      authenticated: "auth/authenticated"
     })
   },
   async mounted() {
     document.body.classList.add("render");
     document.documentElement.classList.remove("md-theme-default");
-
+    this.authenticated = "auth/authenticated";
     function debounce(func, wait, immediate) {
       var timeout;
       return function() {
@@ -1149,7 +1151,11 @@ export default {
       });
       link.addEventListener("click", ev => {
         ev.preventDefault();
-        this.open(pos);
+        if (link.getAttribute("data-exclude")) {
+          this.$router.push({name: 'dashboard'});
+        } else {
+          this.open(pos);
+        }
       });
     });
 
@@ -1337,8 +1343,8 @@ export default {
     }
     new Slideshow(document.querySelector(".slideshow"));
 
-    await this.requestPublicExamples();
-    this.examples = this.getPublicExamples;
+    // await this.requestPublicExamples();
+    // this.examples = this.getPublicExamples;
     this.loaded = true;
   }
 };

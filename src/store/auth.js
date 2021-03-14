@@ -34,19 +34,18 @@ export default {
   actions: {
     async signIn({ dispatch }, credentials) {
       let response = await axios.post("/api/auth/signin", credentials);
-      dispatch("attempt", response.data.token);
+      await dispatch("attempt", response.data.token);
+      await dispatch("redirect", "/dashboard");
     },
-
     async attempt({ commit }, token) {
       commit("SET_TOKEN", token);
       try {
         let response = await axios.get("/api/auth/self");
         await commit("SET_USER", response.data);
-        router.push("/dashboard").catch(err => {});
       } catch (e) {
         commit("SET_TOKEN", null);
         commit("SET_USER", null);
-        router.push("login").catch(err => {});
+        router.push("/").catch(err => {});
       }
     },
     logout({ commit }) {
@@ -58,6 +57,9 @@ export default {
     async register({ dispatch }, data) {
       let response = await axios.post("/api/auth/register", data);
       dispatch("attempt", response.data.token);
+    },
+    async redirect({ dispatch }, to) {
+      router.push(to).catch(err => {});
     }
   }
 };
