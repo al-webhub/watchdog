@@ -1343,8 +1343,8 @@ export default {
     }
     new Slideshow(document.querySelector(".slideshow"));
 
-    // await this.requestPublicExamples();
-    // this.examples = this.getPublicExamples;
+    await this.requestPublicExamples();
+    this.examples = this.getPublicExamples;
     this.loaded = true;
   }
 };
