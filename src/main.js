@@ -158,17 +158,24 @@ axios.interceptors.response.use(
     return response;
   },
   function(error) {
-    if (
-      error.response.status === 401 &&
-      error.response.config.url == "/api/auth/signin"
-    ) {
-      let message = '<span style="color:white">'+i18n.t(`auth.errors.wrong_password`);+'</span>';
-      Vue.swal({
-        title: message,
-        background: 'transparent',
-        confirmButtonColor: 'transparent',
-      });
+    const code = error.response.status;
+    const api_endpoint = error.response.config.url;
+    let message = i18n.t(`auth.errors.undefined`);
+    if (code === 401 && api_endpoint === "/api/auth/signin") {
+      message = i18n.t(`auth.errors.wrong_password`);
+    } else if (code === 401) {
+      message = i18n.t(`auth.errors.expired`);
     }
+    Vue.swal({
+      title: `<span style="color: white">${message}</span>`,
+      background: "transparent",
+      allowOutsideClick: false,
+      confirmButtonColor: "transparent"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        router.go();
+      }
+    });
     return Promise.reject(error);
   }
 );

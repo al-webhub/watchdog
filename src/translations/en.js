@@ -29,7 +29,9 @@ export const ENGLISH_TRANSLATIONS = {
         repeat_password: 'Repeat password',
         errors: {
             empty: 'Sorry, you can\'t pass empty fields',
-            wrong_password: 'It seems your password is wrong or this user does not exist!'
+            wrong_password: 'It seems your password is wrong or this user does not exist!',
+            expired: "Your session is expired! Please log in again.",
+            undefined: "Seems like it is an unknown error."
         }
     },
     routes: {

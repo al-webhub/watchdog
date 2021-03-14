@@ -37,7 +37,6 @@ export default {
                 await commit('SET_WEBSITES', response.data);
             } catch (e) {
                 await commit('SET_WEBSITES', null);
-                Vue.swal("Error", "Unexpected Error!");
             }
         },
         async deleteWebsite({ dispatch }, website) {
