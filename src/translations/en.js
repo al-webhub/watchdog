@@ -50,7 +50,8 @@ export const ENGLISH_TRANSLATIONS = {
         Analytics: 'Analytics',
         Fullsitescan: 'Full site scan',
         FullscanAnalytics: 'Analytics',
-        examples: 'Example settings'
+        examples: 'Example settings',
+        Parameters: 'More specific data'
     },
     pages: {
         dashboard: {
@@ -102,7 +103,8 @@ export const ENGLISH_TRANSLATIONS = {
             week: 'This week',
             month: 'Last 30 days',
             range: 'or select range',
-            fullscan_btn: 'Full site scan'
+            fullscan_btn: 'Full site scan',
+            params_btn: 'More info'
         }
     },
     fullscan: {

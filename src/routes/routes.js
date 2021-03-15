@@ -4,6 +4,7 @@ import Settings from "@/pages/Settings";
 import NotFound from "@/pages/Service/NotFound";
 import Websites from "@/pages/Websites/Websites";
 import Website from "@/pages/Websites/Website";
+import WebsiteCharts from "@/pages/Websites/WebsiteCharts";
 import Fullsitescan from "@/pages/Websites/Fullsitescan";
 import FullscanAnalytics from "@/pages/Websites/FullscanAnalytics";
 import Users from "@/pages/Users/Users.vue";
@@ -143,6 +144,15 @@ const routes = [
         path: "/website/:website_id",
         name: "Analytics",
         component: Website,
+        meta: {
+          protected: true,
+          onlyadmin: false
+        }
+      },
+      {
+        path: "/website/:website_id/parameters",
+        name: "Parameters",
+        component: WebsiteCharts,
         meta: {
           protected: true,
           onlyadmin: false
