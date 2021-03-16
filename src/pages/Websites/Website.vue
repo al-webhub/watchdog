@@ -69,9 +69,47 @@
           </template>
 
           <template slot="content">
-            <p class="category">Uptime</p>
+            <p class="category">Uptime monitor</p>
             <h3 class="title">
               10d 23:59
+            </h3>
+          </template>
+
+          <template  slot="footer">
+            <md-button class="md-icon-button md-primary"><md-icon>mail_outline</md-icon></md-button>
+            <div style="margin-left: 15px;">Last check: 299 sec ago</div>
+          </template>
+        </stats-card>
+      </div>
+      <div class="md-layout-item md-medium-size-25 md-xsmall-size-100 md-size-25">
+        <stats-card data-background-color="red">
+          <template slot="header">
+            <md-icon>shield</md-icon>
+          </template>
+
+          <template slot="content">
+            <p class="category">SSL Checker</p>
+            <h3 class="title">
+              EXPIRED
+            </h3>
+          </template>
+
+          <template  slot="footer">
+            <md-button class="md-icon-button md-primary"><md-icon>mail_outline</md-icon></md-button>
+            <div style="margin-left: 15px;">Last check: 299 sec ago</div>
+          </template>
+        </stats-card>
+      </div>
+      <div class="md-layout-item md-medium-size-25 md-xsmall-size-100 md-size-25">
+        <stats-card data-background-color="red">
+          <template slot="header">
+            <md-icon>dns</md-icon>
+          </template>
+
+          <template slot="content">
+            <p class="category">Domain monitor</p>
+            <h3 class="title">
+              379 days
             </h3>
           </template>
 
