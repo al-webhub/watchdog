@@ -57,7 +57,7 @@
           </template>
 
           <template slot="footer">
-            <md-button title="Setup notifications and performance budgets" class="md-icon-button md-primary"><md-icon>mail_outline</md-icon></md-button>
+            <md-button @click="showPerformanceBudgetDialog = true"  :class="performanceButtonClass" ><md-icon>mail_outline</md-icon></md-button>
             <div style="margin-left: 15px;">Last check: 299 sec ago</div>
           </template>
         </stats-card>
@@ -128,6 +128,31 @@
           :chartLabels="chartLabels"
         ></pulse-chart>
       </div>
+      <md-dialog :md-active.sync="showPerformanceBudgetDialog" md-dynamic-height>
+        <md-dialog-title>Performance bubgets and notifications setup</md-dialog-title>
+        <div class="md-layout">
+          <div class="md-layout-item">
+            <md-field>
+              <md-input v-model="performance_budget.score.budget.mobile"></md-input>
+              <span class="md-helper-text">Mobile minimum value</span>
+            </md-field>
+            <md-field>
+              <md-input v-model="performance_budget.score.budget.desktop"></md-input>
+              <span class="md-helper-text">Desktop minimum value</span>
+            </md-field>
+            <md-checkbox v-model="performance_budget.score.channel.email">Email</md-checkbox>
+            <md-field v-if="performance_budget.score.channel.email">
+              <md-input type="email" v-model="performance_budget.score.data.email"></md-input>
+              <span class="md-helper-text">Email</span>
+            </md-field>
+          </div>
+        </div>
+        <md-dialog-actions>
+          <md-button class="md-primary" @click="showPerformanceBudgetDialog = false">Close</md-button>
+          <md-button class="md-primary" v-if="performance_budget.id > 0" v-on:click="submitPerformanceBudgetUpdate">Update</md-button>
+          <md-button class="md-primary" v-else v-on:click="submitPerformanceBudgetSave">Save</md-button>
+        </md-dialog-actions>
+      </md-dialog>
     </div>
   </div>
 </template>
@@ -136,7 +161,6 @@
 import { PulseChart, StatsCard } from "@/components";
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
-import Vue from "vue";
 import DatePicker from "vue2-datepicker";
 import "vue2-datepicker/index.css";
 
@@ -148,11 +172,28 @@ export default {
   },
   data() {
     return {
+      performance_budget: {
+        score: {
+          channel: {
+            email: false
+          },
+          budget: {
+            mobile: 0,
+            desktop: 0
+          },
+          data: {
+            email: null
+          }
+        },
+        id: 0,
+        website_id: this.website_id
+      },
       chartData: [],
       chartLabels: [],
       loaded: false,
       time: null,
-      website_id: 0
+      website_id: 0,
+      showPerformanceBudgetDialog: false
     };
   },
   methods: {
@@ -161,8 +202,25 @@ export default {
       resetPulse: "pulse/resetPulse",
       requestWeek: "pulse/requestWeek",
       requestMonth: "pulse/requestMonth",
-      requestRange: "pulse/requestRange"
+      requestRange: "pulse/requestRange",
+      savePerformanceBudget: "notifications/savePerformanceBudget",
+      updatePerformanceBudget: "notifications/updatePerformanceBudget",
+      requestPerformanceBudget: "notifications/requestPerformanceBudget"
     }),
+    submitPerformanceBudgetSave: async function() {
+      this.performance_budget.website_id = this.website_id;
+      await this.savePerformanceBudget(this.performance_budget);
+      await this.requestPerformanceBudget(this.website_id);
+      this.performance_budget = this.getPFB;
+
+      this.showPerformanceBudgetDialog = false;
+    },
+    submitPerformanceBudgetUpdate: async function() {
+      this.performance_budget.website_id = this.website_id;
+      await this.updatePerformanceBudget(this.performance_budget);
+      this.showPerformanceBudgetDialog = false;
+      this.performance_budget = this.getPFB;
+    },
     getWeek: async function() {
       this.loaded = false;
       await this.requestWeek(this.website_id);
@@ -198,8 +256,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getPulse: "pulse/getPulse"
-    })
+      getPulse: "pulse/getPulse",
+      getPFB: "notifications/getPFB"
+    }),
+    performanceButtonClass() {
+      let base_class = "md-icon-button ";
+      if (this.performance_budget.id > 0) {
+        return base_class + "md-success";
+      } else {
+        return base_class + "md-primary";
+      }
+    }
   },
   async mounted() {
     this.loaded = false;
@@ -209,6 +276,8 @@ export default {
     this.chartData = this.getPulse;
     this.chartLabels = this.getPulse.labels;
     this.loaded = true;
+    await this.requestPerformanceBudget(this.website_id);
+    this.performance_budget = this.getPFB;
   }
 };
 </script>

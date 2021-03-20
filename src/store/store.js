@@ -10,6 +10,7 @@ import fullscan from "./fullscan";
 import dashboard from "./pages/dashboard";
 
 import examples from "./Service/examples";
+import notifications from "./Website/notifications";
 
 import createPersistedState from "vuex-persistedstate";
 
@@ -24,7 +25,8 @@ export default new Vuex.Store({
     pulse,
     dashboard,
     fullscan,
-    examples
+    examples,
+    notifications
   },
   plugins: [createPersistedState()]
 });

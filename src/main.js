@@ -166,16 +166,20 @@ axios.interceptors.response.use(
     } else if (code === 401) {
       message = i18n.t(`auth.errors.expired`);
     }
-    Vue.swal({
-      title: `<span style="color: white">${message}</span>`,
-      background: "transparent",
-      allowOutsideClick: false,
-      confirmButtonColor: "transparent"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        router.go();
-      }
-    });
-    return Promise.reject(error);
+
+    if (code !== 422) {
+      // validation codes
+      Vue.swal({
+        title: `<span style="color: white">${message}</span>`,
+        background: "transparent",
+        allowOutsideClick: false,
+        confirmButtonColor: "transparent"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.go();
+        }
+      });
+      return Promise.reject(error);
+    }
   }
 );
