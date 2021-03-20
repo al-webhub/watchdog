@@ -129,7 +129,7 @@
         ></pulse-chart>
       </div>
       <md-dialog :md-active.sync="showPerformanceBudgetDialog" md-dynamic-height>
-        <md-dialog-title>Performance bubgets and notifications setup</md-dialog-title>
+        <md-dialog-title>Performance budgets and notifications setup</md-dialog-title>
         <div class="md-layout">
           <div class="md-layout-item">
             <md-field>
