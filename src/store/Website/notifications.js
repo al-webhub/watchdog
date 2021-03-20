@@ -45,7 +45,15 @@ export default {
     },
     async updatePerformanceBudget({ dispatch }, data) {
       try {
-        await axios.post('/api/notification/update', data);
+        await axios.post("/api/notification/update", data);
+        dispatch("requestPerformanceBudget", data.website_id);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deletePerformanceBudget({ dispatch }, data) {
+      try {
+        await axios.post("/api/notification/delete", data);
         dispatch("requestPerformanceBudget", data.website_id);
       } catch (error) {
         console.log(error);
