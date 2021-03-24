@@ -13,12 +13,18 @@
       </div>
       <div class="content_landing">
         <nav class="menu">
-<!--          <a class="menu__item">Blog</a>-->
-<!--          <a class="menu__item">Contact</a>-->
+          <!--          <a class="menu__item">Blog</a>-->
+          <!--          <a class="menu__item">Contact</a>-->
           <a class="menu__item">Examples</a>
           <a class="menu__item">Features</a>
           <a class="menu__item">Register</a>
-          <a v-if="authenticated" :data-exclude="true" :to="dashboard" class="menu__item">Dashboard</a>
+          <a
+            v-if="authenticated"
+            :data-exclude="true"
+            :to="dashboard"
+            class="menu__item"
+            >Dashboard</a
+          >
           <a v-else class="menu__item">Login</a>
         </nav>
         <svg
@@ -238,16 +244,16 @@
         </svg>
       </div>
       <div class="content_landing content--reveal">
-<!--        <div class="content__inner">-->
-<!--          <h2 class="content__title">Home</h2>-->
-<!--          <img src="" alt="" />-->
-<!--          <h3 class="content__subtitle">-->
-<!--          </h3>-->
+        <!--        <div class="content__inner">-->
+        <!--          <h2 class="content__title">Home</h2>-->
+        <!--          <img src="" alt="" />-->
+        <!--          <h3 class="content__subtitle">-->
+        <!--          </h3>-->
 
-<!--        </div>-->
-<!--        <div class="content__inner">-->
-<!--          <h2 class="content__title">Contact</h2>-->
-<!--        </div>-->
+        <!--        </div>-->
+        <!--        <div class="content__inner">-->
+        <!--          <h2 class="content__title">Contact</h2>-->
+        <!--        </div>-->
         <div class="content__inner examples_screen">
           <div class="headlines example_headlines">
             <h2 class="content__title example_headline">Examples</h2>
@@ -256,15 +262,22 @@
               Insights Monitoring service
             </h3>
           </div>
-          <div  class="examples_content">
+          <div class="examples_content">
             <div v-if="loaded" class="sub_examples_wrapper">
               <template v-for="example in examples">
-                <div v-bind:key="example.id"
-                     v-on:click="openExample(example)"
-                     class="s_item custom--card-small"
-                     :title="example.url"
+                <div
+                  v-bind:key="example.id"
+                  v-on:click="openExample(example)"
+                  class="s_item custom--card-small"
+                  :title="example.url"
                 >
-                  <img class="example-image" :src="require(`@/assets/img/example_logos/` + example.image)" alt=""  />
+                  <img
+                    class="example-image"
+                    :src="
+                      require(`@/assets/img/example_logos/` + example.image)
+                    "
+                    alt=""
+                  />
                 </div>
               </template>
             </div>
@@ -273,19 +286,30 @@
         <div class="content__inner features_screen">
           <div class="slideshow">
             <div class="slides slides--images">
-              <div class="slide slide--current">
+              <div class="slide slide--current"></div>
+              <div class="slide">
+                <div
+                  class="slide__img"
+                  :style="{ 'background': features.color1 }"
+                ></div>
               </div>
               <div class="slide">
-                <div class="slide__img" :style="{ 'background-color':   features.color2 }"></div>
+                <div
+                  class="slide__img"
+                  :style="{ 'background': features.color2 }"
+                ></div>
               </div>
               <div class="slide">
-                <div class="slide__img" :style="{ 'background-color':   features.color3 }"></div>
+                <div
+                  class="slide__img"
+                  :style="{ 'background': features.color3 }"
+                ></div>
               </div>
               <div class="slide">
-                <div class="slide__img" :style="{ 'background-color':   features.color4 }"></div>
-              </div>
-              <div class="slide">
-                <div class="slide__img" :style="{ 'background-color':   features.color5 }"></div>
+                <div
+                  class="slide__img"
+                  :style="{ 'background': features.color4 }"
+                ></div>
               </div>
             </div>
             <div class="slides slides--titles">
@@ -294,62 +318,23 @@
                 <div class="slide__desc">
                   <div class="md-layout">
                     <div class="md-layout-item">
-                      Analyze the pagespeed score and core vitals for every URL provided over time
-                      so you can see exactly when it dropped and revert changes back to the code release or content update
-                    </div>
-                  </div>
-                </div>
-                <div class="md-layout ">
-                  <div class="md-layout-item">
-                    <div class="slide-card transparent_card">
-                      Up to 2 years of historical data
-                    </div>
-                  </div>
-                  <div class="md-layout-item ">
-                    <div class="slide-card transparent_card">
-                      Scan intervals from 5min
-                    </div>
-                  </div>
-                  <div class="md-layout-item">
-                    <div class="slide-card transparent_card">
-                     No more guessing. Precise data.
-                    </div>
-                  </div>
-                  <div class="md-layout-item">
-                    <div class="slide-card transparent_card">
-                      Both mobile and desktop
+                      <h3> Analyze the pagespeed score and core vitals for every URL
+                        provided over time. </h3>
+                      <h3>So you can see
+                        exactly when it dropped and revert changes back to the
+                        code release or content update</h3>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="slide ">
-                <h2 class="slide__title outline__black">Full site scans</h2>
+                <h2 class="slide__title ">Full site scans</h2>
                 <div class="slide__desc">
                   <div class="md-layout">
-                    <div class="md-layout-item outline__black">
-                      Scan every single page of your website so you can get whole picture of your website performance.
-                    </div>
-                  </div>
-                </div>
-                <div class="md-layout ">
-                  <div class="md-layout-item">
-                    <div class="slide-card transparent_card outline__black">
-                      Google sheets export (dev)
-                    </div>
-                  </div>
-                  <div class="md-layout-item ">
-                    <div class="slide-card transparent_card outline__black">
-                      Automated and manual scans
-                    </div>
-                  </div>
-                  <div class="md-layout-item">
-                    <div class="slide-card transparent_card outline__black">
-                      Awesome analytics and visualization
-                    </div>
-                  </div>
-                  <div class="md-layout-item">
-                    <div class="slide-card transparent_card outline__black">
-                      Find slow and error pages
+                    <div class="md-layout-item ">
+                      <h3>Scan every single page of your website so you can get
+                        whole picture of your website performance.</h3>
+                       <h4>Google sheets export (dev), Find slow and error pages, Automated and manual scans, Awesome analytics and visualization</h4>
                     </div>
                   </div>
                 </div>
@@ -368,8 +353,11 @@
                 <h2 class="slide__title outline__white">CRON Jobs monitor</h2>
                 <div class="slide__desc">
                   <div class="md-layout">
-                    <div class="md-layout-item" style="font-size: 24px;">
-                      CRON jobs or scheduled tasks are the heart of your data processing. What happens if they stop working?
+                    <div class="md-layout-item" >
+                      <h3>
+                        CRON jobs or scheduled tasks are the heart of your data
+                        processing. What happens if they stop working?
+                      </h3>
                     </div>
                   </div>
                   <div class="md-layout ">
@@ -380,7 +368,7 @@
                     </div>
                     <div class="md-layout-item ">
                       <div class="slide-card transparent_card ">
-                       Constant notifications
+                        Instant notifications
                       </div>
                     </div>
                   </div>
@@ -423,7 +411,9 @@
               </div>
             </div>
             <nav class="slidenav">
-              <button class="slidenav__item slidenav__item--prev">Previous</button>
+              <button class="slidenav__item slidenav__item--prev">
+                Previous
+              </button>
               <span>/</span>
               <button class="slidenav__item slidenav__item--next">Next</button>
             </nav>
@@ -432,7 +422,8 @@
         <div class="content__inner">
           <h2 class="content__title">Register</h2>
           <h3 class="content__subtitle">
-             For now beta testing available only by invites. Contact us for free testing.
+            For now beta testing available only by invites. Contact us for free
+            testing.
           </h3>
         </div>
         <div class="content__inner login-screen">
@@ -484,7 +475,7 @@
 <script>
 import anime from "animejs";
 import charming from "charming";
-import {mapActions,mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import Vue from "vue";
 export default {
   data() {
@@ -508,12 +499,10 @@ export default {
       },
       loaded: false,
       features: {
-        color1: "#2e46ff",
-        color2: "#ffffff",
-        color3: "#c00006",
-        color4: "#000000",
-        color5: "#2e46ff",
-        color6: "#2e46ff"
+        color1: "linear-gradient(to right, #b92b27, #1565c0)",
+        color2: "linear-gradient(to right, #00c6ff, #0072ff)",
+        color3: "linear-gradient(to right, #9d50bb, #6e48aa)",
+        color4: "linear-gradient(to right, #4b6cb7, #182848)"
       }
     };
   },
@@ -565,7 +554,10 @@ export default {
                     <div class="custom--card">
                         <h3>Score</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.score_desktop, 'score')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.score_desktop,
+                              "score"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -575,12 +567,17 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">${item.score_desktop}</div>
+                                      <div class="number">${
+                                        item.score_desktop
+                                      }</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.score_mobile, 'score')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.score_mobile,
+                              "score"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -590,7 +587,9 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Mobile</div>
-                                      <div class="number">${item.score_mobile}</div>
+                                      <div class="number">${
+                                        item.score_mobile
+                                      }</div>
                                     </div>
                                  </div>
                         </div>
@@ -600,7 +599,10 @@ export default {
                     <div class="custom--card">
                         <h3>First contentful paint</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.fcp_desktop, 'fcp')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.fcp_desktop,
+                              "fcp"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -610,12 +612,18 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">${this.normalize(item.fcp_desktop, 1000) }s</div>
+                                      <div class="number">${this.normalize(
+                                        item.fcp_desktop,
+                                        1000
+                                      )}s</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.fcp_desktop, 'fcp')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.fcp_desktop,
+                              "fcp"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -625,7 +633,10 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Mobile</div>
-                                      <div class="number">${this.normalize(item.fcp_mobile, 1000) }s</div>
+                                      <div class="number">${this.normalize(
+                                        item.fcp_mobile,
+                                        1000
+                                      )}s</div>
                                     </div>
                                  </div>
                         </div>
@@ -635,7 +646,10 @@ export default {
                     <div class="custom--card">
                         <h3>Speed index</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.si_desktop, 'si')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.si_desktop,
+                              "si"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -645,12 +659,18 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">${this.normalize(item.si_desktop, 1000)}s</div>
+                                      <div class="number">${this.normalize(
+                                        item.si_desktop,
+                                        1000
+                                      )}s</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.si_mobile, 'si')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.si_mobile,
+                              "si"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -660,7 +680,10 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Mobile</div>
-                                      <div class="number">${this.normalize(item.si_mobile, 1000)}s</div>
+                                      <div class="number">${this.normalize(
+                                        item.si_mobile,
+                                        1000
+                                      )}s</div>
                                     </div>
                                 </div>
                         </div>
@@ -672,7 +695,10 @@ export default {
                     <div class="custom--card">
                         <h3>Total blocking time</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.tbt_desktop,'tbt')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.tbt_desktop,
+                              "tbt"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -682,12 +708,18 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">${this.normalize(item.tbt_desktop, 1000)}s</div>
+                                      <div class="number">${this.normalize(
+                                        item.tbt_desktop,
+                                        1000
+                                      )}s</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.tbt_mobile,'tbt')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.tbt_mobile,
+                              "tbt"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -697,7 +729,10 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Mobile</div>
-                                      <div class="number">${this.normalize(item.tbt_mobile, 1000)}s</div>
+                                      <div class="number">${this.normalize(
+                                        item.tbt_mobile,
+                                        1000
+                                      )}s</div>
                                     </div>
                                  </div>
                         </div>
@@ -707,7 +742,10 @@ export default {
                     <div class="custom--card">
                         <h3>Content layout shift</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.cls_desktop,'cls')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.cls_desktop,
+                              "cls"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -717,12 +755,18 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">${this.normalize(item.cls_desktop, 1000)}</div>
+                                      <div class="number">${this.normalize(
+                                        item.cls_desktop,
+                                        1000
+                                      )}</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.cls_mobile,'cls')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.cls_mobile,
+                              "cls"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -732,7 +776,10 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Mobile</div>
-                                      <div class="number">${this.normalize(item.cls_mobile, 1000)}</div>
+                                      <div class="number">${this.normalize(
+                                        item.cls_mobile,
+                                        1000
+                                      )}</div>
                                     </div>
                                  </div>
                         </div>
@@ -742,7 +789,10 @@ export default {
                     <div class="custom--card">
                         <h3>Time to interactive</h3>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.tti_desktop, 'tti')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.tti_desktop,
+                              "tti"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -752,12 +802,18 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Desktop</div>
-                                      <div class="number">${this.normalize(item.tti_desktop, 1000)}s</div>
+                                      <div class="number">${this.normalize(
+                                        item.tti_desktop,
+                                        1000
+                                      )}s</div>
                                     </div>
                                  </div>
                         </div>
                         <div class="gauge-wrapper min-scaled">
-                            <div class="gauge four rischio${this.getColor(item.tti_mobile, 'tti')} min-scaled">
+                            <div class="gauge four rischio${this.getColor(
+                              item.tti_mobile,
+                              "tti"
+                            )} min-scaled">
                                 <div class="slice-colors min-scaled">
                                     <div class="st slice-item"></div>
                                     <div class="st slice-item"></div>
@@ -767,7 +823,10 @@ export default {
                                 <div class="needle min-scaled"></div>
                                     <div class="gauge-center">
                                       <div class="label">Mobile</div>
-                                      <div class="number">${this.normalize(item.tti_mobile, 1000)}s</div>
+                                      <div class="number">${this.normalize(
+                                        item.tti_mobile,
+                                        1000
+                                      )}s</div>
                                     </div>
                                  </div>
                         </div>
@@ -999,7 +1058,7 @@ export default {
       var timeout;
       return function() {
         var context = this,
-                args = arguments;
+          args = arguments;
         var later = function() {
           timeout = null;
           if (!immediate) func.apply(context, args);
@@ -1152,7 +1211,7 @@ export default {
       link.addEventListener("click", ev => {
         ev.preventDefault();
         if (link.getAttribute("data-exclude")) {
-          this.$router.push({name: 'dashboard'});
+          this.$router.push({ name: "dashboard" });
         } else {
           this.open(pos);
         }
@@ -1167,41 +1226,51 @@ export default {
           animation: {
             slides: {
               duration: 500,
-              easing: 'easeOutQuint'
+              easing: "easeOutQuint"
             },
             shape: {
               duration: 300,
-              easing: {in: 'easeOutQuint', out: 'easeOutQuad'}
+              easing: { in: "easeOutQuint", out: "easeOutQuad" }
             }
           },
-          frameFill: 'url(#gradient1)'
-        }
+          frameFill: "url(#gradient1)"
+        };
         this.init();
       }
       init() {
-        this.DOM.slides = Array.from(this.DOM.el.querySelectorAll('.slides--images > .slide'));
+        this.DOM.slides = Array.from(
+          this.DOM.el.querySelectorAll(".slides--images > .slide")
+        );
         this.slidesTotal = this.DOM.slides.length;
-        this.DOM.nav = this.DOM.el.querySelector('.slidenav');
-        this.DOM.titles = this.DOM.el.querySelector('.slides--titles');
-        this.DOM.titlesSlides = Array.from(this.DOM.titles.querySelectorAll('.slide'));
-        this.DOM.nextCtrl = this.DOM.nav.querySelector('.slidenav__item--next');
-        this.DOM.prevCtrl = this.DOM.nav.querySelector('.slidenav__item--prev');
+        this.DOM.nav = this.DOM.el.querySelector(".slidenav");
+        this.DOM.titles = this.DOM.el.querySelector(".slides--titles");
+        this.DOM.titlesSlides = Array.from(
+          this.DOM.titles.querySelectorAll(".slide")
+        );
+        this.DOM.nextCtrl = this.DOM.nav.querySelector(".slidenav__item--next");
+        this.DOM.prevCtrl = this.DOM.nav.querySelector(".slidenav__item--prev");
         this.current = 0;
         this.createFrame();
         this.initEvents();
       }
       createFrame() {
         this.rect = this.DOM.el.getBoundingClientRect();
-        this.frameSize = this.rect.width/12;
+        this.frameSize = this.rect.width / 12;
         this.paths = {
-          initial: this.calculatePath('initial'),
-          final: this.calculatePath('final')
+          initial: this.calculatePath("initial"),
+          final: this.calculatePath("final")
         };
-        this.DOM.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        this.DOM.svg.setAttribute('class', 'shape');
-        this.DOM.svg.setAttribute('width','100%');
-        this.DOM.svg.setAttribute('height','100%');
-        this.DOM.svg.setAttribute('viewbox',`0 0 ${this.rect.width} ${this.rect.height}`);
+        this.DOM.svg = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg"
+        );
+        this.DOM.svg.setAttribute("class", "shape");
+        this.DOM.svg.setAttribute("width", "100%");
+        this.DOM.svg.setAttribute("height", "100%");
+        this.DOM.svg.setAttribute(
+          "viewbox",
+          `0 0 ${this.rect.width} ${this.rect.height}`
+        );
         this.DOM.svg.innerHTML = `
             <defs>
             <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -1211,49 +1280,71 @@ export default {
             </defs>
             <path fill="${this.settings.frameFill}" d="${this.paths.initial}"/>`;
         this.DOM.el.insertBefore(this.DOM.svg, this.DOM.titles);
-        this.DOM.shape = this.DOM.svg.querySelector('path');
+        this.DOM.shape = this.DOM.svg.querySelector("path");
       }
       updateFrame() {
-        this.paths.initial = this.calculatePath('initial');
-        this.paths.final = this.calculatePath('final');
-        this.DOM.svg.setAttribute('viewbox',`0 0 ${this.rect.width} ${this.rect.height}`);
-        this.DOM.shape.setAttribute('d', this.isAnimating ? this.paths.final : this.paths.initial);
+        this.paths.initial = this.calculatePath("initial");
+        this.paths.final = this.calculatePath("final");
+        this.DOM.svg.setAttribute(
+          "viewbox",
+          `0 0 ${this.rect.width} ${this.rect.height}`
+        );
+        this.DOM.shape.setAttribute(
+          "d",
+          this.isAnimating ? this.paths.final : this.paths.initial
+        );
       }
-      calculatePath(path = 'initial') {
-
-        if ( path === 'initial' ) {
+      calculatePath(path = "initial") {
+        if (path === "initial") {
           return `M 0,0 0,${this.rect.height} ${this.rect.width},${this.rect.height} ${this.rect.width},0 0,0 Z M 0,0 ${this.rect.width},0 ${this.rect.width},${this.rect.height} 0,${this.rect.height} Z`;
-        }
-        else {
-          const point1 = {x: this.rect.width/4-50, y: this.rect.height/4+50};
-          const point2 = {x: this.rect.width/4+50, y: this.rect.height/4-50};
-          const point3 = {x: this.rect.width-point2.x, y: this.rect.height-point2.y};
-          const point4 = {x: this.rect.width-point1.x, y: this.rect.height-point1.y};
+        } else {
+          const point1 = {
+            x: this.rect.width / 4 - 50,
+            y: this.rect.height / 4 + 50
+          };
+          const point2 = {
+            x: this.rect.width / 4 + 50,
+            y: this.rect.height / 4 - 50
+          };
+          const point3 = {
+            x: this.rect.width - point2.x,
+            y: this.rect.height - point2.y
+          };
+          const point4 = {
+            x: this.rect.width - point1.x,
+            y: this.rect.height - point1.y
+          };
 
           return `M 0,0 0,${this.rect.height} ${this.rect.width},${this.rect.height} ${this.rect.width},0 0,0 Z M ${point1.x},${point1.y} ${point2.x},${point2.y} ${point4.x},${point4.y} ${point3.x},${point3.y} Z`;
         }
       }
       initEvents() {
-        this.DOM.nextCtrl.addEventListener('click', () => this.navigate('next'));
-        this.DOM.prevCtrl.addEventListener('click', () => this.navigate('prev'));
+        this.DOM.nextCtrl.addEventListener("click", () =>
+          this.navigate("next")
+        );
+        this.DOM.prevCtrl.addEventListener("click", () =>
+          this.navigate("prev")
+        );
 
-        window.addEventListener('resize', debounce(() => {
-          this.rect = this.DOM.el.getBoundingClientRect();
-          this.updateFrame();
-        }, 20));
+        window.addEventListener(
+          "resize",
+          debounce(() => {
+            this.rect = this.DOM.el.getBoundingClientRect();
+            this.updateFrame();
+          }, 20)
+        );
 
-        document.addEventListener('keydown', (ev) => {
+        document.addEventListener("keydown", ev => {
           const keyCode = ev.keyCode || ev.which;
-          if ( keyCode === 37 ) {
-            this.navigate('prev');
-          }
-          else if ( keyCode === 39 ) {
-            this.navigate('next');
+          if (keyCode === 37) {
+            this.navigate("prev");
+          } else if (keyCode === 39) {
+            this.navigate("next");
           }
         });
       }
-      navigate(dir = 'next') {
-        if ( this.isAnimating ) return false;
+      navigate(dir = "next") {
+        if (this.isAnimating) return false;
         this.isAnimating = true;
 
         const animateShapeIn = anime({
@@ -1270,9 +1361,10 @@ export default {
               targets: currentSlide,
               duration: this.settings.animation.slides.duration,
               easing: this.settings.animation.slides.easing,
-              translateY: dir === 'next' ? this.rect.height : -1*this.rect.height,
+              translateY:
+                dir === "next" ? this.rect.height : -1 * this.rect.height,
               complete: () => {
-                currentSlide.classList.remove('slide--current');
+                currentSlide.classList.remove("slide--current");
                 resolve();
               }
             });
@@ -1282,48 +1374,58 @@ export default {
               targets: currentTitleSlide.children,
               duration: this.settings.animation.slides.duration,
               easing: this.settings.animation.slides.easing,
-              delay: (t,i,total) => dir === 'next' ? i*100 : (total-i-1)*100,
-              translateY: [0, dir === 'next' ? 100 : -100],
-              opacity: [1,0],
+              delay: (t, i, total) =>
+                dir === "next" ? i * 100 : (total - i - 1) * 100,
+              translateY: [0, dir === "next" ? 100 : -100],
+              opacity: [1, 0],
               complete: () => {
-                currentTitleSlide.classList.remove('slide--current');
+                currentTitleSlide.classList.remove("slide--current");
                 resolve();
               }
             });
 
-            this.current = dir === 'next' ?
-                    this.current < this.slidesTotal-1 ? this.current + 1 : 0 :
-                    this.current > 0 ? this.current - 1 : this.slidesTotal-1;
+            this.current =
+              dir === "next"
+                ? this.current < this.slidesTotal - 1
+                  ? this.current + 1
+                  : 0
+                : this.current > 0
+                ? this.current - 1
+                : this.slidesTotal - 1;
 
             const newSlide = this.DOM.slides[this.current];
-            newSlide.classList.add('slide--current');
+            newSlide.classList.add("slide--current");
             anime({
               targets: newSlide,
               duration: this.settings.animation.slides.duration,
               easing: this.settings.animation.slides.easing,
-              translateY: [dir === 'next' ? -1*this.rect.height : this.rect.height,0]
+              translateY: [
+                dir === "next" ? -1 * this.rect.height : this.rect.height,
+                0
+              ]
             });
 
-            const newSlideImg = newSlide.querySelector('.slide__img');
+            const newSlideImg = newSlide.querySelector(".slide__img");
 
             anime.remove(newSlideImg);
             anime({
               targets: newSlideImg,
-              duration: this.settings.animation.slides.duration*3,
+              duration: this.settings.animation.slides.duration * 3,
               easing: this.settings.animation.slides.easing,
-              translateY: [dir === 'next' ? -100 : 100, 0],
-              scale: [0.2,1]
+              translateY: [dir === "next" ? -100 : 100, 0],
+              scale: [0.2, 1]
             });
 
             const newTitleSlide = this.DOM.titlesSlides[this.current];
-            newTitleSlide.classList.add('slide--current');
+            newTitleSlide.classList.add("slide--current");
             anime({
               targets: newTitleSlide.children,
-              duration: this.settings.animation.slides.duration*1.5,
+              duration: this.settings.animation.slides.duration * 1.5,
               easing: this.settings.animation.slides.easing,
-              delay: (t,i,total) => dir === 'next' ? i*100+100 : (total-i-1)*100+100,
-              translateY: [dir === 'next' ? -100 : 100 ,0],
-              opacity: [0,1]
+              delay: (t, i, total) =>
+                dir === "next" ? i * 100 + 100 : (total - i - 1) * 100 + 100,
+              translateY: [dir === "next" ? -100 : 100, 0],
+              opacity: [0, 1]
             });
           });
         };
@@ -1334,7 +1436,7 @@ export default {
             duration: this.settings.animation.shape.duration,
             easing: this.settings.animation.shape.easing.out,
             d: this.paths.initial,
-            complete: () => this.isAnimating = false
+            complete: () => (this.isAnimating = false)
           });
         };
 
@@ -1478,8 +1580,10 @@ export default {
   border-radius: 4px;
   border: 1px solid white;
   background-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 6px 10px rgba(0,0,0,.5), 0 0 6px rgba(0,0,0,.8);
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5), 0 0 6px rgba(0, 0, 0, 0.8);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
   padding: 25px 25px 25px 25px;
   font-size: 1rem;
 }
@@ -1503,10 +1607,10 @@ export default {
 
 .gauge {
   background: #e7e7e7;
-  box-shadow: 0 -3px 6px 2px rgba(0, 0, 0, 0.50);
+  box-shadow: 0 -3px 6px 2px rgba(0, 0, 0, 0.5);
   width: 200px;
   height: 100px;
-  border-radius: 100px 100px 0 0!important;
+  border-radius: 100px 100px 0 0 !important;
   position: relative;
   overflow: hidden;
 }
@@ -1516,12 +1620,12 @@ export default {
 }
 
 .gauge-center {
-  content: '';
+  content: "";
   color: #fff;
   width: 60%;
   height: 60%;
-  background: #15222E;
-  border-radius: 100px 100px 0 0!important;
+  background: #15222e;
+  border-radius: 100px 100px 0 0 !important;
   position: absolute;
   box-shadow: 0 -13px 15px -10px rgba(0, 0, 0, 0.28);
   right: 21%;
@@ -1529,18 +1633,30 @@ export default {
   z-index: 10;
 }
 
-.gauge-center .label, .gauge-center .number {display:block; width: 100%; text-align: center; border:0!important;}
-.gauge-center .label {font-size:0.75em; opacity:0.6; margin:1.1em 0 0.3em 0;}
-.gauge-center .number {font-size:1.2em;}
+.gauge-center .label,
+.gauge-center .number {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: 0 !important;
+}
+.gauge-center .label {
+  font-size: 0.75em;
+  opacity: 0.6;
+  margin: 1.1em 0 0.3em 0;
+}
+.gauge-center .number {
+  font-size: 1.2em;
+}
 
 .needle {
   width: 80px;
   height: 7px;
-  background: #15222E;
-  border-bottom-left-radius: 100%!important;
-  border-bottom-right-radius: 5px!important;
-  border-top-left-radius: 100%!important;
-  border-top-right-radius: 5px!important;
+  background: #15222e;
+  border-bottom-left-radius: 100% !important;
+  border-bottom-right-radius: 5px !important;
+  border-top-left-radius: 100% !important;
+  border-top-right-radius: 5px !important;
   position: absolute;
   bottom: -2px;
   left: 20px;
@@ -1551,12 +1667,30 @@ export default {
   z-index: 9;
 }
 
-.four.rischio1 .needle {animation: fourspeed1 2s 1 both; animation-delay: 1s; display:block;}
-.four.rischio2 .needle {animation: fourspeed2 2s 1 both; animation-delay: 1s; display:block;}
-.four.rischio3 .needle {animation: fourspeed3 2s 1 both; animation-delay: 1s; display:block;}
-.four.rischio4 .needle {animation: fourspeed4 2s 1 both; animation-delay: 1s; display:block;}
+.four.rischio1 .needle {
+  animation: fourspeed1 2s 1 both;
+  animation-delay: 1s;
+  display: block;
+}
+.four.rischio2 .needle {
+  animation: fourspeed2 2s 1 both;
+  animation-delay: 1s;
+  display: block;
+}
+.four.rischio3 .needle {
+  animation: fourspeed3 2s 1 both;
+  animation-delay: 1s;
+  display: block;
+}
+.four.rischio4 .needle {
+  animation: fourspeed4 2s 1 both;
+  animation-delay: 1s;
+  display: block;
+}
 
-.slice-colors {height:100%;}
+.slice-colors {
+  height: 100%;
+}
 
 .slice-colors .st {
   position: absolute;
@@ -1569,34 +1703,50 @@ export default {
 .four .slice-colors .st.slice-item:nth-child(2) {
   border-top: 50px #e67e22 solid;
   border-right: 50px #e67e22 solid;
-  background-color:#E84C3D;
+  background-color: #e84c3d;
 }
 
 .four .slice-colors .st.slice-item:nth-child(4) {
-  left:50%;
+  left: 50%;
   border-bottom: 50px #1eaa59 solid;
   border-right: 50px #1eaa59 solid;
-  background-color:#f1c40f;
+  background-color: #f1c40f;
 }
 
 @-webkit-keyframes fourspeed1 {
-  0% {transform: rotate(0);}
-  100% {transform: rotate(16deg);}
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(16deg);
+  }
 }
 
 @-webkit-keyframes fourspeed2 {
-  0% {transform: rotate(0);}
-  100% {transform: rotate(65deg);}
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(65deg);
+  }
 }
 
 @-webkit-keyframes fourspeed3 {
-  0% {transform: rotate(0);}
-  100% {transform: rotate(115deg);}
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(115deg);
+  }
 }
 
 @-webkit-keyframes fourspeed4 {
-  0% {transform: rotate(0);}
-  100% {transform: rotate(164deg);}
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(164deg);
+  }
 }
 
 /* Examples section gauges end */
@@ -1607,8 +1757,10 @@ export default {
   margin-top: 20px;
   border-radius: 4px;
   background: #fff !important;
-  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
   padding: 14px 14px 14px 14px;
   cursor: pointer;
 }
@@ -1616,12 +1768,12 @@ export default {
 .example-image {
   display: block;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
 }
 
 .custom--card:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
 .custom--card h3 {
@@ -1632,15 +1784,17 @@ export default {
   white-space: nowrap;
   border-radius: 4px;
   background: #fff !important;
-  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
   padding: 7px 7px 7px 7px;
   cursor: pointer;
 }
 
 .custom--card-small:hover {
   transform: scale(1.3);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
 .md-toggle-password {
