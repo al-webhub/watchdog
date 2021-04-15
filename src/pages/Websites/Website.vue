@@ -77,7 +77,7 @@
               class="md-icon-button"
               ><md-icon>delete_forever</md-icon></md-button
             >
-            <div style="margin-left: 15px;">Last check: 299 sec ago</div>
+            <div style="margin-left: 15px;">Last scan: 9min ago</div>
           </template>
         </stats-card>
       </div>
@@ -371,13 +371,13 @@ export default {
     this.chartData = this.getPulse;
     this.chartLabels = this.getPulse.labels;
     this.loaded = true;
-    await this.requestPerformanceBudget(this.website_id);
-    this.performance_budget = this.getPFB;
+    // await this.requestPerformanceBudget(this.website_id);
+    // this.performance_budget = this.getPFB;
   }
 };
 </script>
 
-<style >
+<style>
 .daterangepicker_custom_position {
   margin: 10px 1px 10px 1px;
   height: 88px;
